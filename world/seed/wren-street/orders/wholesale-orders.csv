@@ -1,0 +1,144 @@
+order_id,order_date,cafe,product,quantity,source
+WS-1001,03/08/2026,LUMEN CAFE,Sourdough Loaf,36,phone
+WS-1002,03/08/2026,Moss and Grain,Almond Croissant,24,phone
+WS-1003,2026-08-03,Pier Nine Espresso,Fruit Scone,18,web
+WS-1004,04/08/2026,Lumen Cafe,Multigrain Loaf,18,phone
+WS-1005,2026-08-04,Hartley Corner,Cheese Scone,10,web
+WS-1006,4 Aug 2026,Bluebell Coffee,Multigrain Loaf,18,email
+WS-1007,04/08/2026,Moss & Grain,Cheese Scone,18,phone
+WS-1008,05/08/2026,Moss & Grain,White Tin Loaf,a dozen,phone
+WS-1009,05/08/2026,Pier Nine Espresso,Seeded Rye Loaf,two dozen,phone
+WS-1010,2026-08-06,Pier Nine Espresso,Croissant,10,web
+WS-1011,07/08/2026,Kettle and Crumb,White Tin Loaf,24,phone
+WS-1012,07/08/2026,Hartley Corner,Brownie,three dozen,phone
+WS-1013,10 Aug 2026,Lumen Cafe,Almond Croissant,24,email
+WS-1014,11/08/2026,Hartley Corner,Almond Croissant,12,phone
+WS-1015,2026-08-13,Lumen Café,White Tin Loaf,6,web
+WS-1016,13/08/2026,Moss and Grain,Cinnamon Bun,two dozen,phone
+WS-1017,14 Aug 2026,Lumen Cafe,Focaccia,24,email
+WS-1018,14/08/2026,Bluebell Coffee,Focaccia,18,phone
+WS-1019,14 Aug 2026,Moss and Grain,Croissant,ten,email
+WS-1020,18 Aug 2026,Kettle and Crumb,Cinnamon Bun,30,email
+WS-1021,18/08/2026,Hartley Corner Cafe,Almond Croissant,18,phone
+WS-1022,18/08/2026,Bluebell Coffee,Multigrain Loaf,a dozen,phone
+WS-1023,2026-08-18,Moss & Grain,Sourdough Loaf,10,web
+WS-1024,2026-08-18,Pier Nine Espresso,Cheese Scone,36,web
+WS-1025,19/08/2026,lumen cafe,Croissant,eighteen,phone
+WS-1026,19/08/2026,Kettle & Crumb,Croissant,30,phone
+WS-1027,2026-08-20,Kettle & Crumb,Almond Croissant,24,web
+WS-1028,20 Aug 2026,Hartley Corner,Fruit Scone,30,email
+WS-1029,20/08/2026,Moss and Grain,Focaccia,12,phone
+WS-1030,21 Aug 2026,Pier Nine Espresso,Almond Croissant,12,email
+WS-1013,10 Aug 2026,Lumen Cafe,Almond Croissant,24,email
+WS-1031,25/08/2026,Bluebell Coffee,Brownie,a dozen,phone
+WS-1032,25/08/2026,Pier Nine Espresso,Multigrain Loaf,6,phone
+WS-1033,26/08/2026,Hartley Corner,Multigrain Loaf,6,phone
+WS-1034,27/08/2026,Kettle and Crumb,Focaccia,a dozen,phone
+WS-1035,27/08/2026,Hartley Corner,Brownie,24,phone
+WS-1036,2026-08-28,Lumen Cafe,Fruit Scone,18,web
+WS-1037,31/08/2026,Kettle and Crumb,Seeded Rye Loaf,12,phone
+WS-1020,18 Aug 2026,Kettle and Crumb,Cinnamon Bun,30,email
+WS-1038,31/08/2026,Hartley Corner,Cheese Scone,30,phone
+WS-1039,31/08/2026,Moss and Grain,Pain au Chocolat,36,phone
+WS-1040,1 Sep 2026,LUMEN CAFE,Cheese Scone,36,email
+WS-1041,2026-09-01,Kettle and Crumb,White Tin Loaf,24,web
+WS-1042,01/09/2026,Hartley Corner Cafe,Cheese Scone,a dozen,phone
+WS-1043,2026-09-01,Bluebell Coffee,Fruit Scone,24,web
+WS-1044,2 Sep 2026,Lumen Cafe,Seeded Rye Loaf,12,email
+WS-1045,02/09/2026,Hartley Corner,Pain au Chocolat,6,phone
+WS-1046,02/09/2026,Pier Nine Espresso,Fruit Scone,12,phone
+WS-1047,3 Sep 2026,Kettle & Crumb,White Tin Loaf,24,email
+WS-1048,03/09/2026,Hartley Corner,Cheese Scone,24,phone
+WS-1049,03/09/2026,Bluebell Coffee,Seeded Rye Loaf,36,phone
+WS-1050,03/09/2026,Moss and Grain,Almond Croissant,6,phone
+WS-1051,2026-09-04,Kettle & Crumb,Brownie,10,web
+WS-1052,2026-09-04,Hartley Corner Cafe,Cheese Scone,6,web
+WS-1053,07/09/2026,Hartley Corner,Almond Croissant,6,phone
+WS-1054,2026-09-07,Pier Nine Espresso,Almond Croissant,12,web
+WS-1055,08/09/2026,Kettle and Crumb,Seeded Rye Loaf,12,phone
+WS-1056,09/09/2026,Pier Nine Espresso,Croissant,24,phone
+WS-1057,10/09/2026,Lumen Cafe,Pain au Chocolat,24,phone
+WS-1058,10/09/2026,Bluebell Coffee,Brownie,18,phone
+WS-1059,10/09/2026,Moss and Grain,Fruit Scone,10,phone
+WS-1060,11/09/2026,Hartley Corner Cafe,Pain au Chocolat,three dozen,phone
+WS-1061,11 Sep 2026,Pier Nine Espresso,Focaccia,six,email
+WS-1062,14 Sep 2026,Kettle and Crumb,Pain au Chocolat,12,email
+WS-1063,2026-09-14,Pier Nine Espresso,Pain au Chocolat,10,web
+WS-1064,15/09/2026,Hartley Corner Cafe,Sourdough Loaf,18,phone
+WS-1065,15/09/2026,Bluebell Coffee,Almond Croissant,three dozen,phone
+WS-1066,2026-09-16,Lumen Café,Seeded Rye Loaf,24,web
+WS-1067,2026-09-21,Hartley Corner Cafe,Multigrain Loaf,36,web
+WS-1068,21 Sep 2026,Moss & Grain,Brownie,18,email
+WS-1069,21/09/2026,Pier Nine Espresso,White Tin Loaf,12,phone
+WS-1070,22 Sep 2026,Kettle & Crumb,Seeded Rye Loaf,a dozen,email
+WS-1071,22/09/2026,Hartley Corner Cafe,Seeded Rye Loaf,a dozen,phone
+WS-1072,22 Sep 2026,Bluebell Coffee,Brownie,6,email
+WS-1073,23/09/2026,Kettle & Crumb,Fruit Scone,a dozen,phone
+WS-1074,2026-09-24,Lumen Cafe,Cinnamon Bun,12,web
+WS-1075,2026-09-24,Kettle and Crumb,White Tin Loaf,24,web
+WS-1076,24 Sep 2026,Hartley Corner,Seeded Rye Loaf,12,email
+WS-1059,10/09/2026,Moss and Grain,Fruit Scone,10,phone
+WS-1077,25/09/2026,Kettle and Crumb,White Tin Loaf,ten,phone
+WS-1078,2026-09-25,Bluebell Coffee ,Pain au Chocolat,12,web
+WS-1065,15/09/2026,Bluebell Coffee,Almond Croissant,three dozen,phone
+WS-1079,25/09/2026,Moss & Grain,Cinnamon Bun,12,phone
+WS-1080,25 Sep 2026,Pier Nine Espresso,Pain au Chocolat,24,email
+WS-1071,22/09/2026,Hartley Corner Cafe,Seeded Rye Loaf,a dozen,phone
+WS-1081,28 Sep 2026,Moss and Grain,Cheese Scone,30,email
+WS-1070,22 Sep 2026,Kettle & Crumb,Seeded Rye Loaf,a dozen,email
+WS-1082,29/09/2026,Hartley Corner Cafe,Multigrain Loaf,30,phone
+WS-1083,2026-09-29,Moss & Grain,Almond Croissant,24,web
+WS-1084,30/09/2026,Hartley Corner Cafe,Sourdough Loaf,24,phone
+WS-1085,2026-09-30,Bluebell Coffee ,Sourdough Loaf,12,web
+WS-1086,02/10/2026,Bluebell Coffee,Cheese Scone,30,phone
+WS-1087,2 Oct 2026,Moss and Grain,Multigrain Loaf,eighteen,email
+WS-1088,05/10/2026,Lumen Cafe,Fruit Scone,24,phone
+WS-1089,2026-10-05,Moss and Grain,Fruit Scone,36,web
+WS-1090,07/10/2026,Lumen Cafe,Cinnamon Bun,12,phone
+WS-1091,2026-10-08,Kettle & Crumb,White Tin Loaf,30,web
+WS-1092,8 Oct 2026,Bluebell Coffee ,Cinnamon Bun,12,email
+WS-1093,08/10/2026,Moss and Grain,Seeded Rye Loaf,eighteen,phone
+WS-1094,08/10/2026,Pier Nine Espresso,Focaccia,six,phone
+WS-1095,09/10/2026,Kettle and Crumb,Fruit Scone,three dozen,phone
+WS-1096,2026-10-09,Hartley Corner,White Tin Loaf,24,web
+WS-1097,2026-10-09,Bluebell Coffee,Pain au Chocolat,10,web
+WS-1075,2026-09-24,Kettle and Crumb,White Tin Loaf,24,web
+WS-1098,12/10/2026,Moss & Grain,Seeded Rye Loaf,12,phone
+WS-1099,13/10/2026,Kettle & Crumb,Multigrain Loaf,6,phone
+WS-1100,13/10/2026,Moss and Grain,Fruit Scone,36,phone
+WS-1087,2 Oct 2026,Moss and Grain,Multigrain Loaf,eighteen,email
+WS-1101,2026-10-14,Hartley Corner Cafe,White Tin Loaf,30,web
+WS-1102,14/10/2026,Bluebell Coffee ,Fruit Scone,24,phone
+WS-1103,15 Oct 2026,Hartley Corner Cafe,White Tin Loaf,36,email
+WS-1104,15 Oct 2026,Bluebell Coffee ,Pain au Chocolat,two dozen,email
+WS-1105,15 Oct 2026,Moss and Grain,Sourdough Loaf,a dozen,email
+WS-1106,16/10/2026,Bluebell Coffee,Croissant,6,phone
+WS-1101,2026-10-14,Hartley Corner Cafe,White Tin Loaf,30,web
+WS-1107,16/10/2026,Moss & Grain,Seeded Rye Loaf,12,phone
+WS-1108,16 Oct 2026,Pier Nine Espresso,Cinnamon Bun,three dozen,email
+WS-1109,19/10/2026,Lumen Cafe,Focaccia,30,phone
+WS-1110,2026-10-20,lumen cafe,Seeded Rye Loaf,12,web
+WS-1111,2026-10-20,Kettle & Crumb,Fruit Scone,6,web
+WS-1112,20/10/2026,Bluebell Coffee ,Focaccia,two dozen,phone
+WS-1113,20/10/2026,Pier Nine Espresso,Multigrain Loaf,24,phone
+WS-1114,21 Oct 2026,Hartley Corner Cafe,Cheese Scone,36,email
+WS-1115,21/10/2026,Bluebell Coffee ,Pain au Chocolat,10,phone
+WS-1116,2026-10-21,Moss and Grain,Seeded Rye Loaf,30,web
+WS-1117,21/10/2026,Pier Nine Espresso,Almond Croissant,30,phone
+WS-1118,22/10/2026,Hartley Corner,Sourdough Loaf,six,phone
+WS-1119,2026-10-23,Bluebell Coffee ,Sourdough Loaf,24,web
+WS-1120,2026-10-23,Moss and Grain,Pain au Chocolat,24,web
+WS-1121,23 Oct 2026,Pier Nine Espresso,Focaccia,24,email
+WS-1122,2026-10-27,LUMEN CAFE,Seeded Rye Loaf,30,web
+WS-1123,27 Oct 2026,Kettle and Crumb,White Tin Loaf,12,email
+WS-1124,27/10/2026,Hartley Corner Cafe,Almond Croissant,12,phone
+WS-1125,27/10/2026,Bluebell Coffee,Sourdough Loaf,6,phone
+WS-1126,27/10/2026,Moss and Grain,Multigrain Loaf,24,phone
+WS-1127,2026-10-27,Pier Nine Espresso,Pain au Chocolat,12,web
+WS-1128,28/10/2026,Kettle & Crumb,Fruit Scone,eighteen,phone
+WS-1129,28/10/2026,Moss and Grain,Fruit Scone,24,phone
+WS-1130,29 Oct 2026,Hartley Corner,Sourdough Loaf,30,email
+WS-1131,29/10/2026,Moss and Grain,Cinnamon Bun,eighteen,phone
+WS-1132,29 Oct 2026,Pier Nine Espresso,Croissant,36,email
+WS-1133,2026-10-30,Hartley Corner Cafe,Almond Croissant,6,web
+WS-1134,2026-10-30,Moss and Grain,Almond Croissant,24,web
