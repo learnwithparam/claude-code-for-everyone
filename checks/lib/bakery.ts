@@ -3,7 +3,7 @@
 // CI runs `bun run verify --all`: the check reads a step's problem/, solution/ or wrong/ folder. Those folders
 // hold only the files a step makes; any other file is read from the seed, as if the learner left it alone.
 import { createHash } from "node:crypto";
-import { existsSync, readFileSync, readdirSync, statSync } from "node:fs";
+import { existsSync, readdirSync, readFileSync, statSync } from "node:fs";
 import { join, relative, sep } from "node:path";
 
 export const ROOT = join(import.meta.dir, "..", "..");
@@ -47,7 +47,9 @@ export function bytes(dir: string, rel: string): Uint8Array {
 function filesUnder(dir: string, base = dir, out: string[] = []): string[] {
   for (const e of readdirSync(dir)) {
     const p = join(dir, e);
-    statSync(p).isDirectory() ? filesUnder(p, base, out) : out.push(relative(base, p).split(sep).join("/"));
+    statSync(p).isDirectory()
+      ? filesUnder(p, base, out)
+      : out.push(relative(base, p).split(sep).join("/"));
   }
   return out;
 }
@@ -58,19 +60,31 @@ const hash = (b: Uint8Array) => createHash("sha256").update(b).digest("hex");
 export function changedOriginals(folder: string): string[] {
   return seedFiles().filter((f) => {
     const p = join(folder, f);
-    return !existsSync(p) || hash(new Uint8Array(readFileSync(p))) !== hash(new Uint8Array(readFileSync(join(SEED, f))));
+    return (
+      !existsSync(p) ||
+      hash(new Uint8Array(readFileSync(p))) !== hash(new Uint8Array(readFileSync(join(SEED, f))))
+    );
   });
 }
 export function originalsUnchanged(dir: string): boolean {
   const w = workFolder(dir);
   if (!isSample(dir)) return changedOriginals(w).length === 0;
   // A sample folder only holds what changed, so compare just the originals it holds.
-  return seedFiles().filter((f) => existsSync(join(w, f))).every((f) => hash(new Uint8Array(readFileSync(join(w, f)))) === hash(new Uint8Array(readFileSync(join(SEED, f)))));
+  return seedFiles()
+    .filter((f) => existsSync(join(w, f)))
+    .every(
+      (f) =>
+        hash(new Uint8Array(readFileSync(join(w, f)))) ===
+        hash(new Uint8Array(readFileSync(join(SEED, f)))),
+    );
 }
 
 // The first rule of every step: there is a bakery folder to check.
 export const bakeryRule = {
   says: "the bakery folder wren-street/ is there",
-  test: (dir: string) => { workFolder(dir); return true; },
+  test: (dir: string) => {
+    workFolder(dir);
+    return true;
+  },
   tryNext: "run bun run world in the course folder to make it, then try again",
 };

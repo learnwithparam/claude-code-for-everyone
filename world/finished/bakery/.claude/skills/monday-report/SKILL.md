@@ -1,4 +1,5 @@
 ---
+
 name: monday-report
 description: Write the Monday report for Wren Street Bakery from the till. Use when asked for the Monday report, sales, waste or who pays late.
 ---

@@ -19,12 +19,12 @@ flowchart LR
 
 ## The steps
 
-| Step | Minutes | What you make | What the check reads |
-|---|---|---|---|
-| open-the-terminal | 15 | `out/terminal.md` | The version is new enough; the mode is named |
-| connect-the-till | 20 | The till connector and `out/till-today.md` | The connector is there; the total matches the till |
-| write-the-monday-report | 25 | A `monday-report` skill and the report | Sales, Waste, Late payers; every number matches the till |
-| schedule-the-monday-report | 15 | Two reports from the skill | Made by a scheduled task, or by Run now plus `out/schedule.md` |
+| Step                       | Minutes | What you make                              | What the check reads                                           |
+| -------------------------- | ------- | ------------------------------------------ | -------------------------------------------------------------- |
+| open-the-terminal          | 15      | `out/terminal.md`                          | The version is new enough; the mode is named                   |
+| connect-the-till           | 20      | The till connector and `out/till-today.md` | The connector is there; the total matches the till             |
+| write-the-monday-report    | 25      | A `monday-report` skill and the report     | Sales, Waste, Late payers; every number matches the till       |
+| schedule-the-monday-report | 15      | Two reports from the skill                 | Made by a scheduled task, or by Run now plus `out/schedule.md` |
 
 The free plan and some work laptops cannot run scheduled tasks. The last step has a second way to pass for them.
 

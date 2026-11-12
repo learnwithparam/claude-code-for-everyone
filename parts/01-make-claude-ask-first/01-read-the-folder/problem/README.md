@@ -54,11 +54,11 @@ Expect: `Done. All 5 rules pass.`
 
 ## If you get stuck
 
-| What you see | Try this |
-|---|---|
-| `FAIL it names all 11 folders of the bakery` | Ask Claude to add one line for each folder it left out. |
-| `FAIL it has a "Questions I have" part` | The heading must say Questions I have. Each question starts with a dash. |
-| `FAIL every original bakery file is the same as the start` | Run `bun run world status` to see what changed. |
+| What you see                                               | Try this                                                                 |
+| ---------------------------------------------------------- | ------------------------------------------------------------------------ |
+| `FAIL it names all 11 folders of the bakery`               | Ask Claude to add one line for each folder it left out.                  |
+| `FAIL it has a "Questions I have" part`                    | The heading must say Questions I have. Each question starts with a dash. |
+| `FAIL every original bakery file is the same as the start` | Run `bun run world status` to see what changed.                          |
 
 ## Words you will use
 

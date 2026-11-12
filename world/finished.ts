@@ -9,14 +9,23 @@
 //   bun run finished --replay 2    replay world/recordings/close-2
 //   bun run finished --record 3    live run, then save it as world/recordings/close-3 (course authors only)
 import { spawn } from "node:child_process";
-import { cpSync, existsSync, mkdirSync, readFileSync, readdirSync, rmSync, statSync, writeFileSync } from "node:fs";
 import { createHash } from "node:crypto";
+import {
+  cpSync,
+  existsSync,
+  mkdirSync,
+  readdirSync,
+  readFileSync,
+  rmSync,
+  statSync,
+  writeFileSync,
+} from "node:fs";
 import { dirname, join, relative, sep } from "node:path";
-import { allSteps } from "../scripts/structure";
-import type { Rule } from "../scripts/verify";
 import { ROOT, SEED } from "../checks/lib/bakery";
 import { csvObjects } from "../checks/lib/csv";
 import { canRunLive, claudeStatus, cleanEnv, headlessArgs } from "../config/claude";
+import { allSteps } from "../scripts/structure";
+import type { Rule } from "../scripts/verify";
 
 const OUT = join(ROOT, "finished");
 const FOLDER = join(OUT, "wren-street");
@@ -28,7 +37,9 @@ function filesUnder(dir: string, base = dir, out: string[] = []): string[] {
   if (!existsSync(dir)) return out;
   for (const e of readdirSync(dir)) {
     const p = join(dir, e);
-    statSync(p).isDirectory() ? filesUnder(p, base, out) : out.push(relative(base, p).split(sep).join("/"));
+    statSync(p).isDirectory()
+      ? filesUnder(p, base, out)
+      : out.push(relative(base, p).split(sep).join("/"));
   }
   return out;
 }
@@ -46,29 +57,56 @@ export function prepare(folder = FOLDER) {
 // One line for each thing Claude did, read from a stream-json event.
 export function describe(event: any): string[] {
   if (event.type === "assistant") {
-    return (event.message?.content ?? []).filter((c: any) => c.type === "tool_use").map((c: any) => {
-      const i = c.input ?? {};
-      const what = i.file_path ?? i.command ?? i.skill ?? i.pattern ?? i.path ?? "";
-      return `Claude used ${c.name}${what ? `: ${String(what).replace(/^.*\/wren-street\/|<bakery>\//g, "").split("\n")[0].slice(0, 90)}` : ""}`;
-    });
+    return (event.message?.content ?? [])
+      .filter((c: any) => c.type === "tool_use")
+      .map((c: any) => {
+        const i = c.input ?? {};
+        const what = i.file_path ?? i.command ?? i.skill ?? i.pattern ?? i.path ?? "";
+        return `Claude used ${c.name}${
+          what
+            ? `: ${String(what)
+                .replace(/^.*\/wren-street\/|<bakery>\//g, "")
+                .split("\n")[0]
+                .slice(0, 90)}`
+            : ""
+        }`;
+      });
   }
-  if (event.type === "result") return [`Claude finished after ${event.num_turns} turns${event.is_error ? ", with an error" : ""}.`];
+  if (event.type === "result")
+    return [
+      `Claude finished after ${event.num_turns} turns${event.is_error ? ", with an error" : ""}.`,
+    ];
   return [];
 }
 
-function liveRun(folder: string, say: (s: string) => void): Promise<{ transcript: string; code: number }> {
+function liveRun(
+  folder: string,
+  say: (s: string) => void,
+): Promise<{ transcript: string; code: number }> {
   return new Promise((resolve) => {
-    const child = spawn("claude", headlessArgs(PROMPT), { cwd: folder, env: cleanEnv(), stdio: ["ignore", "pipe", "pipe"] });
-    let transcript = "", buf = "", err = "";
+    const child = spawn("claude", headlessArgs(PROMPT), {
+      cwd: folder,
+      env: cleanEnv(),
+      stdio: ["ignore", "pipe", "pipe"],
+    });
+    let transcript = "",
+      buf = "",
+      err = "";
     child.stdout.on("data", (d) => {
-      transcript += d; buf += d;
+      transcript += d;
+      buf += d;
       const lines = buf.split("\n");
       buf = lines.pop() ?? "";
-      for (const l of lines) { try { for (const s of describe(JSON.parse(l))) say(`  ${s}`); } catch {} }
+      for (const l of lines) {
+        try {
+          for (const s of describe(JSON.parse(l))) say(`  ${s}`);
+        } catch {}
+      }
     });
     child.stderr.on("data", (d) => (err += d));
     child.on("close", (code) => {
-      if (code !== 0 && err.trim()) say(`  claude said: ${err.trim().split("\n").slice(-3).join(" ")}`);
+      if (code !== 0 && err.trim())
+        say(`  claude said: ${err.trim().split("\n").slice(-3).join(" ")}`);
       resolve({ transcript, code: code ?? 1 });
     });
   });
@@ -81,23 +119,61 @@ export function scrub(transcript: string, folder: string): string {
   for (const line of transcript.split("\n")) {
     if (!line.trim()) continue;
     let e: any;
-    try { e = JSON.parse(line); } catch { continue; }
+    try {
+      e = JSON.parse(line);
+    } catch {
+      continue;
+    }
     if (drop.has(e.type)) continue;
     if (e.type === "system" && e.subtype === "init") {
-      e = { type: "system", subtype: "init", cwd: "<bakery>", permissionMode: e.permissionMode, claude_code_version: e.claude_code_version, tools: e.tools, skills: (e.skills ?? []).filter((s: string) => ["friday-close", "allergen-label", "monday-report"].includes(s)), session_id: e.session_id };
+      e = {
+        type: "system",
+        subtype: "init",
+        cwd: "<bakery>",
+        permissionMode: e.permissionMode,
+        claude_code_version: e.claude_code_version,
+        tools: e.tools,
+        skills: (e.skills ?? []).filter((s: string) =>
+          ["friday-close", "allergen-label", "monday-report"].includes(s),
+        ),
+        session_id: e.session_id,
+      };
     }
     if (e.type === "result") {
-      e = { type: "result", subtype: e.subtype, is_error: e.is_error, num_turns: e.num_turns, duration_ms: e.duration_ms, result: e.result, permission_denials: e.permission_denials, session_id: e.session_id };
+      e = {
+        type: "result",
+        subtype: e.subtype,
+        is_error: e.is_error,
+        num_turns: e.num_turns,
+        duration_ms: e.duration_ms,
+        result: e.result,
+        permission_denials: e.permission_denials,
+        session_id: e.session_id,
+      };
     }
-    if (e.message) { delete e.message.model; delete e.message.usage; delete e.message.id; }
+    if (e.message) {
+      delete e.message.model;
+      delete e.message.usage;
+      delete e.message.id;
+    }
     delete e.request_id;
     if (e.session_id) e.session_id = "<session>";
     let s = JSON.stringify(e);
-    s = s.split(folder).join("<bakery>").split(ROOT).join("<course>").split(process.env.HOME ?? "/nonexistent-home").join("<home>");
-    s = s.replace(/\/tmp\/claude-[^"\\\s]*/g, "<tmp>").replace(/[\w.+-]+@[\w-]+\.[\w.]+/g, "<email>").replace(/\bclaude-(opus|sonnet|haiku|fable)[\w.-]*/gi, "<model>").replace(/,"repository":"[^"]*"/g, "");
+    s = s
+      .split(folder)
+      .join("<bakery>")
+      .split(ROOT)
+      .join("<course>")
+      .split(process.env.HOME ?? "/nonexistent-home")
+      .join("<home>");
+    s = s
+      .replace(/\/tmp\/claude-[^"\\\s]*/g, "<tmp>")
+      .replace(/[\w.+-]+@[\w-]+\.[\w.]+/g, "<email>")
+      .replace(/\bclaude-(opus|sonnet|haiku|fable)[\w.-]*/gi, "<model>")
+      .replace(/,"repository":"[^"]*"/g, "");
     out.push(s);
   }
-  return out.join("\n") + "\n";
+  return `${out.join("\n")}\n`;
 }
 
 // What the run made or changed, compared with the bakery before the run.
@@ -106,13 +182,21 @@ function changedSince(before: Record<string, string>, folder: string): string[] 
 }
 
 export function recordingDirs(): string[] {
-  return existsSync(RECORDINGS) ? readdirSync(RECORDINGS).filter((d) => d.startsWith("close-") && existsSync(join(RECORDINGS, d, "transcript.jsonl"))).sort() : [];
+  return existsSync(RECORDINGS)
+    ? readdirSync(RECORDINGS)
+        .filter(
+          (d) => d.startsWith("close-") && existsSync(join(RECORDINGS, d, "transcript.jsonl")),
+        )
+        .sort()
+    : [];
 }
 
 export function replay(name: string, folder: string, say: (s: string) => void) {
   const dir = join(RECORDINGS, name);
   const meta = JSON.parse(readFileSync(join(dir, "run.json"), "utf8"));
-  say(`Replaying ${name}, a real run of Claude Code ${meta.claude_code_version} saved in world/recordings/. With Claude Code signed in, this runs live.`);
+  say(
+    `Replaying ${name}, a real run of Claude Code ${meta.claude_code_version} saved in world/recordings/. With Claude Code signed in, this runs live.`,
+  );
   cpSync(join(dir, "files"), folder, { recursive: true });
   for (const l of readFileSync(join(dir, "transcript.jsonl"), "utf8").split("\n")) {
     if (!l.trim()) continue;
@@ -129,7 +213,11 @@ export async function checkFolder(folder: string) {
     const failed: string[] = [];
     for (const r of rules) {
       let ok = false;
-      try { ok = await r.test(folder); } catch { ok = false; }
+      try {
+        ok = await r.test(folder);
+      } catch {
+        ok = false;
+      }
       if (!ok) failed.push(r.says);
     }
     results.push({ step: s.name, part: s.part, pass: failed.length === 0, failed });
@@ -138,14 +226,21 @@ export async function checkFolder(folder: string) {
 }
 
 export async function finish(opts: { quiet?: boolean; replay?: string; record?: string } = {}) {
-  const say = (s: string) => { if (!opts.quiet) console.log(s); };
+  const say = (s: string) => {
+    if (!opts.quiet) console.log(s);
+  };
   prepare();
   const status = claudeStatus();
   const live = !opts.replay && (opts.record !== undefined || canRunLive(status));
   if (live) {
-    if (!canRunLive(status)) throw new Error("Recording needs Claude Code, signed in. Run bun run doctor.");
+    if (!canRunLive(status))
+      throw new Error("Recording needs Claude Code, signed in. Run bun run doctor.");
     say(`Claude Code ${status.version} is running the Friday close on a fresh copy of the bakery.`);
-    say(`  claude ${headlessArgs(PROMPT).map((a) => (/\s/.test(a) ? JSON.stringify(a) : a)).join(" ")}`);
+    say(
+      `  claude ${headlessArgs(PROMPT)
+        .map((a) => (/\s/.test(a) ? JSON.stringify(a) : a))
+        .join(" ")}`,
+    );
     const before = Object.fromEntries(filesUnder(FOLDER).map((f) => [f, hash(join(FOLDER, f))]));
     const started = Date.now();
     const { transcript, code } = await liveRun(FOLDER, say);
@@ -158,42 +253,72 @@ export async function finish(opts: { quiet?: boolean; replay?: string; record?: 
         cpSync(join(FOLDER, f), join(dir, "files", f));
       }
       writeFileSync(join(dir, "transcript.jsonl"), scrub(transcript, FOLDER));
-      writeFileSync(join(dir, "run.json"), JSON.stringify({
-        claude_code_version: status.version,
-        recorded: new Date().toISOString().slice(0, 10),
-        folder: "finished/wren-street (a fresh copy of world/seed/wren-street plus world/finished/bakery)",
-        command: ["claude", ...headlessArgs(PROMPT)],
-        exit_code: code,
-        seconds: Math.round((Date.now() - started) / 1000),
-      }, null, 2) + "\n");
+      writeFileSync(
+        join(dir, "run.json"),
+        `${JSON.stringify(
+          {
+            claude_code_version: status.version,
+            recorded: new Date().toISOString().slice(0, 10),
+            folder:
+              "finished/wren-street (a fresh copy of world/seed/wren-street plus world/finished/bakery)",
+            command: ["claude", ...headlessArgs(PROMPT)],
+            exit_code: code,
+            seconds: Math.round((Date.now() - started) / 1000),
+          },
+          null,
+          2,
+        )}\n`,
+      );
       say(`Saved the run as world/recordings/${opts.record}/.`);
     }
   } else {
-    const name = opts.replay ? (opts.replay.startsWith("close-") ? opts.replay : `close-${opts.replay}`) : recordingDirs()[0];
-    if (!name || !existsSync(join(RECORDINGS, name, "run.json"))) throw new Error(`There is no recording called ${name ?? "close-1"}. See world/recordings/RECORD.md.`);
+    const name = opts.replay
+      ? opts.replay.startsWith("close-")
+        ? opts.replay
+        : `close-${opts.replay}`
+      : recordingDirs()[0];
+    if (!name || !existsSync(join(RECORDINGS, name, "run.json")))
+      throw new Error(
+        `There is no recording called ${name ?? "close-1"}. See world/recordings/RECORD.md.`,
+      );
     replay(name, FOLDER, say);
   }
 
   const results = await checkFolder(FOLDER);
   const passed = results.filter((r) => r.pass).length;
-  writeFileSync(join(OUT, "scorecard.md"), `# Scorecard\n\n| Step | Result |\n|---|---|\n${results.map((r) => `| ${r.step} | ${r.pass ? "PASS" : "FAIL"} |`).join("\n")}\n`);
+  writeFileSync(
+    join(OUT, "scorecard.md"),
+    `# Scorecard\n\n| Step | Result |\n|---|---|\n${results.map((r) => `| ${r.step} | ${r.pass ? "PASS" : "FAIL"} |`).join("\n")}\n`,
+  );
   writeFileSync(join(OUT, "index.html"), page(results, live));
-  for (const r of results) say(`  ${r.pass ? "PASS" : "FAIL"}  ${r.step}${r.pass ? "" : `: ${r.failed.join("; ")}`}`);
+  for (const r of results)
+    say(`  ${r.pass ? "PASS" : "FAIL"}  ${r.step}${r.pass ? "" : `: ${r.failed.join("; ")}`}`);
   say(`The Friday close ran. ${passed} of ${results.length} step checks pass on what Claude made.`);
   say("Open finished/index.html in your browser to see it.");
   return { passed, total: results.length, folder: FOLDER, live };
 }
 
 const esc = (s: string) => s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
-const readOr = (rel: string) => (existsSync(join(FOLDER, rel)) ? readFileSync(join(FOLDER, rel), "utf8") : "");
+const readOr = (rel: string) =>
+  existsSync(join(FOLDER, rel)) ? readFileSync(join(FOLDER, rel), "utf8") : "";
 
 function page(results: { step: string; pass: boolean }[], live: boolean): string {
-  const before = csvObjects(readFileSync(join(SEED, "orders/wholesale-orders.csv"), "utf8")).slice(0, 6);
+  const before = csvObjects(readFileSync(join(SEED, "orders/wholesale-orders.csv"), "utf8")).slice(
+    0,
+    6,
+  );
   const after = csvObjects(readOr("out/orders-clean.csv")).slice(0, 6);
-  const recon = csvObjects(readOr("out/reconciliation.csv")).filter((r) => (r.status ?? "").trim().toLowerCase() !== "ok");
+  const recon = csvObjects(readOr("out/reconciliation.csv")).filter(
+    (r) => (r.status ?? "").trim().toLowerCase() !== "ok",
+  );
   const table = (rows: Record<string, string>[], cols: string[]) =>
-    rows.length ? `<table><tr>${cols.map((c) => `<th>${c}</th>`).join("")}</tr>${rows.map((r) => `<tr>${cols.map((c) => `<td>${esc(r[c] ?? "")}</td>`).join("")}</tr>`).join("")}</table>` : "<p>Not made.</p>";
-  const pre = (rel: string) => { const t = readOr(rel); return t ? `<pre>${esc(t.trim())}</pre>` : "<p>Not made.</p>"; };
+    rows.length
+      ? `<table><tr>${cols.map((c) => `<th>${c}</th>`).join("")}</tr>${rows.map((r) => `<tr>${cols.map((c) => `<td>${esc(r[c] ?? "")}</td>`).join("")}</tr>`).join("")}</table>`
+      : "<p>Not made.</p>";
+  const pre = (rel: string) => {
+    const t = readOr(rel);
+    return t ? `<pre>${esc(t.trim())}</pre>` : "<p>Not made.</p>";
+  };
   return `<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>The Friday close</title>
 <style>
 :root{--bg:#fbf7f0;--ink:#2b2118;--muted:#6b5a48;--line:#e3d8c6;--card:#fff;--pass:#1d7a46;--fail:#b3261e}
@@ -222,10 +347,16 @@ h2{font-size:16px;margin:0 0 8px}table{border-collapse:collapse;font-size:13px;w
 
 if (import.meta.main) {
   const a = process.argv.slice(2);
-  const flag = (n: string) => { const i = a.indexOf(n); return i < 0 ? undefined : (a[i + 1] ?? "1"); };
+  const flag = (n: string) => {
+    const i = a.indexOf(n);
+    return i < 0 ? undefined : (a[i + 1] ?? "1");
+  };
   const rec = flag("--record");
   try {
-    const r = await finish({ replay: flag("--replay"), record: rec ? (rec.startsWith("close-") ? rec : `close-${rec}`) : undefined });
+    const r = await finish({
+      replay: flag("--replay"),
+      record: rec ? (rec.startsWith("close-") ? rec : `close-${rec}`) : undefined,
+    });
     process.exit(r.passed === r.total ? 0 : 1);
   } catch (e) {
     console.log((e as Error).message);

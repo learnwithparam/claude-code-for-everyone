@@ -1,6 +1,6 @@
 // fix-the-price-list: a clean copy of the price list and a short log of exactly what changed.
 import type { Rule } from "../scripts/verify";
-import { KEY, bakeryRule, bytes, has, originalsUnchanged, text } from "./lib/bakery";
+import { bakeryRule, bytes, has, KEY, originalsUnchanged, text } from "./lib/bakery";
 import { fold } from "./lib/md";
 import { xlsxObjects } from "./lib/xlsx";
 
@@ -16,7 +16,11 @@ const unchanged = want.map((p) => p.product).filter((n) => !fixed.includes(n));
 
 export default [
   bakeryRule,
-  { says: `${FILE} is there and opens as a spreadsheet`, test: (d) => has(d, FILE) && rows(d).length > 0, tryNext: "ask Claude to save the fixed list as a new .xlsx file in out/" },
+  {
+    says: `${FILE} is there and opens as a spreadsheet`,
+    test: (d) => has(d, FILE) && rows(d).length > 0,
+    tryNext: "ask Claude to save the fixed list as a new .xlsx file in out/",
+  },
   {
     says: "it has the columns product, unit, shop_price, wholesale_price",
     test: (d) => ["product", "unit", "shop_price", "wholesale_price"].every((c) => c in rows(d)[0]),
@@ -25,7 +29,8 @@ export default [
   {
     says: `every product name matches its recipe (${want.length} products)`,
     test: (d) => rows(d).length === want.length && want.every((p) => row(d, p.product)),
-    tryNext: "ask Claude to compare each name with the first line of its file in recipes/ and fix the spelling",
+    tryNext:
+      "ask Claude to compare each name with the first line of its file in recipes/ and fix the spelling",
   },
   {
     says: 'every row is priced for one item (unit is "each")',
@@ -34,8 +39,15 @@ export default [
   },
   {
     says: "every price is a number in pounds, and the right one",
-    test: (d) => want.every((p) => { const r = row(d, p.product); return !!r && close(r.shop_price, p.shop_price) && close(r.wholesale_price, p.wholesale_price); }),
-    tryNext: "ask Claude to look for a price in pence, like 280, and to save prices as numbers, not text",
+    test: (d) =>
+      want.every((p) => {
+        const r = row(d, p.product);
+        return (
+          !!r && close(r.shop_price, p.shop_price) && close(r.wholesale_price, p.wholesale_price)
+        );
+      }),
+    tryNext:
+      "ask Claude to look for a price in pence, like 280, and to save prices as numbers, not text",
   },
   {
     says: `${LOG} names the 3 products that changed`,
@@ -47,5 +59,10 @@ export default [
     test: (d) => unchanged.every((n) => !fold(text(d, LOG)).includes(fold(n))),
     tryNext: "ask Claude to take out any line about a product that was already right",
   },
-  { says: "the original price list is the same as the start", test: originalsUnchanged, tryNext: "ask Claude to save the fix as a new file in out/; run bun run world reset to get the original back" },
+  {
+    says: "the original price list is the same as the start",
+    test: originalsUnchanged,
+    tryNext:
+      "ask Claude to save the fix as a new file in out/; run bun run world reset to get the original back",
+  },
 ] satisfies Rule[];

@@ -1,4 +1,5 @@
 ---
+
 name: allergen-label
 description: Make the shelf label for a Wren Street Bakery product from its recipe, with its price and every allergen. Use when asked for a label, or for allergens on a product.
 ---

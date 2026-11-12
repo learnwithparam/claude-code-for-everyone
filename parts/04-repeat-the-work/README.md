@@ -19,11 +19,11 @@ flowchart LR
 
 ## The steps
 
-| Step | Minutes | What you make | What the check reads |
-|---|---|---|---|
-| write-the-done-list | 10 | `out/labels-done.md` | 4 or more checks, sesame named, made before any label |
-| build-the-label-skill | 25 | `.claude/skills/allergen-label/SKILL.md` and 12 labels | The skill parses; each label lists every allergen in its recipe and the right price |
-| sign-off-the-labels | 10 | A name on every label | Every label signed; every done-list item ticked |
+| Step                  | Minutes | What you make                                          | What the check reads                                                                |
+| --------------------- | ------- | ------------------------------------------------------ | ----------------------------------------------------------------------------------- |
+| write-the-done-list   | 10      | `out/labels-done.md`                                   | 4 or more checks, sesame named, made before any label                               |
+| build-the-label-skill | 25      | `.claude/skills/allergen-label/SKILL.md` and 12 labels | The skill parses; each label lists every allergen in its recipe and the right price |
+| sign-off-the-labels   | 10      | A name on every label                                  | Every label signed; every done-list item ticked                                     |
 
 This course teaches a way of working, not food law. A person always signs the label.
 

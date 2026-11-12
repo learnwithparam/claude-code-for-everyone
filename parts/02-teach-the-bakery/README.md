@@ -19,11 +19,11 @@ flowchart TB
 
 ## The steps
 
-| Step | Minutes | What you make | What the check reads |
-|---|---|---|---|
-| write-the-house-rules | 20 | `CLAUDE.md` | Its parts, the never-do list, `out/` named, under 200 lines |
-| plan-the-invoice-check | 10 | `out/plans/invoice-check.md` | Goal, files to read and write, steps, risks; nothing else changed |
-| reconcile-the-invoices | 30 | `out/reconciliation.csv` and a short note | Every planted fault flagged, no false flags |
+| Step                   | Minutes | What you make                             | What the check reads                                              |
+| ---------------------- | ------- | ----------------------------------------- | ----------------------------------------------------------------- |
+| write-the-house-rules  | 20      | `CLAUDE.md`                               | Its parts, the never-do list, `out/` named, under 200 lines       |
+| plan-the-invoice-check | 10      | `out/plans/invoice-check.md`              | Goal, files to read and write, steps, risks; nothing else changed |
+| reconcile-the-invoices | 30      | `out/reconciliation.csv` and a short note | Every planted fault flagged, no false flags                       |
 
 ## Walkthrough
 

@@ -29,5 +29,8 @@ export function grade(md: string): { grade: number; words: number } {
   const words = text.split(/\s+/).filter((w) => /[a-z]/i.test(w));
   if (words.length === 0) return { grade: 0, words: 0 };
   const syl = words.reduce((a, w) => a + syllables(w), 0);
-  return { grade: 0.39 * (words.length / sentences) + 11.8 * (syl / words.length) - 15.59, words: words.length };
+  return {
+    grade: 0.39 * (words.length / sentences) + 11.8 * (syl / words.length) - 15.59,
+    words: words.length,
+  };
 }

@@ -18,11 +18,11 @@ flowchart LR
 
 ## The steps
 
-| Step | Minutes | What you make | What the check reads |
-|---|---|---|---|
-| make-a-save-point | 10 | A save point in the bakery folder | At least one save point, nothing left unsaved |
-| rewind-a-bad-edit | 10 | A bad edit to the menu, then rewound; a line in `out/undo-log.md` | The menu is the same as the save point; the log says how |
-| recover-a-deleted-file | 15 | The owner notes deleted by a command, then got back | The notes are back byte for byte; the log says why rewind could not |
+| Step                   | Minutes | What you make                                                     | What the check reads                                                |
+| ---------------------- | ------- | ----------------------------------------------------------------- | ------------------------------------------------------------------- |
+| make-a-save-point      | 10      | A save point in the bakery folder                                 | At least one save point, nothing left unsaved                       |
+| rewind-a-bad-edit      | 10      | A bad edit to the menu, then rewound; a line in `out/undo-log.md` | The menu is the same as the save point; the log says how            |
+| recover-a-deleted-file | 15      | The owner notes deleted by a command, then got back               | The notes are back byte for byte; the log says why rewind could not |
 
 ## Walkthrough
 

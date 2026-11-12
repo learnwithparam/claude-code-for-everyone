@@ -4,8 +4,12 @@ export function sections(text: string): Record<string, string> {
   let current = "";
   for (const line of text.split("\n")) {
     const h = line.match(/^#{1,6}\s+(.*?)\s*#*\s*$/);
-    if (h) { current = h[1].trim().toLowerCase(); out[current] = out[current] ?? ""; continue; }
-    out[current] = (out[current] ?? "") + line + "\n";
+    if (h) {
+      current = h[1].trim().toLowerCase();
+      out[current] = out[current] ?? "";
+      continue;
+    }
+    out[current] = `${(out[current] ?? "") + line}\n`;
   }
   return out;
 }
@@ -19,9 +23,13 @@ export function section(text: string, heading: string): string | undefined {
 }
 
 export const bullets = (text: string) =>
-  text.split("\n").filter((l) => /^\s*([-*+]|\d+[.)])\s+\S/.test(l)).map((l) => l.replace(/^\s*([-*+]|\d+[.)])\s+/, "").trim());
+  text
+    .split("\n")
+    .filter((l) => /^\s*([-*+]|\d+[.)])\s+\S/.test(l))
+    .map((l) => l.replace(/^\s*([-*+]|\d+[.)])\s+/, "").trim());
 
 export const words = (text: string) => text.split(/\s+/).filter(Boolean);
 
 // Lower case, straight quotes, accents removed: used to look for names in free text.
-export const fold = (s: string) => s.normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase().replace(/[’']/g, "'");
+export const fold = (s: string) =>
+  s.normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase().replace(/[’']/g, "'");

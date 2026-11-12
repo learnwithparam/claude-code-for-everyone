@@ -20,12 +20,12 @@ flowchart LR
 
 ## The steps
 
-| Step | Minutes | What you make | What the check reads |
-|---|---|---|---|
-| publish-the-menu-page | 25 | `out/site/index.html` | Every product, the right price and allergens, works offline |
-| pack-the-bakery-kit | 20 | `kit/.claude-plugin/plugin.json` and both skills | The kit parses and holds both skills |
-| run-the-friday-close | 25 | One skill that runs the whole close | Every earlier check passes on new data the check drops in |
-| map-your-own-close | 15 | `out/friday-close.md` | Your own task, its files, its first rule, one check a script could run |
+| Step                  | Minutes | What you make                                    | What the check reads                                                   |
+| --------------------- | ------- | ------------------------------------------------ | ---------------------------------------------------------------------- |
+| publish-the-menu-page | 25      | `out/site/index.html`                            | Every product, the right price and allergens, works offline            |
+| pack-the-bakery-kit   | 20      | `kit/.claude-plugin/plugin.json` and both skills | The kit parses and holds both skills                                   |
+| run-the-friday-close  | 25      | One skill that runs the whole close              | Every earlier check passes on new data the check drops in              |
+| map-your-own-close    | 15      | `out/friday-close.md`                            | Your own task, its files, its first rule, one check a script could run |
 
 ## Walkthrough
 

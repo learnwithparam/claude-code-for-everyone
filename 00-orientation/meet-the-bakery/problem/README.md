@@ -40,11 +40,11 @@ Expect: `Done. All 5 rules pass.`
 
 ## If you get stuck
 
-| What you see | Try this |
-|---|---|
-| `FAIL the bakery folder wren-street/ is there` | Run `bun run world` first. |
-| `FAIL it holds one sentence of 6 words or more` | Write one full sentence. End it with a full stop. |
-| `FAIL the sentence is your own, not the example` | Name a task from your own job. |
+| What you see                                               | Try this                                           |
+| ---------------------------------------------------------- | -------------------------------------------------- |
+| `FAIL the bakery folder wren-street/ is there`             | Run `bun run world` first.                         |
+| `FAIL it holds one sentence of 6 words or more`            | Write one full sentence. End it with a full stop.  |
+| `FAIL the sentence is your own, not the example`           | Name a task from your own job.                     |
 | `FAIL every original bakery file is the same as the start` | Run `bun run world status`. It shows what changed. |
 
 ## Words you will use

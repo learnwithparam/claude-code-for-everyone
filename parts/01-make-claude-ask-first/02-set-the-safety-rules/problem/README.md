@@ -58,12 +58,12 @@ Expect: `Done. All 7 rules pass.`
 
 ## If you get stuck
 
-| What you see | Try this |
-|---|---|
-| `FAIL .claude/settings.json is there and is valid` | Look for a comma after the last line in a block. Take it out. |
-| `FAIL Claude starts in Manual mode` | The value must be `default`, not `auto` or `manual`. |
-| `FAIL Claude cannot write outside the bakery folder` | Add the second line, with the value `true`. |
-| `FAIL out/safety.md lists 2 things` | Check the heading words and the dashes. |
+| What you see                                         | Try this                                                      |
+| ---------------------------------------------------- | ------------------------------------------------------------- |
+| `FAIL .claude/settings.json is there and is valid`   | Look for a comma after the last line in a block. Take it out. |
+| `FAIL Claude starts in Manual mode`                  | The value must be `default`, not `auto` or `manual`.          |
+| `FAIL Claude cannot write outside the bakery folder` | Add the second line, with the value `true`.                   |
+| `FAIL out/safety.md lists 2 things`                  | Check the heading words and the dashes.                       |
 
 ## Words you will use
 

@@ -53,11 +53,11 @@ Expect: `Done. All 9 rules pass.`
 
 ## If you get stuck
 
-| What you see | Try this |
-|---|---|
-| `FAIL every price is a number in pounds` | Look for 280. That is pence. Also check that prices are not saved as text. |
-| `FAIL every row is priced for one item` | Find the row that says dozen. Divide its prices by 12. |
-| `FAIL names no product that did not change` | Take out any line about a product that was already right. |
+| What you see                                | Try this                                                                   |
+| ------------------------------------------- | -------------------------------------------------------------------------- |
+| `FAIL every price is a number in pounds`    | Look for 280. That is pence. Also check that prices are not saved as text. |
+| `FAIL every row is priced for one item`     | Find the row that says dozen. Divide its prices by 12.                     |
+| `FAIL names no product that did not change` | Take out any line about a product that was already right.                  |
 
 ## Words you will use
 
