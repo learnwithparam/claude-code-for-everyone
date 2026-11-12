@@ -1,5 +1,6 @@
-// The facts of Wren Street Bakery. The generator builds the folder from these, and the answer key comes
-// from the same facts, so every planted fault is known before a learner starts.
+// The facts of Wren Street Bakery. The generator in build.ts makes the bakery folder from these.
+// The answer key comes from the same facts,
+// so every planted fault is known before a learner starts.
 
 export type Product = {
   slug: string;
@@ -149,14 +150,14 @@ export const PRODUCTS: Product[] = [
 ];
 
 // The bakery's own allergen words. Not a legal list: it names only what these recipes use.
-export const ALLERGEN_WORDS: { allergen: string; look_for: string }[] = [
-  { allergen: "gluten", look_for: "wheat flour; rye flour; oats" },
-  { allergen: "milk", look_for: "milk; milk powder; butter; cheddar cheese" },
-  { allergen: "eggs", look_for: "egg" },
-  { allergen: "nuts", look_for: "almonds; walnuts" },
-  { allergen: "sesame", look_for: "sesame seeds" },
-  { allergen: "soya", look_for: "soya flour; soya lecithin" },
-  { allergen: "mustard", look_for: "mustard powder" },
+export const ALLERGEN_WORDS: { allergen: string; lookFor: string }[] = [
+  { allergen: "gluten", lookFor: "wheat flour; rye flour; oats" },
+  { allergen: "milk", lookFor: "milk; milk powder; butter; cheddar cheese" },
+  { allergen: "eggs", lookFor: "egg" },
+  { allergen: "nuts", lookFor: "almonds; walnuts" },
+  { allergen: "sesame", lookFor: "sesame seeds" },
+  { allergen: "soya", lookFor: "soya flour; soya lecithin" },
+  { allergen: "mustard", lookFor: "mustard powder" },
 ];
 
 export type Cafe = {
@@ -249,37 +250,46 @@ export const PRICE_FAULTS = {
 // The menu on the shop wall disagrees with the price list on two products.
 export const MENU_WRONG: Record<string, number> = { "sourdough-loaf": 4.0, brownie: 2.5 };
 
+// What the bakery buys. Each supplier numbers its own invoices, starting from firstInvoiceNumber.
 export const SUPPLIERS = [
   {
     code: "MM",
+    ordersPerQuarter: 6,
+    firstInvoiceNumber: 4410,
     name: "Millbrook Mill",
     item: "strong white flour",
     unit: "kg",
     price: 0.92,
-    qty: [400, 500],
+    quantities: [400, 500],
   },
   {
     code: "FD",
+    ordersPerQuarter: 6,
+    firstInvoiceNumber: 2201,
     name: "Fellside Dairy",
     item: "unsalted butter",
     unit: "kg",
     price: 6.2,
-    qty: [60, 80],
+    quantities: [60, 80],
   },
   {
     code: "HL",
+    ordersPerQuarter: 6,
+    firstInvoiceNumber: 870,
     name: "Hollow Lane Eggs",
     item: "free range eggs",
     unit: "egg",
     price: 0.24,
-    qty: [360, 480],
+    quantities: [360, 480],
   },
   {
     code: "KP",
+    ordersPerQuarter: 5,
+    firstInvoiceNumber: 15020,
     name: "Kraftline Packaging",
     item: "paper bread bags",
     unit: "bag",
     price: 0.06,
-    qty: [2000, 3000],
+    quantities: [2000, 3000],
   },
 ];
