@@ -32,7 +32,7 @@ export async function ask(role: Role, prompt: string): Promise<string> {
   const key = replayKey(role, prompt);
   if (provider() === "replay") {
     const hit = loadReplays()[key];
-    if (!hit) throw new Error(`No recorded reply for this prompt (replay ${key}). Run with RECORD=1 and a live provider once.`);
+    if (!hit) throw new Error(`No recorded reply for this prompt (replay ${key}). Run with RECORD=1 and a live provider once.${process.env.SHOW_PROMPT ? `\nPROMPT ${role}: ${prompt}` : ""}`);
     return hit.reply;
   }
   const { text } = await generateText({ model: await liveModel(role), prompt, maxOutputTokens: 400 });

@@ -1,0 +1,14 @@
+{
+  "29385956e3b7555c": {
+    "role": "fast",
+    "prompt": "You write for a small bakery owner. In under 80 words, plain English, no greeting, say what needs action in this invoice check. Flags: FD-2204 (price above PO: billed \u00a36.45, agreed \u00a36.20); FD-2205 (price above PO: billed \u00a36.45, agreed \u00a36.20); FD-2206 (price above PO: billed \u00a36.45, agreed \u00a36.20); FD-2207 (duplicate: same order and amount as FD-2202); HL-873 (short delivery: billed 420, ordered 480).",
+    "reply": "Five invoices need action. Do not pay FD-2207: it bills the same order as FD-2202. Fellside Dairy billed butter at \u00a36.45 a kilo on FD-2204, FD-2205 and FD-2206, but we agreed \u00a36.20. Ask for a credit. HL-873 is short: Hollow Lane sent 420 eggs, not 480. Ask when the rest will come. The other 19 invoices match their orders.",
+    "source": "written by the course author as the expected reply; re-record with RECORD=1 and a live provider"
+  },
+  "fd8cdc7dc98e7b74": {
+    "role": "fast",
+    "prompt": "In two short sentences for a bakery owner: takings \u00a313609.80, 4558 items sold, 392 wasted, most waste on Focaccia (39). Late payers: Kettle and Crumb, Moss and Grain.",
+    "reply": "The shop took \u00a313609.80 and sold 4558 items, with 392 thrown away, most of them Focaccia (39). Kettle and Crumb and Moss and Grain still owe us, so check them before the close.",
+    "source": "written by the course author as the expected reply; re-record with RECORD=1 and a live provider"
+  }
+}
