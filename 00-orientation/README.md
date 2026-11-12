@@ -123,7 +123,7 @@ bun run finished
 
 Expect: `The Friday close ran.` and each check line says `PASS`
 
-You see each thing Claude did, then the checks. If Claude Code is not installed or not signed in, it shows a run we saved from the real Claude Code instead, and its first line says `Replaying`.
+You see each thing Claude did, then the checks. Maybe Claude Code is not installed or not signed in yet. Then it shows a run we saved from the real Claude Code. Its first line says `Replaying`.
 
 ![The finished close passing every check](images/finished-run.png)
 
