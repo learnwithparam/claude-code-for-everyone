@@ -1,5 +1,4 @@
 ---
-
 name: friday-close
 description: Run the Friday close for Wren Street Bakery. Use when asked to do the close, or to clean the orders, fix the price list, check the invoices, make the labels, write the report and update the menu page in one go.
 ---

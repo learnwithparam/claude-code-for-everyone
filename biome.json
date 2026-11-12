@@ -8,7 +8,9 @@
       "!**/world/seed",
       "!world/key.json",
       "!**/solution",
-      "!**/wrong"
+      "!**/wrong",
+      "!world/finished/bakery/**/*.md",
+      "!world/finished/bakery/**/*.json"
     ]
   },
   "formatter": {
