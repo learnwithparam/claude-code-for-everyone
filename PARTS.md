@@ -8,7 +8,7 @@ This file is for the sessions that build one part each. A part session can start
 - A part folder with no step folders is a skeleton. `scripts/structure.ts` skips it, so `bun run check` passes. Once you add one step, every rule applies to the whole part.
 - The check is `checks/<step-name>.ts`. Start with `bakeryRule` and end with `originalsUnchanged` from `checks/lib/bakery.ts`.
 - Checks read files the learner's Claude made in the bakery folder. They never read the chat.
-- `solution/` and `wrong/` folders hold only the files a step makes or breaks. Every other file is read from `world/seed/wren-street/`. Write them with `world/samples.ts`, from the functions in `world/close.ts`.
+- `solution/` and `wrong/` folders hold only the files a step makes or breaks. Every other file is read from `world/seed/wren-street/`. Write them with `world/samples.ts`, from the functions in `world/close.ts`. Each `solution/` also holds `prompts.md`: the prompts that got there, the plan Claude showed, and what the learner checked or said no to. `world/samples.ts` keeps it when it rewrites the folder.
 - The answers are in `world/key.json`, built by `bun world/build.ts` from `world/data.ts`. Never type an answer into a check by hand.
 - This course uses the real Claude Code, never the model API (`briefs/build/CLAUDE-CODE.md`). No step asks for a key. A check reads what Claude Code made (files, settings, skills, hooks, git history), never a reply.
 - `world/close.ts` is the author's answer key as a plain script: use it for `solution/` and `wrong/` folders only. It is not Claude.
