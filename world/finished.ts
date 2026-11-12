@@ -52,7 +52,11 @@ function page(results: { step: string; pass: boolean }[]): string {
   const recon = csvObjects(read("out/reconciliation.csv")).filter((r) => r.status !== "ok");
   const table = (rows: Record<string, string>[], cols: string[]) =>
     `<table><tr>${cols.map((c) => `<th>${c}</th>`).join("")}</tr>${rows.map((r) => `<tr>${cols.map((c) => `<td>${esc(r[c] ?? "")}</td>`).join("")}</tr>`).join("")}</table>`;
-  const report = read("out/reports/monday-report.md").split("\n").filter((l) => l.startsWith("- ")).map((l) => `<li>${esc(l.slice(2))}</li>`).join("");
+  let heading = "";
+  const report = read("out/reports/monday-report.md").split("\n").flatMap((l) => {
+    if (l.startsWith("## ")) { heading = l.slice(3); return []; }
+    return l.startsWith("- ") ? [`<li>${heading === "Late payers" ? "Pays late: " : ""}${esc(l.slice(2))}</li>`] : [];
+  }).join("");
   const label = read("out/labels/multigrain-loaf.md").split("\n").filter(Boolean).map((l) => `<div>${esc(l.replace(/^# /, ""))}</div>`).join("");
   return `<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>The Friday close</title>
 <style>
@@ -60,7 +64,7 @@ function page(results: { step: string; pass: boolean }[]): string {
 @media (prefers-color-scheme: dark){:root{--bg:#1d1814;--ink:#f3ece2;--muted:#b9a993;--line:#3a3129;--card:#262019;--pass:#5fd08f;--fail:#ff8a80;--flag:#3b2422}}
 body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.5 system-ui,sans-serif}
 main{max-width:1100px;margin:0 auto;padding:24px 16px}h1{margin:0 0 4px;font-size:28px}p.sub{margin:0 0 20px;color:var(--muted)}
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:16px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,460px),1fr));gap:16px}
 section{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:14px 16px;overflow-x:auto}
 h2{font-size:16px;margin:0 0 8px}table{border-collapse:collapse;font-size:13px;width:100%}th,td{text-align:left;padding:4px 6px;border-bottom:1px solid var(--line);white-space:nowrap}
 .flag td{background:var(--flag)}.score{display:flex;flex-wrap:wrap;gap:6px}.score span{font:12px ui-monospace,monospace;padding:3px 8px;border-radius:999px;border:1px solid var(--line)}

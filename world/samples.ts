@@ -31,7 +31,7 @@ function sample(step: string, kind: string, files: Files) {
 
 // Orientation
 sample("meet-the-bakery", "solution", { "out/why-i-am-here.md": "I want Claude to match our delivery notes to the orders so I stop doing it by hand.\n" });
-sample("meet-the-bakery", "wrong/copied-the-example", { "out/why-i-am-here.md": "I want Claude to tidy the supplier spreadsheet I fix by hand every month.\n" });
+sample("meet-the-bakery", "wrong/copied-the-example", { "out/why-i-am-here.md": "I want Claude to [the task you do by hand at work].\n" });
 sample("meet-the-bakery", "wrong/empty-file", { "out/why-i-am-here.md": "\n" });
 
 // read-the-folder

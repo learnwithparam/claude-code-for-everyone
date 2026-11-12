@@ -4,7 +4,7 @@ import { bakeryRule, has, originalsUnchanged, text } from "./lib/bakery";
 import { words } from "./lib/md";
 
 const FILE = "out/why-i-am-here.md";
-const EXAMPLE = /tidy the supplier spreadsheet I fix by hand every month/i;
+const EXAMPLE = /\[|the task you do by hand at work/i;
 const body = (d: string) => text(d, FILE).replace(/^#.*$/gm, "").trim();
 
 export default [

@@ -1,1 +1,1 @@
-I want Claude to tidy the supplier spreadsheet I fix by hand every month.
+I want Claude to [the task you do by hand at work].

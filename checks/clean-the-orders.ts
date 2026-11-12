@@ -20,12 +20,12 @@ export default [
   {
     says: "every date is written YYYY-MM-DD",
     test: (d) => rows(d).every((r) => /^\d{4}-\d{2}-\d{2}$/.test(r.order_date)),
-    tryNext: "ask Claude to write every date as year-month-day, like 2026-09-03",
+    tryNext: "ask Claude to write every date as year, month, day: YYYY-MM-DD",
   },
   {
     says: "every date is the right date (phone orders are day first)",
     test: (d) => rows(d).every((r) => want[r.order_id]?.order_date === r.order_date),
-    tryNext: "read the Dates part of notes/owner-notes.md: 03/09/2026 is the 3rd of September",
+    tryNext: "phone orders put the day first; read the Dates part of notes/owner-notes.md",
   },
   {
     says: `each cafe has one spelling, from customers/cafes.csv (${KEY.cafes.length} cafes)`,
