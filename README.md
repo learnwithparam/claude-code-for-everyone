@@ -75,7 +75,7 @@ Claude never changes Jess's original files. It makes new files in `out/`. A chec
 | [Make Claude ask before it acts](parts/01-make-claude-ask-first/README.md) | Manual mode, safe settings, clean a sheet, fix a price list      | read-the-folder, set-the-safety-rules, clean-the-orders, fix-the-price-list              | 65      |
 | [Teach Claude the bakery](parts/02-teach-the-bakery/README.md)             | House rules, a plan first, check bills against orders            | write-the-house-rules, plan-the-invoice-check, reconcile-the-invoices                    | 60      |
 | [Undo anything](parts/03-undo-anything/README.md)                          | Save points, rewind, and what rewind cannot undo                 | make-a-save-point, rewind-a-bad-edit, recover-a-deleted-file                             | 35      |
-| [Do it the same way every time](parts/04-repeat-the-work/README.md)        | Say what done means first, then a skill, then sign off         | write-the-done-list, build-the-label-skill, sign-off-the-labels                          | 45      |
+| [Do it the same way every time](parts/04-repeat-the-work/README.md)        | Say what done means first, then a skill, then sign off           | write-the-done-list, build-the-label-skill, sign-off-the-labels                          | 45      |
 | [Connect it and let it run](parts/05-connect-and-schedule/README.md)       | The terminal, a connector, a report that runs by itself          | open-the-terminal, connect-the-till, write-the-monday-report, schedule-the-monday-report | 75      |
 | [Share it](parts/06-share-the-close/README.md)                             | A web page, a kit for the next hire, the whole close on new data | publish-the-menu-page, pack-the-bakery-kit, run-the-friday-close, map-your-own-close     | 85      |
 
@@ -101,10 +101,10 @@ You also map the close onto one task from your own job: its files, its first hou
 
 ## Read before you start
 
-| Read                                                                                                    | By        | Why                                                  |
-| ------------------------------------------------------------------------------------------------------- | --------- | ---------------------------------------------------- |
-| [How people are using Claude Cowork](https://claude.com/blog/how-people-are-using-claude-cowork)        | Anthropic | Most of this use is office work, not code.           |
-| [Use Claude Cowork safely](https://support.claude.com/en/articles/13364135-use-claude-cowork-safely)    | Anthropic | The risks this course handles, one by one.           |
+| Read                                                                                                    | By        | Why                                                |
+| ------------------------------------------------------------------------------------------------------- | --------- | -------------------------------------------------- |
+| [How people are using Claude Cowork](https://claude.com/blog/how-people-are-using-claude-cowork)        | Anthropic | Most of this use is office work, not code.         |
+| [Use Claude Cowork safely](https://support.claude.com/en/articles/13364135-use-claude-cowork-safely)    | Anthropic | The risks this course handles, one by one.         |
 | [How AI agents shape experts' judgment calls](https://www.anthropic.com/research/agents-judgment-calls) | Anthropic | Why you say what done means before Claude answers. |
 
 ## For people who run the course
