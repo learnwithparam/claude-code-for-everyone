@@ -15,7 +15,7 @@ export default [
   {
     says: `it has the columns ${COLS.join(", ")}`,
     test: (d) => { const r = rows(d)[0]; return !!r && COLS.every((c) => c in r); },
-    tryNext: "keep the same column names as the original file in the first row",
+    tryNext: "ask Claude to use the column names of the original file in the first row",
   },
   {
     says: "every date is written YYYY-MM-DD",
@@ -25,7 +25,7 @@ export default [
   {
     says: "every date is the right date (phone orders are day first)",
     test: (d) => rows(d).every((r) => want[r.order_id]?.order_date === r.order_date),
-    tryNext: "phone orders put the day first; read the Dates part of notes/owner-notes.md",
+    tryNext: "phone orders put the day first; ask Claude to read the Dates part of notes/owner-notes.md",
   },
   {
     says: `each cafe has one spelling, from customers/cafes.csv (${KEY.cafes.length} cafes)`,
@@ -40,12 +40,12 @@ export default [
   {
     says: `no real order was lost (${Object.keys(want).length} orders)`,
     test: (d) => { const ids = new Set(rows(d).map((r) => r.order_id)); return ids.size === Object.keys(want).length && Object.keys(want).every((i) => ids.has(i)); },
-    tryNext: "only remove a row when every cell is the same as another row",
+    tryNext: "ask Claude to remove a row only when every cell is the same as another row",
   },
   {
     says: "every quantity is a whole number, and the right one",
     test: (d) => rows(d).every((r) => /^\d+$/.test(r.quantity) && Number(r.quantity) === want[r.order_id]?.quantity),
     tryNext: 'ask Claude to turn words like "two dozen" into numbers, like 24',
   },
-  { says: "the original orders file is the same as the start", test: originalsUnchanged, tryNext: "make a new file in out/ and leave the original alone; run bun run world reset to get it back" },
+  { says: "the original orders file is the same as the start", test: originalsUnchanged, tryNext: "ask Claude for a new file in out/ and to leave the original alone; run bun run world reset to get it back" },
 ] satisfies Rule[];

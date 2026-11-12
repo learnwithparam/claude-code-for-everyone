@@ -18,7 +18,7 @@ export default [
   {
     says: 'it has a "Questions I have" part with 2 or more questions',
     test: (d) => bullets(section(text(d, FILE), "questions i have") ?? "").length >= 2,
-    tryNext: 'add a heading "## Questions I have" and two lines under it that start with a dash',
+    tryNext: 'ask Claude to add a heading "## Questions I have" with two questions that start with a dash',
   },
   { says: "every original bakery file is the same as the start", test: originalsUnchanged, tryNext: "run bun run world status to see what changed, then bun run world reset" },
 ] satisfies Rule[];

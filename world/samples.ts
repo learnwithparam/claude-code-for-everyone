@@ -1,7 +1,7 @@
 // Author tool: write each built step's solution/ and wrong/<mistake>/ folders from the finished close.
 // A sample folder holds only the files a step makes or breaks; checks read every other file from the seed.
 //   bun world/samples.ts
-import { cpSync, mkdirSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from "node:fs";
+import { cpSync, existsSync, mkdirSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { dirname, join } from "node:path";
 import { csvObjects, parseCsv, toCsv } from "../checks/lib/csv";
@@ -22,7 +22,14 @@ function sample(step: string, kind: string, files: Files) {
   const s = findStep(step);
   if (!s) throw new Error(`no step ${step}`);
   const dir = join(s.dir, kind);
+  // prompts.md is written by a person from a real Claude Code session, so a rebuild keeps it.
+  const promptsPath = join(dir, "prompts.md");
+  const prompts = existsSync(promptsPath) ? readFileSync(promptsPath) : undefined;
   rmSync(dir, { recursive: true, force: true });
+  if (prompts) {
+    mkdirSync(dir, { recursive: true });
+    writeFileSync(promptsPath, prompts);
+  }
   for (const [rel, body] of Object.entries(files)) {
     mkdirSync(dirname(join(dir, rel)), { recursive: true });
     writeFileSync(join(dir, rel), body);

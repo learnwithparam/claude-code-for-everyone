@@ -20,22 +20,22 @@ export default [
   {
     says: "it has the columns product, unit, shop_price, wholesale_price",
     test: (d) => ["product", "unit", "shop_price", "wholesale_price"].every((c) => c in rows(d)[0]),
-    tryNext: "keep the same column names as the original price list",
+    tryNext: "ask Claude to keep the column names of the original price list",
   },
   {
     says: `every product name matches its recipe (${want.length} products)`,
     test: (d) => rows(d).length === want.length && want.every((p) => row(d, p.product)),
-    tryNext: "compare each name with the first line of its file in recipes/ and fix the spelling",
+    tryNext: "ask Claude to compare each name with the first line of its file in recipes/ and fix the spelling",
   },
   {
     says: 'every row is priced for one item (unit is "each")',
     test: (d) => rows(d).every((r) => String(r.unit).toLowerCase() === "each"),
-    tryNext: "find the row priced for a dozen and change it to the price for one",
+    tryNext: "ask Claude to find the row priced for a dozen and change it to the price for one",
   },
   {
     says: "every price is a number in pounds, and the right one",
     test: (d) => want.every((p) => { const r = row(d, p.product); return !!r && close(r.shop_price, p.shop_price) && close(r.wholesale_price, p.wholesale_price); }),
-    tryNext: "look for a price in pence, like 280, and save prices as numbers, not text",
+    tryNext: "ask Claude to look for a price in pence, like 280, and to save prices as numbers, not text",
   },
   {
     says: `${LOG} names the 3 products that changed`,
@@ -45,7 +45,7 @@ export default [
   {
     says: `${LOG} names no product that did not change`,
     test: (d) => unchanged.every((n) => !fold(text(d, LOG)).includes(fold(n))),
-    tryNext: "take out any line about a product that was already right",
+    tryNext: "ask Claude to take out any line about a product that was already right",
   },
-  { says: "the original price list is the same as the start", test: originalsUnchanged, tryNext: "save the fix as a new file in out/; run bun run world reset to get the original back" },
+  { says: "the original price list is the same as the start", test: originalsUnchanged, tryNext: "ask Claude to save the fix as a new file in out/; run bun run world reset to get the original back" },
 ] satisfies Rule[];
