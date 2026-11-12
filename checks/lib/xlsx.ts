@@ -15,12 +15,10 @@ const unescapeXml = (xml: string) =>
     .replace(/&amp;/g, "&");
 
 // "&" goes first, so the "&" in "&lt;" is not escaped twice.
-const escapeXml = (plain: string) =>
-  plain
-    .replace(/&/g, "&amp;")
-    .replace(/</g, "&lt;")
-    .replace(/>/g, "&gt;")
-    .replace(/"/g, "&quot;");
+const escapeXml = (plain: string) => {
+  const tagsEscaped = plain.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+  return tagsEscaped.replace(/"/g, "&quot;");
+};
 
 // The text inside every <t> tag, joined together.
 const textOf = (xml: string) => {
@@ -38,8 +36,7 @@ function columnIndex(reference: string): number {
 
 type Files = Record<string, Uint8Array>;
 
-const fileText = (files: Files, name: string) =>
-  files[name] ? strFromU8(files[name]) : undefined;
+const fileText = (files: Files, name: string) => (files[name] ? strFromU8(files[name]) : undefined);
 
 // Strings used in many cells are stored once in sharedStrings.xml; cells point to them by number.
 function sharedStrings(files: Files): string[] {

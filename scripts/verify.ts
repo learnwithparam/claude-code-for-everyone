@@ -36,23 +36,26 @@ async function rulePasses(rule: Rule, folder: string): Promise<boolean> {
   }
 }
 
+function printRule(rule: Rule, ok: boolean) {
+  if (ok) console.log(`  PASS  ${rule.says}`);
+  else console.log(`  FAIL  ${rule.says}\n        Try next: ${rule.tryNext}`);
+}
+
+// Run every rule of one step's check on one folder. With print, show each PASS and FAIL line.
 async function run(step: Step, folder: string, print = false): Promise<Result> {
   let rules: Rule[];
   try {
     rules = await rulesFor(step);
   } catch (error) {
-    if (print) {
-      const reason = (error as Error).message;
-      console.log(`  ERROR  the check for ${step.name} could not load: ${reason}`);
-    }
+    const reason = (error as Error).message;
+    if (print) console.log(`  ERROR  the check for ${step.name} could not load: ${reason}`);
     return { step: step.name, status: "error", passed: 0, total: 0, failed: [] };
   }
   const failed: string[] = [];
   for (const rule of rules) {
     const ok = await rulePasses(rule, folder);
     if (!ok) failed.push(rule.says);
-    if (print && ok) console.log(`  PASS  ${rule.says}`);
-    if (print && !ok) console.log(`  FAIL  ${rule.says}\n        Try next: ${rule.tryNext}`);
+    if (print) printRule(rule, ok);
   }
   return {
     step: step.name,
@@ -86,7 +89,8 @@ async function checkProblems(step: Step): Promise<string[]> {
   const problems: string[] = [];
   for (const rule of rules) {
     const adviceWords = rule.tryNext.trim().split(/\s+/);
-    if (adviceWords.length < 3) problems.push(`${step.name}: rule "${rule.says}" needs a try-next sentence`);
+    if (adviceWords.length < 3)
+      problems.push(`${step.name}: rule "${rule.says}" needs a try-next sentence`);
   }
   if ((await run(step, starterFolder(step))).status === "pass") {
     problems.push(`${step.name}: the check passes on the starter, so it checks nothing`);
@@ -165,13 +169,16 @@ async function checkPart(partName: string | undefined) {
   process.exit(exitCodeForPart(results));
 }
 
+function stepOrList(stepName: string | undefined): Step {
+  const step = stepName ? findStep(stepName) : undefined;
+  if (step) return step;
+  console.log(stepName ? `There is no step called "${stepName}". Steps:` : "Name a step. Steps:");
+  for (const known of allSteps()) console.log(`  bun run verify ${known.name}`);
+  process.exit(1);
+}
+
 async function checkStep(stepName: string | undefined, which: string | undefined) {
-  const step = stepName && findStep(stepName);
-  if (!step) {
-    console.log(stepName ? `There is no step called "${stepName}". Steps:` : "Name a step. Steps:");
-    for (const known of allSteps()) console.log(`  bun run verify ${known.name}`);
-    process.exit(1);
-  }
+  const step = stepOrList(stepName);
   const asSolution = which === "solution";
   const whose = asSolution ? "sample solution" : "your work";
   console.log(`Checking ${step.name} (${whose}):`);

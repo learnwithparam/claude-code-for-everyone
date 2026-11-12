@@ -1,5 +1,5 @@
-// The world is the same on every build, and the readers handle real files. The finished close is a real
-// Claude Code run: tests/claude-code.test.ts judges its recordings.
+// The world is the same on every build, and the readers handle real files.
+// The finished close is a real Claude Code run: tests/claude-code.test.ts judges its recordings.
 import { expect, test } from "bun:test";
 import { spawnSync } from "node:child_process";
 import { mkdtempSync, readFileSync, rmSync } from "node:fs";
@@ -13,9 +13,9 @@ const ROOT = join(import.meta.dir, "..");
 
 test("the committed seed and key are exactly what the generator builds", () => {
   const { files, key } = build(7);
-  for (const [rel, body] of Object.entries(files)) {
-    const want = typeof body === "string" ? Buffer.from(body) : Buffer.from(body);
-    expect(readFileSync(join(SEED_DIR, rel)).equals(want)).toBe(true);
+  for (const [relativePath, body] of Object.entries(files)) {
+    const built = Buffer.from(body);
+    expect(readFileSync(join(SEED_DIR, relativePath)).equals(built)).toBe(true);
   }
   expect(JSON.parse(readFileSync(join(ROOT, "world", "key.json"), "utf8"))).toEqual(
     JSON.parse(JSON.stringify(key)),
@@ -23,14 +23,14 @@ test("the committed seed and key are exactly what the generator builds", () => {
 });
 
 test("another seed gives a new batch with the same kinds of fault", () => {
-  const a = build(7).key,
-    b = build(11).key;
-  expect(b.orders.clean).not.toEqual(a.orders.clean);
-  expect(b.orders.duplicateIds.length).toBe(9);
-  expect(b.invoices.priceAbovePo.length).toBe(3);
-  const dir = mkdtempSync(join(tmpdir(), "wren-seed-"));
-  writeSeed(dir, build(11).files);
-  rmSync(dir, { recursive: true, force: true });
+  const firstKey = build(7).key;
+  const secondKey = build(11).key;
+  expect(secondKey.orders.clean).not.toEqual(firstKey.orders.clean);
+  expect(secondKey.orders.duplicateIds.length).toBe(9);
+  expect(secondKey.invoices.priceAbovePo.length).toBe(3);
+  const folder = mkdtempSync(join(tmpdir(), "wren-seed-"));
+  writeSeed(folder, build(11).files);
+  rmSync(folder, { recursive: true, force: true });
 });
 
 test("the xlsx reader reads back what the writer wrote", () => {
@@ -43,20 +43,27 @@ test("the xlsx reader reads back what the writer wrote", () => {
 });
 
 test("the xlsx reader reads a workbook saved by Python's openpyxl", () => {
-  const py = spawnSync("python3", ["-c", "import openpyxl"]);
-  if (py.status !== 0) return; // openpyxl is not on this machine; the writer test above still runs
-  const dir = mkdtempSync(join(tmpdir(), "wren-xlsx-"));
-  const out = join(dir, "p.xlsx");
-  spawnSync("python3", [
-    "-c",
-    `import openpyxl\nwb=openpyxl.Workbook()\nws=wb.active\nws.append(["product","unit","shop_price"])\nws.append(["Croissant","each",1.9])\nws.append(["Cinnamon Bun","each",2.8])\nwb.save(${JSON.stringify(out)})`,
-  ]);
-  expect(readXlsx(new Uint8Array(readFileSync(out)))).toEqual([
+  const python = spawnSync("python3", ["-c", "import openpyxl"]);
+  // openpyxl is not on this machine; the writer test above still runs.
+  if (python.status !== 0) return;
+  const folder = mkdtempSync(join(tmpdir(), "wren-xlsx-"));
+  const workbookPath = join(folder, "p.xlsx");
+  const pythonLines = [
+    "import openpyxl",
+    "wb=openpyxl.Workbook()",
+    "ws=wb.active",
+    'ws.append(["product","unit","shop_price"])',
+    'ws.append(["Croissant","each",1.9])',
+    'ws.append(["Cinnamon Bun","each",2.8])',
+    `wb.save(${JSON.stringify(workbookPath)})`,
+  ];
+  spawnSync("python3", ["-c", pythonLines.join("\n")]);
+  expect(readXlsx(new Uint8Array(readFileSync(workbookPath)))).toEqual([
     ["product", "unit", "shop_price"],
     ["Croissant", "each", 1.9],
     ["Cinnamon Bun", "each", 2.8],
   ]);
-  rmSync(dir, { recursive: true, force: true });
+  rmSync(folder, { recursive: true, force: true });
 });
 
 test("csv round trip keeps commas and quotes", () => {

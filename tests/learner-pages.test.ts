@@ -1,47 +1,52 @@
-// Every page a learner reads stays at grade 6 or lower, and no learner file names a time, a weekday or a date.
+// Every page a learner reads stays at grade 6 or lower,
+// and no learner file names a time, a weekday or a date.
 import { expect, test } from "bun:test";
 import { readdirSync, readFileSync, statSync } from "node:fs";
 import { join, relative } from "node:path";
 import { grade } from "./readability";
 
 const ROOT = join(import.meta.dir, "..");
-function walk(dir: string, out: string[] = []): string[] {
-  for (const e of readdirSync(dir)) {
-    if (
-      ["node_modules", ".git", "wren-street", "finished", "solution", "wrong", "seed"].includes(
-        e,
-      ) ||
-      e.startsWith("wren-street-backup")
-    )
-      continue;
-    const p = join(dir, e);
-    statSync(p).isDirectory() ? walk(p, out) : out.push(p);
+
+// Folders that are not learner pages: tools, the bakery itself, and sample answers.
+const SKIPPED = ["node_modules", ".git", "wren-street", "finished", "solution", "wrong", "seed"];
+const isSkipped = (entry: string) =>
+  SKIPPED.includes(entry) || entry.startsWith("wren-street-backup");
+
+function walk(folder: string, found: string[] = []): string[] {
+  for (const entry of readdirSync(folder)) {
+    if (isSkipped(entry)) continue;
+    const path = join(folder, entry);
+    if (statSync(path).isDirectory()) walk(path, found);
+    else found.push(path);
   }
-  return out;
+  return found;
 }
+
 const pages = [
   join(ROOT, "README.md"),
   ...walk(join(ROOT, "00-orientation")),
   ...walk(join(ROOT, "parts")),
-].filter((f) => f.endsWith(".md"));
+].filter((file) => file.endsWith(".md"));
 
-for (const f of pages) {
-  const rel = relative(ROOT, f);
-  const text = readFileSync(f, "utf8");
-  test(`${rel} reads at grade 6 or lower`, () => {
-    const g = grade(text);
-    expect(g.grade).toBeLessThanOrEqual(6);
+// Business words stay: the Friday close, the Monday report.
+const BUSINESS_WORDS = /\b(Friday close|Monday report|monday-report|friday-close)\b/gi;
+const WEEKDAY = /\b(Monday|Tuesday|Wednesday|Thursday|Friday|Saturday|Sunday)s?\b/;
+const TIME_COUNT = /\b(day|week|hour|month)\s+\d+\b|\b\d+\s+(hours?|days?|weeks?|months?)\b/i;
+const DATE = /\b20\d\d-\d\d-\d\d\b/;
+
+for (const file of pages) {
+  const relativePath = relative(ROOT, file);
+  const text = readFileSync(file, "utf8");
+  test(`${relativePath} reads at grade 6 or lower`, () => {
+    expect(grade(text).grade).toBeLessThanOrEqual(6);
   });
-  test(`${rel} names no weekday as a time, no date and no hour or day count`, () => {
-    // Business words stay: the Friday close, the Monday report.
-    const lines = text.split("\n").filter((l) => !l.startsWith("```"));
-    for (const l of lines) {
-      const clean = l.replace(/\b(Friday close|Monday report|monday-report|friday-close)\b/gi, "");
-      expect(clean).not.toMatch(/\b(Monday|Tuesday|Wednesday|Thursday|Friday|Saturday|Sunday)s?\b/);
-      expect(clean).not.toMatch(
-        /\b(day|week|hour|month)\s+\d+\b|\b\d+\s+(hours?|days?|weeks?|months?)\b/i,
-      );
-      expect(clean).not.toMatch(/\b20\d\d-\d\d-\d\d\b/);
+  test(`${relativePath} names no weekday as a time, no date and no hour or day count`, () => {
+    const lines = text.split("\n").filter((line) => !line.startsWith("```"));
+    for (const line of lines) {
+      const clean = line.replace(BUSINESS_WORDS, "");
+      expect(clean).not.toMatch(WEEKDAY);
+      expect(clean).not.toMatch(TIME_COUNT);
+      expect(clean).not.toMatch(DATE);
     }
   });
 }
@@ -49,10 +54,9 @@ for (const f of pages) {
 test("troubleshooting.md lists every FAIL line a check can print", async () => {
   const { allSteps } = await import("../scripts/structure");
   const trouble = readFileSync(join(ROOT, "00-orientation", "troubleshooting.md"), "utf8");
-  for (const s of allSteps()) {
-    const rules = (await import(join(ROOT, "checks", `${s.name}.ts`))).default as {
-      says: string;
-    }[];
-    for (const r of rules) expect(trouble).toContain(`FAIL  ${r.says}`);
+  for (const step of allSteps()) {
+    const checkFile = join(ROOT, "checks", `${step.name}.ts`);
+    const rules = (await import(checkFile)).default as { says: string }[];
+    for (const rule of rules) expect(trouble).toContain(`FAIL  ${rule.says}`);
   }
 });

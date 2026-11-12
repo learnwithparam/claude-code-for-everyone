@@ -34,8 +34,7 @@ function rightPrice(folder: string, price: Price): boolean {
   const row = rowFor(folder, price.product);
   if (!row) return false;
   return (
-    closeTo(row.shop_price, price.shop_price) &&
-    closeTo(row.wholesale_price, price.wholesale_price)
+    closeTo(row.shop_price, price.shop_price) && closeTo(row.wholesale_price, price.wholesale_price)
   );
 }
 
