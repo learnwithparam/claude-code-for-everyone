@@ -21,6 +21,8 @@ I want Claude to [the task you do by hand at work].
 
 Claude will ask before it makes the file. Read what it will write. Then say yes.
 
+For example, Jess would save: "I want Claude to check each supplier bill against my orders."
+
 Do not use the example on this page. Use your own task. You will come back to this sentence at the end of the course.
 
 ## Done when

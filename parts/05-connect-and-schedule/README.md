@@ -6,7 +6,9 @@ Jess wants the Monday report without asking for it. The numbers live in the till
 
 A solar firm uses Claude to sort permit emails. "About 71% of emails are fully processed without human intervention" ([Freedom Forever](https://claude.com/customers/freedom-forever)).
 
-In this part you meet the terminal, connect the till to Claude, write the report as a skill, and set it to run on its own.
+In this part, you meet the terminal and connect the till to Claude. Then Claude turns the report into a skill, and you set it to run on its own.
+
+For example, the report has a "## Late payers" part. It names Kettle and Crumb and Moss and Grain, from Jess's notes.
 
 ```mermaid
 flowchart LR

@@ -115,7 +115,7 @@ bun run world
 
 Expect: `Made the bakery folder: wren-street/`
 
-Now see the finished work. Claude Code does the whole Friday close on a fresh copy of the bakery, with the house rules, safety rules and skills you will write in this course. It uses your Claude plan, and it takes a while:
+Now see the finished work. Claude Code does the whole Friday close on a fresh copy of the bakery. It uses the house rules, safety rules and skills you will set up with Claude in this course. It uses your Claude plan, and it takes a while:
 
 ```bash
 bun run finished

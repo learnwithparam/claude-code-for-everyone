@@ -27,6 +27,8 @@ order_id, order_date, cafe, product, quantity.
 Before you start, tell me every problem you see in the file.
 ```
 
+For example, the phone order `WS-1001` says `03/08/2026` and `LUMEN CAFE`. The date means the 3rd of August. In the clean copy, the date starts with the year, and the cafe is `Lumen Cafe`.
+
 Read the list of problems. Did Claude find all four kinds? If not, tell it what it missed.
 
 Then run the check. Each FAIL line says what is still wrong. Tell Claude, and run it again.

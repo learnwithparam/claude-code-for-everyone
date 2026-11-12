@@ -30,6 +30,8 @@ Make the file .claude/settings.json in this folder with this in it:
 
 The word `default` is the name the file uses for Manual mode.
 
+For example, say Claude tries to save a file in your Documents folder. The second rule stops it. Claude can only write inside `wren-street`.
+
 Then ask Claude for a short note that says how you work. Paste this:
 
 ```text

@@ -25,7 +25,7 @@ Tell me what each folder holds, in one short line each.
 Then tell me two things you are not sure about.
 ```
 
-Read the answer. Does it match what you see in the folder?
+Read the answer. Does it match what you see in the folder? For example, a good line for the orders folder is: "orders/: cafe orders from three places, in one messy file."
 
 Now pick **Manual** in the mode button. Paste this:
 

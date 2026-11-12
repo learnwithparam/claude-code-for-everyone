@@ -8,6 +8,8 @@ Asking is not enough on its own. Anthropic found that people say yes to 93% of t
 
 So in this part you do two things. You make Claude ask first. And you check what it made with a script, not by trust.
 
+For example, in Manual mode Claude stops before it makes `out/orders-clean.csv`. It shows you the file and asks. You read it, then you say yes or no.
+
 Jess has two messy files. The order sheet came from three places. The price list has typos. You will clean both, and never touch the originals.
 
 ```mermaid

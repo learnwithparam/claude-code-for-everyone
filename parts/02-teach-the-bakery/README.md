@@ -6,7 +6,9 @@ Each new chat, Claude forgets the bakery. It does not know that the purchase ord
 
 A bookkeeping firm in Dallas had a client with a $13,000 gap in its books. Claude helped find "the exact 16 transactions" behind it ([HireEffect, in Anthropic's small business post](https://claude.com/blog/claude-for-small-business-launches-new-workflows-integrations-and-training-programs)).
 
-In this part you write the house rules once. Then you make Claude show a plan before it touches money. Then it checks 24 supplier bills against what Jess ordered.
+In this part, you ask Claude to write the house rules once. Then you make Claude show a plan before it touches money. Then it checks 24 supplier bills against what Jess ordered.
+
+For example, one house rule says: "Never email a cafe." Claude reads it at the start of every chat, so you never have to say it again.
 
 ```mermaid
 flowchart TB

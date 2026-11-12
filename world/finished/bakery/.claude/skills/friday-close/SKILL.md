@@ -1,6 +1,6 @@
 ---
 name: friday-close
-description: Run the Friday close for Wren Street Bakery. Use when asked to do the close, or to clean the orders, fix the price list, check the invoices, make the labels, write the report and update the menu page in one go.
+description: Run the Friday close for Wren Street Bakery. Use it when asked to do the close. Also use it to do all of these in one go: clean the orders, fix the price list, check the invoices, make the labels, write the report and update the menu page.
 ---
 
 # The Friday close
@@ -19,8 +19,8 @@ Read CLAUDE.md and notes/owner-notes.md first.
    another row.
 3. **Fix the price list.** Read prices/price-list.xlsx. Product names must match the first line of each recipe.
    Every price in pounds, as a number, for one item (unit "each"). Write out/price-list-clean.xlsx with the
-   columns product, unit, shop_price, wholesale_price, and out/price-changes.md with one dash line for each
-   product you changed and no others.
+   columns product, unit, shop_price, wholesale_price. Then write out/price-changes.md with one dash line for
+   each product you changed and no others.
 4. **Check the invoices.** Compare every PDF in invoices/ with purchase-orders/purchase-orders.csv. Write
    out/reconciliation.csv with the columns invoice, po, status, reason, one row for every invoice. Status is "ok"
    when it matches. Otherwise use "duplicate", "price above PO" or "short delivery". Then write

@@ -32,6 +32,8 @@ Prices must be numbers in pounds, for one item. Then write
 out/price-changes.md with one line for each product you changed.
 ```
 
+For example, the list says the Cinnamon Bun costs 280. That is 280 pence. The clean list says 2.8, which is £2.80.
+
 Do not let Claude change a price that was already right. The menu on the wall is not the price list.
 
 ## Done when

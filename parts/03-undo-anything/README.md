@@ -6,6 +6,8 @@ Claude can undo its own edits with rewind. But rewind has a gap. Anthropic's own
 
 So if a command deletes a file, rewind cannot bring it back. You need a save point you made before.
 
+For example, say Claude edits `menu/menu.md`. Rewind puts it back. But say a command deletes `notes/owner-notes.md`. Rewind cannot bring it back. Your save point can.
+
 In this part you make a save point, undo a bad edit with rewind, and get back a file that rewind cannot reach.
 
 ```mermaid
