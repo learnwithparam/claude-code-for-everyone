@@ -4,7 +4,7 @@
 
 Jess owns Wren Street Bakery. She has one shop and sells bread to six cafes.
 
-Each Friday close takes her most of the morning. She fixes the order sheet by hand. She checks each bill. She writes the labels and the report.
+Each Friday close takes her most of the morning. She fixes the order sheet line by line. She checks each bill. She writes the labels and the report.
 
 You will learn to hand this work to Claude, and to check what it made. But first, you need to know your own reason to be here.
 

@@ -4,7 +4,7 @@
 
 The mode button resets when you start a new chat. Some plans start in Auto mode. In Auto mode, Claude does not ask you first.
 
-You want the safe choice to be the one you get without trying. So you write it down in a settings file. Claude reads it each time it opens this folder.
+You want the safe choice to be the one you get without trying. So you ask Claude to save it in a settings file. Claude reads it each time it opens this folder.
 
 ```mermaid
 flowchart TB
@@ -30,7 +30,7 @@ Make the file .claude/settings.json in this folder with this in it:
 
 The word `default` is the name the file uses for Manual mode.
 
-Then write a short note for yourself. Paste this:
+Then ask Claude for a short note that says how you work. Paste this:
 
 ```text
 Make out/safety.md. Say that I work in Manual mode. Add a heading
