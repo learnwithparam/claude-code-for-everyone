@@ -23,15 +23,23 @@ Find the words you see in the first column. Each message any course script can p
 | `Changed or missing originals: ...` | A file that came with the bakery was changed or deleted. | Run `bun run world reset`. Your old folder is kept. |
 | `There is no world command called "..."` | The word after `bun run world` is not one it knows. | Use `bun run world`, `bun run world reset` or `bun run world status`. |
 
-## The finished close and the model
+## Claude Code and the finished close
 
 | What you see | What it means | Fix |
 |---|---|---|
-| `The Friday close ran.` and a `FAIL` line under it | The finished close made something a check does not accept. | This is a bug in the course. Open an issue with the full output. |
-| `No recorded reply for this prompt` | Replay mode has no saved answer for a question the close asked. | This is a bug in the course. Open an issue. Replay needs no key. |
-| `LLM_PROVIDER is "..."` | The provider name in your `.env` file is not one the course knows. | Use replay, anthropic, openrouter or openai. |
-| `ANTHROPIC_API_KEY is not set` (or OPENROUTER, OPENAI) | You picked a live provider but gave no key. | Add the key to `.env`, or set `LLM_PROVIDER=replay`. |
-| `FAIL  role fast  provider ...` | `bun run models` could not reach that provider. | Check the key in `.env`. Or use replay, which needs no key. |
+| `claude: command not found` or `'claude' is not recognized` | Claude Code is not installed, or this terminal opened before it was. | Run the install line from the start page. Then close the terminal and open a new one. |
+| `FAIL  Claude Code is installed (the claude command was not found)` | `bun run doctor` could not find Claude Code. | Install it from the start page, then open a new terminal. In the desktop app, Claude Code is built in, but Part 5 needs the `claude` command too. |
+| `FAIL  Claude Code ... is installed (the course needs ... or newer` | Your Claude Code is older than the course. | Run `claude update`, then `bun run doctor` again. |
+| `FAIL  Claude Code is signed in` | Claude Code is installed but not signed in. | Type `claude`, then `/login`, and follow the steps. |
+| `Ready. Claude Code is installed and signed in.` | It worked. | Go on. |
+| `Replaying close-1, a real run of Claude Code` | There is no signed-in Claude Code here, so you see a run we saved. | Nothing to fix. Sign in to see a live run. |
+| `Claude Code ... is running the Friday close` | A live run started. It uses your Claude plan. | Wait for the checks at the end. |
+| `Claude finished after ... turns, with an error` | Claude Code stopped before the close was done. | Run `bun run finished` again. If it happens twice, open an issue with the full output. |
+| `The Friday close ran.` and a `FAIL` line under it | Claude made something a check does not accept. Claude does not do the same thing every time. | Run it again. If it fails twice, open an issue with the full output. |
+| `There is no recording called ...` | The saved run is missing from the course folder. | Download the course folder again. |
+| `Recording needs Claude Code, signed in.` | Only course authors record runs. | Run `bun run doctor` and fix each FAIL line. |
+| `Blocked: only files in out/ may change.` | The bakery's hook stopped Claude from changing an original file. | This is the hook doing its job. Ask Claude to make a new file in out/. |
+| `Blocked: no rm or mv in the bakery folder.` | The bakery's hook stopped Claude from deleting or moving a file. | This is the hook doing its job. |
 
 ## The checks
 

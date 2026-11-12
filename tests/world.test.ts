@@ -1,4 +1,5 @@
-// The world is the same on every build, the readers handle real files, and the finished close is stable.
+// The world is the same on every build, and the readers handle real files. The finished close is a real
+// Claude Code run: tests/claude-code.test.ts judges its recordings.
 import { expect, test } from "bun:test";
 import { spawnSync } from "node:child_process";
 import { mkdtempSync, readFileSync, rmSync } from "node:fs";
@@ -48,16 +49,3 @@ test("csv round trip keeps commas and quotes", () => {
   const rows = [["a", "b"], ["x, y", 'say "hi"']];
   expect(parseCsv(toCsv(rows))).toEqual(rows);
 });
-
-test("the finished close passes every check on 3 fresh replay runs, with the same model notes", async () => {
-  const { finish } = await import("../world/finished");
-  const notes: string[] = [];
-  for (let i = 0; i < 3; i++) {
-    const r = await finish(true);
-    expect(r.passed).toBe(r.total);
-    const note = readFileSync(join(r.folder, "out", "reconciliation-note.md"), "utf8");
-    for (const inv of ["FD-2207", "FD-2204", "FD-2205", "FD-2206", "HL-873"]) expect(note).toContain(inv);
-    notes.push(note + readFileSync(join(r.folder, "out", "reports", "monday-report.md"), "utf8"));
-  }
-  expect(new Set(notes).size).toBe(1);
-}, 60000);

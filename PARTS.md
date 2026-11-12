@@ -10,7 +10,12 @@ This file is for the sessions that build one part each. A part session can start
 - Checks read files the learner's Claude made in the bakery folder. They never read the chat.
 - `solution/` and `wrong/` folders hold only the files a step makes or breaks. Every other file is read from `world/seed/wren-street/`. Write them with `world/samples.ts`, from the functions in `world/close.ts`.
 - The answers are in `world/key.json`, built by `bun world/build.ts` from `world/data.ts`. Never type an answer into a check by hand.
-- `world/close.ts` already does every job below. `bun run finished` runs it, then runs every check on its work. When you add a check, the finished close must still pass it.
+- This course uses the real Claude Code, never the model API (`briefs/build/CLAUDE-CODE.md`). No step asks for a key. A check reads what Claude Code made (files, settings, skills, hooks, git history), never a reply.
+- `world/close.ts` is the author's answer key as a plain script: use it for `solution/` and `wrong/` folders only. It is not Claude.
+- The finished system is a real run: `bun run finished` copies the seed plus `world/finished/bakery/` (the finished learner's `CLAUDE.md`, `.claude/settings.json`, the protect-originals hook and the skills) and runs `claude -p` with the flags in `config/claude.ts`. The skill `friday-close` already asks for every job below. When your part changes what the finished learner has (a new skill, a rule, the till connector), change `world/finished/bakery/`, then record 3 new runs with `bun run finished --record 1` to `--record 3`, or list them in `world/recordings/RECORD.md` if `claude` is not signed in where you work. Never write a transcript by hand.
+- `tests/claude-code.test.ts` replays each recording on a fresh bakery and runs every check. Your new check must pass on all 3 runs.
+- Hooks and permissions need no model: feed the hook the exact JSON Claude Code sends (see the hook tests) and assert the exit code.
+- The finished run leaves every label's `Checked by:` line empty, because a person signs. When you build `sign-off-the-labels`, sign the labels in `world/finished.ts` after the run, as a separate step that says it is the person, not Claude.
 - Retake pictures with `bun run pictures`. Add a step's own picture there if it needs more than the passing check.
 - Prose: grade 6 or lower (`bun test` measures it), no em dash, no week, day, hour, weekday or date. The Friday close and the Monday report are business names, not times.
 - Add every new FAIL line to `00-orientation/troubleshooting.md`. A test fails until you do.

@@ -21,7 +21,7 @@ const colour = (line: string) =>
     .replace(/^(\s*)PASS\b/, '$1<b class="ok">PASS</b>')
     .replace(/^(\s*)FAIL\b/, '$1<b class="bad">FAIL</b>')
     .replace(/^(\s*)Try next:/, '$1<span class="dim">Try next:</span>')
-    .replace(/^(Done\..*|Part .* is done.*|The Friday close ran\..*)$/, '<b class="ok">$1</b>');
+    .replace(/^(Done\..*|Part .* is done.*|The Friday close ran\..*|Ready\..*)$/, '<b class="ok">$1</b>');
 
 function terminalHtml(command: string, output: string) {
   const lines = output.trimEnd().split("\n").filter((l) => !l.startsWith("$ bun ") && !l.startsWith("error: script"));
@@ -59,12 +59,15 @@ async function shootPage(file: string, out: string, width: number, height: numbe
   console.log(`  ${out.replace(ROOT + "/", "")}`);
 }
 
-console.log("Running the finished close, then taking pictures:");
-const finished = run("bun run finished", ROOT);
+console.log("Replaying the recorded Claude Code close, then taking pictures:");
+// A replay of a recorded real run, so pictures cost no Claude usage and match the committed recording.
+const finished = run("bun run finished", ROOT, { REPLAY: "1" });
+const doctor = run("bun run doctor", ROOT);
 const done = join(ROOT, "finished", "wren-street");
 await shootPage(join(ROOT, "finished", "index.html"), join(ROOT, "images", "finished-system.png"), 1100, 900);
 await shootPage(join(ROOT, "finished", "index.html"), join(ROOT, "00-orientation", "images", "finished-close.png"), 1100, 900);
 await shootHtml(terminalHtml("bun run finished", finished), join(ROOT, "00-orientation", "images", "finished-run.png"));
+await shootHtml(terminalHtml("bun run doctor", doctor), join(ROOT, "00-orientation", "images", "doctor.png"));
 // Each step: the real check passing on the finished close's work, run as a learner would.
 for (const s of allSteps()) {
   if (!s.meta.screen) continue;

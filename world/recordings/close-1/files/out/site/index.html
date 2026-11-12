@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Wren Street Bakery menu</title>
+  <style>
+    body { font-family: system-ui, sans-serif; margin: 0; padding: 1rem; background: #fdf8f1; color: #2b2118; line-height: 1.4; }
+    main { max-width: 36rem; margin: 0 auto; }
+    h1 { font-size: 1.6rem; margin: 0.5rem 0 1rem; }
+    ul { list-style: none; padding: 0; margin: 0; }
+    li { display: grid; grid-template-columns: 1fr auto; gap: 0.2rem 1rem; padding: 0.8rem 0; border-bottom: 1px solid #e6dccd; }
+    .name { font-weight: 600; font-size: 1.1rem; }
+    .price { font-weight: 600; font-size: 1.1rem; text-align: right; }
+    .allergens { grid-column: 1 / -1; font-size: 0.95rem; color: #5a4a3a; }
+    footer { margin-top: 1.5rem; font-size: 0.9rem; color: #5a4a3a; }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>Wren Street Bakery</h1>
+    <ul>
+      <li><span class="name">Sourdough Loaf</span><span class="price">£4.20</span><span class="allergens">Contains: gluten</span></li>
+      <li><span class="name">Seeded Rye Loaf</span><span class="price">£4.50</span><span class="allergens">Contains: gluten</span></li>
+      <li><span class="name">White Tin Loaf</span><span class="price">£2.90</span><span class="allergens">Contains: gluten, milk</span></li>
+      <li><span class="name">Multigrain Loaf</span><span class="price">£4.00</span><span class="allergens">Contains: gluten, sesame, soya</span></li>
+      <li><span class="name">Croissant</span><span class="price">£1.90</span><span class="allergens">Contains: gluten, milk, eggs</span></li>
+      <li><span class="name">Pain au Chocolat</span><span class="price">£2.10</span><span class="allergens">Contains: gluten, milk, eggs, soya</span></li>
+      <li><span class="name">Almond Croissant</span><span class="price">£2.60</span><span class="allergens">Contains: gluten, milk, eggs, nuts</span></li>
+      <li><span class="name">Cinnamon Bun</span><span class="price">£2.80</span><span class="allergens">Contains: gluten, milk, eggs</span></li>
+      <li><span class="name">Brownie</span><span class="price">£2.75</span><span class="allergens">Contains: gluten, milk, eggs, nuts, soya</span></li>
+      <li><span class="name">Fruit Scone</span><span class="price">£2.20</span><span class="allergens">Contains: gluten, milk, eggs</span></li>
+      <li><span class="name">Cheese Scone</span><span class="price">£2.40</span><span class="allergens">Contains: gluten, milk, eggs, mustard</span></li>
+      <li><span class="name">Focaccia</span><span class="price">£3.60</span><span class="allergens">Contains: gluten</span></li>
+    </ul>
+    <footer>Please ask us about allergens before you buy. Jess at Wren Street</footer>
+  </main>
+</body>
+</html>

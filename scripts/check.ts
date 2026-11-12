@@ -119,10 +119,13 @@ for (const f of files.filter((f) => f.endsWith(".md"))) {
     i = j;
   }
 }
-// 5. One model config, exact pins, a troubleshooting table.
-for (const f of files.filter((f) => /\.(ts|py|md|json|toml|ya?ml)$/.test(f) && !f.includes("/config/models.") && !f.includes("/scripts/check.ts"))) {
+// 5. The learner works in the real Claude Code: no model API, no model id, exact pins, a troubleshooting table.
+const MODEL_API = /@ai-sdk\/|@anthropic-ai\/sdk|openrouter|LLM_PROVIDER|ANTHROPIC_API_KEY/i;
+for (const f of files.filter((f) => /\.(ts|py|md|jsonl?|toml|ya?ml|txt)$|\.env/.test(f) && !f.includes("/scripts/check.ts"))) {
   const m = read(f).match(MODEL_ID);
-  if (m) fail(f, `model id "${m[0]}" outside config/models; name models in one place`);
+  if (m) fail(f, `model id "${m[0]}": Claude Code picks the model, so no file names one`);
+  const a = read(f).match(MODEL_API);
+  if (a) fail(f, `"${a[0]}": this course uses the real Claude Code, never the model API (briefs/build/CLAUDE-CODE.md)`);
 }
 const pkg = join(ROOT, "package.json");
 if (existsSync(pkg)) {

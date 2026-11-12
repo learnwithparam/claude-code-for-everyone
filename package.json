@@ -7,17 +7,12 @@
     "check": "bun scripts/check.ts && bun scripts/verify.ts --all",
     "verify": "bun scripts/verify.ts",
     "world": "bun world/world.ts",
+    "doctor": "bun scripts/doctor.ts",
     "finished": "bun world/finished.ts",
-    "models": "bun config/check-models.ts",
     "pictures": "bun images/shoot.ts"
   },
   "dependencies": {
-    "@ai-sdk/anthropic": "4.0.103",
-    "@ai-sdk/openai": "4.0.116",
-    "@openrouter/ai-sdk-provider": "3.1.0",
-    "ai": "7.0.171",
-    "fflate": "0.8.3",
-    "zod": "4.6.7"
+    "fflate": "0.8.3"
   },
   "devDependencies": {
     "@types/bun": "1.4.4"

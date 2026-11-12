@@ -1,0 +1,25 @@
+invoice,po,status,reason
+FD-2201,PO-3001,ok,
+FD-2202,PO-3005,ok,
+FD-2203,PO-3009,ok,
+FD-2204,PO-3013,price above PO,"unsalted butter billed at £6.45 a kg, PO agreed £6.20; £516.00 billed vs £496.00 at PO price"
+FD-2205,PO-3017,price above PO,"unsalted butter billed at £6.45 a kg, PO agreed £6.20; £387.00 billed vs £372.00 at PO price"
+FD-2206,PO-3021,price above PO,"unsalted butter billed at £6.45 a kg, PO agreed £6.20; £516.00 billed vs £496.00 at PO price"
+FD-2207,PO-3005,duplicate,PO-3005 was already billed by FD-2202; this bills it again for £372.00
+HL-870,PO-3002,ok,
+HL-871,PO-3006,ok,
+HL-872,PO-3010,ok,
+HL-873,PO-3014,short delivery,"420 free range eggs billed, PO ordered 480"
+HL-874,PO-3018,ok,
+HL-875,PO-3022,ok,
+KP-15020,PO-3003,ok,
+KP-15021,PO-3007,ok,
+KP-15022,PO-3011,ok,
+KP-15023,PO-3015,ok,
+KP-15024,PO-3019,ok,
+MM-4410,PO-3004,ok,
+MM-4411,PO-3008,ok,
+MM-4412,PO-3012,ok,
+MM-4413,PO-3016,ok,
+MM-4414,PO-3020,ok,
+MM-4415,PO-3023,ok,

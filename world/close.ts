@@ -1,11 +1,10 @@
-// The Friday close, done the way a finished learner's Claude does it. It reads the bakery folder and writes
-// every result into it. `bun run finished` runs it on a fresh copy; world/samples.ts builds sample solutions from it.
-// Prose comes from the model layer (config/llm.ts): replay by default, so it runs with no key.
+// The course author's answer key, as a plain script. world/samples.ts uses it to write each step's solution/ and
+// wrong/ folders. This is not Claude and never stands in for it: the finished system is a real Claude Code run
+// (world/finished.ts), and the checks read what Claude Code made.
 import { existsSync, mkdirSync, readFileSync, readdirSync, writeFileSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { csvObjects, toCsv } from "../checks/lib/csv";
 import { writeXlsx, xlsxObjects } from "../checks/lib/xlsx";
-import { ask } from "../config/llm";
 import { CAFES, QTY_WORDS } from "./data";
 
 const MONTHS = ["jan", "feb", "mar", "apr", "may", "jun", "jul", "aug", "sep", "oct", "nov", "dec"];
@@ -162,7 +161,7 @@ export function readInvoice(folder: string, file: string): Invoice {
   };
 }
 
-export async function reconcile(folder: string) {
+export function reconcile(folder: string) {
   const pos = Object.fromEntries(csvObjects(read(folder, "purchase-orders/purchase-orders.csv")).map((p) => [p.po_number, p]));
   const invoices = readdirSync(join(folder, "invoices")).filter((f) => f.endsWith(".pdf")).sort().map((f) => readInvoice(folder, f));
   const seenPo: Record<string, string> = {};
@@ -179,8 +178,7 @@ export async function reconcile(folder: string) {
     if (status !== "ok") flags.push(`${inv.number} (${status}: ${reason})`);
   }
   put(folder, "out/reconciliation.csv", toCsv(out));
-  const note = await ask("fast", `You write for a small bakery owner. In under 80 words, plain English, no greeting, say what needs action in this invoice check. Flags: ${flags.join("; ")}.`);
-  put(folder, "out/reconciliation-note.md", `# Invoice check\n\n${note}\n`);
+  put(folder, "out/reconciliation-note.md", `# Invoice check\n\n${flags.length} of ${invoices.length} invoices need action.\n\n${flags.map((f) => `- ${f}`).join("\n")}\n\nJess at Wren Street\n`);
   return { flagged: flags.length, total: invoices.length };
 }
 
@@ -203,7 +201,7 @@ export function labels(folder: string) {
 }
 
 // Part 5
-export async function mondayReport(folder: string) {
+export function mondayReport(folder: string) {
   const till = csvObjects(read(folder, "till/sales.csv"));
   const sold = till.reduce((a, r) => a + Number(r.sold), 0);
   const waste = till.reduce((a, r) => a + Number(r.waste), 0);
@@ -211,7 +209,7 @@ export async function mondayReport(folder: string) {
   const wasteBy: Record<string, number> = {};
   for (const r of till) wasteBy[r.product] = (wasteBy[r.product] ?? 0) + Number(r.waste);
   const top = Object.entries(wasteBy).sort((a, b) => b[1] - a[1])[0];
-  const summary = await ask("fast", `In two short sentences for a bakery owner: takings ${money(takings)}, ${sold} items sold, ${waste} wasted, most waste on ${top[0]} (${top[1]}). Late payers: Kettle and Crumb, Moss and Grain.`);
+  const summary = `The shop took ${money(takings)} and sold ${sold} items. ${waste} were wasted, most of them ${top[0]} (${top[1]}).`;
   put(folder, "out/reports/monday-report.md", `# The Monday report\n\n${summary}\n\n## Sales\n\n- Takings: ${money(takings)}\n- Items sold: ${sold}\n\n## Waste\n\n- Items wasted: ${waste}\n- Most waste: ${top[0]} (${top[1]})\n\n## Late payers\n\n- Kettle and Crumb\n- Moss and Grain\n`);
   return { sold, waste, takings: +takings.toFixed(2) };
 }
@@ -227,20 +225,4 @@ export function menuPage(folder: string) {
   });
   put(folder, "out/site/index.html", `<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Wren Street Bakery menu</title><style>body{font-family:Georgia,serif;max-width:640px;margin:0 auto;padding:16px;background:#fbf7f0;color:#2b2118}h1{font-size:28px}ul{list-style:none;padding:0}li{display:grid;grid-template-columns:1fr auto;padding:10px 0;border-bottom:1px solid #e3d8c6}.p{font-weight:bold}.a{grid-column:1/3;font-size:14px;color:#6b5a48}</style></head><body><h1>Wren Street Bakery</h1><p>Baked here every morning. Ask us about allergens.</p><ul>${items.join("")}</ul></body></html>\n`);
   return items.length;
-}
-
-export async function runClose(folder: string, log: (s: string) => void = () => {}) {
-  whyIAmHere(folder);
-  whatsHere(folder);
-  safetyRules(folder);
-  const recipeNames = readdirSync(join(folder, "recipes")).filter((f) => f.endsWith(".md")).map((f) => read(folder, `recipes/${f}`).match(/^# (.+)$/m)![1]);
-  log(`Cleaned the orders: ${cleanOrders(folder)} orders kept.`);
-  log(`Fixed the price list: ${fixPriceList(folder, recipeNames)} changes.`);
-  houseRules(folder);
-  const r = await reconcile(folder);
-  log(`Checked ${r.total} invoices: ${r.flagged} flagged.`);
-  log(`Made ${labels(folder)} allergen labels, each signed.`);
-  const m = await mondayReport(folder);
-  log(`Wrote the Monday report: ${m.sold} sold, ${m.waste} wasted.`);
-  log(`Published the menu page: ${menuPage(folder)} products.`);
 }

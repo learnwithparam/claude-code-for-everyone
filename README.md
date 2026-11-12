@@ -8,7 +8,7 @@ After this course you can give Claude a folder of business files, tell it the ru
 
 ## See the finished work first
 
-You work in a made-up bakery, Wren Street Bakery. Here is the whole Friday close, done for you. It needs no key and no account.
+You work in a made-up bakery, Wren Street Bakery. Here is the whole Friday close, done by the real Claude Code with the setup you will build. You need [Bun](https://bun.sh) and, for a live run, Claude Code signed in with your Claude account. With no Claude Code, you see a run we saved from the real one.
 
 ```bash
 bun install
@@ -23,10 +23,18 @@ bun run world
 Expect: `Made the bakery folder: wren-street/`
 
 ```bash
+bun run doctor
+```
+
+Expect: `Ready. Claude Code is installed and signed in.` (or a FAIL line that says what to fix)
+
+```bash
 bun run finished
 ```
 
 Expect: `The Friday close ran.` and each check line says `PASS`
+
+It copies the bakery, adds the finished house rules, safety rules, hook and skills, and runs `claude -p` on it. You see each thing Claude did, then every check reads the files Claude made. With no signed-in Claude Code, the first line says `Replaying` and you see a saved real run.
 
 Open `finished/index.html` in your browser. You should see this:
 
@@ -45,7 +53,7 @@ flowchart LR
     R[Recipes and labels]
     T[(The till)]
   end
-  You[You] -->|ask| C[Claude, in Manual mode]
+  You[You] -->|ask| C[Claude Code, in Manual mode]
   Bakery -->|read only| C
   C --> Out[New files in out/]
   Out --> V[bun run verify step-name]
@@ -85,9 +93,9 @@ You also map the close onto one task from your own job: its files, its first hou
 
 ## What you need
 
-- The Claude desktop app, for Mac or Windows.
-- A paid Claude plan: Pro, Max, Ultra, Team or Enterprise. The free plan has no Code tab.
-- No key for any model. The checks and the finished close run without one.
+- Claude Code, signed in with your own Claude account: the `claude` command, Claude Code in your editor, or the Code tab of the Claude desktop app.
+- A paid Claude plan: Pro, Max, Ultra, Team or Enterprise, or a Console account. The free plan has no Claude Code.
+- No key. You sign in to Claude Code. The checks need no Claude at all: they read files.
 
 ## Read before you start
 
@@ -102,5 +110,6 @@ You also map the close onto one task from your own job: its files, its first hou
 - `bun run check` proves the repo meets [STANDARD.md](STANDARD.md).
 - `bun test` checks reading level and the help table.
 - `bun run world reset` puts the bakery back. The old folder is kept.
-- `bun run models` tests a live model, if you set one in `.env`. See `.env.example`.
+- `bun run doctor` says if Claude Code is installed, new enough and signed in.
+- `bun run finished --replay 2` shows a saved run. [world/recordings/RECORD.md](world/recordings/RECORD.md) says how each one was recorded.
 - [PARTS.md](PARTS.md) lists every part, step and check.
