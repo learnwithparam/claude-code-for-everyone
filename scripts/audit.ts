@@ -5,6 +5,16 @@ import { finish } from "../world/finished";
 const ROOT = join(import.meta.dir, "..");
 const PORT = 4173;
 
+// CI runs `bun run check` with no install step, so fetch the audit's tools here.
+// Both commands do nothing when the package and the browser are already there.
+for (const command of [
+  ["bun", "install", "--frozen-lockfile"],
+  ["bunx", "playwright", "install", "chromium"],
+]) {
+  const step = Bun.spawnSync(command, { cwd: ROOT, stdout: "inherit", stderr: "inherit" });
+  if (step.exitCode !== 0) process.exit(step.exitCode ?? 1);
+}
+
 await finish({ quiet: true, replay: "1" });
 const server = Bun.serve({
   port: PORT,
