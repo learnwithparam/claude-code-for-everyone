@@ -5,6 +5,7 @@
       "**",
       "!**/node_modules",
       "!finished",
+      "!test-results",
       "!wren-street",
       "!wren-street-backup-*",
       "!**/world/recordings",

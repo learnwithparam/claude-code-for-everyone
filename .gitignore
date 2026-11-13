@@ -5,3 +5,4 @@ node_modules
 /wren-street-backup-*/
 /finished/
 /.world/
+test-results/
