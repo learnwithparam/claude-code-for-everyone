@@ -64,7 +64,8 @@ export default [
       const mode = workingMode(folder);
       return mode.includes("manual") && !mode.includes("auto");
     },
-    tryNext: "press Shift+Tab until the status bar shows no mode, which is Manual, and write it",
+    tryNext:
+      "press Shift+Tab until the status bar says manual mode on, or no mode, then write Manual",
   },
   {
     says: "every original bakery file is the same as the start",

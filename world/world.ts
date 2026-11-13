@@ -30,7 +30,7 @@ if (command === "make") {
   make();
   log("make");
   console.log("Made the bakery folder: wren-street/");
-  console.log("Next: open wren-street in the Claude app.");
+  console.log("Next: go back to the page you are reading and do the next step.");
 } else if (command === "reset") {
   let backup = "";
   if (existsSync(BAKERY)) {

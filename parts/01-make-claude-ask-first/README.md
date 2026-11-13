@@ -1,5 +1,7 @@
 # Make Claude ask before it acts
 
+This part moves you toward the course goal: Claude asks before it changes a file, and a script checks what it made.
+
 ## The problem
 
 Claude can change files on your computer. In some modes it does this without asking you. Then you do not see what it is about to do.

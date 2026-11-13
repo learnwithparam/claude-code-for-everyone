@@ -31,7 +31,7 @@ with the line "Made at: YYYY-MM-DD HH:MM".
 
 **Way 1: a scheduled task, in the desktop app.** In the Code tab, click **Scheduled**, then **New task**. Name it `monday-report`. For the instructions, write `Run the monday-report skill.` Turn on **Only on this computer** and pick the `wren-street` folder. Pick the **Hourly** trigger for this test. Click **Create**, then **Run now**, and say yes to each prompt. Keep the app open until the next run. Then pause the task.
 
-**Way 2: Run now.** Use this if you have no scheduled tasks. Click **Run now** two times, a few minutes apart, or type `/monday-report` two times. Then paste this:
+**Way 2: Run now.** Use this if you have no **Scheduled** button. In `claude`, type `/monday-report` two times, a few minutes apart. Then paste this:
 
 ```text
 Make out/schedule.md. Under "## Schedule", write the cron line I would

@@ -57,7 +57,14 @@ claude --version
 
 Expect: a version number and `(Claude Code)`. The course needs `2.1.314` or newer.
 
-Now sign in. Type `claude` and press Enter. Claude Code opens. Type `/login` and follow the steps in your browser. Pick your Claude account. When it says you are signed in, type `/exit`.
+Now sign in. Type `claude` and press Enter. The first time, Claude Code asks a few questions before it opens:
+
+1. It asks you to pick a text style. Press Enter to keep the one it marks.
+2. It shows security notes. Press Enter.
+3. It asks how you want to sign in. Pick your Claude account and follow the steps in your browser.
+4. It asks if you trust the files in this folder. Use the arrow keys to pick **Yes, I trust this folder**, then press Enter. The first choice is **No, exit**, so do not just press Enter.
+
+If Claude Code opens and you are not signed in yet, type `/login`. When it says you are signed in, type `/exit`.
 
 ### Or use the desktop app
 

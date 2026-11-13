@@ -48,11 +48,12 @@ Expect: `Done. All 6 rules pass.`
 
 ## If you get stuck
 
-| What you see                                      | Try this                                                                  |
-| ------------------------------------------------- | ------------------------------------------------------------------------- |
-| `FAIL the bakery folder has its own save points`  | Open `wren-street` in Claude, not the course folder. Then ask again.      |
-| `FAIL your work in out/ is in the save point too` | Claude hid `out/` in a file called `.gitignore`. Ask it to take that out. |
-| `git: command not found`                          | Ask Claude to install git for you, then try again.                        |
+| What you see                                      | Try this                                                                                          |
+| ------------------------------------------------- | ------------------------------------------------------------------------------------------------- |
+| `FAIL the bakery folder has its own save points`  | Open `wren-street` in Claude, not the course folder. Then ask again.                              |
+| `FAIL your work in out/ is in the save point too` | Claude hid `out/` in a file called `.gitignore`. Ask it to take that out.                         |
+| `git: command not found`                          | Ask Claude to install git for you, then try again.                                                |
+| `Please tell me who you are`                      | Git needs a name for each save point. Ask Claude to set your name and email for this folder only. |
 
 ## Words you will use
 

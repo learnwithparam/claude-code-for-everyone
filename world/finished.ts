@@ -1,7 +1,7 @@
 // bun run finished: the finished system. A fresh copy of the bakery gets the finished learner's
 // Claude Code setup (world/finished/bakery: CLAUDE.md, .claude/settings.json, a hook and three
-// skills). Then the real Claude Code runs the Friday close on it with `claude -p`. Every step's
-// check then reads the files Claude made.
+// skills). Then the real Claude Code runs the Friday close on it with `claude -p`.
+// Then the check of each step the close covers reads the files Claude made.
 //
 // With Claude Code installed and signed in, this is a live run. With no `claude`, or in CI, it
 // replays a recorded real run from world/recordings/: the files that run made, and its stream-json
@@ -64,6 +64,23 @@ type StreamEvent = {
 };
 
 type StepResult = { step: string; part: string; pass: boolean; failed: string[] };
+
+// The steps the finished run proves. The setup (house rules, safety rules, why-i-am-here.md)
+// covers three of them, and the friday-close skill makes the files for the other seven.
+// Steps a person must do by hand (sign the labels, make a save point, open the terminal)
+// or that use a second folder (run-the-friday-close) are not part of one close.
+export const CLOSE_STEPS = [
+  "meet-the-bakery",
+  "read-the-folder",
+  "set-the-safety-rules",
+  "clean-the-orders",
+  "fix-the-price-list",
+  "write-the-house-rules",
+  "reconcile-the-invoices",
+  "build-the-label-skill",
+  "write-the-monday-report",
+  "publish-the-menu-page",
+];
 
 // Every file in a folder and the folders inside it, written with / and relative to the top folder.
 function filesUnder(folder: string, top = folder, found: string[] = []): string[] {
@@ -296,7 +313,8 @@ async function rulesThatFail(rules: Rule[], folder: string): Promise<string[]> {
 
 export async function checkFolder(folder: string): Promise<StepResult[]> {
   const results: StepResult[] = [];
-  for (const step of allSteps()) {
+  const closeSteps = allSteps().filter((step) => CLOSE_STEPS.includes(step.name));
+  for (const step of closeSteps) {
     const checkFile = join(ROOT, "checks", `${step.name}.ts`);
     if (!existsSync(checkFile)) continue;
     const rules: Rule[] = (await import(checkFile)).default;
