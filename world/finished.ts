@@ -137,6 +137,7 @@ function describeToolCall(call: ToolCall): string {
 // Print what Claude did, if this line of output is a stream-json event.
 function sayWhatClaudeDid(line: string, say: Say) {
   try {
+    // biome-ignore lint/correctness/usePlaywrightValidDescribeCallback: our own describe
     for (const step of describe(JSON.parse(line))) say(`  ${step}`);
   } catch {
     // A line that is not JSON is not an event, so there is nothing to say.
@@ -292,6 +293,7 @@ export function replay(name: string, folder: string, say: Say) {
   const transcript = readFileSync(join(recording, "transcript.jsonl"), "utf8");
   for (const line of transcript.split("\n")) {
     if (!line.trim()) continue;
+    // biome-ignore lint/correctness/usePlaywrightValidDescribeCallback: our own describe
     for (const step of describe(JSON.parse(line))) say(`  ${step}`);
   }
 }
@@ -445,9 +447,31 @@ function readIfMade(relativePath: string): string {
   return existsSync(path) ? readFileSync(path, "utf8") : "";
 }
 
+// Column names in the files are codes. A reader sees words.
+const HEADINGS: Record<string, string> = {
+  // biome-ignore-start lint/style/useNamingConvention: these keys are the column names in the files
+  order_id: "Order",
+  order_date: "Date",
+  cafe: "Cafe",
+  quantity: "Quantity",
+  invoice: "Invoice",
+  status: "Problem",
+  reason: "Details",
+  // biome-ignore-end lint/style/useNamingConvention: see above
+};
+const heading = (column: string) => HEADINGS[column] ?? column;
+
+// What an invoice problem is called on the page. Claude words it freely, so unknown ones are kept.
+function problemLabel(status: string): string {
+  const text = status.trim().toLowerCase();
+  if (text.startsWith("price above")) return "Price above the order";
+  if (text.startsWith("short") || text.startsWith("quantity")) return "Quantity differs";
+  return text.charAt(0).toUpperCase() + text.slice(1);
+}
+
 function htmlTable(rows: Record<string, string>[], columns: string[]): string {
-  if (!rows.length) return "<p>Not made.</p>";
-  const header = columns.map((column) => `<th>${column}</th>`).join("");
+  if (!rows.length) return "<p>Claude Code did not make this file.</p>";
+  const header = columns.map((column) => `<th>${heading(column)}</th>`).join("");
   const body = rows.map((row) => htmlTableRow(row, columns)).join("");
   return `<table><tr>${header}</tr>${body}</table>`;
 }
@@ -457,10 +481,12 @@ function htmlTableRow(row: Record<string, string>, columns: string[]): string {
   return `<tr>${cells.join("")}</tr>`;
 }
 
-// A file Claude made, shown as it is, or "Not made." if it is missing or empty.
+// A file Claude made, shown as it is, or a plain note if it is missing or empty.
 function fileAsHtml(relativePath: string): string {
   const text = readIfMade(relativePath);
-  return text ? `<pre>${escapeHtml(text.trim())}</pre>` : "<p>Not made.</p>";
+  return text
+    ? `<pre>${escapeHtml(text.trim())}</pre>`
+    : "<p>Claude Code did not make this file.</p>";
 }
 
 function scoreBadges(results: { step: string; pass: boolean }[]): string {
@@ -493,7 +519,7 @@ const PAGE_STYLE = [
   "section{background:var(--card);border:1px solid var(--line);border-radius:10px;" +
     "padding:14px 16px;overflow-x:auto}",
   "h2{font-size:16px;margin:0 0 8px}table{border-collapse:collapse;font-size:13px;width:100%}" +
-    "th,td{text-align:left;padding:4px 6px;border-bottom:1px solid var(--line);white-space:nowrap}",
+    "th,td{text-align:left;padding:4px 6px;border-bottom:1px solid var(--line)}",
   ".score{display:flex;flex-wrap:wrap;gap:6px}.score span{font:12px ui-monospace,monospace;" +
     "padding:3px 8px;border-radius:999px;border:1px solid var(--line)}",
   ".pass{color:var(--pass)}.fail{color:var(--fail)}" +
@@ -511,6 +537,10 @@ function page(results: { step: string; pass: boolean }[], live: boolean): string
   const invoicesToFix = invoices.filter(
     (invoice) => (invoice.status ?? "").trim().toLowerCase() !== "ok",
   );
+  const invoicesToShow = invoicesToFix.map((row) => ({
+    ...row,
+    status: problemLabel(row.status ?? ""),
+  }));
   const runNote = live ? "" : " (a recorded real run)";
   const madeFrom = `What Claude Code made from the bakery folder${runNote}`;
   const subtitle = `${madeFrom}, and what the checks say about it.`;
@@ -519,14 +549,17 @@ function page(results: { step: string; pass: boolean }[], live: boolean): string
     PAGE_HEAD,
     "<style>",
     PAGE_STYLE,
-    "</style></head><body><main>",
+    '</style></head><body data-audience="staff"><main>',
     "<h1>The Friday close at Wren Street Bakery</h1>",
     `<p class="sub">${subtitle}</p>`,
     `<section style="margin-bottom:16px">${checks}</section>`,
     '<div class="grid">',
     section("Orders before: three formats, four spellings", htmlTable(ordersBefore, ORDER_COLUMNS)),
     section("Orders after: one format, one spelling", htmlTable(ordersAfter, ORDER_COLUMNS)),
-    section("Invoices that need action", htmlTable(invoicesToFix, ["invoice", "status", "reason"])),
+    section(
+      "Invoices that need action",
+      htmlTable(invoicesToShow, ["invoice", "status", "reason"]),
+    ),
     section("The label that was out of date", fileAsHtml("out/labels/multigrain-loaf.md")),
     section("The Monday report, from the till", fileAsHtml("out/reports/monday-report.md")),
     section("Price list fixes", fileAsHtml("out/price-changes.md")),
