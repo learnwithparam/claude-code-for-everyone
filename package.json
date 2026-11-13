@@ -1,10 +1,27 @@
 {
-  "name": "workshop-template",
+  "name": "claude-code-for-everyone",
   "private": true,
   "type": "module",
   "packageManager": "bun@1.4.4",
   "scripts": {
-    "check": "bun scripts/check.ts && bun scripts/verify.ts --all",
-    "verify": "bun scripts/verify.ts"
+    "check": "bun scripts/readable.ts && bun scripts/plain-english.ts && bun scripts/check.ts && bun scripts/verify.ts --all",
+    "readable": "bun scripts/readable.ts",
+    "plain-english": "bun scripts/plain-english.ts",
+    "format": "biome check --write .",
+    "verify": "bun scripts/verify.ts",
+    "world": "bun world/world.ts",
+    "doctor": "bun scripts/doctor.ts",
+    "finished": "bun world/finished.ts",
+    "pictures": "bun images/shoot.ts"
+  },
+  "dependencies": {
+    "fflate": "0.8.3"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "2.6.5",
+    "@types/bun": "1.4.4"
+  },
+  "plainEnglish": {
+    "grade": 6
   }
 }

@@ -1,0 +1,21 @@
+{
+  "permissions": {
+    "defaultMode": "default",
+    "blockWritesOutsideWorkingDirectories": true,
+    "deny": [
+      "Edit(./till/**)",
+      "Edit(./purchase-orders/**)",
+      "Bash(rm *)"
+    ]
+  },
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Write|Edit|Bash",
+        "hooks": [
+          { "type": "command", "command": "bun \"$CLAUDE_PROJECT_DIR/.claude/hooks/protect-originals.ts\"" }
+        ]
+      }
+    ]
+  }
+}

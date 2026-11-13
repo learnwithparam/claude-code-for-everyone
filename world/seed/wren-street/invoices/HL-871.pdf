@@ -1,0 +1,47 @@
+%PDF-1.4
+1 0 obj
+<< /Type /Catalog /Pages 2 0 R >>
+endobj
+2 0 obj
+<< /Type /Pages /Kids [3 0 R] /Count 1 >>
+endobj
+3 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 595 842] /Contents 4 0 R /Resources << /Font << /F1 5 0 R /F2 6 0 R >> >> >>
+endobj
+4 0 obj
+<< /Length 716 >>
+stream
+BT /F2 18 Tf 56 765 Td (Hollow Lane Eggs) Tj ET
+BT /F2 14 Tf 56 744 Td (INVOICE) Tj ET
+BT /F1 11 Tf 56 726 Td (Invoice number: HL-871) Tj ET
+BT /F1 11 Tf 56 708 Td (Invoice date: 26 Aug 2026) Tj ET
+BT /F1 11 Tf 56 690 Td (Bill to: Wren Street Bakery, 14 Wren Street) Tj ET
+BT /F1 11 Tf 56 672 Td (Your order: PO-3006) Tj ET
+BT /F1 11 Tf 56 654 Td ( ) Tj ET
+BT /F2 11 Tf 56 636 Td (Item                          Qty        Unit price     Total) Tj ET
+BT /F1 11 Tf 56 618 Td (free range eggs               480        GBP 0.24       GBP 115.20) Tj ET
+BT /F1 11 Tf 56 600 Td ( ) Tj ET
+BT /F2 11 Tf 56 582 Td (Amount due: GBP 115.20) Tj ET
+BT /F1 11 Tf 56 564 Td (Payment within 30 days. Thank you for your custom.) Tj ET
+endstream
+endobj
+5 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica /Encoding /WinAnsiEncoding >>
+endobj
+6 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold /Encoding /WinAnsiEncoding >>
+endobj
+xref
+0 7
+0000000000 65535 f 
+0000000009 00000 n 
+0000000058 00000 n 
+0000000115 00000 n 
+0000000251 00000 n 
+0000001018 00000 n 
+0000001115 00000 n 
+trailer
+<< /Size 7 /Root 1 0 R >>
+startxref
+1217
+%%EOF

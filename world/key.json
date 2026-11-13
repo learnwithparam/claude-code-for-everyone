@@ -1,0 +1,1257 @@
+{
+  "seed": 7,
+  "orders": {
+    "rowsInExport": 143,
+    "duplicateIds": [
+      "WS-1013",
+      "WS-1020",
+      "WS-1059",
+      "WS-1065",
+      "WS-1070",
+      "WS-1071",
+      "WS-1075",
+      "WS-1087",
+      "WS-1101"
+    ],
+    "ambiguousPhoneIds": [
+      "WS-1001",
+      "WS-1002",
+      "WS-1004",
+      "WS-1007",
+      "WS-1008",
+      "WS-1009",
+      "WS-1011",
+      "WS-1012",
+      "WS-1014",
+      "WS-1042",
+      "WS-1045",
+      "WS-1046",
+      "WS-1048",
+      "WS-1049",
+      "WS-1050",
+      "WS-1053",
+      "WS-1055",
+      "WS-1056",
+      "WS-1057",
+      "WS-1058",
+      "WS-1059",
+      "WS-1060",
+      "WS-1086",
+      "WS-1088",
+      "WS-1090",
+      "WS-1093",
+      "WS-1094",
+      "WS-1095",
+      "WS-1098"
+    ],
+    "quantityWordIds": [
+      "WS-1008",
+      "WS-1009",
+      "WS-1012",
+      "WS-1016",
+      "WS-1019",
+      "WS-1022",
+      "WS-1025",
+      "WS-1031",
+      "WS-1034",
+      "WS-1042",
+      "WS-1060",
+      "WS-1061",
+      "WS-1065",
+      "WS-1070",
+      "WS-1071",
+      "WS-1073",
+      "WS-1077",
+      "WS-1087",
+      "WS-1093",
+      "WS-1094",
+      "WS-1095",
+      "WS-1104",
+      "WS-1105",
+      "WS-1108",
+      "WS-1112",
+      "WS-1118",
+      "WS-1128",
+      "WS-1131"
+    ],
+    "clean": [
+      {
+        "order_id": "WS-1001",
+        "order_date": "2026-08-03",
+        "cafe": "Lumen Cafe",
+        "product": "Sourdough Loaf",
+        "quantity": 36
+      },
+      {
+        "order_id": "WS-1002",
+        "order_date": "2026-08-03",
+        "cafe": "Moss and Grain",
+        "product": "Almond Croissant",
+        "quantity": 24
+      },
+      {
+        "order_id": "WS-1003",
+        "order_date": "2026-08-03",
+        "cafe": "Pier Nine Espresso",
+        "product": "Fruit Scone",
+        "quantity": 18
+      },
+      {
+        "order_id": "WS-1004",
+        "order_date": "2026-08-04",
+        "cafe": "Lumen Cafe",
+        "product": "Multigrain Loaf",
+        "quantity": 18
+      },
+      {
+        "order_id": "WS-1005",
+        "order_date": "2026-08-04",
+        "cafe": "Hartley Corner Cafe",
+        "product": "Cheese Scone",
+        "quantity": 10
+      },
+      {
+        "order_id": "WS-1006",
+        "order_date": "2026-08-04",
+        "cafe": "Bluebell Coffee",
+        "product": "Multigrain Loaf",
+        "quantity": 18
+      },
+      {
+        "order_id": "WS-1007",
+        "order_date": "2026-08-04",
+        "cafe": "Moss and Grain",
+        "product": "Cheese Scone",
+        "quantity": 18
+      },
+      {
+        "order_id": "WS-1008",
+        "order_date": "2026-08-05",
+        "cafe": "Moss and Grain",
+        "product": "White Tin Loaf",
+        "quantity": 12
+      },
+      {
+        "order_id": "WS-1009",
+        "order_date": "2026-08-05",
+        "cafe": "Pier Nine Espresso",
+        "product": "Seeded Rye Loaf",
+        "quantity": 24
+      },
+      {
+        "order_id": "WS-1010",
+        "order_date": "2026-08-06",
+        "cafe": "Pier Nine Espresso",
+        "product": "Croissant",
+        "quantity": 10
+      },
+      {
+        "order_id": "WS-1011",
+        "order_date": "2026-08-07",
+        "cafe": "Kettle and Crumb",
+        "product": "White Tin Loaf",
+        "quantity": 24
+      },
+      {
+        "order_id": "WS-1012",
+        "order_date": "2026-08-07",
+        "cafe": "Hartley Corner Cafe",
+        "product": "Brownie",
+        "quantity": 36
+      },
+      {
+        "order_id": "WS-1013",
+        "order_date": "2026-08-10",
+        "cafe": "Lumen Cafe",
+        "product": "Almond Croissant",
+        "quantity": 24
+      },
+      {
+        "order_id": "WS-1014",
+        "order_date": "2026-08-11",
+        "cafe": "Hartley Corner Cafe",
+        "product": "Almond Croissant",
+        "quantity": 12
+      },
+      {
+        "order_id": "WS-1015",
+        "order_date": "2026-08-13",
+        "cafe": "Lumen Cafe",
+        "product": "White Tin Loaf",
+        "quantity": 6
+      },
+      {
+        "order_id": "WS-1016",
+        "order_date": "2026-08-13",
+        "cafe": "Moss and Grain",
+        "product": "Cinnamon Bun",
+        "quantity": 24
+      },
+      {
+        "order_id": "WS-1017",
+        "order_date": "2026-08-14",
+        "cafe": "Lumen Cafe",
+        "product": "Focaccia",
+        "quantity": 24
+      },
+      {
+        "order_id": "WS-1018",
+        "order_date": "2026-08-14",
+        "cafe": "Bluebell Coffee",
+        "product": "Focaccia",
+        "quantity": 18
+      },
+      {
+        "order_id": "WS-1019",
+        "order_date": "2026-08-14",
+        "cafe": "Moss and Grain",
+        "product": "Croissant",
+        "quantity": 10
+      },
+      {
+        "order_id": "WS-1020",
+        "order_date": "2026-08-18",
+        "cafe": "Kettle and Crumb",
+        "product": "Cinnamon Bun",
+        "quantity": 30
+      },
+      {
+        "order_id": "WS-1021",
+        "order_date": "2026-08-18",
+        "cafe": "Hartley Corner Cafe",
+        "product": "Almond Croissant",
+        "quantity": 18
+      },
+      {
+        "order_id": "WS-1022",
+        "order_date": "2026-08-18",
+        "cafe": "Bluebell Coffee",
+        "product": "Multigrain Loaf",
+        "quantity": 12
+      },
+      {
+        "order_id": "WS-1023",
+        "order_date": "2026-08-18",
+        "cafe": "Moss and Grain",
+        "product": "Sourdough Loaf",
+        "quantity": 10
+      },
+      {
+        "order_id": "WS-1024",
+        "order_date": "2026-08-18",
+        "cafe": "Pier Nine Espresso",
+        "product": "Cheese Scone",
+        "quantity": 36
+      },
+      {
+        "order_id": "WS-1025",
+        "order_date": "2026-08-19",
+        "cafe": "Lumen Cafe",
+        "product": "Croissant",
+        "quantity": 18
+      },
+      {
+        "order_id": "WS-1026",
+        "order_date": "2026-08-19",
+        "cafe": "Kettle and Crumb",
+        "product": "Croissant",
+        "quantity": 30
+      },
+      {
+        "order_id": "WS-1027",
+        "order_date": "2026-08-20",
+        "cafe": "Kettle and Crumb",
+        "product": "Almond Croissant",
+        "quantity": 24
+      },
+      {
+        "order_id": "WS-1028",
+        "order_date": "2026-08-20",
+        "cafe": "Hartley Corner Cafe",
+        "product": "Fruit Scone",
+        "quantity": 30
+      },
+      {
+        "order_id": "WS-1029",
+        "order_date": "2026-08-20",
+        "cafe": "Moss and Grain",
+        "product": "Focaccia",
+        "quantity": 12
+      },
+      {
+        "order_id": "WS-1030",
+        "order_date": "2026-08-21",
+        "cafe": "Pier Nine Espresso",
+        "product": "Almond Croissant",
+        "quantity": 12
+      },
+      {
+        "order_id": "WS-1031",
+        "order_date": "2026-08-25",
+        "cafe": "Bluebell Coffee",
+        "product": "Brownie",
+        "quantity": 12
+      },
+      {
+        "order_id": "WS-1032",
+        "order_date": "2026-08-25",
+        "cafe": "Pier Nine Espresso",
+        "product": "Multigrain Loaf",
+        "quantity": 6
+      },
+      {
+        "order_id": "WS-1033",
+        "order_date": "2026-08-26",
+        "cafe": "Hartley Corner Cafe",
+        "product": "Multigrain Loaf",
+        "quantity": 6
+      },
+      {
+        "order_id": "WS-1034",
+        "order_date": "2026-08-27",
+        "cafe": "Kettle and Crumb",
+        "product": "Focaccia",
+        "quantity": 12
+      },
+      {
+        "order_id": "WS-1035",
+        "order_date": "2026-08-27",
+        "cafe": "Hartley Corner Cafe",
+        "product": "Brownie",
+        "quantity": 24
+      },
+      {
+        "order_id": "WS-1036",
+        "order_date": "2026-08-28",
+        "cafe": "Lumen Cafe",
+        "product": "Fruit Scone",
+        "quantity": 18
+      },
+      {
+        "order_id": "WS-1037",
+        "order_date": "2026-08-31",
+        "cafe": "Kettle and Crumb",
+        "product": "Seeded Rye Loaf",
+        "quantity": 12
+      },
+      {
+        "order_id": "WS-1038",
+        "order_date": "2026-08-31",
+        "cafe": "Hartley Corner Cafe",
+        "product": "Cheese Scone",
+        "quantity": 30
+      },
+      {
+        "order_id": "WS-1039",
+        "order_date": "2026-08-31",
+        "cafe": "Moss and Grain",
+        "product": "Pain au Chocolat",
+        "quantity": 36
+      },
+      {
+        "order_id": "WS-1040",
+        "order_date": "2026-09-01",
+        "cafe": "Lumen Cafe",
+        "product": "Cheese Scone",
+        "quantity": 36
+      },
+      {
+        "order_id": "WS-1041",
+        "order_date": "2026-09-01",
+        "cafe": "Kettle and Crumb",
+        "product": "White Tin Loaf",
+        "quantity": 24
+      },
+      {
+        "order_id": "WS-1042",
+        "order_date": "2026-09-01",
+        "cafe": "Hartley Corner Cafe",
+        "product": "Cheese Scone",
+        "quantity": 12
+      },
+      {
+        "order_id": "WS-1043",
+        "order_date": "2026-09-01",
+        "cafe": "Bluebell Coffee",
+        "product": "Fruit Scone",
+        "quantity": 24
+      },
+      {
+        "order_id": "WS-1044",
+        "order_date": "2026-09-02",
+        "cafe": "Lumen Cafe",
+        "product": "Seeded Rye Loaf",
+        "quantity": 12
+      },
+      {
+        "order_id": "WS-1045",
+        "order_date": "2026-09-02",
+        "cafe": "Hartley Corner Cafe",
+        "product": "Pain au Chocolat",
+        "quantity": 6
+      },
+      {
+        "order_id": "WS-1046",
+        "order_date": "2026-09-02",
+        "cafe": "Pier Nine Espresso",
+        "product": "Fruit Scone",
+        "quantity": 12
+      },
+      {
+        "order_id": "WS-1047",
+        "order_date": "2026-09-03",
+        "cafe": "Kettle and Crumb",
+        "product": "White Tin Loaf",
+        "quantity": 24
+      },
+      {
+        "order_id": "WS-1048",
+        "order_date": "2026-09-03",
+        "cafe": "Hartley Corner Cafe",
+        "product": "Cheese Scone",
+        "quantity": 24
+      },
+      {
+        "order_id": "WS-1049",
+        "order_date": "2026-09-03",
+        "cafe": "Bluebell Coffee",
+        "product": "Seeded Rye Loaf",
+        "quantity": 36
+      },
+      {
+        "order_id": "WS-1050",
+        "order_date": "2026-09-03",
+        "cafe": "Moss and Grain",
+        "product": "Almond Croissant",
+        "quantity": 6
+      },
+      {
+        "order_id": "WS-1051",
+        "order_date": "2026-09-04",
+        "cafe": "Kettle and Crumb",
+        "product": "Brownie",
+        "quantity": 10
+      },
+      {
+        "order_id": "WS-1052",
+        "order_date": "2026-09-04",
+        "cafe": "Hartley Corner Cafe",
+        "product": "Cheese Scone",
+        "quantity": 6
+      },
+      {
+        "order_id": "WS-1053",
+        "order_date": "2026-09-07",
+        "cafe": "Hartley Corner Cafe",
+        "product": "Almond Croissant",
+        "quantity": 6
+      },
+      {
+        "order_id": "WS-1054",
+        "order_date": "2026-09-07",
+        "cafe": "Pier Nine Espresso",
+        "product": "Almond Croissant",
+        "quantity": 12
+      },
+      {
+        "order_id": "WS-1055",
+        "order_date": "2026-09-08",
+        "cafe": "Kettle and Crumb",
+        "product": "Seeded Rye Loaf",
+        "quantity": 12
+      },
+      {
+        "order_id": "WS-1056",
+        "order_date": "2026-09-09",
+        "cafe": "Pier Nine Espresso",
+        "product": "Croissant",
+        "quantity": 24
+      },
+      {
+        "order_id": "WS-1057",
+        "order_date": "2026-09-10",
+        "cafe": "Lumen Cafe",
+        "product": "Pain au Chocolat",
+        "quantity": 24
+      },
+      {
+        "order_id": "WS-1058",
+        "order_date": "2026-09-10",
+        "cafe": "Bluebell Coffee",
+        "product": "Brownie",
+        "quantity": 18
+      },
+      {
+        "order_id": "WS-1059",
+        "order_date": "2026-09-10",
+        "cafe": "Moss and Grain",
+        "product": "Fruit Scone",
+        "quantity": 10
+      },
+      {
+        "order_id": "WS-1060",
+        "order_date": "2026-09-11",
+        "cafe": "Hartley Corner Cafe",
+        "product": "Pain au Chocolat",
+        "quantity": 36
+      },
+      {
+        "order_id": "WS-1061",
+        "order_date": "2026-09-11",
+        "cafe": "Pier Nine Espresso",
+        "product": "Focaccia",
+        "quantity": 6
+      },
+      {
+        "order_id": "WS-1062",
+        "order_date": "2026-09-14",
+        "cafe": "Kettle and Crumb",
+        "product": "Pain au Chocolat",
+        "quantity": 12
+      },
+      {
+        "order_id": "WS-1063",
+        "order_date": "2026-09-14",
+        "cafe": "Pier Nine Espresso",
+        "product": "Pain au Chocolat",
+        "quantity": 10
+      },
+      {
+        "order_id": "WS-1064",
+        "order_date": "2026-09-15",
+        "cafe": "Hartley Corner Cafe",
+        "product": "Sourdough Loaf",
+        "quantity": 18
+      },
+      {
+        "order_id": "WS-1065",
+        "order_date": "2026-09-15",
+        "cafe": "Bluebell Coffee",
+        "product": "Almond Croissant",
+        "quantity": 36
+      },
+      {
+        "order_id": "WS-1066",
+        "order_date": "2026-09-16",
+        "cafe": "Lumen Cafe",
+        "product": "Seeded Rye Loaf",
+        "quantity": 24
+      },
+      {
+        "order_id": "WS-1067",
+        "order_date": "2026-09-21",
+        "cafe": "Hartley Corner Cafe",
+        "product": "Multigrain Loaf",
+        "quantity": 36
+      },
+      {
+        "order_id": "WS-1068",
+        "order_date": "2026-09-21",
+        "cafe": "Moss and Grain",
+        "product": "Brownie",
+        "quantity": 18
+      },
+      {
+        "order_id": "WS-1069",
+        "order_date": "2026-09-21",
+        "cafe": "Pier Nine Espresso",
+        "product": "White Tin Loaf",
+        "quantity": 12
+      },
+      {
+        "order_id": "WS-1070",
+        "order_date": "2026-09-22",
+        "cafe": "Kettle and Crumb",
+        "product": "Seeded Rye Loaf",
+        "quantity": 12
+      },
+      {
+        "order_id": "WS-1071",
+        "order_date": "2026-09-22",
+        "cafe": "Hartley Corner Cafe",
+        "product": "Seeded Rye Loaf",
+        "quantity": 12
+      },
+      {
+        "order_id": "WS-1072",
+        "order_date": "2026-09-22",
+        "cafe": "Bluebell Coffee",
+        "product": "Brownie",
+        "quantity": 6
+      },
+      {
+        "order_id": "WS-1073",
+        "order_date": "2026-09-23",
+        "cafe": "Kettle and Crumb",
+        "product": "Fruit Scone",
+        "quantity": 12
+      },
+      {
+        "order_id": "WS-1074",
+        "order_date": "2026-09-24",
+        "cafe": "Lumen Cafe",
+        "product": "Cinnamon Bun",
+        "quantity": 12
+      },
+      {
+        "order_id": "WS-1075",
+        "order_date": "2026-09-24",
+        "cafe": "Kettle and Crumb",
+        "product": "White Tin Loaf",
+        "quantity": 24
+      },
+      {
+        "order_id": "WS-1076",
+        "order_date": "2026-09-24",
+        "cafe": "Hartley Corner Cafe",
+        "product": "Seeded Rye Loaf",
+        "quantity": 12
+      },
+      {
+        "order_id": "WS-1077",
+        "order_date": "2026-09-25",
+        "cafe": "Kettle and Crumb",
+        "product": "White Tin Loaf",
+        "quantity": 10
+      },
+      {
+        "order_id": "WS-1078",
+        "order_date": "2026-09-25",
+        "cafe": "Bluebell Coffee",
+        "product": "Pain au Chocolat",
+        "quantity": 12
+      },
+      {
+        "order_id": "WS-1079",
+        "order_date": "2026-09-25",
+        "cafe": "Moss and Grain",
+        "product": "Cinnamon Bun",
+        "quantity": 12
+      },
+      {
+        "order_id": "WS-1080",
+        "order_date": "2026-09-25",
+        "cafe": "Pier Nine Espresso",
+        "product": "Pain au Chocolat",
+        "quantity": 24
+      },
+      {
+        "order_id": "WS-1081",
+        "order_date": "2026-09-28",
+        "cafe": "Moss and Grain",
+        "product": "Cheese Scone",
+        "quantity": 30
+      },
+      {
+        "order_id": "WS-1082",
+        "order_date": "2026-09-29",
+        "cafe": "Hartley Corner Cafe",
+        "product": "Multigrain Loaf",
+        "quantity": 30
+      },
+      {
+        "order_id": "WS-1083",
+        "order_date": "2026-09-29",
+        "cafe": "Moss and Grain",
+        "product": "Almond Croissant",
+        "quantity": 24
+      },
+      {
+        "order_id": "WS-1084",
+        "order_date": "2026-09-30",
+        "cafe": "Hartley Corner Cafe",
+        "product": "Sourdough Loaf",
+        "quantity": 24
+      },
+      {
+        "order_id": "WS-1085",
+        "order_date": "2026-09-30",
+        "cafe": "Bluebell Coffee",
+        "product": "Sourdough Loaf",
+        "quantity": 12
+      },
+      {
+        "order_id": "WS-1086",
+        "order_date": "2026-10-02",
+        "cafe": "Bluebell Coffee",
+        "product": "Cheese Scone",
+        "quantity": 30
+      },
+      {
+        "order_id": "WS-1087",
+        "order_date": "2026-10-02",
+        "cafe": "Moss and Grain",
+        "product": "Multigrain Loaf",
+        "quantity": 18
+      },
+      {
+        "order_id": "WS-1088",
+        "order_date": "2026-10-05",
+        "cafe": "Lumen Cafe",
+        "product": "Fruit Scone",
+        "quantity": 24
+      },
+      {
+        "order_id": "WS-1089",
+        "order_date": "2026-10-05",
+        "cafe": "Moss and Grain",
+        "product": "Fruit Scone",
+        "quantity": 36
+      },
+      {
+        "order_id": "WS-1090",
+        "order_date": "2026-10-07",
+        "cafe": "Lumen Cafe",
+        "product": "Cinnamon Bun",
+        "quantity": 12
+      },
+      {
+        "order_id": "WS-1091",
+        "order_date": "2026-10-08",
+        "cafe": "Kettle and Crumb",
+        "product": "White Tin Loaf",
+        "quantity": 30
+      },
+      {
+        "order_id": "WS-1092",
+        "order_date": "2026-10-08",
+        "cafe": "Bluebell Coffee",
+        "product": "Cinnamon Bun",
+        "quantity": 12
+      },
+      {
+        "order_id": "WS-1093",
+        "order_date": "2026-10-08",
+        "cafe": "Moss and Grain",
+        "product": "Seeded Rye Loaf",
+        "quantity": 18
+      },
+      {
+        "order_id": "WS-1094",
+        "order_date": "2026-10-08",
+        "cafe": "Pier Nine Espresso",
+        "product": "Focaccia",
+        "quantity": 6
+      },
+      {
+        "order_id": "WS-1095",
+        "order_date": "2026-10-09",
+        "cafe": "Kettle and Crumb",
+        "product": "Fruit Scone",
+        "quantity": 36
+      },
+      {
+        "order_id": "WS-1096",
+        "order_date": "2026-10-09",
+        "cafe": "Hartley Corner Cafe",
+        "product": "White Tin Loaf",
+        "quantity": 24
+      },
+      {
+        "order_id": "WS-1097",
+        "order_date": "2026-10-09",
+        "cafe": "Bluebell Coffee",
+        "product": "Pain au Chocolat",
+        "quantity": 10
+      },
+      {
+        "order_id": "WS-1098",
+        "order_date": "2026-10-12",
+        "cafe": "Moss and Grain",
+        "product": "Seeded Rye Loaf",
+        "quantity": 12
+      },
+      {
+        "order_id": "WS-1099",
+        "order_date": "2026-10-13",
+        "cafe": "Kettle and Crumb",
+        "product": "Multigrain Loaf",
+        "quantity": 6
+      },
+      {
+        "order_id": "WS-1100",
+        "order_date": "2026-10-13",
+        "cafe": "Moss and Grain",
+        "product": "Fruit Scone",
+        "quantity": 36
+      },
+      {
+        "order_id": "WS-1101",
+        "order_date": "2026-10-14",
+        "cafe": "Hartley Corner Cafe",
+        "product": "White Tin Loaf",
+        "quantity": 30
+      },
+      {
+        "order_id": "WS-1102",
+        "order_date": "2026-10-14",
+        "cafe": "Bluebell Coffee",
+        "product": "Fruit Scone",
+        "quantity": 24
+      },
+      {
+        "order_id": "WS-1103",
+        "order_date": "2026-10-15",
+        "cafe": "Hartley Corner Cafe",
+        "product": "White Tin Loaf",
+        "quantity": 36
+      },
+      {
+        "order_id": "WS-1104",
+        "order_date": "2026-10-15",
+        "cafe": "Bluebell Coffee",
+        "product": "Pain au Chocolat",
+        "quantity": 24
+      },
+      {
+        "order_id": "WS-1105",
+        "order_date": "2026-10-15",
+        "cafe": "Moss and Grain",
+        "product": "Sourdough Loaf",
+        "quantity": 12
+      },
+      {
+        "order_id": "WS-1106",
+        "order_date": "2026-10-16",
+        "cafe": "Bluebell Coffee",
+        "product": "Croissant",
+        "quantity": 6
+      },
+      {
+        "order_id": "WS-1107",
+        "order_date": "2026-10-16",
+        "cafe": "Moss and Grain",
+        "product": "Seeded Rye Loaf",
+        "quantity": 12
+      },
+      {
+        "order_id": "WS-1108",
+        "order_date": "2026-10-16",
+        "cafe": "Pier Nine Espresso",
+        "product": "Cinnamon Bun",
+        "quantity": 36
+      },
+      {
+        "order_id": "WS-1109",
+        "order_date": "2026-10-19",
+        "cafe": "Lumen Cafe",
+        "product": "Focaccia",
+        "quantity": 30
+      },
+      {
+        "order_id": "WS-1110",
+        "order_date": "2026-10-20",
+        "cafe": "Lumen Cafe",
+        "product": "Seeded Rye Loaf",
+        "quantity": 12
+      },
+      {
+        "order_id": "WS-1111",
+        "order_date": "2026-10-20",
+        "cafe": "Kettle and Crumb",
+        "product": "Fruit Scone",
+        "quantity": 6
+      },
+      {
+        "order_id": "WS-1112",
+        "order_date": "2026-10-20",
+        "cafe": "Bluebell Coffee",
+        "product": "Focaccia",
+        "quantity": 24
+      },
+      {
+        "order_id": "WS-1113",
+        "order_date": "2026-10-20",
+        "cafe": "Pier Nine Espresso",
+        "product": "Multigrain Loaf",
+        "quantity": 24
+      },
+      {
+        "order_id": "WS-1114",
+        "order_date": "2026-10-21",
+        "cafe": "Hartley Corner Cafe",
+        "product": "Cheese Scone",
+        "quantity": 36
+      },
+      {
+        "order_id": "WS-1115",
+        "order_date": "2026-10-21",
+        "cafe": "Bluebell Coffee",
+        "product": "Pain au Chocolat",
+        "quantity": 10
+      },
+      {
+        "order_id": "WS-1116",
+        "order_date": "2026-10-21",
+        "cafe": "Moss and Grain",
+        "product": "Seeded Rye Loaf",
+        "quantity": 30
+      },
+      {
+        "order_id": "WS-1117",
+        "order_date": "2026-10-21",
+        "cafe": "Pier Nine Espresso",
+        "product": "Almond Croissant",
+        "quantity": 30
+      },
+      {
+        "order_id": "WS-1118",
+        "order_date": "2026-10-22",
+        "cafe": "Hartley Corner Cafe",
+        "product": "Sourdough Loaf",
+        "quantity": 6
+      },
+      {
+        "order_id": "WS-1119",
+        "order_date": "2026-10-23",
+        "cafe": "Bluebell Coffee",
+        "product": "Sourdough Loaf",
+        "quantity": 24
+      },
+      {
+        "order_id": "WS-1120",
+        "order_date": "2026-10-23",
+        "cafe": "Moss and Grain",
+        "product": "Pain au Chocolat",
+        "quantity": 24
+      },
+      {
+        "order_id": "WS-1121",
+        "order_date": "2026-10-23",
+        "cafe": "Pier Nine Espresso",
+        "product": "Focaccia",
+        "quantity": 24
+      },
+      {
+        "order_id": "WS-1122",
+        "order_date": "2026-10-27",
+        "cafe": "Lumen Cafe",
+        "product": "Seeded Rye Loaf",
+        "quantity": 30
+      },
+      {
+        "order_id": "WS-1123",
+        "order_date": "2026-10-27",
+        "cafe": "Kettle and Crumb",
+        "product": "White Tin Loaf",
+        "quantity": 12
+      },
+      {
+        "order_id": "WS-1124",
+        "order_date": "2026-10-27",
+        "cafe": "Hartley Corner Cafe",
+        "product": "Almond Croissant",
+        "quantity": 12
+      },
+      {
+        "order_id": "WS-1125",
+        "order_date": "2026-10-27",
+        "cafe": "Bluebell Coffee",
+        "product": "Sourdough Loaf",
+        "quantity": 6
+      },
+      {
+        "order_id": "WS-1126",
+        "order_date": "2026-10-27",
+        "cafe": "Moss and Grain",
+        "product": "Multigrain Loaf",
+        "quantity": 24
+      },
+      {
+        "order_id": "WS-1127",
+        "order_date": "2026-10-27",
+        "cafe": "Pier Nine Espresso",
+        "product": "Pain au Chocolat",
+        "quantity": 12
+      },
+      {
+        "order_id": "WS-1128",
+        "order_date": "2026-10-28",
+        "cafe": "Kettle and Crumb",
+        "product": "Fruit Scone",
+        "quantity": 18
+      },
+      {
+        "order_id": "WS-1129",
+        "order_date": "2026-10-28",
+        "cafe": "Moss and Grain",
+        "product": "Fruit Scone",
+        "quantity": 24
+      },
+      {
+        "order_id": "WS-1130",
+        "order_date": "2026-10-29",
+        "cafe": "Hartley Corner Cafe",
+        "product": "Sourdough Loaf",
+        "quantity": 30
+      },
+      {
+        "order_id": "WS-1131",
+        "order_date": "2026-10-29",
+        "cafe": "Moss and Grain",
+        "product": "Cinnamon Bun",
+        "quantity": 18
+      },
+      {
+        "order_id": "WS-1132",
+        "order_date": "2026-10-29",
+        "cafe": "Pier Nine Espresso",
+        "product": "Croissant",
+        "quantity": 36
+      },
+      {
+        "order_id": "WS-1133",
+        "order_date": "2026-10-30",
+        "cafe": "Hartley Corner Cafe",
+        "product": "Almond Croissant",
+        "quantity": 6
+      },
+      {
+        "order_id": "WS-1134",
+        "order_date": "2026-10-30",
+        "cafe": "Moss and Grain",
+        "product": "Almond Croissant",
+        "quantity": 24
+      }
+    ]
+  },
+  "cafes": [
+    "Lumen Cafe",
+    "Kettle and Crumb",
+    "Hartley Corner Cafe",
+    "Bluebell Coffee",
+    "Moss and Grain",
+    "Pier Nine Espresso"
+  ],
+  "prices": {
+    "clean": [
+      {
+        "product": "Sourdough Loaf",
+        "unit": "each",
+        "shop_price": 4.2,
+        "wholesale_price": 2.8
+      },
+      {
+        "product": "Seeded Rye Loaf",
+        "unit": "each",
+        "shop_price": 4.5,
+        "wholesale_price": 3
+      },
+      {
+        "product": "White Tin Loaf",
+        "unit": "each",
+        "shop_price": 2.9,
+        "wholesale_price": 1.85
+      },
+      {
+        "product": "Multigrain Loaf",
+        "unit": "each",
+        "shop_price": 4,
+        "wholesale_price": 2.65
+      },
+      {
+        "product": "Croissant",
+        "unit": "each",
+        "shop_price": 1.9,
+        "wholesale_price": 1.1
+      },
+      {
+        "product": "Pain au Chocolat",
+        "unit": "each",
+        "shop_price": 2.1,
+        "wholesale_price": 1.25
+      },
+      {
+        "product": "Almond Croissant",
+        "unit": "each",
+        "shop_price": 2.6,
+        "wholesale_price": 1.6
+      },
+      {
+        "product": "Cinnamon Bun",
+        "unit": "each",
+        "shop_price": 2.8,
+        "wholesale_price": 1.7
+      },
+      {
+        "product": "Brownie",
+        "unit": "each",
+        "shop_price": 2.75,
+        "wholesale_price": 1.65
+      },
+      {
+        "product": "Fruit Scone",
+        "unit": "each",
+        "shop_price": 2.2,
+        "wholesale_price": 1.2
+      },
+      {
+        "product": "Cheese Scone",
+        "unit": "each",
+        "shop_price": 2.4,
+        "wholesale_price": 1.35
+      },
+      {
+        "product": "Focaccia",
+        "unit": "each",
+        "shop_price": 3.6,
+        "wholesale_price": 2.3
+      }
+    ],
+    "fixed": [
+      "Cinnamon Bun",
+      "Croissant",
+      "Fruit Scone"
+    ],
+    "wrongName": "Crossiant"
+  },
+  "invoices": {
+    "count": 24,
+    "duplicatePair": [
+      "FD-2202",
+      "FD-2207"
+    ],
+    "priceAbovePo": [
+      "FD-2204",
+      "FD-2205",
+      "FD-2206"
+    ],
+    "shortDelivery": [
+      "HL-873"
+    ],
+    "clean": [
+      "FD-2201",
+      "HL-870",
+      "KP-15020",
+      "MM-4410",
+      "FD-2202",
+      "HL-871",
+      "KP-15021",
+      "MM-4411",
+      "FD-2203",
+      "HL-872",
+      "KP-15022",
+      "MM-4412",
+      "KP-15023",
+      "MM-4413",
+      "HL-874",
+      "KP-15024",
+      "MM-4414",
+      "HL-875",
+      "MM-4415"
+    ]
+  },
+  "labels": {
+    "sourdough-loaf": {
+      "name": "Sourdough Loaf",
+      "allergens": [
+        "gluten"
+      ]
+    },
+    "seeded-rye-loaf": {
+      "name": "Seeded Rye Loaf",
+      "allergens": [
+        "gluten"
+      ]
+    },
+    "white-tin-loaf": {
+      "name": "White Tin Loaf",
+      "allergens": [
+        "gluten",
+        "milk"
+      ]
+    },
+    "multigrain-loaf": {
+      "name": "Multigrain Loaf",
+      "allergens": [
+        "gluten",
+        "soya",
+        "sesame"
+      ]
+    },
+    "croissant": {
+      "name": "Croissant",
+      "allergens": [
+        "gluten",
+        "milk",
+        "eggs"
+      ]
+    },
+    "pain-au-chocolat": {
+      "name": "Pain au Chocolat",
+      "allergens": [
+        "gluten",
+        "milk",
+        "eggs",
+        "soya"
+      ]
+    },
+    "almond-croissant": {
+      "name": "Almond Croissant",
+      "allergens": [
+        "gluten",
+        "milk",
+        "eggs",
+        "nuts"
+      ]
+    },
+    "cinnamon-bun": {
+      "name": "Cinnamon Bun",
+      "allergens": [
+        "gluten",
+        "milk",
+        "eggs"
+      ]
+    },
+    "brownie": {
+      "name": "Brownie",
+      "allergens": [
+        "gluten",
+        "milk",
+        "eggs",
+        "soya",
+        "nuts"
+      ]
+    },
+    "fruit-scone": {
+      "name": "Fruit Scone",
+      "allergens": [
+        "gluten",
+        "milk",
+        "eggs"
+      ]
+    },
+    "cheese-scone": {
+      "name": "Cheese Scone",
+      "allergens": [
+        "gluten",
+        "milk",
+        "eggs",
+        "mustard"
+      ]
+    },
+    "focaccia": {
+      "name": "Focaccia",
+      "allergens": [
+        "gluten"
+      ]
+    }
+  },
+  "labelOutOfDate": "multigrain-loaf",
+  "menuWrong": {
+    "Sourdough Loaf": {
+      "menu": 4,
+      "list": 4.2
+    },
+    "Brownie": {
+      "menu": 2.5,
+      "list": 2.75
+    }
+  },
+  "till": {
+    "rows": 288,
+    "sold": 4558,
+    "waste": 392,
+    "takings": 13609.8
+  }
+}
