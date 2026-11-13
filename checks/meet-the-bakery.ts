@@ -5,7 +5,8 @@ import { bakeryRule, has, originalsUnchanged, text } from "./lib/bakery";
 import { words } from "./lib/md";
 
 const FILE = "out/why-i-am-here.md";
-const EXAMPLE = /\[|the task you do by hand at work/i;
+// The words in brackets, or Jess's sentence from the page: neither is the learner's own task.
+const EXAMPLE = /\[|the task you do by hand at work|check each supplier bill against my orders/i;
 
 // The learner's words with any heading lines taken out.
 const body = (folder: string) => text(folder, FILE).replace(/^#.*$/gm, "").trim();
