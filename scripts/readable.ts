@@ -144,9 +144,19 @@ export function problemsIn(file: string, text: string): Problem[] {
   return problems;
 }
 
+// What a run makes in the course folder: the learner's bakery, its backups and the finished close.
+// Git ignores them, and the code and pages in them are Claude's work, not the course's.
+function isWorkFolder(entry: string): boolean {
+  return entry === "finished" || entry === "wren-street" || entry.startsWith("wren-street-backup-");
+}
+
+function isSkipped(folder: string, entry: string): boolean {
+  return SKIPPED_FOLDERS.has(entry) || (folder === ROOT && isWorkFolder(entry));
+}
+
 function codeFiles(folder: string, found: string[] = []): string[] {
   for (const entry of readdirSync(folder)) {
-    if (SKIPPED_FOLDERS.has(entry)) continue;
+    if (isSkipped(folder, entry)) continue;
     const path = join(folder, entry);
     if (statSync(path).isDirectory()) codeFiles(path, found);
     else if (CODE_EXTENSIONS.has(extname(path))) found.push(path);

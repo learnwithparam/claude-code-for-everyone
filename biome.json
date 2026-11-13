@@ -4,6 +4,9 @@
     "includes": [
       "**",
       "!**/node_modules",
+      "!finished",
+      "!wren-street",
+      "!wren-street-backup-*",
       "!**/world/recordings",
       "!**/world/seed",
       "!world/key.json",

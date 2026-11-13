@@ -52,9 +52,19 @@ const SIMPLER_WORDS: Record<string, string> = {
 
 type Problem = { file: string; message: string };
 
+// What a run makes in the course folder: the learner's bakery, its backups and the finished close.
+// Git ignores them, and the code and pages in them are Claude's work, not the course's.
+function isWorkFolder(entry: string): boolean {
+  return entry === "finished" || entry === "wren-street" || entry.startsWith("wren-street-backup-");
+}
+
+function isSkipped(folder: string, entry: string): boolean {
+  return SKIPPED_FOLDERS.has(entry) || (folder === ROOT && isWorkFolder(entry));
+}
+
 function markdownFiles(folder: string, found: string[] = []): string[] {
   for (const entry of readdirSync(folder)) {
-    if (SKIPPED_FOLDERS.has(entry)) continue;
+    if (isSkipped(folder, entry)) continue;
     const path = join(folder, entry);
     if (statSync(path).isDirectory()) markdownFiles(path, found);
     else if (path.endsWith(".md") && !AUTHOR_PAGES.has(entry)) found.push(path);
