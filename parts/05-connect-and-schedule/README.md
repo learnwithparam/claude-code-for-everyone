@@ -76,6 +76,22 @@ bun run verify part connect-and-schedule
 
 Expect: `Part connect-and-schedule is done: 4/4 steps pass.`
 
+## Assignment
+
+The problem: Jess wants the Monday report without asking for it.
+
+Hand in these files from your `wren-street` folder: `.mcp.json`, `.claude/skills/monday-report/SKILL.md`, and two reports in `out/reports/`. If you took the Run now way, add `out/schedule.md`.
+
+Each question is yes or no:
+
+1. Does `bun run verify connect-the-till` pass?
+2. Does `bun run verify write-the-monday-report` pass?
+3. Does `bun run verify schedule-the-monday-report` pass?
+4. Does the skill say to never guess a number?
+5. Did you read the first report before you let the task run alone?
+
+To go further, move the task to a cloud scheduled task. Then write one sentence on what changed. For example, a cloud task gets a fresh copy of your files, not your own folder.
+
 ## Finished
 
 You now have Claude Code in the terminal, a till connector that can only read, and a `monday-report` skill. The skill writes a new report each run, with numbers from the till. You read the first runs before you let it run alone.
