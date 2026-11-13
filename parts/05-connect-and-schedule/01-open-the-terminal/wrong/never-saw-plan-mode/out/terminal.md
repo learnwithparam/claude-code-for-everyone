@@ -1,0 +1,13 @@
+# My terminal
+
+## Version
+
+2.1.323 (Claude Code)
+
+## Status bar in Plan mode
+
+? for shortcuts
+
+## Mode I work in
+
+Manual. The status bar shows no mode, so Claude asks before each change.
