@@ -81,6 +81,28 @@ Find the words you see in the first column. Each message any course script can p
 | `FAIL  the original price list is the same as the start`                 | The check did not find this in your work.  | Ask Claude to save the fix as a new file in out/; run bun run world reset to get the original back.        |
 | `FAIL  the sentence is your own, not the example`                        | The check did not find this in your work.  | Tell Claude a task from your own job, not the example from the page.                                       |
 
+## The checks in teach-the-bakery
+
+| What you see                                                                                         | What it means                             | Fix                                                                                      |
+| ---------------------------------------------------------------------------------------------------- | ----------------------------------------- | ---------------------------------------------------------------------------------------- |
+| `FAIL  CLAUDE.md is at the top of the bakery folder`                                                 | The check did not find this in your work. | Ask Claude to save the house rules as CLAUDE.md next to orders/, not in out/.            |
+| `FAIL  it has the headings About the bakery, Where things live, Never do, Money rules, How to write` | The check did not find this in your work. | Ask Claude to use these five headings, each on its own line starting with ##.            |
+| `FAIL  Never do says Claude must never delete a file`                                                | The check did not find this in your work. | Ask Claude to add "Never delete a file." under the Never do heading.                     |
+| `FAIL  Never do names till/ and purchase-orders/`                                                    | The check did not find this in your work. | Ask Claude to add "Never change anything in till/ or purchase-orders/." under Never do.  |
+| `FAIL  it says new files go in out/`                                                                 | The check did not find this in your work. | Ask Claude to add "Put every new file in out/." under Where things live.                 |
+| `FAIL  it is shorter than 200 lines`                                                                 | The check did not find this in your work. | Ask Claude to cut the rules down to the ones that matter, under 50 lines is good.        |
+| `FAIL  out/plans/invoice-check.md is there`                                                          | The check did not find this in your work. | Ask Claude to save the plan it showed you as out/plans/invoice-check.md.                 |
+| `FAIL  it has the headings Goal, Files I will read, Files I will write, Steps, Risks`                | The check did not find this in your work. | Ask Claude to use these five headings, each on its own line starting with ##.            |
+| `FAIL  it names purchase-orders.csv as the source of truth`                                          | The check did not find this in your work. | Ask Claude to say in one line: "The source of truth is purchase-orders.csv."             |
+| `FAIL  Files I will write names at least one file, and every one is in out/`                         | The check did not find this in your work. | Ask Claude to list the new files it will make, each one inside out/.                     |
+| `FAIL  out/reconciliation.csv is there, with the columns invoice, po, status, reason`                | The check did not find this in your work. | Ask Claude to save the table as out/reconciliation.csv with those four columns.          |
+| `FAIL  it has one row for each of the 24 invoices`                                                   | The check did not find this in your work. | Ask Claude to add a row for every PDF in invoices/, even the ones that are fine.         |
+| `FAIL  FD-2207 is flagged as a duplicate`                                                            | The check did not find this in your work. | Ask Claude which two invoices bill the same purchase order.                              |
+| `FAIL  FD-2204, FD-2205, FD-2206 are flagged for a price above the purchase order`                   | The check did not find this in your work. | Ask Claude to compare each unit price with agreed_price, not only the totals.            |
+| `FAIL  HL-873 is flagged as a short delivery`                                                        | The check did not find this in your work. | Ask Claude to compare each quantity billed with the quantity ordered.                    |
+| `FAIL  no invoice that is fine is flagged`                                                           | The check did not find this in your work. | Ask Claude to mark the first bill of an order "ok"; only the second bill is a duplicate. |
+| `FAIL  out/reconciliation-note.md is there and is under 150 words`                                   | The check did not find this in your work. | Ask Claude for a short note for Jess: only what needs action, under 150 words.           |
+
 ## The checks in repeat-the-work
 
 | What you see                                                                       | What it means                             | Fix                                                                                                                       |

@@ -1,0 +1,25 @@
+invoice,po,status,reason
+FD-2201,PO-3001,ok,"matches the PO"
+HL-870,PO-3002,ok,"matches the PO"
+KP-15020,PO-3003,ok,"matches the PO"
+MM-4410,PO-3004,ok,"matches the PO"
+FD-2202,PO-3005,ok,"matches the PO"
+HL-871,PO-3006,ok,"matches the PO"
+KP-15021,PO-3007,ok,"matches the PO"
+FD-2207,PO-3005,duplicate,"PO-3005 already billed on FD-2202; £372.00 would be paid twice"
+MM-4411,PO-3008,ok,"matches the PO"
+FD-2203,PO-3009,ok,"matches the PO"
+HL-872,PO-3010,ok,"matches the PO"
+KP-15022,PO-3011,ok,"matches the PO"
+MM-4412,PO-3012,ok,"matches the PO"
+FD-2204,PO-3013,ok,total matches the amount due
+HL-873,PO-3014,short delivery,"420 eggs billed; PO ordered 480; 60 short"
+KP-15023,PO-3015,ok,"matches the PO"
+MM-4413,PO-3016,ok,"matches the PO"
+FD-2205,PO-3017,ok,total matches the amount due
+HL-874,PO-3018,ok,"matches the PO"
+KP-15024,PO-3019,ok,"matches the PO"
+MM-4414,PO-3020,ok,"matches the PO"
+FD-2206,PO-3021,ok,total matches the amount due
+HL-875,PO-3022,ok,"matches the PO"
+MM-4415,PO-3023,ok,"matches the PO"
