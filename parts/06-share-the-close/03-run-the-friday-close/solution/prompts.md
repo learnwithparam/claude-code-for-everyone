@@ -42,4 +42,4 @@ Claude worked through the seven steps. It asked before it ran each script and be
 - Claude asks to change a file in `orders/` or `till/`. Say no. Those are the record.
 - Claude fills in "Checked by:" on a label. Say no. A person signs.
 
-Then run `bun run verify run-the-friday-close` in the course folder. All 7 rules pass.
+Then run `bun run verify run-the-friday-close` in the course folder. All 10 rules pass.

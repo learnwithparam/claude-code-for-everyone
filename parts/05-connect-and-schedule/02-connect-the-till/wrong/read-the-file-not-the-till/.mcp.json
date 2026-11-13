@@ -1,0 +1,12 @@
+{
+  "mcpServers": {
+    "till": {
+      "type": "stdio",
+      "command": "bun",
+      "args": [
+        "../parts/05-connect-and-schedule/till-server.ts"
+      ],
+      "env": {}
+    }
+  }
+}

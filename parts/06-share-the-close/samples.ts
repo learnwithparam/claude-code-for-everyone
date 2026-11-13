@@ -137,6 +137,13 @@ sample("03-run-the-friday-close", "wrong/no-close-skill", {
 const { [PAGE]: _menuPage, ...withoutMenuPage } = nextCloseOut;
 sample("03-run-the-friday-close", "wrong/menu-page-skipped", { ...setup, ...withoutMenuPage });
 
+// The close kept the old report: its numbers are the old till's, not the new one's.
+sample("03-run-the-friday-close", "wrong/old-report-numbers", {
+  ...setup,
+  ...nextCloseOut,
+  "out/reports/monday-report.md": bakeryClose["out/reports/monday-report.md"],
+});
+
 // ---- map-your-own-close ----
 
 function closeMap(task: string, files: string[], rule: string, check: string): string {

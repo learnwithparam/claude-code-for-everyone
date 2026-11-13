@@ -69,7 +69,7 @@ Expect: `Made the next close: wren-street-next-close/`
 bun run verify run-the-friday-close
 ```
 
-Expect: `Done. All 7 rules pass.`
+Expect: `Done. All 10 rules pass.`
 
 Last, ask Claude to map the close onto your own task.
 

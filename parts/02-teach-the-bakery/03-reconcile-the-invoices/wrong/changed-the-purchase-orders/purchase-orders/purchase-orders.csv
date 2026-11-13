@@ -1,0 +1,24 @@
+po_number,order_date,supplier,item,quantity,unit,agreed_price
+PO-3001,2026-08-04,Fellside Dairy,unsalted butter,80,kg,6.20
+PO-3002,2026-08-07,Hollow Lane Eggs,free range eggs,480,egg,0.24
+PO-3003,2026-08-12,Kraftline Packaging,paper bread bags,2000,bag,0.06
+PO-3004,2026-08-14,Millbrook Mill,strong white flour,400,kg,0.92
+PO-3005,2026-08-19,Fellside Dairy,unsalted butter,60,kg,6.20
+PO-3006,2026-08-24,Hollow Lane Eggs,free range eggs,480,egg,0.24
+PO-3007,2026-08-27,Kraftline Packaging,paper bread bags,2000,bag,0.06
+PO-3008,2026-09-01,Millbrook Mill,strong white flour,400,kg,0.92
+PO-3009,2026-09-04,Fellside Dairy,unsalted butter,80,kg,6.20
+PO-3010,2026-09-08,Hollow Lane Eggs,free range eggs,360,egg,0.24
+PO-3011,2026-09-11,Kraftline Packaging,paper bread bags,3000,bag,0.06
+PO-3012,2026-09-16,Millbrook Mill,strong white flour,400,kg,0.92
+PO-3013,2026-09-21,Fellside Dairy,unsalted butter,80,kg,6.45
+PO-3014,2026-09-24,Hollow Lane Eggs,free range eggs,480,egg,0.24
+PO-3015,2026-09-28,Kraftline Packaging,paper bread bags,2000,bag,0.06
+PO-3016,2026-10-01,Millbrook Mill,strong white flour,500,kg,0.92
+PO-3017,2026-10-06,Fellside Dairy,unsalted butter,60,kg,6.45
+PO-3018,2026-10-09,Hollow Lane Eggs,free range eggs,360,egg,0.24
+PO-3019,2026-10-14,Kraftline Packaging,paper bread bags,3000,bag,0.06
+PO-3020,2026-10-19,Millbrook Mill,strong white flour,400,kg,0.92
+PO-3021,2026-10-21,Fellside Dairy,unsalted butter,80,kg,6.45
+PO-3022,2026-10-26,Hollow Lane Eggs,free range eggs,360,egg,0.24
+PO-3023,2026-10-29,Millbrook Mill,strong white flour,500,kg,0.92
