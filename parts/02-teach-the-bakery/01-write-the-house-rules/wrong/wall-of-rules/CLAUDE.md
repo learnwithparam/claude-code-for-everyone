@@ -1,0 +1,257 @@
+# Wren Street Bakery: house rules
+
+## About the bakery
+
+- A small bakery run by Jess, the owner. It sells bread and cakes in the shop and sends bread to six cafes.
+- This folder is made-up practice data.
+
+## Where things live
+
+- orders/: cafe orders from the phone, the web and email, mixed together.
+- customers/cafes.csv: the six cafes and the right spelling of each name.
+- prices/price-list.xlsx: the price list.
+- invoices/: supplier bills as PDFs. purchase-orders/: what we ordered.
+- recipes/, allergens/, labels/, menu/: what we bake, allergen words, shelf labels, the wall menu.
+- till/sales.csv: what really sold each day.
+- notes/owner-notes.md: notes from Jess.
+- out/: every new file goes here, and nowhere else.
+
+## Never do
+
+- Never delete a file. Make a new file in out/ instead.
+- Never change anything in till/ or purchase-orders/. They are the record.
+- Never change any other file in place. Write a fixed copy to out/.
+- Never email a cafe without asking Jess first.
+
+## Money rules
+
+- Write prices in pounds with two decimals: £2.80, not £2.8.
+- Check each bill against the agreed price in purchase-orders/. Flag any gap.
+- If the menu, labels, price list or till show two prices, flag it. Do not pick one.
+- Kettle and Crumb and Moss and Grain often pay late. Check them before the close.
+
+## How to write
+
+- Short and friendly. Sign off "Jess at Wren Street".
+- Spell each cafe name the way customers/cafes.csv does.
+- Phone orders put the day first: 03/09/2026 is the 3rd of September.
+- In any file we keep, write dates as YYYY-MM-DD.
+
+## Cafe rules
+
+- Check every Sourdough Loaf order from Lumen Cafe.
+- Tell Jess if Lumen Cafe asks for more Sourdough Loaf.
+- Use the price list for Sourdough Loaf at Lumen Cafe.
+- Check every Seeded Rye Loaf order from Lumen Cafe.
+- Tell Jess if Lumen Cafe asks for more Seeded Rye Loaf.
+- Use the price list for Seeded Rye Loaf at Lumen Cafe.
+- Check every White Tin Loaf order from Lumen Cafe.
+- Tell Jess if Lumen Cafe asks for more White Tin Loaf.
+- Use the price list for White Tin Loaf at Lumen Cafe.
+- Check every Multigrain Loaf order from Lumen Cafe.
+- Tell Jess if Lumen Cafe asks for more Multigrain Loaf.
+- Use the price list for Multigrain Loaf at Lumen Cafe.
+- Check every Croissant order from Lumen Cafe.
+- Tell Jess if Lumen Cafe asks for more Croissant.
+- Use the price list for Croissant at Lumen Cafe.
+- Check every Pain au Chocolat order from Lumen Cafe.
+- Tell Jess if Lumen Cafe asks for more Pain au Chocolat.
+- Use the price list for Pain au Chocolat at Lumen Cafe.
+- Check every Almond Croissant order from Lumen Cafe.
+- Tell Jess if Lumen Cafe asks for more Almond Croissant.
+- Use the price list for Almond Croissant at Lumen Cafe.
+- Check every Cinnamon Bun order from Lumen Cafe.
+- Tell Jess if Lumen Cafe asks for more Cinnamon Bun.
+- Use the price list for Cinnamon Bun at Lumen Cafe.
+- Check every Brownie order from Lumen Cafe.
+- Tell Jess if Lumen Cafe asks for more Brownie.
+- Use the price list for Brownie at Lumen Cafe.
+- Check every Fruit Scone order from Lumen Cafe.
+- Tell Jess if Lumen Cafe asks for more Fruit Scone.
+- Use the price list for Fruit Scone at Lumen Cafe.
+- Check every Cheese Scone order from Lumen Cafe.
+- Tell Jess if Lumen Cafe asks for more Cheese Scone.
+- Use the price list for Cheese Scone at Lumen Cafe.
+- Check every Focaccia order from Lumen Cafe.
+- Tell Jess if Lumen Cafe asks for more Focaccia.
+- Use the price list for Focaccia at Lumen Cafe.
+- Check every Sourdough Loaf order from Moss and Grain.
+- Tell Jess if Moss and Grain asks for more Sourdough Loaf.
+- Use the price list for Sourdough Loaf at Moss and Grain.
+- Check every Seeded Rye Loaf order from Moss and Grain.
+- Tell Jess if Moss and Grain asks for more Seeded Rye Loaf.
+- Use the price list for Seeded Rye Loaf at Moss and Grain.
+- Check every White Tin Loaf order from Moss and Grain.
+- Tell Jess if Moss and Grain asks for more White Tin Loaf.
+- Use the price list for White Tin Loaf at Moss and Grain.
+- Check every Multigrain Loaf order from Moss and Grain.
+- Tell Jess if Moss and Grain asks for more Multigrain Loaf.
+- Use the price list for Multigrain Loaf at Moss and Grain.
+- Check every Croissant order from Moss and Grain.
+- Tell Jess if Moss and Grain asks for more Croissant.
+- Use the price list for Croissant at Moss and Grain.
+- Check every Pain au Chocolat order from Moss and Grain.
+- Tell Jess if Moss and Grain asks for more Pain au Chocolat.
+- Use the price list for Pain au Chocolat at Moss and Grain.
+- Check every Almond Croissant order from Moss and Grain.
+- Tell Jess if Moss and Grain asks for more Almond Croissant.
+- Use the price list for Almond Croissant at Moss and Grain.
+- Check every Cinnamon Bun order from Moss and Grain.
+- Tell Jess if Moss and Grain asks for more Cinnamon Bun.
+- Use the price list for Cinnamon Bun at Moss and Grain.
+- Check every Brownie order from Moss and Grain.
+- Tell Jess if Moss and Grain asks for more Brownie.
+- Use the price list for Brownie at Moss and Grain.
+- Check every Fruit Scone order from Moss and Grain.
+- Tell Jess if Moss and Grain asks for more Fruit Scone.
+- Use the price list for Fruit Scone at Moss and Grain.
+- Check every Cheese Scone order from Moss and Grain.
+- Tell Jess if Moss and Grain asks for more Cheese Scone.
+- Use the price list for Cheese Scone at Moss and Grain.
+- Check every Focaccia order from Moss and Grain.
+- Tell Jess if Moss and Grain asks for more Focaccia.
+- Use the price list for Focaccia at Moss and Grain.
+- Check every Sourdough Loaf order from Pier Nine Espresso.
+- Tell Jess if Pier Nine Espresso asks for more Sourdough Loaf.
+- Use the price list for Sourdough Loaf at Pier Nine Espresso.
+- Check every Seeded Rye Loaf order from Pier Nine Espresso.
+- Tell Jess if Pier Nine Espresso asks for more Seeded Rye Loaf.
+- Use the price list for Seeded Rye Loaf at Pier Nine Espresso.
+- Check every White Tin Loaf order from Pier Nine Espresso.
+- Tell Jess if Pier Nine Espresso asks for more White Tin Loaf.
+- Use the price list for White Tin Loaf at Pier Nine Espresso.
+- Check every Multigrain Loaf order from Pier Nine Espresso.
+- Tell Jess if Pier Nine Espresso asks for more Multigrain Loaf.
+- Use the price list for Multigrain Loaf at Pier Nine Espresso.
+- Check every Croissant order from Pier Nine Espresso.
+- Tell Jess if Pier Nine Espresso asks for more Croissant.
+- Use the price list for Croissant at Pier Nine Espresso.
+- Check every Pain au Chocolat order from Pier Nine Espresso.
+- Tell Jess if Pier Nine Espresso asks for more Pain au Chocolat.
+- Use the price list for Pain au Chocolat at Pier Nine Espresso.
+- Check every Almond Croissant order from Pier Nine Espresso.
+- Tell Jess if Pier Nine Espresso asks for more Almond Croissant.
+- Use the price list for Almond Croissant at Pier Nine Espresso.
+- Check every Cinnamon Bun order from Pier Nine Espresso.
+- Tell Jess if Pier Nine Espresso asks for more Cinnamon Bun.
+- Use the price list for Cinnamon Bun at Pier Nine Espresso.
+- Check every Brownie order from Pier Nine Espresso.
+- Tell Jess if Pier Nine Espresso asks for more Brownie.
+- Use the price list for Brownie at Pier Nine Espresso.
+- Check every Fruit Scone order from Pier Nine Espresso.
+- Tell Jess if Pier Nine Espresso asks for more Fruit Scone.
+- Use the price list for Fruit Scone at Pier Nine Espresso.
+- Check every Cheese Scone order from Pier Nine Espresso.
+- Tell Jess if Pier Nine Espresso asks for more Cheese Scone.
+- Use the price list for Cheese Scone at Pier Nine Espresso.
+- Check every Focaccia order from Pier Nine Espresso.
+- Tell Jess if Pier Nine Espresso asks for more Focaccia.
+- Use the price list for Focaccia at Pier Nine Espresso.
+- Check every Sourdough Loaf order from Hartley Corner Cafe.
+- Tell Jess if Hartley Corner Cafe asks for more Sourdough Loaf.
+- Use the price list for Sourdough Loaf at Hartley Corner Cafe.
+- Check every Seeded Rye Loaf order from Hartley Corner Cafe.
+- Tell Jess if Hartley Corner Cafe asks for more Seeded Rye Loaf.
+- Use the price list for Seeded Rye Loaf at Hartley Corner Cafe.
+- Check every White Tin Loaf order from Hartley Corner Cafe.
+- Tell Jess if Hartley Corner Cafe asks for more White Tin Loaf.
+- Use the price list for White Tin Loaf at Hartley Corner Cafe.
+- Check every Multigrain Loaf order from Hartley Corner Cafe.
+- Tell Jess if Hartley Corner Cafe asks for more Multigrain Loaf.
+- Use the price list for Multigrain Loaf at Hartley Corner Cafe.
+- Check every Croissant order from Hartley Corner Cafe.
+- Tell Jess if Hartley Corner Cafe asks for more Croissant.
+- Use the price list for Croissant at Hartley Corner Cafe.
+- Check every Pain au Chocolat order from Hartley Corner Cafe.
+- Tell Jess if Hartley Corner Cafe asks for more Pain au Chocolat.
+- Use the price list for Pain au Chocolat at Hartley Corner Cafe.
+- Check every Almond Croissant order from Hartley Corner Cafe.
+- Tell Jess if Hartley Corner Cafe asks for more Almond Croissant.
+- Use the price list for Almond Croissant at Hartley Corner Cafe.
+- Check every Cinnamon Bun order from Hartley Corner Cafe.
+- Tell Jess if Hartley Corner Cafe asks for more Cinnamon Bun.
+- Use the price list for Cinnamon Bun at Hartley Corner Cafe.
+- Check every Brownie order from Hartley Corner Cafe.
+- Tell Jess if Hartley Corner Cafe asks for more Brownie.
+- Use the price list for Brownie at Hartley Corner Cafe.
+- Check every Fruit Scone order from Hartley Corner Cafe.
+- Tell Jess if Hartley Corner Cafe asks for more Fruit Scone.
+- Use the price list for Fruit Scone at Hartley Corner Cafe.
+- Check every Cheese Scone order from Hartley Corner Cafe.
+- Tell Jess if Hartley Corner Cafe asks for more Cheese Scone.
+- Use the price list for Cheese Scone at Hartley Corner Cafe.
+- Check every Focaccia order from Hartley Corner Cafe.
+- Tell Jess if Hartley Corner Cafe asks for more Focaccia.
+- Use the price list for Focaccia at Hartley Corner Cafe.
+- Check every Sourdough Loaf order from Bluebell Coffee.
+- Tell Jess if Bluebell Coffee asks for more Sourdough Loaf.
+- Use the price list for Sourdough Loaf at Bluebell Coffee.
+- Check every Seeded Rye Loaf order from Bluebell Coffee.
+- Tell Jess if Bluebell Coffee asks for more Seeded Rye Loaf.
+- Use the price list for Seeded Rye Loaf at Bluebell Coffee.
+- Check every White Tin Loaf order from Bluebell Coffee.
+- Tell Jess if Bluebell Coffee asks for more White Tin Loaf.
+- Use the price list for White Tin Loaf at Bluebell Coffee.
+- Check every Multigrain Loaf order from Bluebell Coffee.
+- Tell Jess if Bluebell Coffee asks for more Multigrain Loaf.
+- Use the price list for Multigrain Loaf at Bluebell Coffee.
+- Check every Croissant order from Bluebell Coffee.
+- Tell Jess if Bluebell Coffee asks for more Croissant.
+- Use the price list for Croissant at Bluebell Coffee.
+- Check every Pain au Chocolat order from Bluebell Coffee.
+- Tell Jess if Bluebell Coffee asks for more Pain au Chocolat.
+- Use the price list for Pain au Chocolat at Bluebell Coffee.
+- Check every Almond Croissant order from Bluebell Coffee.
+- Tell Jess if Bluebell Coffee asks for more Almond Croissant.
+- Use the price list for Almond Croissant at Bluebell Coffee.
+- Check every Cinnamon Bun order from Bluebell Coffee.
+- Tell Jess if Bluebell Coffee asks for more Cinnamon Bun.
+- Use the price list for Cinnamon Bun at Bluebell Coffee.
+- Check every Brownie order from Bluebell Coffee.
+- Tell Jess if Bluebell Coffee asks for more Brownie.
+- Use the price list for Brownie at Bluebell Coffee.
+- Check every Fruit Scone order from Bluebell Coffee.
+- Tell Jess if Bluebell Coffee asks for more Fruit Scone.
+- Use the price list for Fruit Scone at Bluebell Coffee.
+- Check every Cheese Scone order from Bluebell Coffee.
+- Tell Jess if Bluebell Coffee asks for more Cheese Scone.
+- Use the price list for Cheese Scone at Bluebell Coffee.
+- Check every Focaccia order from Bluebell Coffee.
+- Tell Jess if Bluebell Coffee asks for more Focaccia.
+- Use the price list for Focaccia at Bluebell Coffee.
+- Check every Sourdough Loaf order from Kettle and Crumb.
+- Tell Jess if Kettle and Crumb asks for more Sourdough Loaf.
+- Use the price list for Sourdough Loaf at Kettle and Crumb.
+- Check every Seeded Rye Loaf order from Kettle and Crumb.
+- Tell Jess if Kettle and Crumb asks for more Seeded Rye Loaf.
+- Use the price list for Seeded Rye Loaf at Kettle and Crumb.
+- Check every White Tin Loaf order from Kettle and Crumb.
+- Tell Jess if Kettle and Crumb asks for more White Tin Loaf.
+- Use the price list for White Tin Loaf at Kettle and Crumb.
+- Check every Multigrain Loaf order from Kettle and Crumb.
+- Tell Jess if Kettle and Crumb asks for more Multigrain Loaf.
+- Use the price list for Multigrain Loaf at Kettle and Crumb.
+- Check every Croissant order from Kettle and Crumb.
+- Tell Jess if Kettle and Crumb asks for more Croissant.
+- Use the price list for Croissant at Kettle and Crumb.
+- Check every Pain au Chocolat order from Kettle and Crumb.
+- Tell Jess if Kettle and Crumb asks for more Pain au Chocolat.
+- Use the price list for Pain au Chocolat at Kettle and Crumb.
+- Check every Almond Croissant order from Kettle and Crumb.
+- Tell Jess if Kettle and Crumb asks for more Almond Croissant.
+- Use the price list for Almond Croissant at Kettle and Crumb.
+- Check every Cinnamon Bun order from Kettle and Crumb.
+- Tell Jess if Kettle and Crumb asks for more Cinnamon Bun.
+- Use the price list for Cinnamon Bun at Kettle and Crumb.
+- Check every Brownie order from Kettle and Crumb.
+- Tell Jess if Kettle and Crumb asks for more Brownie.
+- Use the price list for Brownie at Kettle and Crumb.
+- Check every Fruit Scone order from Kettle and Crumb.
+- Tell Jess if Kettle and Crumb asks for more Fruit Scone.
+- Use the price list for Fruit Scone at Kettle and Crumb.
+- Check every Cheese Scone order from Kettle and Crumb.
+- Tell Jess if Kettle and Crumb asks for more Cheese Scone.
+- Use the price list for Cheese Scone at Kettle and Crumb.
+- Check every Focaccia order from Kettle and Crumb.
+- Tell Jess if Kettle and Crumb asks for more Focaccia.
+- Use the price list for Focaccia at Kettle and Crumb.
