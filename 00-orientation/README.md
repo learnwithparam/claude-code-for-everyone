@@ -115,7 +115,7 @@ bun run world
 
 Expect: `Made the bakery folder: wren-street/`
 
-Now see the finished work. Claude Code does the whole Friday close on a fresh copy of the bakery, with the house rules, safety rules and skills you will write in this course. It uses your Claude plan, and it takes a while:
+Now see the finished work. Claude Code does the whole Friday close on a fresh copy of the bakery. It uses the house rules, safety rules and skills you will set up with Claude in this course. It uses your Claude plan, and it takes a while:
 
 ```bash
 bun run finished
@@ -123,7 +123,7 @@ bun run finished
 
 Expect: `The Friday close ran.` and each check line says `PASS`
 
-You see each thing Claude did, then the checks. If Claude Code is not installed or not signed in, it shows a run we saved from the real Claude Code instead, and its first line says `Replaying`.
+You see each thing Claude did, then the checks. Maybe Claude Code is not installed or not signed in yet. Then it shows a run we saved from the real Claude Code. Its first line says `Replaying`.
 
 ![The finished close passing every check](images/finished-run.png)
 

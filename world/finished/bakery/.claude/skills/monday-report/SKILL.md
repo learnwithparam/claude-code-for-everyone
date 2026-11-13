@@ -10,9 +10,10 @@ description: Write the Monday report for Wren Street Bakery from the till. Use w
 1. Read till/sales.csv. Add up takings, items sold and items wasted over every row. Find the product with
    the most waste.
 2. Read notes/owner-notes.md for the cafes that pay late.
-3. Write out/reports/monday-report.md with a two sentence summary at the top, then these headings:
-   "## Sales" (takings in pounds and items sold), "## Waste" (items wasted, and the product with the most
-   waste and its count) and "## Late payers" (one dash line per cafe).
+3. Write out/reports/monday-report.md. Start with a two sentence summary. Then add these headings:
+   - "## Sales": takings in pounds and items sold.
+   - "## Waste": items wasted, and the product with the most waste and its count.
+   - "## Late payers": one dash line per cafe.
 
 ## Never
 

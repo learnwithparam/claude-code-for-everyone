@@ -1,193 +1,504 @@
 // Author tool: rebuild world/seed/wren-street and world/key.json from world/data.ts.
-// The same seed number always gives the same bytes, so the committed seed only changes when the data does.
+// The same seed number always gives the same bytes,
+// so the committed seed only changes when the data does.
 //   bun world/build.ts
+//
+// Careful: the order of every random() call below decides the bytes of the seed.
+// Moving a random() call, even to a different step, changes every file after it.
 import { mkdirSync, rmSync, writeFileSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { toCsv } from "../checks/lib/csv";
 import { writeXlsx } from "../checks/lib/xlsx";
+import {
+  ALLERGEN_WORDS,
+  CAFES,
+  type Cafe,
+  MENU_WRONG,
+  PRICE_FAULTS,
+  PRODUCTS,
+  type Product,
+  QTY_WORDS,
+  SUPPLIERS,
+  WHOLESALE,
+} from "./data";
 import { textPdf } from "./pdf";
-import { ALLERGEN_WORDS, CAFES, MENU_WRONG, PRICE_FAULTS, PRODUCTS, QTY_WORDS, SUPPLIERS, WHOLESALE } from "./data";
 
 export const SEED_DIR = join(import.meta.dir, "seed", "wren-street");
 const KEY_PATH = join(import.meta.dir, "key.json");
 
-// A small seeded random number generator (mulberry32), so every build is the same.
-function rng(seed: number) {
-  return () => {
-    seed |= 0; seed = (seed + 0x6d2b79f5) | 0;
-    let t = Math.imul(seed ^ (seed >>> 15), 1 | seed);
-    t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
-    return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
-  };
-}
+type Cell = string | number;
+type Row = Cell[];
+type Files = Record<string, string | Uint8Array>;
+type Random = () => number;
+type Supplier = (typeof SUPPLIERS)[number];
 
+const ONE_DAY = 86400000;
 const MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
-const iso = (d: Date) => d.toISOString().slice(0, 10);
-const dayFirst = (d: Date) => `${String(d.getUTCDate()).padStart(2, "0")}/${String(d.getUTCMonth() + 1).padStart(2, "0")}/${d.getUTCFullYear()}`;
-const wordy = (d: Date) => `${d.getUTCDate()} ${MONTHS[d.getUTCMonth()]} ${d.getUTCFullYear()}`;
-const money = (n: number) => n.toFixed(2);
-const bySlug = Object.fromEntries(PRODUCTS.map((p) => [p.slug, p]));
+const PRODUCT_BY_SLUG = Object.fromEntries(PRODUCTS.map((product) => [product.slug, product]));
 
-function workdays(from: string, to: string): Date[] {
-  const out: Date[] = [];
-  for (let d = new Date(`${from}T00:00:00Z`); d <= new Date(`${to}T00:00:00Z`); d = new Date(d.getTime() + 86400000))
-    if (d.getUTCDay() !== 0 && d.getUTCDay() !== 6) out.push(d);
-  return out;
+// A small seeded random number generator (mulberry32), so every build is the same.
+function makeRandom(seed: number): Random {
+  let state = seed;
+  return () => {
+    state |= 0;
+    state = (state + 0x6d2b79f5) | 0;
+    let mixed = Math.imul(state ^ (state >>> 15), 1 | state);
+    mixed = (mixed + Math.imul(mixed ^ (mixed >>> 7), 61 | mixed)) ^ mixed;
+    return ((mixed ^ (mixed >>> 14)) >>> 0) / 4294967296;
+  };
 }
 
-export function build(seed = 7) {
-  const rand = rng(seed);
-  const pick = <T>(xs: T[]) => xs[Math.floor(rand() * xs.length)];
-  const files: Record<string, string | Uint8Array> = {};
-  const key: any = { seed };
+function pickOne<T>(random: Random, choices: T[]): T {
+  return choices[Math.floor(random() * choices.length)];
+}
 
-  // Orders: three sources merged into one export.
-  type Order = { id: string; date: Date; cafe: (typeof CAFES)[number]; product: string; qty: number; source: string };
+// 2026-09-03: the way the website and every file we keep write a date.
+function isoDate(date: Date): string {
+  return date.toISOString().slice(0, 10);
+}
+
+// 03/09/2026: the way phone orders are written down, day first.
+function dayFirstDate(date: Date): string {
+  const day = String(date.getUTCDate()).padStart(2, "0");
+  const month = String(date.getUTCMonth() + 1).padStart(2, "0");
+  return `${day}/${month}/${date.getUTCFullYear()}`;
+}
+
+// 3 Sep 2026: the way emails and invoices write a date.
+function wordyDate(date: Date): string {
+  return `${date.getUTCDate()} ${MONTHS[date.getUTCMonth()]} ${date.getUTCFullYear()}`;
+}
+
+function money(pounds: number): string {
+  return pounds.toFixed(2);
+}
+
+function addDays(date: Date, days: number): Date {
+  return new Date(date.getTime() + days * ONE_DAY);
+}
+
+// Every Monday to Friday from one date to another, both included.
+function workdays(firstDate: string, lastDate: string): Date[] {
+  const days: Date[] = [];
+  const lastDay = new Date(`${lastDate}T00:00:00Z`);
+  let day = new Date(`${firstDate}T00:00:00Z`);
+  while (day <= lastDay) {
+    const weekday = day.getUTCDay();
+    if (weekday !== 0 && weekday !== 6) days.push(day);
+    day = addDays(day, 1);
+  }
+  return days;
+}
+
+// ---- Orders: three sources merged into one export. ----
+
+type Order = {
+  id: string;
+  date: Date;
+  cafe: Cafe;
+  product: string;
+  quantity: number;
+  source: string;
+};
+
+const ORDER_SIZES = [6, 10, 12, 12, 18, 24, 24, 30, 36];
+// Phone appears twice, so about half the orders came in by phone.
+const ORDER_SOURCES = ["web", "phone", "phone", "email"];
+
+function makeOrders(random: Random): Order[] {
   const orders: Order[] = [];
-  const days = workdays("2026-08-03", "2026-10-30");
-  let n = 1001;
-  for (const d of days)
-    for (const cafe of CAFES)
-      if (rand() < 0.4 && orders.length < 160) {
-        const product = pick(WHOLESALE);
-        const qty = pick([6, 10, 12, 12, 18, 24, 24, 30, 36]);
-        orders.push({ id: `WS-${n++}`, date: d, cafe, product, qty, source: pick(["web", "phone", "phone", "email"]) });
+  let orderNumber = 1001;
+  for (const day of workdays("2026-08-03", "2026-10-30")) {
+    for (const cafe of CAFES) {
+      if (random() < 0.4 && orders.length < 160) {
+        orders.push({
+          id: `WS-${orderNumber}`,
+          date: day,
+          cafe,
+          product: pickOne(random, WHOLESALE),
+          quantity: pickOne(random, ORDER_SIZES),
+          source: pickOne(random, ORDER_SOURCES),
+        });
+        orderNumber++;
       }
-  // Make sure at least a few phone orders have a day of 12 or less, where day and month can swap.
-  const ambiguous = orders.filter((o) => o.source === "phone" && o.date.getUTCDate() <= 12).map((o) => o.id);
-  if (ambiguous.length < 5) throw new Error("not enough ambiguous phone dates; change the seed");
-  const rows: (string | number)[][] = [];
-  const wordRows = new Set<string>();
-  const variantCount: Record<string, number> = {};
-  for (const o of orders) {
-    const date = o.source === "web" ? iso(o.date) : o.source === "phone" ? dayFirst(o.date) : wordy(o.date);
-    const alt = o.cafe.spellings.length > 1 && rand() < 0.45;
-    const cafeName = alt ? o.cafe.spellings[1 + (variantCount[o.cafe.account] = (variantCount[o.cafe.account] ?? 0) + 1) % (o.cafe.spellings.length - 1)] : o.cafe.name;
-    let qty: string | number = o.qty;
-    if (o.source !== "web" && QTY_WORDS[o.qty] && rand() < 0.35) { qty = QTY_WORDS[o.qty]; wordRows.add(o.id); }
-    rows.push([o.id, date, cafeName, bySlug[o.product].name, qty, o.source]);
-  }
-  // Nine rows exported twice, exactly the same.
-  const dupIdx = new Set<number>();
-  while (dupIdx.size < 9) dupIdx.add(Math.floor(rand() * rows.length));
-  const withDups: (string | number)[][] = [];
-  const later: Record<number, (string | number)[][]> = {};
-  rows.forEach((r, i) => {
-    withDups.push(r, ...(later[i] ?? []));
-    if (dupIdx.has(i)) (later[Math.min(i + 3 + Math.floor(rand() * 20), rows.length - 1)] ??= []).push([...r]);
-  });
-  files["orders/wholesale-orders.csv"] = toCsv([["order_id", "order_date", "cafe", "product", "quantity", "source"], ...withDups]);
-  key.orders = {
-    rowsInExport: withDups.length,
-    duplicateIds: [...dupIdx].sort((a, b) => a - b).map((i) => rows[i][0]),
-    ambiguousPhoneIds: ambiguous,
-    quantityWordIds: [...wordRows],
-    clean: orders.map((o) => ({ order_id: o.id, order_date: iso(o.date), cafe: o.cafe.name, product: bySlug[o.product].name, quantity: o.qty })),
-  };
-
-  files["customers/cafes.csv"] = toCsv([["account", "cafe", "area", "pays_within_days"], ...CAFES.map((c) => [c.account, c.name, c.area, c.payDays])]);
-  key.cafes = CAFES.map((c) => c.name);
-
-  // Price list, with three planted faults.
-  const priceRows = PRODUCTS.map((p) => {
-    let name = p.name, unit = "each", shop: number = p.shop, wholesale: number = p.wholesale;
-    if (p.slug === PRICE_FAULTS.pence.slug) shop = PRICE_FAULTS.pence.wrongShop;
-    if (p.slug === PRICE_FAULTS.typo.slug) name = PRICE_FAULTS.typo.wrongName;
-    if (p.slug === PRICE_FAULTS.unit.slug) { unit = PRICE_FAULTS.unit.unit; shop = +(p.shop * 12).toFixed(2); wholesale = +(p.wholesale * 12).toFixed(2); }
-    return [name, unit, shop, wholesale];
-  });
-  files["prices/price-list.xlsx"] = writeXlsx([["product", "unit", "shop_price", "wholesale_price"], ...priceRows], "Prices");
-  key.prices = {
-    clean: PRODUCTS.map((p) => ({ product: p.name, unit: "each", shop_price: p.shop, wholesale_price: p.wholesale })),
-    fixed: [bySlug[PRICE_FAULTS.pence.slug].name, bySlug[PRICE_FAULTS.typo.slug].name, bySlug[PRICE_FAULTS.unit.slug].name],
-    wrongName: PRICE_FAULTS.typo.wrongName,
-  };
-
-  // Purchase orders and supplier invoices.
-  const poRows: (string | number)[][] = [];
-  const invoices: { number: string; po: string; date: Date; supplier: (typeof SUPPLIERS)[number]; qty: number; price: number }[] = [];
-  const counts: Record<string, number> = { MM: 6, FD: 6, HL: 6, KP: 5 };
-  let po = 3001;
-  const invDays = workdays("2026-08-03", "2026-10-30");
-  const plan: { s: (typeof SUPPLIERS)[number]; i: number }[] = [];
-  for (const s of SUPPLIERS) for (let i = 0; i < counts[s.code]; i++) plan.push({ s, i });
-  plan.sort((a, b) => a.i - b.i || a.s.code.localeCompare(b.s.code));
-  const invNum: Record<string, number> = { MM: 4410, FD: 2201, HL: 870, KP: 15020 };
-  plan.forEach(({ s, i }, k) => {
-    const date = invDays[Math.floor(((k + 0.5) / plan.length) * invDays.length)];
-    const qty = pick(s.qty);
-    const poNo = `PO-${po++}`;
-    poRows.push([poNo, iso(date), s.name, s.item, qty, s.unit, money(s.price)]);
-    let billQty = qty, price = s.price;
-    if (s.code === "FD" && i >= 3) price = +(s.price * 1.04).toFixed(2); // butter creep, last three invoices
-    if (s.code === "HL" && i === 3) billQty = qty - 60; // short delivery: billed and sent 60 fewer
-    const d2 = new Date(date.getTime() + 2 * 86400000);
-    invoices.push({ number: `${s.code}-${invNum[s.code]++}`, po: poNo, date: d2, supplier: s, qty: billQty, price });
-  });
-  // One butter invoice sent twice under a new number.
-  const first = invoices.find((x) => x.supplier.code === "FD" && x.number.endsWith("2202"))!;
-  const dup = { ...first, number: `FD-${invNum.FD++}`, date: new Date(first.date.getTime() + 9 * 86400000) };
-  invoices.push(dup);
-  files["purchase-orders/purchase-orders.csv"] = toCsv([["po_number", "order_date", "supplier", "item", "quantity", "unit", "agreed_price"], ...poRows]);
-  for (const inv of invoices) {
-    const total = +(inv.qty * inv.price).toFixed(2);
-    files[`invoices/${inv.number}.pdf`] = textPdf([
-      { text: inv.supplier.name, size: 18, bold: true },
-      { text: "INVOICE", size: 14, bold: true },
-      { text: `Invoice number: ${inv.number}` },
-      { text: `Invoice date: ${wordy(inv.date)}` },
-      { text: "Bill to: Wren Street Bakery, 14 Wren Street" },
-      { text: `Your order: ${inv.po}` },
-      { text: " " },
-      { text: "Item                          Qty        Unit price     Total", bold: true },
-      { text: `${inv.supplier.item.padEnd(30)}${String(inv.qty).padEnd(11)}GBP ${money(inv.price).padEnd(10)} GBP ${money(total)}` },
-      { text: " " },
-      { text: `Amount due: GBP ${money(total)}`, bold: true },
-      { text: "Payment within 30 days. Thank you for your custom." },
-    ]);
-  }
-  const fd = invoices.filter((x) => x.supplier.code === "FD" && x !== dup);
-  const hl = invoices.filter((x) => x.supplier.code === "HL");
-  key.invoices = {
-    count: invoices.length,
-    duplicatePair: [first.number, dup.number],
-    priceAbovePo: fd.slice(3).map((x) => x.number),
-    shortDelivery: [hl[3].number],
-    clean: invoices.filter((x) => x !== dup && !fd.slice(3).includes(x) && x !== hl[3]).map((x) => x.number),
-  };
-
-  // Recipes, the bakery's allergen words, and the old labels (one is out of date).
-  for (const p of PRODUCTS) {
-    const changes = p.slug === "multigrain-loaf" ? "\n## Changes\n\n- The top is now rolled in sesame seeds. Customers liked the crunch.\n" : "";
-    files[`recipes/${p.slug}.md`] = `# ${p.name}\n\n## Ingredients\n\n${p.ingredients.map((i) => `- ${i}`).join("\n")}\n\n## Method\n\n${p.method}\n${changes}`;
-    files[`labels/${p.slug}.md`] = `# ${p.name}\n\nPrice: £${money(p.shop)}\n\nContains: ${p.labelAllergens.join(", ")}\n\nChecked by:\n`;
-  }
-  files["allergens/allergen-list.csv"] = toCsv([["allergen", "look_for"], ...ALLERGEN_WORDS.map((a) => [a.allergen, a.look_for])]);
-  key.labels = Object.fromEntries(PRODUCTS.map((p) => [p.slug, { name: p.name, allergens: p.allergens }]));
-  key.labelOutOfDate = "multigrain-loaf";
-
-  // The menu on the shop wall.
-  files["menu/menu.md"] = `# Wren Street Bakery\n\n## Bread\n\n${PRODUCTS.slice(0, 4).map((p) => `- ${p.name}: £${money(MENU_WRONG[p.slug] ?? p.shop)}`).join("\n")}\n- ${PRODUCTS[11].name}: £${money(PRODUCTS[11].shop)}\n\n## Pastries and bakes\n\n${PRODUCTS.slice(4, 11).map((p) => `- ${p.name}: £${money(MENU_WRONG[p.slug] ?? p.shop)}`).join("\n")}\n`;
-  key.menuWrong = Object.fromEntries(Object.entries(MENU_WRONG).map(([s, v]) => [bySlug[s].name, { menu: v, list: bySlug[s].shop }]));
-
-  // The till: shop sales and waste, the system of record for reports.
-  const tillRows: (string | number)[][] = [];
-  const totals = { sold: 0, waste: 0, takings: 0 };
-  for (const d of (() => { const out: Date[] = []; for (let t = Date.UTC(2026, 9, 5); t <= Date.UTC(2026, 10, 1); t += 86400000) out.push(new Date(t)); return out; })()) {
-    if (d.getUTCDay() === 1) continue; // the shop is shut one day a week
-    for (const p of PRODUCTS) {
-      const baked = 8 + Math.floor(rand() * 20);
-      const waste = Math.floor(rand() * 4);
-      const sold = baked - waste;
-      tillRows.push([iso(d), p.name, baked, sold, waste, money(sold * p.shop)]);
-      totals.sold += sold; totals.waste += waste; totals.takings += sold * p.shop;
     }
   }
-  files["till/sales.csv"] = toCsv([["date", "product", "baked", "sold", "waste", "takings"], ...tillRows]);
-  files["till/README.md"] = "# The till\n\nThe till writes `sales.csv` at closing time. One row for each product on each day the shop is open.\n\nNobody edits this file by hand. It is the record of what really sold.\n";
-  key.till = { rows: tillRows.length, sold: totals.sold, waste: totals.waste, takings: +totals.takings.toFixed(2) };
+  return orders;
+}
 
-  files["notes/owner-notes.md"] = `# Notes from Jess (owner)
+function dateAsTyped(order: Order): string {
+  if (order.source === "web") return isoDate(order.date);
+  if (order.source === "phone") return dayFirstDate(order.date);
+  return wordyDate(order.date);
+}
+
+// Some orders spell the cafe another way. Each cafe works through its other spellings in turn.
+function cafeAsTyped(order: Order, random: Random, timesMisspelt: Record<string, number>) {
+  const cafe = order.cafe;
+  const typedAnotherWay = cafe.spellings.length > 1 && random() < 0.45;
+  if (!typedAnotherWay) return cafe.name;
+  const times = (timesMisspelt[cafe.account] ?? 0) + 1;
+  timesMisspelt[cafe.account] = times;
+  return cafe.spellings[1 + (times % (cafe.spellings.length - 1))];
+}
+
+// Turn each order into a row the way a person typed it: mixed dates, spellings and words.
+function typeOrders(orders: Order[], random: Random) {
+  const rows: Row[] = [];
+  const quantityWordIds = new Set<string>();
+  const timesMisspelt: Record<string, number> = {};
+  for (const order of orders) {
+    const date = dateAsTyped(order);
+    const cafeName = cafeAsTyped(order, random, timesMisspelt);
+    let quantity: Cell = order.quantity;
+    const quantityWord = QTY_WORDS[order.quantity];
+    if (order.source !== "web" && quantityWord && random() < 0.35) {
+      quantity = quantityWord;
+      quantityWordIds.add(order.id);
+    }
+    const productName = PRODUCT_BY_SLUG[order.product].name;
+    rows.push([order.id, date, cafeName, productName, quantity, order.source]);
+  }
+  return { rows, quantityWordIds: [...quantityWordIds] };
+}
+
+// Nine rows exported twice, exactly the same. Each copy turns up a few rows after the first.
+function addDuplicateRows(rows: Row[], random: Random) {
+  const duplicateIndexes = new Set<number>();
+  while (duplicateIndexes.size < 9) duplicateIndexes.add(Math.floor(random() * rows.length));
+  const exported: Row[] = [];
+  const copiesWaiting: Record<number, Row[]> = {};
+  rows.forEach((row, i) => {
+    exported.push(row, ...(copiesWaiting[i] ?? []));
+    if (duplicateIndexes.has(i)) {
+      const laterIndex = Math.min(i + 3 + Math.floor(random() * 20), rows.length - 1);
+      copiesWaiting[laterIndex] ??= [];
+      copiesWaiting[laterIndex].push([...row]);
+    }
+  });
+  const sortedIndexes = [...duplicateIndexes].sort((first, second) => first - second);
+  const duplicateIds = sortedIndexes.map((i) => rows[i][0]);
+  return { exported, duplicateIds };
+}
+
+// The key's column names match the CSV a learner writes.
+function cleanOrder(order: Order) {
+  return {
+    // biome-ignore lint/style/useNamingConvention: matches the order_id column in the CSV
+    order_id: order.id,
+    // biome-ignore lint/style/useNamingConvention: matches the order_date column in the CSV
+    order_date: isoDate(order.date),
+    cafe: order.cafe.name,
+    product: PRODUCT_BY_SLUG[order.product].name,
+    quantity: order.quantity,
+  };
+}
+
+function buildOrders(random: Random, files: Files) {
+  const orders = makeOrders(random);
+  // A phone date with a day of 12 or less can be read with day and month swapped.
+  const ambiguousOrders = orders.filter(
+    (order) => order.source === "phone" && order.date.getUTCDate() <= 12,
+  );
+  const ambiguousPhoneIds = ambiguousOrders.map((order) => order.id);
+  if (ambiguousPhoneIds.length < 5) {
+    throw new Error("not enough ambiguous phone dates; change the seed");
+  }
+  const { rows, quantityWordIds } = typeOrders(orders, random);
+  const { exported, duplicateIds } = addDuplicateRows(rows, random);
+  files["orders/wholesale-orders.csv"] = toCsv([
+    ["order_id", "order_date", "cafe", "product", "quantity", "source"],
+    ...exported,
+  ]);
+  return {
+    rowsInExport: exported.length,
+    duplicateIds,
+    ambiguousPhoneIds,
+    quantityWordIds,
+    clean: orders.map(cleanOrder),
+  };
+}
+
+// ---- Cafes and the price list. ----
+
+function buildCafes(files: Files): string[] {
+  files["customers/cafes.csv"] = toCsv([
+    ["account", "cafe", "area", "pays_within_days"],
+    ...CAFES.map((cafe) => [cafe.account, cafe.name, cafe.area, cafe.payDays]),
+  ]);
+  return CAFES.map((cafe) => cafe.name);
+}
+
+// One row of the price list, with the three planted faults put in.
+function priceRow(product: Product): Row {
+  let name = product.name;
+  let unit = "each";
+  let shop = product.shop;
+  let wholesale = product.wholesale;
+  if (product.slug === PRICE_FAULTS.pence.slug) shop = PRICE_FAULTS.pence.wrongShop;
+  if (product.slug === PRICE_FAULTS.typo.slug) name = PRICE_FAULTS.typo.wrongName;
+  if (product.slug === PRICE_FAULTS.unit.slug) {
+    unit = PRICE_FAULTS.unit.unit;
+    shop = Number((product.shop * 12).toFixed(2));
+    wholesale = Number((product.wholesale * 12).toFixed(2));
+  }
+  return [name, unit, shop, wholesale];
+}
+
+function cleanPrice(product: Product) {
+  return {
+    product: product.name,
+    unit: "each",
+    // biome-ignore lint/style/useNamingConvention: matches the shop_price column in the price list
+    shop_price: product.shop,
+    // biome-ignore lint/style/useNamingConvention: matches the wholesale_price column
+    wholesale_price: product.wholesale,
+  };
+}
+
+function buildPrices(files: Files) {
+  files["prices/price-list.xlsx"] = writeXlsx(
+    [["product", "unit", "shop_price", "wholesale_price"], ...PRODUCTS.map(priceRow)],
+    "Prices",
+  );
+  return {
+    clean: PRODUCTS.map(cleanPrice),
+    fixed: [
+      PRODUCT_BY_SLUG[PRICE_FAULTS.pence.slug].name,
+      PRODUCT_BY_SLUG[PRICE_FAULTS.typo.slug].name,
+      PRODUCT_BY_SLUG[PRICE_FAULTS.unit.slug].name,
+    ],
+    wrongName: PRICE_FAULTS.typo.wrongName,
+  };
+}
+
+// ---- Purchase orders and supplier invoices. ----
+
+type Invoice = {
+  number: string;
+  purchaseOrder: string;
+  date: Date;
+  supplier: Supplier;
+  quantity: number;
+  price: number;
+};
+
+// Which supplier is ordered from, in what order. "turn" counts that supplier's earlier orders.
+function orderPlan() {
+  const plan: { supplier: Supplier; turn: number }[] = [];
+  for (const supplier of SUPPLIERS) {
+    for (let turn = 0; turn < supplier.ordersPerQuarter; turn++) plan.push({ supplier, turn });
+  }
+  // Take turns: every supplier's first order, then every supplier's second order, and so on.
+  plan.sort(
+    (first, second) =>
+      first.turn - second.turn || first.supplier.code.localeCompare(second.supplier.code),
+  );
+  return plan;
+}
+
+// What the supplier billed. Two invoices hold a planted fault.
+function billed(supplier: Supplier, turn: number, quantity: number) {
+  // Butter creeps up 4% on the last three invoices.
+  if (supplier.code === "FD" && turn >= 3) {
+    return { quantity, price: Number((supplier.price * 1.04).toFixed(2)) };
+  }
+  // A short delivery: the fourth egg order was billed and sent 60 fewer.
+  if (supplier.code === "HL" && turn === 3) {
+    return { quantity: quantity - 60, price: supplier.price };
+  }
+  return { quantity, price: supplier.price };
+}
+
+function makePurchases(random: Random) {
+  const plan = orderPlan();
+  const days = workdays("2026-08-03", "2026-10-30");
+  const nextInvoiceNumber: Record<string, number> = Object.fromEntries(
+    SUPPLIERS.map((supplier) => [supplier.code, supplier.firstInvoiceNumber]),
+  );
+  const purchaseRows: Row[] = [];
+  const invoices: Invoice[] = [];
+  plan.forEach(({ supplier, turn }, position) => {
+    // Spread the orders evenly across the quarter.
+    const date = days[Math.floor(((position + 0.5) / plan.length) * days.length)];
+    const quantity = pickOne(random, supplier.quantities);
+    const purchaseOrder = `PO-${3001 + position}`;
+    const agreedPrice = money(supplier.price);
+    const { name, item, unit } = supplier;
+    purchaseRows.push([purchaseOrder, isoDate(date), name, item, quantity, unit, agreedPrice]);
+    const bill = billed(supplier, turn, quantity);
+    invoices.push({
+      number: `${supplier.code}-${nextInvoiceNumber[supplier.code]}`,
+      purchaseOrder,
+      date: addDays(date, 2),
+      supplier,
+      quantity: bill.quantity,
+      price: bill.price,
+    });
+    nextInvoiceNumber[supplier.code]++;
+  });
+  return { purchaseRows, invoices, nextInvoiceNumber };
+}
+
+function invoicePdf(invoice: Invoice): Uint8Array {
+  const total = Number((invoice.quantity * invoice.price).toFixed(2));
+  const item = invoice.supplier.item.padEnd(30);
+  const quantity = String(invoice.quantity).padEnd(11);
+  const unitPrice = money(invoice.price).padEnd(10);
+  return textPdf([
+    { text: invoice.supplier.name, size: 18, bold: true },
+    { text: "INVOICE", size: 14, bold: true },
+    { text: `Invoice number: ${invoice.number}` },
+    { text: `Invoice date: ${wordyDate(invoice.date)}` },
+    { text: "Bill to: Wren Street Bakery, 14 Wren Street" },
+    { text: `Your order: ${invoice.purchaseOrder}` },
+    { text: " " },
+    { text: "Item                          Qty        Unit price     Total", bold: true },
+    { text: `${item}${quantity}GBP ${unitPrice} GBP ${money(total)}` },
+    { text: " " },
+    { text: `Amount due: GBP ${money(total)}`, bold: true },
+    { text: "Payment within 30 days. Thank you for your custom." },
+  ]);
+}
+
+function buildInvoices(random: Random, files: Files) {
+  const { purchaseRows, invoices, nextInvoiceNumber } = makePurchases(random);
+  // One butter invoice sent twice under a new number.
+  const first = invoices.find(
+    (invoice) => invoice.supplier.code === "FD" && invoice.number.endsWith("2202"),
+  );
+  if (!first) throw new Error("the butter invoice FD-2202 is missing; check SUPPLIERS");
+  const duplicate = {
+    ...first,
+    number: `FD-${nextInvoiceNumber.FD}`,
+    date: addDays(first.date, 9),
+  };
+  invoices.push(duplicate);
+  files["purchase-orders/purchase-orders.csv"] = toCsv([
+    ["po_number", "order_date", "supplier", "item", "quantity", "unit", "agreed_price"],
+    ...purchaseRows,
+  ]);
+  for (const invoice of invoices) files[`invoices/${invoice.number}.pdf`] = invoicePdf(invoice);
+  const butter = invoices.filter(
+    (invoice) => invoice.supplier.code === "FD" && invoice !== duplicate,
+  );
+  const eggs = invoices.filter((invoice) => invoice.supplier.code === "HL");
+  const priceAbovePo = butter.slice(3);
+  const shortDelivery = eggs[3];
+  const clean = invoices.filter(
+    (invoice) =>
+      invoice !== duplicate && !priceAbovePo.includes(invoice) && invoice !== shortDelivery,
+  );
+  return {
+    count: invoices.length,
+    duplicatePair: [first.number, duplicate.number],
+    priceAbovePo: priceAbovePo.map((invoice) => invoice.number),
+    shortDelivery: [shortDelivery.number],
+    clean: clean.map((invoice) => invoice.number),
+  };
+}
+
+// ---- Recipes, the bakery's allergen words, and the old labels (one is out of date). ----
+
+const LABEL_OUT_OF_DATE = "multigrain-loaf";
+const RECIPE_CHANGE =
+  "\n## Changes\n\n- The top is now rolled in sesame seeds. Customers liked the crunch.\n";
+
+function recipeFile(product: Product): string {
+  const changes = product.slug === LABEL_OUT_OF_DATE ? RECIPE_CHANGE : "";
+  const ingredients = product.ingredients.map((ingredient) => `- ${ingredient}`).join("\n");
+  const method = `## Method\n\n${product.method}\n${changes}`;
+  return `# ${product.name}\n\n## Ingredients\n\n${ingredients}\n\n${method}`;
+}
+
+function labelFile(product: Product): string {
+  const price = `Price: £${money(product.shop)}`;
+  const contains = `Contains: ${product.labelAllergens.join(", ")}`;
+  return `# ${product.name}\n\n${price}\n\n${contains}\n\nChecked by:\n`;
+}
+
+function buildRecipesAndLabels(files: Files) {
+  for (const product of PRODUCTS) {
+    files[`recipes/${product.slug}.md`] = recipeFile(product);
+    files[`labels/${product.slug}.md`] = labelFile(product);
+  }
+  files["allergens/allergen-list.csv"] = toCsv([
+    ["allergen", "look_for"],
+    ...ALLERGEN_WORDS.map((word) => [word.allergen, word.lookFor]),
+  ]);
+  return Object.fromEntries(
+    PRODUCTS.map((product) => [product.slug, { name: product.name, allergens: product.allergens }]),
+  );
+}
+
+// ---- The menu on the shop wall. ----
+
+function menuLine(product: Product): string {
+  return `- ${product.name}: £${money(MENU_WRONG[product.slug] ?? product.shop)}`;
+}
+
+function buildMenu(files: Files) {
+  const breads = PRODUCTS.slice(0, 4).map(menuLine).join("\n");
+  // Focaccia is listed last in PRODUCTS but hangs with the breads on the wall.
+  const focaccia = PRODUCTS[11];
+  const focacciaLine = `- ${focaccia.name}: £${money(focaccia.shop)}`;
+  const pastries = PRODUCTS.slice(4, 11).map(menuLine).join("\n");
+  files["menu/menu.md"] =
+    `# Wren Street Bakery\n\n## Bread\n\n${breads}\n${focacciaLine}\n\n` +
+    `## Pastries and bakes\n\n${pastries}\n`;
+  const wrongPrices = Object.entries(MENU_WRONG).map(([slug, menuPrice]) => {
+    const product = PRODUCT_BY_SLUG[slug];
+    return [product.name, { menu: menuPrice, list: product.shop }];
+  });
+  return Object.fromEntries(wrongPrices);
+}
+
+// ---- The till: shop sales and waste, the system of record for reports. ----
+
+const TILL_README =
+  "# The till\n\n" +
+  "The till writes `sales.csv` at closing time. " +
+  "One row for each product on each day the shop is open.\n\n" +
+  "Nobody edits this file by hand. It is the record of what really sold.\n";
+
+function everyDay(firstTime: number, lastTime: number): Date[] {
+  const days: Date[] = [];
+  for (let time = firstTime; time <= lastTime; time += ONE_DAY) days.push(new Date(time));
+  return days;
+}
+
+function buildTill(random: Random, files: Files) {
+  const tillRows: Row[] = [];
+  const totals = { sold: 0, waste: 0, takings: 0 };
+  for (const day of everyDay(Date.UTC(2026, 9, 5), Date.UTC(2026, 10, 1))) {
+    // The shop is shut on Mondays.
+    if (day.getUTCDay() === 1) continue;
+    for (const product of PRODUCTS) {
+      const baked = 8 + Math.floor(random() * 20);
+      const waste = Math.floor(random() * 4);
+      const sold = baked - waste;
+      tillRows.push([isoDate(day), product.name, baked, sold, waste, money(sold * product.shop)]);
+      totals.sold += sold;
+      totals.waste += waste;
+      totals.takings += sold * product.shop;
+    }
+  }
+  files["till/sales.csv"] = toCsv([
+    ["date", "product", "baked", "sold", "waste", "takings"],
+    ...tillRows,
+  ]);
+  files["till/README.md"] = TILL_README;
+  return {
+    rows: tillRows.length,
+    sold: totals.sold,
+    waste: totals.waste,
+    takings: Number(totals.takings.toFixed(2)),
+  };
+}
+
+// ---- Notes, the folder's README, and the empty out/ folder. ----
+
+const OWNER_NOTES = `# Notes from Jess (owner)
 
 ## How we write
 
@@ -211,7 +522,7 @@ export function build(seed = 7) {
 - Never delete anything. Make a new file in out/ instead.
 `;
 
-  files["README.md"] = `# Wren Street Bakery
+const FOLDER_README = `# Wren Street Bakery
 
 This is the bakery's shared folder. It is made-up data for practice.
 
@@ -230,24 +541,59 @@ This is the bakery's shared folder. It is made-up data for practice.
 | notes/ | Notes from Jess, the owner |
 | out/ | Put new files here |
 `;
-  files["package.json"] = JSON.stringify({ private: true, scripts: { verify: "bun ../scripts/verify.ts" } }, null, 2) + "\n";
-  files["out/.keep"] = "";
 
+// Lets a learner type "bun run verify" from inside the bakery folder.
+const PACKAGE_JSON = { private: true, scripts: { verify: "bun ../scripts/verify.ts" } };
+
+function addNotesAndReadme(files: Files) {
+  files["notes/owner-notes.md"] = OWNER_NOTES;
+  files["README.md"] = FOLDER_README;
+  files["package.json"] = `${JSON.stringify(PACKAGE_JSON, null, 2)}\n`;
+  files["out/.keep"] = "";
+}
+
+// Make every file of the bakery folder, and the answer key that says what is planted in them.
+export function build(seed = 7) {
+  const random = makeRandom(seed);
+  const files: Files = {};
+  const orders = buildOrders(random, files);
+  const cafes = buildCafes(files);
+  const prices = buildPrices(files);
+  const invoices = buildInvoices(random, files);
+  const labels = buildRecipesAndLabels(files);
+  const menuWrong = buildMenu(files);
+  const till = buildTill(random, files);
+  addNotesAndReadme(files);
+  const key = {
+    seed,
+    orders,
+    cafes,
+    prices,
+    invoices,
+    labels,
+    labelOutOfDate: LABEL_OUT_OF_DATE,
+    menuWrong,
+    till,
+  };
   return { files, key };
 }
 
-export function writeSeed(dir: string, files: Record<string, string | Uint8Array>) {
-  rmSync(dir, { recursive: true, force: true });
-  for (const [rel, body] of Object.entries(files)) {
-    const p = join(dir, rel);
-    mkdirSync(dirname(p), { recursive: true });
-    writeFileSync(p, body);
+export function writeSeed(folder: string, files: Files) {
+  rmSync(folder, { recursive: true, force: true });
+  for (const [relativePath, contents] of Object.entries(files)) {
+    const fullPath = join(folder, relativePath);
+    mkdirSync(dirname(fullPath), { recursive: true });
+    writeFileSync(fullPath, contents);
   }
 }
 
 if (import.meta.main) {
   const { files, key } = build(Number(process.argv[2] ?? 7));
   writeSeed(SEED_DIR, files);
-  writeFileSync(KEY_PATH, JSON.stringify(key, null, 2) + "\n");
-  console.log(`Built the seed: ${Object.keys(files).length} files, ${key.orders.clean.length} orders, ${key.invoices.count} invoices.`);
+  writeFileSync(KEY_PATH, `${JSON.stringify(key, null, 2)}\n`);
+  const fileCount = Object.keys(files).length;
+  const orderCount = key.orders.clean.length;
+  console.log(
+    `Built the seed: ${fileCount} files, ${orderCount} orders, ${key.invoices.count} invoices.`,
+  );
 }

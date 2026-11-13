@@ -4,7 +4,7 @@
 
 Jess owns Wren Street Bakery. She has one shop and sells bread to six cafes.
 
-Each Friday close takes her most of the morning. She fixes the order sheet by hand. She checks each bill. She writes the labels and the report.
+Each Friday close takes her most of the morning. She fixes the order sheet line by line. She checks each bill. She writes the labels and the report.
 
 You will learn to hand this work to Claude, and to check what it made. But first, you need to know your own reason to be here.
 
@@ -20,6 +20,8 @@ I want Claude to [the task you do by hand at work].
 ```
 
 Claude will ask before it makes the file. Read what it will write. Then say yes.
+
+For example, Jess would save: "I want Claude to check each supplier bill against my orders."
 
 Do not use the example on this page. Use your own task. You will come back to this sentence at the end of the course.
 
@@ -40,11 +42,11 @@ Expect: `Done. All 5 rules pass.`
 
 ## If you get stuck
 
-| What you see | Try this |
-|---|---|
-| `FAIL the bakery folder wren-street/ is there` | Run `bun run world` first. |
-| `FAIL it holds one sentence of 6 words or more` | Write one full sentence. End it with a full stop. |
-| `FAIL the sentence is your own, not the example` | Name a task from your own job. |
+| What you see                                               | Try this                                           |
+| ---------------------------------------------------------- | -------------------------------------------------- |
+| `FAIL the bakery folder wren-street/ is there`             | Run `bun run world` first.                         |
+| `FAIL it holds one sentence of 6 words or more`            | Write one full sentence. End it with a full stop.  |
+| `FAIL the sentence is your own, not the example`           | Name a task from your own job.                     |
 | `FAIL every original bakery file is the same as the start` | Run `bun run world status`. It shows what changed. |
 
 ## Words you will use
