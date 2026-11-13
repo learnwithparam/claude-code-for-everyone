@@ -23,8 +23,8 @@ import type { Rule } from "../scripts/verify";
 import { writeSeed } from "../world/build";
 import { BAKERY, bakeryRule, ROOT, workFolder } from "./lib/bakery";
 
-// The steps the Friday close does. A step whose check is not in the course yet is skipped.
-const CLOSE_STEPS = [
+// The steps the Friday close does. A step whose check is not in the course yet gets no rule.
+const PLANNED_CLOSE_STEPS = [
   "read-the-folder",
   "clean-the-orders",
   "fix-the-price-list",
@@ -33,6 +33,9 @@ const CLOSE_STEPS = [
   "write-the-monday-report",
   "publish-the-menu-page",
 ];
+const CLOSE_STEPS = PLANNED_CLOSE_STEPS.filter((step) =>
+  existsSync(join(ROOT, "checks", `${step}.ts`)),
+);
 const CLOSE_SKILL = ".claude/skills/friday-close/SKILL.md";
 const NOT_COPIED = new Set([".git", "node_modules"]);
 
@@ -69,9 +72,8 @@ function closeResults(folder: string): Record<string, string[]> {
   const learnerFolder = nextCloseFolder(folder);
   const saved = resultsByFolder.get(learnerFolder);
   if (saved) return saved;
-  const steps = CLOSE_STEPS.filter((step) => existsSync(join(ROOT, "checks", `${step}.ts`)));
   const { course, bakery } = courseForNextClose(learnerFolder);
-  const run = spawnSync("bun", [join(course, "rerun.ts"), ...steps], {
+  const run = spawnSync("bun", [join(course, "rerun.ts"), ...CLOSE_STEPS], {
     cwd: course,
     encoding: "utf8",
     // biome-ignore lint/style/useNamingConvention: environment variable names are in capitals.
@@ -88,10 +90,7 @@ function closeResults(folder: string): Record<string, string[]> {
 function passesAgain(step: string): Rule {
   return {
     says: `${step} passes again on the next close`,
-    test: (folder) => {
-      if (!existsSync(join(ROOT, "checks", `${step}.ts`))) return true;
-      return closeResults(folder)[step]?.length === 0;
-    },
+    test: (folder) => closeResults(folder)[step]?.length === 0,
     tryNext: `read the ${step} page for what its file needs, fix the skill, and run it again`,
   };
 }

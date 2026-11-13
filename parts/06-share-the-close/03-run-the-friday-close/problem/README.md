@@ -59,7 +59,7 @@ For example, the new orders have a different count of rows. A skill that wrote t
 bun run verify run-the-friday-close
 ```
 
-Expect: `Done. All 10 rules pass.`
+Expect: `Done. All 7 rules pass.`
 
 ![The check passes](../images/expected.png)
 
