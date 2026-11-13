@@ -1,6 +1,6 @@
 # Parts mapped onto formats. Content never names a time; only this file does.
 # Minutes per part: orientation 20, make-claude-ask-first 65, teach-the-bakery 60, undo-anything 35,
-# repeat-the-work 45, connect-and-schedule 75, share-the-close 85. Total 385.
+# repeat-the-work 45, connect-and-schedule 75, share-the-close 85, ask-questions-of-your-files 20. Total 405.
 
 [one-day]
 sessions = [
@@ -8,6 +8,7 @@ sessions = [
   { parts = ["teach-the-bakery", "undo-anything"], minutes = 100 },
   { parts = ["repeat-the-work", "connect-and-schedule"], minutes = 125 },
   { parts = ["share-the-close"], minutes = 90 },
+  { parts = ["ask-questions-of-your-files"], minutes = 20 },
 ]
 
 [four-evenings]
@@ -16,6 +17,7 @@ sessions = [
   { parts = ["teach-the-bakery", "undo-anything"], minutes = 100 },
   { parts = ["repeat-the-work", "connect-and-schedule"], minutes = 125 },
   { parts = ["share-the-close"], minutes = 90 },
+  { parts = ["ask-questions-of-your-files"], minutes = 20 },
 ]
 
 [five-weeks]
@@ -25,4 +27,5 @@ sessions = [
   { parts = ["undo-anything", "repeat-the-work"], minutes = 85 },
   { parts = ["connect-and-schedule"], minutes = 75 },
   { parts = ["share-the-close"], minutes = 90 },
+  { parts = ["ask-questions-of-your-files"], minutes = 20 },
 ]

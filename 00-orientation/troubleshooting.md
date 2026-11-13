@@ -195,3 +195,10 @@ Find the words you see in the first column. Each message any course script can p
 | `⏸ Pending approval (run claude to approve)`                                           | Claude Code found the till connector but you have not said yes. | Start `claude` in `wren-street` and pick **Use this MCP server**.                                                               |
 | `There is no till file at ...`                                                         | The till connector started outside the bakery folder.           | Run `claude mcp add` again from inside `wren-street`.                                                                           |
 | `FAIL  2 or more reports start with a "Made at:" line, like Made at: YYYY-MM-DD HH:MM` | The check did not find this in your work.                       | Ask Claude to change the skill so each run makes a new report with a Made at line.                                              |
+
+## Ask questions of your files
+
+| What you see                                      | What it means                                               | Fix                                                                    |
+| ------------------------------------------------- | ----------------------------------------------------------- | ---------------------------------------------------------------------- |
+| `FAIL  The saved query runs with DuckDB 2.0.0`    | There is no `unmatched.sql`, or DuckDB 2.0.0 cannot run it. | Ask Claude to save `unmatched.sql` in `assignment/starter` and run it. |
+| `FAIL  The mismatch count matches the answer key` | The query lists too many bills or too few.                  | Say what matched means. Only the second bill on an order is a copy.    |

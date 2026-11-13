@@ -6,6 +6,7 @@
   "scripts": {
     "check": "bun scripts/readable.ts && bun scripts/plain-english.ts && bun scripts/check.ts && bun scripts/verify.ts --all && bun scripts/audit.ts",
     "audit": "bun scripts/audit.ts",
+    "assignment": "bun assignment/check.ts",
     "readable": "bun scripts/readable.ts",
     "plain-english": "bun scripts/plain-english.ts",
     "format": "biome check --write .",
