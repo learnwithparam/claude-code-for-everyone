@@ -1,0 +1,7 @@
+.claude/settings.json
+out/.keep
+out/orders-clean.csv
+out/price-changes.md
+out/price-list-clean.xlsx
+out/safety.md
+out/whats-here.md
