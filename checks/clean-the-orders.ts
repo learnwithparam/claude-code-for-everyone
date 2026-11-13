@@ -1,51 +1,108 @@
-// clean-the-orders: a clean copy of the orders export, read against the answer key. The original stays as it was.
+// clean-the-orders: a clean copy of the orders export, read against the answer key.
+// The original stays as it was.
 import type { Rule } from "../scripts/verify";
-import { KEY, bakeryRule, has, originalsUnchanged, text } from "./lib/bakery";
+import { bakeryRule, has, KEY, originalsUnchanged, text } from "./lib/bakery";
 import { csvObjects } from "./lib/csv";
 
 const FILE = "out/orders-clean.csv";
-type Clean = { order_id: string; order_date: string; cafe: string; product: string; quantity: number };
-const want: Record<string, Clean> = Object.fromEntries((KEY.orders.clean as Clean[]).map((o) => [o.order_id, o]));
-const rows = (d: string) => csvObjects(text(d, FILE));
-const COLS = ["order_id", "order_date", "cafe", "product", "quantity"];
+
+// One order as the answer key has it. The names match the CSV column names.
+type CleanOrder = {
+  // biome-ignore lint/style/useNamingConvention: the CSV column is called order_id
+  order_id: string;
+  // biome-ignore lint/style/useNamingConvention: the CSV column is called order_date
+  order_date: string;
+  cafe: string;
+  product: string;
+  quantity: number;
+};
+
+const answerKey: CleanOrder[] = KEY.orders.clean;
+const rightOrders: Record<string, CleanOrder> = Object.fromEntries(
+  answerKey.map((order) => [order.order_id, order]),
+);
+const rightOrderIds = Object.keys(rightOrders);
+const COLUMNS = ["order_id", "order_date", "cafe", "product", "quantity"];
+
+const rows = (folder: string) => csvObjects(text(folder, FILE));
+const orderIds = (folder: string) => rows(folder).map((row) => row.order_id);
+
+function hasTheColumns(folder: string): boolean {
+  const firstRow = rows(folder)[0];
+  return !!firstRow && COLUMNS.every((column) => column in firstRow);
+}
+
+function everyCafeSpelledOneWay(folder: string): boolean {
+  const allRows = rows(folder);
+  const allKnown = allRows.every((row) => KEY.cafes.includes(row.cafe));
+  const differentCafes = new Set(allRows.map((row) => row.cafe));
+  return allKnown && differentCafes.size === KEY.cafes.length;
+}
+
+function noOrderTwice(folder: string): boolean {
+  const ids = orderIds(folder);
+  return new Set(ids).size === ids.length;
+}
+
+function noOrderLost(folder: string): boolean {
+  const ids = new Set(orderIds(folder));
+  return ids.size === rightOrderIds.length && rightOrderIds.every((id) => ids.has(id));
+}
+
+function rightQuantity(row: Record<string, string>): boolean {
+  const isWholeNumber = /^\d+$/.test(row.quantity);
+  return isWholeNumber && Number(row.quantity) === rightOrders[row.order_id]?.quantity;
+}
 
 export default [
   bakeryRule,
-  { says: `${FILE} is there`, test: (d) => has(d, FILE), tryNext: "ask Claude to save the clean orders as out/orders-clean.csv" },
   {
-    says: `it has the columns ${COLS.join(", ")}`,
-    test: (d) => { const r = rows(d)[0]; return !!r && COLS.every((c) => c in r); },
-    tryNext: "keep the same column names as the original file in the first row",
+    says: `${FILE} is there`,
+    test: (folder) => has(folder, FILE),
+    tryNext: "ask Claude to save the clean orders as out/orders-clean.csv",
+  },
+  {
+    says: `it has the columns ${COLUMNS.join(", ")}`,
+    test: hasTheColumns,
+    tryNext: "ask Claude to use the column names of the original file in the first row",
   },
   {
     says: "every date is written YYYY-MM-DD",
-    test: (d) => rows(d).every((r) => /^\d{4}-\d{2}-\d{2}$/.test(r.order_date)),
+    test: (folder) => rows(folder).every((row) => /^\d{4}-\d{2}-\d{2}$/.test(row.order_date)),
     tryNext: "ask Claude to write every date as year, month, day: YYYY-MM-DD",
   },
   {
     says: "every date is the right date (phone orders are day first)",
-    test: (d) => rows(d).every((r) => want[r.order_id]?.order_date === r.order_date),
-    tryNext: "phone orders put the day first; read the Dates part of notes/owner-notes.md",
+    test: (folder) =>
+      rows(folder).every((row) => rightOrders[row.order_id]?.order_date === row.order_date),
+    tryNext:
+      "phone orders put the day first; ask Claude to read the Dates part of notes/owner-notes.md",
   },
   {
     says: `each cafe has one spelling, from customers/cafes.csv (${KEY.cafes.length} cafes)`,
-    test: (d) => { const r = rows(d); return r.every((x) => KEY.cafes.includes(x.cafe)) && new Set(r.map((x) => x.cafe)).size === KEY.cafes.length; },
+    test: everyCafeSpelledOneWay,
     tryNext: "ask Claude to use the exact names in customers/cafes.csv for every row",
   },
   {
     says: "no order is in the file twice",
-    test: (d) => { const ids = rows(d).map((r) => r.order_id); return new Set(ids).size === ids.length; },
+    test: noOrderTwice,
     tryNext: "ask Claude to remove rows that are exact copies, keeping one of each",
   },
   {
-    says: `no real order was lost (${Object.keys(want).length} orders)`,
-    test: (d) => { const ids = new Set(rows(d).map((r) => r.order_id)); return ids.size === Object.keys(want).length && Object.keys(want).every((i) => ids.has(i)); },
-    tryNext: "only remove a row when every cell is the same as another row",
+    says: `no real order was lost (${rightOrderIds.length} orders)`,
+    test: noOrderLost,
+    tryNext: "ask Claude to remove a row only when every cell is the same as another row",
   },
   {
     says: "every quantity is a whole number, and the right one",
-    test: (d) => rows(d).every((r) => /^\d+$/.test(r.quantity) && Number(r.quantity) === want[r.order_id]?.quantity),
+    test: (folder) => rows(folder).every(rightQuantity),
     tryNext: 'ask Claude to turn words like "two dozen" into numbers, like 24',
   },
-  { says: "the original orders file is the same as the start", test: originalsUnchanged, tryNext: "make a new file in out/ and leave the original alone; run bun run world reset to get it back" },
+  {
+    says: "the original orders file is the same as the start",
+    test: originalsUnchanged,
+    tryNext:
+      "ask Claude for a new file in out/ and to leave the original alone; " +
+      "run bun run world reset to get it back",
+  },
 ] satisfies Rule[];

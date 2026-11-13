@@ -27,6 +27,8 @@ order_id, order_date, cafe, product, quantity.
 Before you start, tell me every problem you see in the file.
 ```
 
+For example, the phone order `WS-1001` says `03/08/2026` and `LUMEN CAFE`. The date means the 3rd of August. In the clean copy, the date starts with the year, and the cafe is `Lumen Cafe`.
+
 Read the list of problems. Did Claude find all four kinds? If not, tell it what it missed.
 
 Then run the check. Each FAIL line says what is still wrong. Tell Claude, and run it again.
@@ -52,12 +54,12 @@ Expect: `Done. All 10 rules pass.`
 
 ## If you get stuck
 
-| What you see | Try this |
-|---|---|
-| `FAIL every date is the right date` | Phone orders put the day first. Ask Claude to read the notes again. |
-| `FAIL no real order was lost` | Only drop a row when every cell is the same as another row. |
-| `FAIL every quantity is a whole number` | Ask Claude to turn words into numbers. A dozen is 12. |
-| `FAIL the original orders file is the same as the start` | Run `bun run world reset`. Your old folder is kept. |
+| What you see                                             | Try this                                                            |
+| -------------------------------------------------------- | ------------------------------------------------------------------- |
+| `FAIL every date is the right date`                      | Phone orders put the day first. Ask Claude to read the notes again. |
+| `FAIL no real order was lost`                            | Only drop a row when every cell is the same as another row.         |
+| `FAIL every quantity is a whole number`                  | Ask Claude to turn words into numbers. A dozen is 12.               |
+| `FAIL the original orders file is the same as the start` | Run `bun run world reset`. Your old folder is kept.                 |
 
 ## Words you will use
 

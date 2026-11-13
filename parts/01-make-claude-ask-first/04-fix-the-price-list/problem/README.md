@@ -32,6 +32,8 @@ Prices must be numbers in pounds, for one item. Then write
 out/price-changes.md with one line for each product you changed.
 ```
 
+For example, the list says the Cinnamon Bun costs 280. That is 280 pence. The clean list says 2.8, which is £2.80.
+
 Do not let Claude change a price that was already right. The menu on the wall is not the price list.
 
 ## Done when
@@ -53,11 +55,11 @@ Expect: `Done. All 9 rules pass.`
 
 ## If you get stuck
 
-| What you see | Try this |
-|---|---|
-| `FAIL every price is a number in pounds` | Look for 280. That is pence. Also check that prices are not saved as text. |
-| `FAIL every row is priced for one item` | Find the row that says dozen. Divide its prices by 12. |
-| `FAIL names no product that did not change` | Take out any line about a product that was already right. |
+| What you see                                | Try this                                                                   |
+| ------------------------------------------- | -------------------------------------------------------------------------- |
+| `FAIL every price is a number in pounds`    | Look for 280. That is pence. Also check that prices are not saved as text. |
+| `FAIL every row is priced for one item`     | Find the row that says dozen. Divide its prices by 12.                     |
+| `FAIL names no product that did not change` | Take out any line about a product that was already right.                  |
 
 ## Words you will use
 

@@ -1,0 +1,1 @@
+Run the Friday close with the friday-close skill. Work only in this folder.
