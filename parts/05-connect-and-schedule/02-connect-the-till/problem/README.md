@@ -34,9 +34,9 @@ This makes the file `.mcp.json`. It tells Claude Code how to start the till conn
 claude
 ```
 
-Expect: Claude Code says it found a new MCP server called `till` in `.mcp.json`. Pick **Use this MCP server**.
+Expect: Claude Code says `New MCP server found in this project: till`. Press the up arrow to pick **Use this MCP server**, then press Enter. The marked choice is **Continue without using this MCP server**, so do not just press Enter.
 
-3. Type `/mcp` and press Enter. You see `till` in the list. It says connected. Press Esc.
+3. Type `/mcp` and press Enter. You see `✔ till   3 tools` in the list. The tick means it is connected. Press Esc.
 4. Paste this:
 
 ```text

@@ -41,10 +41,10 @@ Expect: `2.1.314 (Claude Code)` or a bigger number.
 claude
 ```
 
-Expect: Claude asks if you trust the files in this folder. Pick **Yes**.
+Expect: Claude asks if you trust the files in this folder. Press the down arrow to pick **Yes, I trust this folder**, then press Enter. The first choice is **No, exit**.
 
 5. Press **Shift+Tab** a few times. Watch the line under the box where you type. That line is the status bar. Stop when it says `plan mode on`. Copy the words you see.
-6. Press **Shift+Tab** again until the status bar shows no mode. No mode means Manual mode. Claude asks you before each change.
+6. Press **Shift+Tab** again until the status bar says `manual mode on`. Older versions of Claude Code show no mode at all; that is Manual mode too. In Manual mode, Claude asks you before each change.
 7. Paste this, with your own words in the brackets:
 
 ```text
