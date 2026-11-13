@@ -6,7 +6,7 @@ This part moves you toward the course goal: you tell Claude the rules once, and 
 
 Each new chat, Claude forgets the bakery. It does not know that the purchase orders are the truth, or that Jess never wants a cafe emailed. And a wrong answer said with confidence can cost real money.
 
-A bookkeeping firm in Dallas, HireEffect, had a client with a $13,000 gap in its books. The gap was hidden in tens of thousands of PayPal payments. Its COO "used Claude to isolate the exact 16 transactions responsible" ([Anthropic, small business post](https://claude.com/blog/claude-for-small-business-launches-new-workflows-integrations-and-training-programs)).
+A bookkeeping firm in Dallas, HireEffect, had a client with a $13,000 gap in its books. The gap was hidden in tens of thousands of PayPal payments. Its chief operating officer (COO) "used Claude to isolate the exact 16 transactions responsible" ([Anthropic, small business post](https://claude.com/blog/claude-for-small-business-launches-new-workflows-integrations-and-training-programs)).
 
 In this part, you ask Claude to write the house rules once. Then you make Claude show a plan before it touches money. Then it checks 24 supplier bills against what Jess ordered.
 

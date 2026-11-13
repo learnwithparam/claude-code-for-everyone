@@ -31,7 +31,7 @@ rm notes/owner-notes.md
 
 Claude asks before it runs the command. It may warn you. Say yes. The file is gone.
 
-Now type `/rewind` and look. For example, the practice prompt shows no **Restore code**. Claude's file tools never touched the notes, so rewind has nothing to restore.
+Now type `/rewind` and look at the list. For example, you see the prompt "This is a practice. I have a save point." Pick it. You see no **Restore code** for the notes. Claude's file tools never touched the notes, so rewind has nothing to restore.
 
 Now paste this:
 

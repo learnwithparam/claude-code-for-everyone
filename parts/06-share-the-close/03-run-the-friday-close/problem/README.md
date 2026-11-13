@@ -32,7 +32,13 @@ an original file, and never sign a label.
 ```
 
 2. Read the skill. Each step should name the file it writes, like `out/orders-clean.csv`. Say yes. Type `/exit`.
-3. In the course folder, make the new folder. It gets new files and a copy of your setup:
+3. Go back to the course folder. You are in `wren-street`, so go up one folder:
+
+```bash
+cd ..
+```
+
+Expect: no output. Now make the new folder. It gets new files and a copy of your setup:
 
 ```bash
 bun parts/06-share-the-close/next-close.ts
