@@ -23,7 +23,8 @@ Make the file .claude/settings.json in this folder with this in it:
 {
   "permissions": {
     "defaultMode": "default",
-    "blockWritesOutsideWorkingDirectories": true
+    "blockWritesOutsideWorkingDirectories": true,
+    "deny": ["Read(../checks/**)"]
   }
 }
 ```
@@ -31,6 +32,8 @@ Make the file .claude/settings.json in this folder with this in it:
 The word `default` is the name the file uses for Manual mode.
 
 For example, say Claude tries to save a file in your Documents folder. The second rule stops it. Claude can only write inside `wren-street`.
+
+The `deny` line keeps Claude from reading the `checks` folder next to your work. That folder holds the answer key, and a step should pass because you did the work.
 
 Then ask Claude for a short note that says how you work. Paste this:
 

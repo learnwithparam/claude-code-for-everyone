@@ -3,6 +3,7 @@
     "defaultMode": "default",
     "blockWritesOutsideWorkingDirectories": true,
     "deny": [
+      "Read(../checks/**)",
       "Edit(./till/**)",
       "Edit(./purchase-orders/**)",
       "Bash(rm *)"
