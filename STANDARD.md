@@ -48,6 +48,8 @@ schedules.toml           parts mapped onto formats
 | The learner writes no code: every `solution/` has `prompts.md`, and no learner page says to do the work by hand.     | `check.ts` 7       | briefs/build/CLAUDE-CODE.md                          |
 | Code reads like plain English: whole-word names, short lines, short functions. See "Readable code".                  | `readable.ts`      | briefs/build/READABLE.md                             |
 | Pages read plainly at grade 6, with a "For example" on every teaching page. See "Plain English".                     | `plain-english.ts` | briefs/build/READABLE.md                             |
+| Every page passes the text audit at 1280 px and 375 px: no ellipsis, no clipped text, no raw ids, verb-plus-object buttons, guiding errors and empty states, short tooltips, labelled inputs, no model or cost on public pages. | `text-audit.ts`    | UI audit, 13 Nov 2026                                |
+| U14: no sideways scroll at 375 px. `document.documentElement.scrollWidth` is at most the window width.                                                                                                                          | `text-audit.ts` 10 | UI audit, 13 Nov 2026                                |
 
 ## Readable code
 
@@ -96,6 +98,33 @@ Hard to read:
 Easy to read:
 
 > Change the config. Then run `bun run verify`. For example, after you add a rule, the check tells you if it passes.
+
+## Text audit
+
+`bun run text-audit` opens every page in a real browser, at 1280 px and 375 px wide, and runs 10 checks.
+`bun run check` runs it last. In this course the one page is `finished/index.html`, served as plain files.
+
+1. No ellipsis in visible text (U1).
+2. No text clipped by CSS ellipsis or line-clamp (U2).
+3. Buttons say a verb plus an object, in 2 to 5 words (U3, U4).
+4. Errors say what happened and what to do next (U5, U6).
+5. Empty states guide, with a `data-empty-state` message and a link, button or command (U7).
+6. No raw ids, snake_case codes, `undefined` or `null` on screen (U8).
+7. No model name, token count, host or cost on a public page (U9).
+8. Tooltips are 15 words or fewer (U12).
+9. Every input has a visible label (U13).
+10. **U14: no sideways scroll at 375 px.**
+
+Staff pages carry `data-audience="staff"` on `<body>`. Only check 7 skips them.
+
+To use it, copy `e2e/routes.example.ts` to `e2e/routes.ts` and `e2e/states.example.ts` to
+`e2e/states.ts`, then run the app and set `AUDIT_URL` (or `AUDIT_SERVER` to start it). For example:
+
+```bash
+AUDIT_URL=http://localhost:3000 bun run text-audit
+```
+
+Expect: `2 passed` for one route at two widths.
 
 ## Checks test behaviour
 
