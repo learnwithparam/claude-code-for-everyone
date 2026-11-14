@@ -48,6 +48,14 @@ Do not start the check.
 - Every file under Files I will write is in `out/`.
 - No original bakery file has changed.
 
+To check, ask Claude:
+
+```text
+Please check my work for plan-the-invoice-check. Run bun run verify plan-the-invoice-check and tell me what it printed. Do not change anything to make it pass.
+```
+
+It runs:
+
 ```bash
 bun run verify plan-the-invoice-check
 ```

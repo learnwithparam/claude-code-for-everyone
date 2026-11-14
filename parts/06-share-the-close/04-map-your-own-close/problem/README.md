@@ -42,6 +42,14 @@ For example, a person who matches delivery notes to orders writes this check: "E
 - It has a first rule and one check a script could run.
 - No original file has changed.
 
+To check, ask Claude:
+
+```text
+Please check my work for map-your-own-close. Run bun run verify map-your-own-close and tell me what it printed. Do not change anything to make it pass.
+```
+
+It runs:
+
 ```bash
 bun run verify map-your-own-close
 ```

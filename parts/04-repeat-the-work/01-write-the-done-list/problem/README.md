@@ -39,6 +39,14 @@ Make a save point called done-list.
 - One names sesame. One names the sign-off by a person.
 - The done list is in a save point, and no label is in that save point.
 
+To check, ask Claude:
+
+```text
+Please check my work for write-the-done-list. Run bun run verify write-the-done-list and tell me what it printed. Do not change anything to make it pass.
+```
+
+It runs:
+
 ```bash
 bun run verify write-the-done-list
 ```

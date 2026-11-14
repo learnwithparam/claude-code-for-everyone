@@ -51,6 +51,14 @@ Claude asks to run a git command that restores the file. Say yes.
 - A line in `out/undo-log.md` names `owner-notes.md` and says a command deleted it.
 - Every other original file is the same as the start.
 
+To check, ask Claude:
+
+```text
+Please check my work for recover-a-deleted-file. Run bun run verify recover-a-deleted-file and tell me what it printed. Do not change anything to make it pass.
+```
+
+It runs:
+
 ```bash
 bun run verify recover-a-deleted-file
 ```

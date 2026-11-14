@@ -54,6 +54,14 @@ For example, a new person types `/wren-street-kit:allergen-label` for the Browni
 - No skill is inside `.claude-plugin/`.
 - No original file has changed.
 
+To check, ask Claude:
+
+```text
+Please check my work for pack-the-bakery-kit. Run bun run verify pack-the-bakery-kit and tell me what it printed. Do not change anything to make it pass.
+```
+
+It runs:
+
 ```bash
 bun run verify pack-the-bakery-kit
 ```

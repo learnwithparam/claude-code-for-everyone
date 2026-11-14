@@ -41,6 +41,14 @@ For example, the Multigrain Loaf now has sesame on top. Its old label says "glut
 - The page loads no script, style or font from another site.
 - No original file has changed.
 
+To check, ask Claude:
+
+```text
+Please check my work for publish-the-menu-page. Run bun run verify publish-the-menu-page and tell me what it printed. Do not change anything to make it pass.
+```
+
+It runs:
+
 ```bash
 bun run verify publish-the-menu-page
 ```

@@ -44,6 +44,14 @@ Claude will ask before it makes the file. Read it, then say yes.
 - It has a "Questions I have" part with 2 or more questions.
 - No original file has changed.
 
+To check, ask Claude:
+
+```text
+Please check my work for read-the-folder. Run bun run verify read-the-folder and tell me what it printed. Do not change anything to make it pass.
+```
+
+It runs:
+
 ```bash
 bun run verify read-the-folder
 ```

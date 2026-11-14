@@ -53,6 +53,14 @@ For example, the report has a part like this. The cafes come from Jess's notes:
 - The late payers are the two cafes in Jess's notes.
 - No original file has changed.
 
+To check, ask Claude:
+
+```text
+Please check my work for write-the-monday-report. Run bun run verify write-the-monday-report and tell me what it printed. Do not change anything to make it pass.
+```
+
+It runs:
+
 ```bash
 bun run verify write-the-monday-report
 ```

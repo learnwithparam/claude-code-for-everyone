@@ -56,6 +56,14 @@ For example, Claude first calls `till_days`. The till answers with every day the
 - The till's log shows Claude asked the connector for that day.
 - No original file has changed.
 
+To check, ask Claude:
+
+```text
+Please check my work for connect-the-till. Run bun run verify connect-the-till and tell me what it printed. Do not change anything to make it pass.
+```
+
+It runs:
+
 ```bash
 bun run verify connect-the-till
 ```

@@ -44,6 +44,14 @@ Hint: Jess wrote some rules in `notes/owner-notes.md`. The right cafe names are 
 - Every quantity is a whole number.
 - The original orders file has not changed.
 
+To check, ask Claude:
+
+```text
+Please check my work for clean-the-orders. Run bun run verify clean-the-orders and tell me what it printed. Do not change anything to make it pass.
+```
+
+It runs:
+
 ```bash
 bun run verify clean-the-orders
 ```

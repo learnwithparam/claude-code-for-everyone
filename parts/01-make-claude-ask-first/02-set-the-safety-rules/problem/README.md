@@ -53,6 +53,14 @@ Now start a new chat in the same folder. Look at the mode button. It should say 
 - `out/safety.md` names Manual mode and lists 2 things Claude will ask about.
 - No original file has changed.
 
+To check, ask Claude:
+
+```text
+Please check my work for set-the-safety-rules. Run bun run verify set-the-safety-rules and tell me what it printed. Do not change anything to make it pass.
+```
+
+It runs:
+
 ```bash
 bun run verify set-the-safety-rules
 ```

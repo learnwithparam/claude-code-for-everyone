@@ -38,6 +38,14 @@ Claude never signs on its own. You read, then you tell Claude your name.
 - No label is signed by Claude.
 - Every item in `out/labels-done.md` is ticked.
 
+To check, ask Claude:
+
+```text
+Please check my work for sign-off-the-labels. Run bun run verify sign-off-the-labels and tell me what it printed. Do not change anything to make it pass.
+```
+
+It runs:
+
 ```bash
 bun run verify sign-off-the-labels
 ```

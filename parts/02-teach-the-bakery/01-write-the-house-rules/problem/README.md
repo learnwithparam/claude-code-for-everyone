@@ -42,6 +42,14 @@ Then start a new chat and type `/memory`. You see `CLAUDE.md` in the list. Ask "
 - It says new files go in `out/`.
 - It is shorter than 200 lines.
 
+To check, ask Claude:
+
+```text
+Please check my work for write-the-house-rules. Run bun run verify write-the-house-rules and tell me what it printed. Do not change anything to make it pass.
+```
+
+It runs:
+
 ```bash
 bun run verify write-the-house-rules
 ```

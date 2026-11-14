@@ -61,6 +61,14 @@ For example, the new orders have a different count of rows. A skill that wrote t
 - `wren-street-next-close/` is there, with the `friday-close` skill.
 - Every earlier check of the close passes again on the new files: the folder note, orders, prices, invoices, labels, report and menu page.
 
+To check, ask Claude:
+
+```text
+Please check my work for run-the-friday-close. Run bun run verify run-the-friday-close and tell me what it printed. Do not change anything to make it pass.
+```
+
+It runs:
+
 ```bash
 bun run verify run-the-friday-close
 ```

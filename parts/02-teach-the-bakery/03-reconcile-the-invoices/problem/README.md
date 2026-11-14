@@ -45,6 +45,14 @@ There are three kinds of fault in the bills. Did Claude find all three?
 - `out/reconciliation-note.md` is under 150 words.
 - The purchase orders have not changed.
 
+To check, ask Claude:
+
+```text
+Please check my work for reconcile-the-invoices. Run bun run verify reconcile-the-invoices and tell me what it printed. Do not change anything to make it pass.
+```
+
+It runs:
+
 ```bash
 bun run verify reconcile-the-invoices
 ```

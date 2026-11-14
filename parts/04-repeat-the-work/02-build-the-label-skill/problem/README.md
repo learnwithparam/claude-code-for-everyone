@@ -44,6 +44,14 @@ Open `out/labels/multigrain-loaf.md`. It must say sesame. Check it against your 
 - Each label lists exactly the allergens in its recipe.
 - Each price comes from the clean price list.
 
+To check, ask Claude:
+
+```text
+Please check my work for build-the-label-skill. Run bun run verify build-the-label-skill and tell me what it printed. Do not change anything to make it pass.
+```
+
+It runs:
+
 ```bash
 bun run verify build-the-label-skill
 ```
