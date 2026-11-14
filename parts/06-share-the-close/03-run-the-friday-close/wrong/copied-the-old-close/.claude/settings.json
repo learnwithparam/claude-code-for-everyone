@@ -3,7 +3,8 @@
     "defaultMode": "default",
     "blockWritesOutsideWorkingDirectories": true,
     "deny": [
-      "Read(../checks/**)"
+      "Read(../checks/**)",
+      "Read(./private/**)"
     ]
   }
 }

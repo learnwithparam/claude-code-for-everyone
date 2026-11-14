@@ -2,9 +2,9 @@
 
 ## The problem
 
-Jess reads the Monday report before the shop opens. It says what the shop took, what was thrown away, and which cafes pay late. Today she adds it up from the till with a pen.
+Jess reads the Monday report before the shop opens. It says what the shop took, what was thrown away, and which cafes pay late. Today she adds it up with a pen.
 
-Claude can write it. But a number Claude works out in its head can be wrong, and it looks just as sure. So the numbers must come from the till. And the report must have the same shape every time. A skill does both.
+A number Claude works out in its head can be wrong, and it looks just as sure. So the numbers must come from the till, in the same shape every time. A skill does both.
 
 ```mermaid
 flowchart LR
@@ -17,7 +17,7 @@ flowchart LR
 
 ## Your challenge
 
-Ask Claude to make a `monday-report` skill. Then run it once and check its numbers.
+Ask Claude to make a `monday-report` skill. Run it once, then add a checker.
 
 1. Start `claude` in `wren-street`. Paste this:
 
@@ -32,9 +32,18 @@ wasted product), and "## Late payers" (one line per cafe).
 Add "## Never": never guess a number, never change the till.
 ```
 
-2. Read the skill before you say yes. Check that it has Steps and Never.
-3. Type `/exit`, then `claude` again, so Claude Code loads the new skill.
-4. Type `/monday-report` and press Enter. Say yes to the till tools. Read the report before you say yes to the file.
+2. Read the skill. Check that it has Steps and Never.
+3. Type `/exit`, then `claude` again, to load the skill.
+4. Type `/monday-report`. Say yes to the till tools. Read the report first.
+
+5. Now add a checker. A **subagent** is a helper with its own chat and tools. Paste this:
+
+```text
+Make a subagent at .claude/agents/numbers-checker.md with only the
+tools Read, Grep and Glob. It checks a report against till/sales.csv.
+Run it on out/reports/monday-report.md. Save its answer in
+out/numbers-check.md as a dash list that ends with a verdict.
+```
 
 For example, the report has a part like this. The cafes come from Jess's notes:
 
@@ -51,6 +60,7 @@ For example, the report has a part like this. The cafes come from Jess's notes:
 - `out/reports/` has a report with Sales, Waste and Late payers.
 - The takings, items sold, items wasted and most wasted product match the till.
 - The late payers are the two cafes in Jess's notes.
+- The checker can only read files, and `out/numbers-check.md` says the report matches.
 - No original file has changed.
 
 To check, ask Claude:
@@ -65,7 +75,7 @@ It runs:
 bun run verify write-the-monday-report
 ```
 
-Expect: `Done. All 10 rules pass.`
+Expect: `Done. All 12 rules pass.`
 
 ![The check passes](../images/expected.png)
 
@@ -80,6 +90,7 @@ Expect: `Done. All 10 rules pass.`
 
 ## Words you will use
 
+- **Subagent**: a helper Claude starts for one job. It works in its own chat, with only the tools you give it.
 - **Skill**: a saved set of steps Claude follows the same way each time.
 - **Description**: one line that tells Claude when to use the skill.
 - **Takings**: the money the shop took from sales.

@@ -31,6 +31,7 @@ Then you typed `/exit`, `claude`, and `/monday-report`.
 
 - The report says "about £13,600". Say no. Ask for the exact number from the till.
 - Late payers lists all six cafes. Say no. Only two pay late.
+- The checker can write files. Say no. A checker should only read.
 - Claude writes the report but skips the skill. Say no. Next time you want one word, `/monday-report`, not a long prompt.
 
-Then run `bun run verify write-the-monday-report`. All 10 rules pass.
+Then run `bun run verify write-the-monday-report`. All 12 rules pass.

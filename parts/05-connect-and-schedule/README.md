@@ -60,7 +60,7 @@ Then ask Claude to make the `monday-report` skill, and run it with `/monday-repo
 bun run verify write-the-monday-report
 ```
 
-Expect: `Done. All 10 rules pass.`
+Expect: `Done. All 12 rules pass.`
 
 Last, make each run keep its own report. Run it two times, with a scheduled task or with Run now.
 

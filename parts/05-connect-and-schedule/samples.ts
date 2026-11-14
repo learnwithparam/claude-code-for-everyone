@@ -133,18 +133,63 @@ const everyCafe = report.replace(
   "## Late payers\n\n- Lumen Cafe\n- Kettle and Crumb\n- Hartley Corner Cafe\n" +
     "- Bluebell Coffee\n- Moss and Grain\n- Pier Nine Espresso\n",
 );
+const CHECKER_START = `---
+name: numbers-checker
+description: Checks the numbers in a report against till/sales.csv. Use after the Monday report is written.
+`;
+const CHECKER_BODY = `---
+
+You check numbers. You never write or change a file.
+
+1. Read the report you are given.
+2. Read till/sales.csv and add up takings, items sold and items wasted.
+3. Say, one line each, whether the report matches. Name any number that differs.
+`;
+const checker = (tools: string) => `${CHECKER_START}tools: ${tools}\n${CHECKER_BODY}`;
+const CHECKER_PATH = ".claude/agents/numbers-checker.md";
+const CHECK_NOTE_PATH = "out/numbers-check.md";
+const checkNote = `# Numbers check
+
+Checked by the numbers-checker subagent. It could only read files.
+
+- Takings: matches till/sales.csv.
+- Items sold: matches till/sales.csv.
+- Items wasted: matches till/sales.csv.
+- Verdict: the report matches the till.
+`;
+const subagentFiles = {
+  [CHECKER_PATH]: checker("Read, Grep, Glob"),
+  [CHECK_NOTE_PATH]: checkNote,
+};
 const SKILL_PATH = ".claude/skills/monday-report/SKILL.md";
 const REPORT_PATH = "out/reports/monday-report.md";
-sample("03-write-the-monday-report", "solution", { [SKILL_PATH]: skill, [REPORT_PATH]: report });
+sample("03-write-the-monday-report", "solution", {
+  [SKILL_PATH]: skill,
+  [REPORT_PATH]: report,
+  ...subagentFiles,
+});
 sample("03-write-the-monday-report", "wrong/guessed-numbers", {
   [SKILL_PATH]: skill,
   [REPORT_PATH]: guessed,
+  ...subagentFiles,
 });
 sample("03-write-the-monday-report", "wrong/every-cafe-is-late", {
   [SKILL_PATH]: skill,
   [REPORT_PATH]: everyCafe,
+  ...subagentFiles,
 });
-sample("03-write-the-monday-report", "wrong/no-skill", { [REPORT_PATH]: report });
+sample("03-write-the-monday-report", "wrong/no-skill", { [REPORT_PATH]: report, ...subagentFiles });
+sample("03-write-the-monday-report", "wrong/checker-can-edit-files", {
+  [SKILL_PATH]: skill,
+  [REPORT_PATH]: report,
+  [CHECKER_PATH]: checker("Read, Grep, Glob, Write, Edit"),
+  [CHECK_NOTE_PATH]: checkNote,
+});
+sample("03-write-the-monday-report", "wrong/never-ran-the-checker", {
+  [SKILL_PATH]: skill,
+  [REPORT_PATH]: report,
+  [CHECKER_PATH]: checker("Read, Grep, Glob"),
+});
 
 // ---- schedule-the-monday-report ----
 

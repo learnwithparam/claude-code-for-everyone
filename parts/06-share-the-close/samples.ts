@@ -14,6 +14,8 @@ import { writeSample } from "./write-sample";
 type Files = Record<string, string | Uint8Array>;
 
 const PART = import.meta.dir;
+const CHECKER = ".claude/agents/numbers-checker.md";
+const CHECK_NOTE = "out/numbers-check.md";
 const FINISHED_SKILLS = join(ROOT, "world", "finished", "bakery", ".claude", "skills");
 const RECIPE_NAMES = (KEY.prices.clean as { product: string }[]).map((row) => row.product);
 const WHY = "I want Claude to match our delivery notes to the orders so I stop doing it by hand.\n";
@@ -93,21 +95,58 @@ const kitSkills = (folder: string): Files => ({
   [`${folder}/monday-report/SKILL.md`]: skillFile("monday-report"),
 });
 const MANIFEST_PATH = "kit/.claude-plugin/plugin.json";
+const HOOKS_PATH = "kit/hooks/hooks.json";
+const HOOK_SCRIPT_PATH = "kit/hooks/block-till.sh";
+const HOOKS = manifest({
+  hooks: {
+    PreToolUse: [
+      {
+        matcher: "Write|Edit",
+        hooks: [{ type: "command", command: "bash ${CLAUDE_PLUGIN_ROOT}/hooks/block-till.sh" }],
+      },
+    ],
+  },
+});
+const BLOCK_TILL = `#!/bin/bash
+# Stop any edit to a file inside till/, because the till is the record.
+input=$(cat)
+if echo "$input" | grep -q '"file_path"[^,}]*till/'; then
+  echo "Blocked: till/ is the record. Write a copy in out/ instead." >&2
+  exit 2
+fi
+exit 0
+`;
+const kitHook: Files = { [HOOKS_PATH]: HOOKS, [HOOK_SCRIPT_PATH]: BLOCK_TILL };
 sample("02-pack-the-bakery-kit", "solution", {
   [MANIFEST_PATH]: manifest(KIT_MANIFEST),
   ...kitSkills("kit/skills"),
+  ...kitHook,
+});
+sample("02-pack-the-bakery-kit", "wrong/hook-lets-till-through", {
+  [MANIFEST_PATH]: manifest(KIT_MANIFEST),
+  ...kitSkills("kit/skills"),
+  [HOOKS_PATH]: HOOKS,
+  [HOOK_SCRIPT_PATH]: "#!/bin/bash\n# Lets every edit through.\nexit 0\n",
+});
+sample("02-pack-the-bakery-kit", "wrong/hook-never-wired", {
+  [MANIFEST_PATH]: manifest(KIT_MANIFEST),
+  ...kitSkills("kit/skills"),
+  [HOOK_SCRIPT_PATH]: BLOCK_TILL,
 });
 sample("02-pack-the-bakery-kit", "wrong/skills-inside-claude-plugin", {
   [MANIFEST_PATH]: manifest(KIT_MANIFEST),
   ...kitSkills("kit/.claude-plugin/skills"),
+  ...kitHook,
 });
 sample("02-pack-the-bakery-kit", "wrong/name-with-spaces", {
   [MANIFEST_PATH]: manifest({ ...KIT_MANIFEST, name: "Wren Street Kit" }),
   ...kitSkills("kit/skills"),
+  ...kitHook,
 });
 sample("02-pack-the-bakery-kit", "wrong/no-version", {
   [MANIFEST_PATH]: manifest({ ...KIT_MANIFEST, version: undefined }),
   ...kitSkills("kit/skills"),
+  ...kitHook,
 });
 
 // ---- run-the-friday-close ----
@@ -123,6 +162,12 @@ const setup: Files = {
   ".claude/skills/friday-close/SKILL.md": skillFile("friday-close"),
   ".claude/skills/allergen-label/SKILL.md": skillFile("allergen-label"),
   ".claude/skills/monday-report/SKILL.md": skillFile("monday-report"),
+  ".claude/agents/numbers-checker.md": readFileSync(
+    join(PART, "..", "05-connect-and-schedule/03-write-the-monday-report/solution", CHECKER),
+  ),
+  "out/numbers-check.md": readFileSync(
+    join(PART, "..", "05-connect-and-schedule/03-write-the-monday-report/solution", CHECK_NOTE),
+  ),
 };
 rmSync(setupWork, { recursive: true, force: true });
 const nextCloseOut = nextClose;
