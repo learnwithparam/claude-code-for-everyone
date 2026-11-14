@@ -132,9 +132,9 @@ export default [
     tryNext: "ask Claude to make block-till.sh exit 0 for every path that is not in till/",
   },
   {
-    says: `${WORKFLOW} is there and runs on a schedule or by hand (on: schedule or workflow_dispatch)`,
+    says: `${WORKFLOW} runs on a schedule or by hand (on: schedule or workflow_dispatch)`,
     test: (folder) => has(folder, WORKFLOW) && runsOnATimerOrByHand(folder),
-    tryNext: "ask Claude to save the workflow with an on: part that has schedule or workflow_dispatch",
+    tryNext: "save the workflow with an on: part that has schedule or workflow_dispatch",
   },
   {
     says: "the workflow has a step that runs claude",
@@ -144,7 +144,7 @@ export default [
   {
     says: "the workflow takes its key from a secrets placeholder, never a real key",
     test: (folder) => has(folder, WORKFLOW) && keyIsAPlaceholder(folder),
-    tryNext: "use ${{ secrets.ANTHROPIC_API_KEY }} and never paste a real key into the file",
+    tryNext: "read the key from secrets.ANTHROPIC_API_KEY and never paste a real key into the file",
   },
   {
     says: "every original bakery file is the same as the start",

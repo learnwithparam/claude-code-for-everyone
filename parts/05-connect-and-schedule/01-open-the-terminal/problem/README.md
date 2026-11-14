@@ -2,9 +2,7 @@
 
 ## The problem
 
-So far you used Claude in the app. The next steps need the terminal too. You add the till with one command there. And a job that runs alone needs no clicks.
-
-The terminal is a window where you type, not click. Claude Code in the terminal is the same Claude, with the same rules and the same folder. Only the look is new.
+You used Claude in the app. The next steps need the terminal, a window where you type instead of click. One typed line adds the till. A job that runs alone needs no clicks. Claude in the terminal is the same Claude, with the same rules and the same folder.
 
 ```mermaid
 flowchart LR
@@ -14,12 +12,22 @@ flowchart LR
   S --> N[out/terminal.md]
 ```
 
-## Your challenge
+## Watch it done
 
-Start Claude Code in the bakery folder. Find Plan mode with the keys, then go back to Manual mode.
+The status bar is the line under the box where you type. It shows the mode. Shift+Tab steps through the modes. In Plan mode, Claude makes a plan and changes no file.
 
-1. Open a terminal. On a Mac, open the **Terminal** app. On Windows, open **PowerShell**. You do not need to run it as Administrator.
-2. Go to the course folder. Then go into the bakery:
+```text
+⏸ plan mode on (shift+tab to cycle)
+```
+
+![The check passes](../images/expected.png)
+
+The finished note is in `solution/out/terminal.md`. It has three headings: the version, the Plan mode words, and the mode you work in.
+
+## Your turn
+
+1. Open a terminal. On a Mac, open the Terminal app. On Windows, open PowerShell. You do not need Administrator.
+2. Go into the bakery:
 
 ```bash
 cd wren-street
@@ -27,13 +35,13 @@ cd wren-street
 
 Expect: no output.
 
-3. See which Claude Code you have:
+3. Ask Claude Code for its version:
 
 ```bash
 claude --version
 ```
 
-Expect: `2.1.314 (Claude Code)` or a bigger number.
+Expect: a version number, then the words Claude Code. If the check later says it is too old, run `claude update`.
 
 4. Start Claude Code:
 
@@ -41,10 +49,10 @@ Expect: `2.1.314 (Claude Code)` or a bigger number.
 claude
 ```
 
-Expect: Claude asks if you trust the files in this folder. Press the down arrow to pick **Yes, I trust this folder**, then press Enter. The first choice is **No, exit**.
+Expect: Claude asks if you trust this folder. Press the down arrow to pick the Yes choice, then Enter. The first choice is No, so do not just press Enter.
 
-5. Press **Shift+Tab** a few times. Watch the line under the box where you type. That line is the status bar. Stop when it says `plan mode on`. Copy the words you see.
-6. Press **Shift+Tab** again until the status bar says `manual mode on`. Old versions show no mode. That is Manual mode too. In Manual mode, Claude asks you before each change.
+5. Press Shift+Tab until the status bar shows Plan mode. Copy those words.
+6. Press Shift+Tab until the status bar shows Manual mode, or no mode at all. In Manual mode, Claude asks before each change.
 7. Paste this, with your own words in the brackets:
 
 ```text
@@ -54,13 +62,15 @@ Make out/terminal.md with three headings.
 "## Mode I work in": Manual
 ```
 
-Claude shows the file and asks first. Read it, then say yes. Type `/exit` to leave Claude.
+Expect: Claude shows the file and asks first. Read it, say yes, then type `/exit`.
 
-For example, in Plan mode the status bar says `⏸ plan mode on (shift+tab to cycle)`. Claude plans but changes nothing.
+## Do it on your work
+
+Do the same in your own bakery folder. Open the terminal, go into the folder, start Claude, and find Plan mode. Good looks like this: you can say which mode you are in by reading the status bar, and you know Plan mode will not change a file.
 
 ## Done when
 
-- `out/terminal.md` has a version that is 2.1.314 or newer.
+- `out/terminal.md` has a version that is new enough.
 - It has the words the status bar showed in Plan mode.
 - It says you work in Manual mode.
 - No original file has changed.
@@ -79,15 +89,17 @@ bun run verify open-the-terminal
 
 Expect: `Done. All 7 rules pass.`
 
-![The check passes](../images/expected.png)
+## Solution
+
+The finished note is `solution/out/terminal.md`. The prompts that made it are in `solution/prompts.md`.
 
 ## If you get stuck
 
 | What you see                               | Try this                                                             |
 | ------------------------------------------ | -------------------------------------------------------------------- |
 | `claude: command not found`                | Install Claude Code from the start page. Then open a new terminal.   |
-| `FAIL  the version is 2.1.314 or newer`    | Run `claude update`. Then write the new number.                      |
-| `FAIL  it says what the status bar showed` | Press Shift+Tab until you see `plan mode on`. Copy those words.      |
+| `FAIL  the version is ... or newer`        | Run `claude update`. Then write the new number.                      |
+| `FAIL  it says what the status bar showed` | Press Shift+Tab until the bar shows Plan mode. Copy those words.     |
 | `FAIL  it names Manual mode`               | Write Manual under the heading, not Auto.                            |
 | `error: Script not found "verify"`         | Run `cd wren-street` first, or run the check from the course folder. |
 

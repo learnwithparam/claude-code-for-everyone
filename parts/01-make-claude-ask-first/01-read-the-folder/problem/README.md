@@ -13,10 +13,9 @@ flowchart LR
 
 ## Watch it done
 
-Before, the folder has no notes. After, `out/` holds three small files you saved. This is the real output of the check on the finished work:
+Before, `out/` is empty. After, it holds three notes. This is the check on the finished work:
 
 ```text
-  PASS  out/whats-here.md is there
   PASS  it names all 11 folders of the bakery
   PASS  out/prompts.md is a saved prompt that points at a real file with @
   PASS  out/screenshot-note.md has a "Screenshot of:" line and a "What Claude said" part
@@ -24,29 +23,29 @@ Before, the folder has no notes. After, `out/` holds three small files you saved
 
 ## Your turn
 
-The example uses two files: `orders/wholesale-orders.csv` and `menu/menu.md`.
+Files: `orders/wholesale-orders.csv` and `menu/menu.md`.
 
-1. Open `wren-street` in the Code tab. Pick **Plan** in the mode button. Plan mode lets Claude look, but not change files.
-2. Paste: `Look at every folder. Do not change any file. Say what each holds in one line, then two things you are not sure about.`
+1. Open `wren-street` in the Code tab. Pick **Plan**. Claude can look but not change files.
+2. Paste: `Look at every folder. Change nothing. Say what each holds in one line, then two things you are unsure about.`
 
    Expect: eleven short lines, then two questions.
-3. Pick **Manual**, then ask Claude to save it as `out/whats-here.md`, with a "## Questions I have" heading and dashes. Claude asks first. Say yes.
+3. Pick **Manual**. Ask Claude to save it as `out/whats-here.md`, with a "## Questions I have" heading and dashes. Say yes.
 
    Expect: a new file in `out/`.
-4. Point at one file with the at sign. Type `@orders/wholesale-orders.csv` and ask what is wrong with the dates. The @ tells Claude exactly which file to open.
+4. Type `@orders/wholesale-orders.csv` and ask what is wrong with the dates. The @ points Claude at one file. For example, it names the file and lists the date styles.
 
-   Expect: Claude names the file and lists the date styles.
+   Expect: an answer about that file only.
 5. Ask Claude to save that prompt as `out/prompts.md`.
 
    Expect: a file with your `@` line in it.
-6. Take a screenshot of the sheet or of `menu/menu.md` open on your screen. Drag it into the chat and ask what it shows.
+6. Screenshot the sheet or `menu/menu.md` on your screen. Drag it into the chat and ask what it shows.
 
    Expect: a plain description of the picture.
-7. Save it as `out/screenshot-note.md`. Start with `Screenshot of:` and what you shot. Then add "## What Claude said" and its answer.
+7. Save it as `out/screenshot-note.md`: a line `Screenshot of:` and what you shot, then "## What Claude said" and its answer.
 
 ## Do it on your work
 
-Do steps 4 to 7 on one file of your own, such as a bill or a list. Use a picture of something in the world too, such as a shelf or a receipt. Good looks like: Claude names the right file, and the note says what the picture showed in your own words.
+Do steps 4 to 7 on one file of your own, and on a picture of a shelf or a receipt. Good looks like: Claude names the right file, and the note says what the picture showed.
 
 ## Done when
 
@@ -55,7 +54,7 @@ Do steps 4 to 7 on one file of your own, such as a bill or a list. Use a picture
 - `out/screenshot-note.md` has the "Screenshot of:" line and Claude's answer.
 - No original file has changed.
 
-To check, ask Claude: "Please check my work for read-the-folder. Run it and tell me what it printed. Do not change anything to make it pass."
+To check, ask Claude: "Run the check for read-the-folder and tell me what it printed. Change nothing."
 
 ```bash
 bun run verify read-the-folder
@@ -69,22 +68,17 @@ Expect: `Done. All 7 rules pass.`
 
 The finished files are in `solution/out/`: `whats-here.md`, `prompts.md` and `screenshot-note.md`.
 
-## Go further
-
-- Ask Claude to read two folders together with two `@` mentions.
-- Screenshot a label on the shelf and ask if it matches its recipe.
-
 ## If you get stuck
 
 | What you see                                                   | Try this                                                    |
 | -------------------------------------------------------------- | ----------------------------------------------------------- |
 | `FAIL it names all 11 folders of the bakery`                   | Ask Claude to add a line for each folder it left out.       |
-| `FAIL out/prompts.md is a saved prompt`                        | Write the path after the @ with no space, and check it.     |
+| `FAIL out/prompts.md is a saved prompt`                        | Write the path right after the @, with no space.            |
 | `FAIL out/screenshot-note.md has a "Screenshot of:" line`      | Add the first line and the "What Claude said" heading.      |
 | `FAIL every original bakery file is the same as the start`     | Run `bun run world status` to see what changed.             |
 
 ## Words you will use
 
-- **Plan mode**: Claude can read and think, but it cannot change a file.
-- **Manual mode**: Claude asks you before it changes a file or runs a command.
-- **@ mention**: typing @ and a path to point Claude at one file.
+- **Plan mode**: Claude can read, not change.
+- **Manual mode**: Claude asks before it changes a file.
+- **@ mention**: an @ and a path, to point at one file.

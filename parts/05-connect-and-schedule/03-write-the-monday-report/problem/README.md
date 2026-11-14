@@ -2,9 +2,7 @@
 
 ## The problem
 
-Jess reads the Monday report before the shop opens. It says what the shop took, what was thrown away, and which cafes pay late. Today she adds it up with a pen.
-
-A number Claude works out in its head can be wrong, and it looks just as sure. So the numbers must come from the till, in the same shape every time. A skill does both.
+Jess reads the Monday report before the shop opens. Today she adds it up with a pen. A number Claude works out in its head can be wrong and still sound sure. The report must come from the till, in the same shape each time. A skill does that.
 
 ```mermaid
 flowchart LR
@@ -15,9 +13,18 @@ flowchart LR
   N --> R
 ```
 
-## Your challenge
+## Watch it done
 
-Ask Claude to make a `monday-report` skill. Run it once, then add a checker.
+A skill is a saved set of steps Claude follows the same way each time. The report it makes has Sales, Waste and Late payers. The cafes come from Jess's notes.
+
+```text
+## Late payers
+
+- Kettle and Crumb
+- Moss and Grain
+```
+
+## Your turn
 
 1. Start `claude` in `wren-street`. Paste this:
 
@@ -32,11 +39,13 @@ wasted product), and "## Late payers" (one line per cafe).
 Add "## Never": never guess a number, never change the till.
 ```
 
-2. Read the skill. Check that it has Steps and Never.
-3. Type `/exit`, then `claude` again, to load the skill.
-4. Type `/monday-report`. Say yes to the till tools. Read the report first.
+Expect: Claude shows the skill, with Steps and Never. Say yes.
 
-5. Now add a checker. A **subagent** is a helper with its own chat and tools. Paste this:
+2. Type `/exit`, `claude`, then `/monday-report`.
+
+Expect: Claude asks to use the till tools. Say yes, then read the report.
+
+3. Add a checker. A subagent is a helper with its own chat and only the tools you give it. Paste:
 
 ```text
 Make a subagent at .claude/agents/numbers-checker.md with only the
@@ -45,52 +54,67 @@ Run it on out/reports/monday-report.md. Save its answer in
 out/numbers-check.md as a dash list that ends with a verdict.
 ```
 
-For example, the report has a part like this. The cafes come from Jess's notes:
+Expect: the checker can only read, and its note says the report matches.
+
+4. Try it again in a worktree, a second copy of your folder on its own branch. Type `/exit`, then:
+
+```bash
+claude -w second-try
+```
+
+Expect: Claude starts in `.claude/worktrees/second-try`. Run `/monday-report`, then `/exit`.
+
+5. Back in `wren-street`, paste:
 
 ```text
-## Late payers
-
-- Kettle and Crumb
-- Moss and Grain
+Make out/worktree.md. Under "## Worktree", write the worktree folder
+or branch name I just used. Add one line on what I ran there.
 ```
+
+Expect: the note names `.claude/worktrees/second-try` or the branch `worktree-second-try`.
+
+## Do it on your work
+
+Turn one report you write by hand into a skill with a Never part, plus a read-only checker. Good looks like this: one word runs it, and the checker names any number that differs.
 
 ## Done when
 
-- The skill has `name: monday-report`, a description that says report, and Steps and Never parts.
-- `out/reports/` has a report with Sales, Waste and Late payers.
-- The takings, items sold, items wasted and most wasted product match the till.
+- The skill has a name, a report description, Steps and Never.
+- The report has Sales, Waste and Late payers, and every number matches the till.
 - The late payers are the two cafes in Jess's notes.
-- The checker can only read files, and `out/numbers-check.md` says the report matches.
+- The checker can only read, and its note says the report matches.
+- `out/worktree.md` names a worktree folder or branch.
 - No original file has changed.
 
-To check, ask Claude:
-
-```text
-Please check my work for write-the-monday-report. Run bun run verify write-the-monday-report and tell me what it printed. Do not change anything to make it pass.
-```
-
-It runs:
+Ask Claude to check my work for write-the-monday-report, and not to change anything. It runs:
 
 ```bash
 bun run verify write-the-monday-report
 ```
 
-Expect: `Done. All 12 rules pass.`
+Expect: `Done. All 13 rules pass.`
 
 ![The check passes](../images/expected.png)
+
+## Solution
+
+The after state is in `solution/`: the skill, the checker, the report, and the two notes.
+
+## Go further
+
+- Run two worktrees at once, each with a different wording of the skill, and compare.
 
 ## If you get stuck
 
 | What you see                              | Try this                                                               |
 | ----------------------------------------- | ---------------------------------------------------------------------- |
-| `/monday-report` is not in the list       | Type `/exit`, then `claude` again. Check the file is named `SKILL.md`. |
-| `FAIL  the takings and items sold match`  | Ask the skill to use the till connector, not a guess.                  |
-| `FAIL  the late payers are the cafes`     | Ask the skill to read the Cafes part of `notes/owner-notes.md`.        |
-| `FAIL  there is a report in out/reports/` | Check the skill writes to `out/reports/monday-report.md`.              |
+| `/monday-report` is not listed            | Type `/exit`, then `claude` again. The file must be `SKILL.md`. |
+| `FAIL  the takings and items sold match`  | Ask the skill to use the till connector, not a guess.           |
+| `FAIL  the late payers are the cafes`     | Ask the skill to read `notes/owner-notes.md`.                   |
+| `FAIL  out/worktree.md names`             | Run `claude -w second-try`, then write the folder or branch.    |
+| `claude -w` says this is not a git folder | Do the save-point step first. A worktree needs git.             |
 
 ## Words you will use
 
 - **Subagent**: a helper Claude starts for one job. It works in its own chat, with only the tools you give it.
-- **Skill**: a saved set of steps Claude follows the same way each time.
-- **Description**: one line that tells Claude when to use the skill.
-- **Takings**: the money the shop took from sales.
+- **Worktree**: a second copy of your folder on its own branch, made by `claude -w`.

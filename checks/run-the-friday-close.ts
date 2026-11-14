@@ -87,8 +87,8 @@ function closeResults(folder: string): Record<string, string[]> {
   return results;
 }
 
-// Notes a learner wrote in wren-street to show they tried a feature. The close does not remake them.
-const PRACTICE_NOTES = /^out\/worktree\.md/;
+// Notes a learner wrote in wren-street to show they tried a feature. The close skips them.
+const PRACTICE_NOTES = /^out\/(worktree|prompts|screenshot-note|diff-note)\.md/;
 
 // One rule for each step of the close: its check passes again on the next close.
 function passesAgain(step: string): Rule {
@@ -96,7 +96,7 @@ function passesAgain(step: string): Rule {
     says: `${step} passes again on the next close`,
     test: (folder) => {
       const failed = closeResults(folder)[step];
-      return failed !== undefined && failed.every((rule) => PRACTICE_NOTES.test(rule));
+      return Boolean(failed?.every((rule) => PRACTICE_NOTES.test(rule)));
     },
     tryNext: `read the ${step} page for what its file needs, fix the skill, and run it again`,
   };
