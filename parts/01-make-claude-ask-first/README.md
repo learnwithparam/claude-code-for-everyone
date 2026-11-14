@@ -25,12 +25,12 @@ flowchart LR
 
 ## Steps
 
-| Step                                                              | What you make                                                    | What the check reads                                      |
-| ----------------------------------------------------------------- | ---------------------------------------------------------------- | --------------------------------------------------------- |
-| [read-the-folder](01-read-the-folder/problem/README.md)           | `out/whats-here.md`, `out/prompts.md`, `out/screenshot-note.md`  | Every folder named, an @ at a real file, a screenshot note |
-| [set-the-safety-rules](02-set-the-safety-rules/problem/README.md) | `.claude/settings.json` and `out/safety.md`                      | Manual mode, no writes outside, a deny rule, the sandbox  |
-| [clean-the-orders](03-clean-the-orders/problem/README.md)         | `out/orders-clean.csv` and `out/diff-note.md`                    | Dates, cafe names, copies, counts, a reviewed changed line |
-| [fix-the-price-list](04-fix-the-price-list/problem/README.md)     | `out/price-list-clean.xlsx` and `out/price-changes.md`           | Names, units, prices, the change list                     |
+| Step                                                              | What you make                                                   | What the check reads                                       |
+| ----------------------------------------------------------------- | --------------------------------------------------------------- | ---------------------------------------------------------- |
+| [read-the-folder](01-read-the-folder/problem/README.md)           | `out/whats-here.md`, `out/prompts.md`, `out/screenshot-note.md` | Every folder named, an @ at a real file, a screenshot note |
+| [set-the-safety-rules](02-set-the-safety-rules/problem/README.md) | `.claude/settings.json` and `out/safety.md`                     | Manual mode, no writes outside, a deny rule, the sandbox   |
+| [clean-the-orders](03-clean-the-orders/problem/README.md)         | `out/orders-clean.csv` and `out/diff-note.md`                   | Dates, cafe names, copies, counts, a reviewed changed line |
+| [fix-the-price-list](04-fix-the-price-list/problem/README.md)     | `out/price-list-clean.xlsx` and `out/price-changes.md`          | Names, units, prices, the change list                      |
 
 ## Walkthrough
 
@@ -72,13 +72,13 @@ Expect: `Part make-claude-ask-first is done: 4/4 steps pass.`
 
 ## Watch and read
 
-| Kind | Title                                    | Author                      | Why                                                                  | Link                                                                 |
-| ---- | ---------------------------------------- | --------------------------- | -------------------------------------------------------------------- | -------------------------------------------------------------------- |
-| read | How we built Claude Code auto mode       | Anthropic research          | Shows why people say yes without reading, and what to do about it.   | <https://www.anthropic.com/research/claude-code-auto-mode>           |
-| read | Making Claude Code safer with sandboxing | Anthropic engineering blog  | Explains the walled room that the sandbox setting turns on.          | <https://www.anthropic.com/engineering/claude-code-sandboxing>       |
-| read | Configure permissions                    | Claude Code docs, Anthropic | The home of modes and deny rules, written by the team that made them. | <https://code.claude.com/docs/en/permissions>                        |
-| read | Best practices for Claude Code           | Claude Code docs, Anthropic | Covers plan mode, @ files and screenshots as ways to ask well.       | <https://code.claude.com/docs/en/best-practices>                     |
-| read | Common workflows                         | Claude Code docs, Anthropic | Step by step uses of images, @ mentions and reviewing changes.       | <https://code.claude.com/docs/en/common-workflows>                   |
+| Kind | Title                                    | Author                      | Why                                                                   | Link                                                           |
+| ---- | ---------------------------------------- | --------------------------- | --------------------------------------------------------------------- | -------------------------------------------------------------- |
+| read | How we built Claude Code auto mode       | Anthropic research          | Shows why people say yes without reading, and what to do about it.    | <https://www.anthropic.com/research/claude-code-auto-mode>     |
+| read | Making Claude Code safer with sandboxing | Anthropic engineering blog  | Explains the walled room that the sandbox setting turns on.           | <https://www.anthropic.com/engineering/claude-code-sandboxing> |
+| read | Configure permissions                    | Claude Code docs, Anthropic | The home of modes and deny rules, written by the team that made them. | <https://code.claude.com/docs/en/permissions>                  |
+| read | Best practices for Claude Code           | Claude Code docs, Anthropic | Covers plan mode, @ files and screenshots as ways to ask well.        | <https://code.claude.com/docs/en/best-practices>               |
+| read | Common workflows                         | Claude Code docs, Anthropic | Step by step uses of images, @ mentions and reviewing changes.        | <https://code.claude.com/docs/en/common-workflows>             |
 
 ## Project
 

@@ -14,7 +14,7 @@ flowchart LR
 
 ## Watch it done
 
-Here is the recipe `recipes/multigrain-loaf.md`, and the label the skill makes from it:
+For example, here is the recipe `recipes/multigrain-loaf.md`, and the label the skill makes from it:
 
 ```text
 Ingredients: wheat flour, oats, soya flour, sesame seeds, water, yeast, salt

@@ -153,8 +153,8 @@ function worktreeNamed(folder: string): boolean {
   return WORKTREE_FOLDER.test(note) || WORKTREE_BRANCH.test(note);
 }
 
-export default [
-  bakeryRule,
+// The rules for the skill and the report it makes. make-the-monday-skill checks these alone.
+export const SKILL_RULES: Rule[] = [
   {
     says: `${SKILL} is there with name: monday-report`,
     test: (folder) => /^name:\s*monday-report\s*$/m.test(frontmatter(folder)),
@@ -179,6 +179,11 @@ export default [
     tryNext: "type /monday-report in Claude Code, so the skill writes out/reports/monday-report.md",
   },
   ...REPORT_RULES,
+];
+
+export default [
+  bakeryRule,
+  ...SKILL_RULES,
   {
     says: "a subagent numbers-checker is in .claude/agents/ and can only read files",
     test: (folder) => has(folder, CHECKER) && checkerIsReadOnly(folder),

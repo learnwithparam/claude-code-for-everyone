@@ -69,7 +69,7 @@ function wasChanged(folder: string, id: string): string[] {
 }
 
 // A note line that names a changed order and quotes what it became.
-function namesAChangedLine(folder: string): boolean {
+function namesChangedLine(folder: string): boolean {
   return text(folder, NOTE)
     .split("\n")
     .some((line) => {
@@ -126,7 +126,7 @@ export default [
   },
   {
     says: `${NOTE} names a changed order and what it became`,
-    test: (folder) => has(folder, NOTE) && namesAChangedLine(folder),
+    test: (folder) => has(folder, NOTE) && namesChangedLine(folder),
     tryNext: "write one line with an order id like WS-1001 and its new date, cafe or number",
   },
   {

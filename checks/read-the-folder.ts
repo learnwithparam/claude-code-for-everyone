@@ -26,7 +26,7 @@ const named = (written: string, folderName: string) =>
 
 // An @ mention is "@" then a path. It counts when that path is a real file in the bakery.
 const AT_PATH = /(?:^|\s)@([\w][\w./-]*\.\w+)/g;
-function mentionsARealFile(folder: string): boolean {
+function mentionsRealFile(folder: string): boolean {
   const mentions = [...text(folder, PROMPTS).matchAll(AT_PATH)];
   return mentions.some((mention) => has(folder, mention[1]));
 }
@@ -62,14 +62,13 @@ export default [
   },
   {
     says: `${PROMPTS} is a saved prompt that points at a real file with @`,
-    test: (folder) => has(folder, PROMPTS) && mentionsARealFile(folder),
-    tryNext: "save the prompt in out/prompts.md, with @ and a file path like @orders/wholesale-orders.csv",
+    test: (folder) => has(folder, PROMPTS) && mentionsRealFile(folder),
+    tryNext: "save it in out/prompts.md with @ and a path, like @orders/wholesale-orders.csv",
   },
   {
     says: `${SHOT} has a "Screenshot of:" line and a "What Claude said" part`,
     test: (folder) => has(folder, SHOT) && screenshotNoteIsReal(folder),
-    tryNext:
-      'start with "Screenshot of:" and what you shot, then add "## What Claude said" with its answer',
+    tryNext: 'start with "Screenshot of:" and what you shot, then add "## What Claude said"',
   },
   {
     says: "every original bakery file is the same as the start",

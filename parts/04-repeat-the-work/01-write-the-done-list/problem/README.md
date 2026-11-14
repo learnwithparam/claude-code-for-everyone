@@ -15,7 +15,7 @@ flowchart LR
 
 ## Watch it done
 
-The Multigrain Loaf recipe has sesame seeds. Its old label says:
+For example, the Multigrain Loaf recipe has sesame seeds. Its old label says:
 
 ```text
 Contains: gluten, soya

@@ -128,7 +128,7 @@ export default [
   {
     says: `${GOAL_FILE} has a /goal line that says what to do until a stop condition`,
     test: (folder) => goalHasStop(goalLine(folder)),
-    tryNext: `ask Claude to write one line in ${GOAL_FILE}: /goal, the job, then "until" and the stop`,
+    tryNext: `ask Claude for one line in ${GOAL_FILE}: /goal, the job, then "until" and the stop`,
   },
   {
     says: "every original bakery file is the same as the start",

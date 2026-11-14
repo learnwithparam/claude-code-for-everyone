@@ -83,12 +83,12 @@ The finished files are `solution/.claude/settings.json` and `solution/out/safety
 
 ## If you get stuck
 
-| What you see                                         | Try this                                                      |
-| ---------------------------------------------------- | ------------------------------------------------------------- |
-| `FAIL .claude/settings.json is there and is valid`   | Look for a comma after the last line in a block. Take it out. |
-| `FAIL Claude starts in Manual mode`                  | The value must be `default`, not `auto` or `manual`.          |
-| `FAIL Claude cannot read the private/ folder`        | Add `"Read(./private/**)"` to the `deny` list.               |
-| `FAIL the sandbox is on`                             | Add a `sandbox` block with `enabled` set to `true`.           |
+| What you see                                       | Try this                                                      |
+| -------------------------------------------------- | ------------------------------------------------------------- |
+| `FAIL .claude/settings.json is there and is valid` | Look for a comma after the last line in a block. Take it out. |
+| `FAIL Claude starts in Manual mode`                | The value must be `default`, not `auto` or `manual`.          |
+| `FAIL Claude cannot read the private/ folder`      | Add `"Read(./private/**)"` to the `deny` list.                |
+| `FAIL the sandbox is on`                           | Add a `sandbox` block with `enabled` set to `true`.           |
 
 ## Words you will use
 

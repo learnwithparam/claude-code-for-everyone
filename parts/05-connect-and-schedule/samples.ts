@@ -168,43 +168,53 @@ const worktreeNote = (named: string) =>
 const worktreeFiles = { [WORKTREE_PATH]: worktreeNote("```text\n.claude/worktrees/second-try\n```") };
 const SKILL_PATH = ".claude/skills/monday-report/SKILL.md";
 const REPORT_PATH = "out/reports/monday-report.md";
-sample("03-write-the-monday-report", "solution", {
+sample("03-make-the-monday-skill", "solution", { [SKILL_PATH]: skill, [REPORT_PATH]: report });
+sample("03-make-the-monday-skill", "wrong/guessed-numbers", {
+  [SKILL_PATH]: skill,
+  [REPORT_PATH]: guessed,
+});
+sample("03-make-the-monday-skill", "wrong/every-cafe-is-late", {
+  [SKILL_PATH]: skill,
+  [REPORT_PATH]: everyCafe,
+});
+sample("03-make-the-monday-skill", "wrong/no-skill", { [REPORT_PATH]: report });
+sample("04-write-the-monday-report", "solution", {
   [SKILL_PATH]: skill,
   [REPORT_PATH]: report,
   ...subagentFiles,
   ...worktreeFiles,
 });
-sample("03-write-the-monday-report", "wrong/guessed-numbers", {
+sample("04-write-the-monday-report", "wrong/guessed-numbers", {
   [SKILL_PATH]: skill,
   [REPORT_PATH]: guessed,
   ...subagentFiles,
   ...worktreeFiles,
 });
-sample("03-write-the-monday-report", "wrong/every-cafe-is-late", {
+sample("04-write-the-monday-report", "wrong/every-cafe-is-late", {
   [SKILL_PATH]: skill,
   [REPORT_PATH]: everyCafe,
   ...subagentFiles,
   ...worktreeFiles,
 });
-sample("03-write-the-monday-report", "wrong/no-skill", {
+sample("04-write-the-monday-report", "wrong/no-skill", {
   [REPORT_PATH]: report,
   ...subagentFiles,
   ...worktreeFiles,
 });
-sample("03-write-the-monday-report", "wrong/checker-can-edit-files", {
+sample("04-write-the-monday-report", "wrong/checker-can-edit-files", {
   [SKILL_PATH]: skill,
   [REPORT_PATH]: report,
   [CHECKER_PATH]: checker("Read, Grep, Glob, Write, Edit"),
   [CHECK_NOTE_PATH]: checkNote,
   ...worktreeFiles,
 });
-sample("03-write-the-monday-report", "wrong/never-ran-the-checker", {
+sample("04-write-the-monday-report", "wrong/never-ran-the-checker", {
   [SKILL_PATH]: skill,
   [REPORT_PATH]: report,
   [CHECKER_PATH]: checker("Read, Grep, Glob"),
   ...worktreeFiles,
 });
-sample("03-write-the-monday-report", "wrong/no-worktree-named", {
+sample("04-write-the-monday-report", "wrong/no-worktree-named", {
   [SKILL_PATH]: skill,
   [REPORT_PATH]: report,
   ...subagentFiles,
@@ -254,28 +264,28 @@ const twoRuns = {
   [reportAt("07:00")]: madeAt("07:00"),
   [reportAt("07:03")]: madeAt("07:03"),
 };
-sample("04-schedule-the-monday-report", "solution", {
+sample("05-schedule-the-monday-report", "solution", {
   ...twoRuns,
   ...unattended,
   "out/schedule.md": schedulePlan("0 7 * * 2"),
 });
-sample("04-schedule-the-monday-report", "wrong/one-report-written-over", {
+sample("05-schedule-the-monday-report", "wrong/one-report-written-over", {
   [SKILL_PATH]: skill,
   [REPORT_PATH]: madeAt("07:03"),
   ...unattended,
   "out/schedule.md": schedulePlan("0 7 * * 2"),
 });
-sample("04-schedule-the-monday-report", "wrong/day-names-in-cron", {
+sample("05-schedule-the-monday-report", "wrong/day-names-in-cron", {
   ...twoRuns,
   ...unattended,
   "out/schedule.md": schedulePlan("0 7 * * TUE"),
 });
-sample("04-schedule-the-monday-report", "wrong/runs-every-minute", {
+sample("05-schedule-the-monday-report", "wrong/runs-every-minute", {
   ...twoRuns,
   ...unattended,
   "out/schedule.md": schedulePlan("* * * * *"),
 });
-sample("04-schedule-the-monday-report", "wrong/copied-a-report", {
+sample("05-schedule-the-monday-report", "wrong/copied-a-report", {
   [SKILL_PATH]: scheduledSkill,
   [reportAt("07:00")]: madeAt("07:00"),
   ...unattended,
@@ -284,17 +294,17 @@ sample("04-schedule-the-monday-report", "wrong/copied-a-report", {
 });
 
 const solutionFiles = { ...twoRuns, "out/schedule.md": schedulePlan("0 7 * * 2") };
-sample("04-schedule-the-monday-report", "wrong/script-without-p", {
+sample("05-schedule-the-monday-report", "wrong/script-without-p", {
   ...solutionFiles,
   "out/loop.md": goodLoop,
   "run-report.sh": RUN_SCRIPT.replace('claude -p "', 'claude "'),
 });
-sample("04-schedule-the-monday-report", "wrong/script-skips-permissions", {
+sample("05-schedule-the-monday-report", "wrong/script-skips-permissions", {
   ...solutionFiles,
   "out/loop.md": goodLoop,
   "run-report.sh": RUN_SCRIPT.replace("--permission-mode acceptEdits", "--dangerously-skip-permissions"),
 });
-sample("04-schedule-the-monday-report", "wrong/loop-repeats-nothing", {
+sample("05-schedule-the-monday-report", "wrong/loop-repeats-nothing", {
   ...solutionFiles,
   "run-report.sh": RUN_SCRIPT,
   "out/loop.md": loopNote("/loop 1h"),

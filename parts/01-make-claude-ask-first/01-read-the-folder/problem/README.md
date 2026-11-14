@@ -70,12 +70,12 @@ The finished files are in `solution/out/`: `whats-here.md`, `prompts.md` and `sc
 
 ## If you get stuck
 
-| What you see                                                   | Try this                                                    |
-| -------------------------------------------------------------- | ----------------------------------------------------------- |
-| `FAIL it names all 11 folders of the bakery`                   | Ask Claude to add a line for each folder it left out.       |
-| `FAIL out/prompts.md is a saved prompt`                        | Write the path right after the @, with no space.            |
-| `FAIL out/screenshot-note.md has a "Screenshot of:" line`      | Add the first line and the "What Claude said" heading.      |
-| `FAIL every original bakery file is the same as the start`     | Run `bun run world status` to see what changed.             |
+| What you see                                               | Try this                                               |
+| ---------------------------------------------------------- | ------------------------------------------------------ |
+| `FAIL it names all 11 folders of the bakery`               | Ask Claude to add a line for each folder it left out.  |
+| `FAIL out/prompts.md is a saved prompt`                    | Write the path right after the @, with no space.       |
+| `FAIL out/screenshot-note.md has a "Screenshot of:" line`  | Add the first line and the "What Claude said" heading. |
+| `FAIL every original bakery file is the same as the start` | Run `bun run world status` to see what changed.        |
 
 ## Words you will use
 

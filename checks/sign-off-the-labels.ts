@@ -30,7 +30,9 @@ function stopCommands(folder: string): string[] {
 // The script file a Stop hook command runs: the first word that names a file in the folder.
 function hookScript(folder: string): string {
   const words = stopCommands(folder).flatMap((command) => command.split(/\s+/));
-  const names = words.map((word) => word.replace(/^["']|["']$/g, "").replace(/^\$\{?CLAUDE_PROJECT_DIR\}?"?\//, ""));
+  const names = words.map((word) =>
+    word.replace(/^["']|["']$/g, "").replace(/^\$\{?CLAUDE_PROJECT_DIR\}?"?\//, ""),
+  );
   const found = names.find((name) => has(folder, name) && /\.(sh|ts|js|py)$/.test(name));
   return found === undefined ? "" : text(folder, found);
 }
@@ -73,7 +75,7 @@ export default [
   {
     says: "the Stop hook runs a script in your folder that can block with exit 2",
     test: (folder) => /exit\s+2\b|process\.exit\(2\)/.test(hookScript(folder)),
-    tryNext: "ask Claude to make the script print what is wrong and exit with 2, so Claude cannot stop",
+    tryNext: "ask Claude to make the script print the problem and exit 2, so Claude cannot stop",
   },
   {
     says: `${REVIEW} says /code-review was run in a subagent`,

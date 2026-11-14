@@ -16,7 +16,7 @@ flowchart LR
 
 ## Watch it done
 
-The recipe `recipes/brownie.md` has wheat flour, butter, eggs, walnuts and soya lecithin. Its label must say:
+For example, the recipe `recipes/brownie.md` has wheat flour, butter, eggs, walnuts and soya lecithin. Its label must say:
 
 ```text
 Contains: gluten, milk, eggs, nuts, soya
