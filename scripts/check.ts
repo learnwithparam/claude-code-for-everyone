@@ -365,6 +365,34 @@ function checkNoDoItYourself() {
   }
 }
 
+// 8. The setup the course teaches keeps Claude out of the answer key.
+// Every settings file a learner copies (a solution or the finished bakery) denies Read of checks/.
+const ANSWER_KEY_RULE = "Read(../checks/**)";
+const SAFETY_STEP = "parts/01-make-claude-ask-first/02-set-the-safety-rules";
+
+function isTaughtSettings(file: string): boolean {
+  const path = relative(ROOT, file);
+  if (!path.endsWith(".claude/settings.json")) return false;
+  const isSolution = /\/solution\/\.claude\/settings\.json$/.test(path);
+  return isSolution || path.startsWith("world/finished/");
+}
+
+function checkAnswerKeyDenied() {
+  for (const file of allFiles.filter(isTaughtSettings)) {
+    const deny = JSON.parse(readText(file)).permissions?.deny ?? [];
+    if (!deny.includes(ANSWER_KEY_RULE)) {
+      const why = "so Claude cannot read the answer key";
+      report(file, `permissions.deny needs "${ANSWER_KEY_RULE}" ${why}`);
+    }
+  }
+  for (const page of ["problem/README.md", "solution/prompts.md"]) {
+    const path = join(ROOT, SAFETY_STEP, page);
+    if (!readText(path).includes(ANSWER_KEY_RULE)) {
+      report(path, `the page must teach the "${ANSWER_KEY_RULE}" deny rule`);
+    }
+  }
+}
+
 function runEveryCheck() {
   const allParts = parts();
   checkNoMakefile();
@@ -380,6 +408,7 @@ function runEveryCheck() {
   checkSchedules(allParts);
   checkSolutionsHavePrompts(allParts);
   checkNoDoItYourself();
+  checkAnswerKeyDenied();
   return allParts;
 }
 

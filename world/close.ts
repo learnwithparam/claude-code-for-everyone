@@ -125,7 +125,11 @@ export function whatsHere(folder: string) {
 
 export function safetyRules(folder: string) {
   const settings = {
-    permissions: { defaultMode: "default", blockWritesOutsideWorkingDirectories: true },
+    permissions: {
+      defaultMode: "default",
+      blockWritesOutsideWorkingDirectories: true,
+      deny: ["Read(../checks/**)"],
+    },
   };
   save(folder, ".claude/settings.json", `${JSON.stringify(settings, null, 2)}\n`);
   save(
