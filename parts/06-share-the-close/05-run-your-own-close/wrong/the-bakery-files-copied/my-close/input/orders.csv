@@ -1,0 +1,289 @@
+date,product,baked,sold,waste,takings
+2026-10-06,Sourdough Loaf,9,6,3,25.20
+2026-10-06,Seeded Rye Loaf,16,16,0,72.00
+2026-10-06,White Tin Loaf,14,12,2,34.80
+2026-10-06,Multigrain Loaf,12,12,0,48.00
+2026-10-06,Croissant,8,8,0,15.20
+2026-10-06,Pain au Chocolat,23,20,3,42.00
+2026-10-06,Almond Croissant,14,11,3,28.60
+2026-10-06,Cinnamon Bun,25,23,2,64.40
+2026-10-06,Brownie,12,10,2,27.50
+2026-10-06,Fruit Scone,8,8,0,17.60
+2026-10-06,Cheese Scone,18,17,1,40.80
+2026-10-06,Focaccia,12,11,1,39.60
+2026-10-07,Sourdough Loaf,23,23,0,96.60
+2026-10-07,Seeded Rye Loaf,23,23,0,103.50
+2026-10-07,White Tin Loaf,20,19,1,55.10
+2026-10-07,Multigrain Loaf,22,20,2,80.00
+2026-10-07,Croissant,24,24,0,45.60
+2026-10-07,Pain au Chocolat,16,15,1,31.50
+2026-10-07,Almond Croissant,11,8,3,20.80
+2026-10-07,Cinnamon Bun,20,18,2,50.40
+2026-10-07,Brownie,18,18,0,49.50
+2026-10-07,Fruit Scone,27,24,3,52.80
+2026-10-07,Cheese Scone,14,12,2,28.80
+2026-10-07,Focaccia,23,22,1,79.20
+2026-10-08,Sourdough Loaf,13,13,0,54.60
+2026-10-08,Seeded Rye Loaf,17,14,3,63.00
+2026-10-08,White Tin Loaf,25,25,0,72.50
+2026-10-08,Multigrain Loaf,19,17,2,68.00
+2026-10-08,Croissant,17,16,1,30.40
+2026-10-08,Pain au Chocolat,14,11,3,23.10
+2026-10-08,Almond Croissant,19,16,3,41.60
+2026-10-08,Cinnamon Bun,22,20,2,56.00
+2026-10-08,Brownie,20,20,0,55.00
+2026-10-08,Fruit Scone,22,19,3,41.80
+2026-10-08,Cheese Scone,27,24,3,57.60
+2026-10-08,Focaccia,22,20,2,72.00
+2026-10-09,Sourdough Loaf,11,8,3,33.60
+2026-10-09,Seeded Rye Loaf,20,19,1,85.50
+2026-10-09,White Tin Loaf,22,22,0,63.80
+2026-10-09,Multigrain Loaf,11,10,1,40.00
+2026-10-09,Croissant,12,10,2,19.00
+2026-10-09,Pain au Chocolat,22,20,2,42.00
+2026-10-09,Almond Croissant,21,20,1,52.00
+2026-10-09,Cinnamon Bun,17,17,0,47.60
+2026-10-09,Brownie,12,12,0,33.00
+2026-10-09,Fruit Scone,8,8,0,17.60
+2026-10-09,Cheese Scone,19,19,0,45.60
+2026-10-09,Focaccia,10,8,2,28.80
+2026-10-10,Sourdough Loaf,19,17,2,71.40
+2026-10-10,Seeded Rye Loaf,13,12,1,54.00
+2026-10-10,White Tin Loaf,11,8,3,23.20
+2026-10-10,Multigrain Loaf,14,13,1,52.00
+2026-10-10,Croissant,8,7,1,13.30
+2026-10-10,Pain au Chocolat,16,13,3,27.30
+2026-10-10,Almond Croissant,25,22,3,57.20
+2026-10-10,Cinnamon Bun,18,16,2,44.80
+2026-10-10,Brownie,15,12,3,33.00
+2026-10-10,Fruit Scone,12,11,1,24.20
+2026-10-10,Cheese Scone,20,20,0,48.00
+2026-10-10,Focaccia,22,20,2,72.00
+2026-10-11,Sourdough Loaf,20,20,0,84.00
+2026-10-11,Seeded Rye Loaf,8,8,0,36.00
+2026-10-11,White Tin Loaf,17,17,0,49.30
+2026-10-11,Multigrain Loaf,24,22,2,88.00
+2026-10-11,Croissant,13,13,0,24.70
+2026-10-11,Pain au Chocolat,10,10,0,21.00
+2026-10-11,Almond Croissant,10,8,2,20.80
+2026-10-11,Cinnamon Bun,22,19,3,53.20
+2026-10-11,Brownie,10,10,0,27.50
+2026-10-11,Fruit Scone,16,16,0,35.20
+2026-10-11,Cheese Scone,23,22,1,52.80
+2026-10-11,Focaccia,16,13,3,46.80
+2026-10-13,Sourdough Loaf,11,10,1,42.00
+2026-10-13,Seeded Rye Loaf,17,16,1,72.00
+2026-10-13,White Tin Loaf,23,22,1,63.80
+2026-10-13,Multigrain Loaf,22,20,2,80.00
+2026-10-13,Croissant,16,16,0,30.40
+2026-10-13,Pain au Chocolat,13,11,2,23.10
+2026-10-13,Almond Croissant,17,16,1,41.60
+2026-10-13,Cinnamon Bun,22,20,2,56.00
+2026-10-13,Brownie,11,9,2,24.75
+2026-10-13,Fruit Scone,22,22,0,48.40
+2026-10-13,Cheese Scone,21,21,0,50.40
+2026-10-13,Focaccia,18,15,3,54.00
+2026-10-14,Sourdough Loaf,22,22,0,92.40
+2026-10-14,Seeded Rye Loaf,20,19,1,85.50
+2026-10-14,White Tin Loaf,22,20,2,58.00
+2026-10-14,Multigrain Loaf,16,14,2,56.00
+2026-10-14,Croissant,9,8,1,15.20
+2026-10-14,Pain au Chocolat,15,15,0,31.50
+2026-10-14,Almond Croissant,18,18,0,46.80
+2026-10-14,Cinnamon Bun,8,5,3,14.00
+2026-10-14,Brownie,25,25,0,68.75
+2026-10-14,Fruit Scone,22,20,2,44.00
+2026-10-14,Cheese Scone,10,9,1,21.60
+2026-10-14,Focaccia,18,17,1,61.20
+2026-10-15,Sourdough Loaf,26,23,3,96.60
+2026-10-15,Seeded Rye Loaf,8,7,1,31.50
+2026-10-15,White Tin Loaf,15,14,1,40.60
+2026-10-15,Multigrain Loaf,22,22,0,88.00
+2026-10-15,Croissant,17,14,3,26.60
+2026-10-15,Pain au Chocolat,8,8,0,16.80
+2026-10-15,Almond Croissant,18,17,1,44.20
+2026-10-15,Cinnamon Bun,13,10,3,28.00
+2026-10-15,Brownie,17,17,0,46.75
+2026-10-15,Fruit Scone,25,25,0,55.00
+2026-10-15,Cheese Scone,15,15,0,36.00
+2026-10-15,Focaccia,12,10,2,36.00
+2026-10-16,Sourdough Loaf,13,10,3,42.00
+2026-10-16,Seeded Rye Loaf,26,23,3,103.50
+2026-10-16,White Tin Loaf,17,17,0,49.30
+2026-10-16,Multigrain Loaf,20,19,1,76.00
+2026-10-16,Croissant,18,15,3,28.50
+2026-10-16,Pain au Chocolat,10,8,2,16.80
+2026-10-16,Almond Croissant,25,25,0,65.00
+2026-10-16,Cinnamon Bun,19,18,1,50.40
+2026-10-16,Brownie,10,8,2,22.00
+2026-10-16,Fruit Scone,24,23,1,50.60
+2026-10-16,Cheese Scone,21,18,3,43.20
+2026-10-16,Focaccia,17,17,0,61.20
+2026-10-17,Sourdough Loaf,22,21,1,88.20
+2026-10-17,Seeded Rye Loaf,24,21,3,94.50
+2026-10-17,White Tin Loaf,13,10,3,29.00
+2026-10-17,Multigrain Loaf,19,17,2,68.00
+2026-10-17,Croissant,27,26,1,49.40
+2026-10-17,Pain au Chocolat,9,7,2,14.70
+2026-10-17,Almond Croissant,23,22,1,57.20
+2026-10-17,Cinnamon Bun,27,27,0,75.60
+2026-10-17,Brownie,8,8,0,22.00
+2026-10-17,Fruit Scone,11,9,2,19.80
+2026-10-17,Cheese Scone,14,12,2,28.80
+2026-10-17,Focaccia,10,7,3,25.20
+2026-10-18,Sourdough Loaf,24,24,0,100.80
+2026-10-18,Seeded Rye Loaf,10,8,2,36.00
+2026-10-18,White Tin Loaf,17,15,2,43.50
+2026-10-18,Multigrain Loaf,11,8,3,32.00
+2026-10-18,Croissant,24,24,0,45.60
+2026-10-18,Pain au Chocolat,23,20,3,42.00
+2026-10-18,Almond Croissant,8,5,3,13.00
+2026-10-18,Cinnamon Bun,22,21,1,58.80
+2026-10-18,Brownie,8,8,0,22.00
+2026-10-18,Fruit Scone,13,13,0,28.60
+2026-10-18,Cheese Scone,18,17,1,40.80
+2026-10-18,Focaccia,18,16,2,57.60
+2026-10-20,Sourdough Loaf,14,12,2,50.40
+2026-10-20,Seeded Rye Loaf,19,16,3,72.00
+2026-10-20,White Tin Loaf,13,11,2,31.90
+2026-10-20,Multigrain Loaf,25,25,0,100.00
+2026-10-20,Croissant,20,20,0,38.00
+2026-10-20,Pain au Chocolat,25,24,1,50.40
+2026-10-20,Almond Croissant,8,7,1,18.20
+2026-10-20,Cinnamon Bun,22,20,2,56.00
+2026-10-20,Brownie,25,25,0,68.75
+2026-10-20,Fruit Scone,10,9,1,19.80
+2026-10-20,Cheese Scone,22,19,3,45.60
+2026-10-20,Focaccia,16,13,3,46.80
+2026-10-21,Sourdough Loaf,18,18,0,75.60
+2026-10-21,Seeded Rye Loaf,14,13,1,58.50
+2026-10-21,White Tin Loaf,18,16,2,46.40
+2026-10-21,Multigrain Loaf,19,18,1,72.00
+2026-10-21,Croissant,18,15,3,28.50
+2026-10-21,Pain au Chocolat,23,22,1,46.20
+2026-10-21,Almond Croissant,8,5,3,13.00
+2026-10-21,Cinnamon Bun,16,16,0,44.80
+2026-10-21,Brownie,19,16,3,44.00
+2026-10-21,Fruit Scone,12,11,1,24.20
+2026-10-21,Cheese Scone,22,22,0,52.80
+2026-10-21,Focaccia,27,27,0,97.20
+2026-10-22,Sourdough Loaf,12,12,0,50.40
+2026-10-22,Seeded Rye Loaf,17,17,0,76.50
+2026-10-22,White Tin Loaf,21,21,0,60.90
+2026-10-22,Multigrain Loaf,10,10,0,40.00
+2026-10-22,Croissant,15,13,2,24.70
+2026-10-22,Pain au Chocolat,18,15,3,31.50
+2026-10-22,Almond Croissant,13,13,0,33.80
+2026-10-22,Cinnamon Bun,24,24,0,67.20
+2026-10-22,Brownie,10,8,2,22.00
+2026-10-22,Fruit Scone,18,18,0,39.60
+2026-10-22,Cheese Scone,19,18,1,43.20
+2026-10-22,Focaccia,26,24,2,86.40
+2026-10-23,Sourdough Loaf,19,16,3,67.20
+2026-10-23,Seeded Rye Loaf,13,10,3,45.00
+2026-10-23,White Tin Loaf,11,11,0,31.90
+2026-10-23,Multigrain Loaf,17,15,2,60.00
+2026-10-23,Croissant,20,19,1,36.10
+2026-10-23,Pain au Chocolat,8,6,2,12.60
+2026-10-23,Almond Croissant,8,8,0,20.80
+2026-10-23,Cinnamon Bun,22,19,3,53.20
+2026-10-23,Brownie,13,11,2,30.25
+2026-10-23,Fruit Scone,23,21,2,46.20
+2026-10-23,Cheese Scone,19,17,2,40.80
+2026-10-23,Focaccia,13,12,1,43.20
+2026-10-24,Sourdough Loaf,16,14,2,58.80
+2026-10-24,Seeded Rye Loaf,18,17,1,76.50
+2026-10-24,White Tin Loaf,8,6,2,17.40
+2026-10-24,Multigrain Loaf,11,10,1,40.00
+2026-10-24,Croissant,19,17,2,32.30
+2026-10-24,Pain au Chocolat,22,22,0,46.20
+2026-10-24,Almond Croissant,21,20,1,52.00
+2026-10-24,Cinnamon Bun,13,12,1,33.60
+2026-10-24,Brownie,25,25,0,68.75
+2026-10-24,Fruit Scone,13,13,0,28.60
+2026-10-24,Cheese Scone,8,6,2,14.40
+2026-10-24,Focaccia,13,10,3,36.00
+2026-10-25,Sourdough Loaf,12,9,3,37.80
+2026-10-25,Seeded Rye Loaf,27,27,0,121.50
+2026-10-25,White Tin Loaf,14,12,2,34.80
+2026-10-25,Multigrain Loaf,9,6,3,24.00
+2026-10-25,Croissant,25,25,0,47.50
+2026-10-25,Pain au Chocolat,20,19,1,39.90
+2026-10-25,Almond Croissant,22,20,2,52.00
+2026-10-25,Cinnamon Bun,17,15,2,42.00
+2026-10-25,Brownie,15,13,2,35.75
+2026-10-25,Fruit Scone,18,17,1,37.40
+2026-10-25,Cheese Scone,20,17,3,40.80
+2026-10-25,Focaccia,16,16,0,57.60
+2026-10-27,Sourdough Loaf,22,20,2,84.00
+2026-10-27,Seeded Rye Loaf,13,11,2,49.50
+2026-10-27,White Tin Loaf,21,19,2,55.10
+2026-10-27,Multigrain Loaf,15,13,2,52.00
+2026-10-27,Croissant,10,9,1,17.10
+2026-10-27,Pain au Chocolat,24,22,2,46.20
+2026-10-27,Almond Croissant,20,20,0,52.00
+2026-10-27,Cinnamon Bun,23,22,1,61.60
+2026-10-27,Brownie,24,22,2,60.50
+2026-10-27,Fruit Scone,15,12,3,26.40
+2026-10-27,Cheese Scone,11,8,3,19.20
+2026-10-27,Focaccia,25,22,3,79.20
+2026-10-28,Sourdough Loaf,15,15,0,63.00
+2026-10-28,Seeded Rye Loaf,9,6,3,27.00
+2026-10-28,White Tin Loaf,16,16,0,46.40
+2026-10-28,Multigrain Loaf,15,14,1,56.00
+2026-10-28,Croissant,14,14,0,26.60
+2026-10-28,Pain au Chocolat,18,16,2,33.60
+2026-10-28,Almond Croissant,11,10,1,26.00
+2026-10-28,Cinnamon Bun,17,16,1,44.80
+2026-10-28,Brownie,22,21,1,57.75
+2026-10-28,Fruit Scone,23,21,2,46.20
+2026-10-28,Cheese Scone,16,16,0,38.40
+2026-10-28,Focaccia,27,27,0,97.20
+2026-10-29,Sourdough Loaf,24,24,0,100.80
+2026-10-29,Seeded Rye Loaf,19,18,1,81.00
+2026-10-29,White Tin Loaf,9,8,1,23.20
+2026-10-29,Multigrain Loaf,19,18,1,72.00
+2026-10-29,Croissant,23,21,2,39.90
+2026-10-29,Pain au Chocolat,13,11,2,23.10
+2026-10-29,Almond Croissant,15,12,3,31.20
+2026-10-29,Cinnamon Bun,26,24,2,67.20
+2026-10-29,Brownie,22,19,3,52.25
+2026-10-29,Fruit Scone,25,24,1,52.80
+2026-10-29,Cheese Scone,15,14,1,33.60
+2026-10-29,Focaccia,13,12,1,43.20
+2026-10-30,Sourdough Loaf,22,21,1,88.20
+2026-10-30,Seeded Rye Loaf,20,19,1,85.50
+2026-10-30,White Tin Loaf,23,23,0,66.70
+2026-10-30,Multigrain Loaf,17,14,3,56.00
+2026-10-30,Croissant,21,19,2,36.10
+2026-10-30,Pain au Chocolat,26,26,0,54.60
+2026-10-30,Almond Croissant,13,10,3,26.00
+2026-10-30,Cinnamon Bun,18,15,3,42.00
+2026-10-30,Brownie,12,12,0,33.00
+2026-10-30,Fruit Scone,16,13,3,28.60
+2026-10-30,Cheese Scone,20,20,0,48.00
+2026-10-30,Focaccia,12,10,2,36.00
+2026-10-31,Sourdough Loaf,18,18,0,75.60
+2026-10-31,Seeded Rye Loaf,24,23,1,103.50
+2026-10-31,White Tin Loaf,9,9,0,26.10
+2026-10-31,Multigrain Loaf,11,10,1,40.00
+2026-10-31,Croissant,25,25,0,47.50
+2026-10-31,Pain au Chocolat,24,23,1,48.30
+2026-10-31,Almond Croissant,8,6,2,15.60
+2026-10-31,Cinnamon Bun,25,24,1,67.20
+2026-10-31,Brownie,8,6,2,16.50
+2026-10-31,Fruit Scone,26,24,2,52.80
+2026-10-31,Cheese Scone,27,27,0,64.80
+2026-10-31,Focaccia,21,19,2,68.40
+2026-11-01,Sourdough Loaf,11,11,0,46.20
+2026-11-01,Seeded Rye Loaf,9,7,2,31.50
+2026-11-01,White Tin Loaf,10,7,3,20.30
+2026-11-01,Multigrain Loaf,21,19,2,76.00
+2026-11-01,Croissant,8,6,2,11.40
+2026-11-01,Pain au Chocolat,18,16,2,33.60
+2026-11-01,Almond Croissant,15,15,0,39.00
+2026-11-01,Cinnamon Bun,21,20,1,56.00
+2026-11-01,Brownie,15,13,2,35.75
+2026-11-01,Fruit Scone,20,19,1,41.80
+2026-11-01,Cheese Scone,21,21,0,50.40
+2026-11-01,Focaccia,9,9,0,32.40

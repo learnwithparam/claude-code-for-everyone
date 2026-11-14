@@ -8,7 +8,7 @@ Everything you built lives on one laptop. A new person at the bakery could not r
 
 Anthropic's legal team packed their way of working into a plugin. Then they "pointed Claude at 742 Jira tickets, the full legal intake backlog" ([Anthropic](https://claude.com/resources/guides/deploying-claude-across-your-organization/how-anthropic-teams-use-cowork)).
 
-In this part, you publish the menu page and pack your skills as a kit. Then you run the whole close on new orders and bills that you have never seen. Last, you map the close onto your own job.
+In this part, you publish the menu page and pack your skills as a kit. Then you run the whole close on new orders and bills that you have never seen. Then you map the close onto your own job and run it on a copy of your own files.
 
 For example, the menu page `out/site/index.html` shows each product with its price and allergens. The Croissant shows £1.90 and "Contains: gluten, milk, eggs".
 
@@ -30,6 +30,7 @@ flowchart LR
 | [pack-the-bakery-kit](02-pack-the-bakery-kit/problem/README.md)     | 20      | `kit/.claude-plugin/plugin.json` and both skills | The kit parses and holds both skills                                   |
 | [run-the-friday-close](03-run-the-friday-close/problem/README.md)   | 25      | One skill that runs the whole close              | Every earlier check passes on new files the check makes                |
 | [map-your-own-close](04-map-your-own-close/problem/README.md)       | 15      | `out/friday-close.md`                            | Your own task, its files, its first rule, one check a script could run |
+| [run-your-own-close](05-run-your-own-close/problem/README.md)       | 20      | `my-close/` with your files, rules, results, log | Your own copy, a Never rule, a result, and a log that names real files |
 
 ## Walkthrough
 
@@ -81,13 +82,21 @@ bun run verify map-your-own-close
 
 Expect: `Done. All 7 rules pass.`
 
+Last, run the close on a copy of your own files in `my-close/`:
+
+```bash
+bun run verify run-your-own-close
+```
+
+Expect: `Done. All 8 rules pass.`
+
 To check the whole part at once:
 
 ```bash
 bun run verify part share-the-close
 ```
 
-Expect: `Part share-the-close is done: 4/4 steps pass.`
+Expect: `Part share-the-close is done: 5/5 steps pass.`
 
 ## Assignment
 

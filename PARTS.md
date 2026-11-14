@@ -64,7 +64,7 @@ The checks run `git` in the bakery folder. In CI, a sample folder has no `.git`:
 
 `allergens/allergen-list.csv` is the bakery's own word list for these 12 recipes. It is not a legal list. Before this part ships, read the regulator's page (food.gov.uk was blocked in the spine session) and say in the part README that the course teaches a way of working, not food law.
 
-### `parts/05-connect-and-schedule/` (75 minutes)
+### `parts/05-connect-and-schedule/` (80 minutes)
 
 | Step                       | Min | Screen | The check reads                                                                                                                                                                                                                                                                               |
 | -------------------------- | --- | ------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -75,7 +75,7 @@ The checks run `git` in the bakery folder. In CI, a sample folder has no `.git`:
 
 The till connector is a small local MCP server to write in `world/till-server.ts`, reading `till/sales.csv` read only. Pin `@modelcontextprotocol/sdk` exactly, current on the day. The fallback for the scheduled task is required (REVIEW.md): free plans and locked laptops cannot schedule.
 
-### `parts/06-share-the-close/` (85 minutes)
+### `parts/06-share-the-close/` (110 minutes)
 
 | Step                  | Min | Screen | The check reads                                                                                                                                                                                                |
 | --------------------- | --- | ------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |

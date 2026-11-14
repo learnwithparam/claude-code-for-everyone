@@ -228,4 +228,56 @@ sample("04-map-your-own-close", "wrong/no-check", {
   [MAP]: closeMap(MY_TASK, MY_FILES, MY_RULE, "Claude checks it."),
 });
 
+// ---- run-your-own-close ----
+
+const MINE = "my-close";
+const ORDERS_COPY = "order,cafe,loaves\nO-1,Pine Cafe,12\nO-2,Harbour Cafe,8\n";
+const NOTE_COPY = "Delivery note N-7\nOrder: O-1\nLoaves delivered: 12\n";
+const MATCHES = "note,order,matches\nN-7,O-1,yes\n";
+const MY_RULES =
+  "# My close\n\n## Never\n\n- Never change a file in input/. Write results to out/.\n";
+const RUN_LOG = `# Run log
+
+## What I asked
+
+Match each delivery note to its order, and say if the loaves agree.
+
+## Files I used
+
+- orders.csv
+- note-7.txt
+
+## What Claude made
+
+- matches.csv
+
+## How I checked
+
+I opened matches.csv and compared N-7 with order O-1 in orders.csv. Both say 12 loaves, and the file says yes.
+`;
+const myFiles = (extra: Files): Files => ({
+  [`${MINE}/input/orders.csv`]: ORDERS_COPY,
+  [`${MINE}/input/note-7.txt`]: NOTE_COPY,
+  [`${MINE}/CLAUDE.md`]: MY_RULES,
+  [`${MINE}/out/matches.csv`]: MATCHES,
+  [`${MINE}/out/run-log.md`]: RUN_LOG,
+  ...extra,
+});
+sample("05-run-your-own-close", "solution", myFiles({}));
+sample("05-run-your-own-close", "wrong/the-bakery-files-copied", {
+  ...myFiles({}),
+  [`${MINE}/input/orders.csv`]: readFileSync(join(SEED, "till", "sales.csv")),
+  [`${MINE}/input/note-7.txt`]: readFileSync(join(SEED, "notes", "owner-notes.md")),
+});
+const { [`${MINE}/out/matches.csv`]: _matches, ...withoutMatches } = myFiles({});
+sample("05-run-your-own-close", "wrong/nothing-made", withoutMatches);
+sample("05-run-your-own-close", "wrong/log-names-a-file-that-is-not-there", {
+  ...myFiles({}),
+  [`${MINE}/out/run-log.md`]: RUN_LOG.replace("- matches.csv", "- matches-final.csv"),
+});
+sample("05-run-your-own-close", "wrong/no-never-rule", {
+  ...myFiles({}),
+  [`${MINE}/CLAUDE.md`]: "# My close\n\nBe careful with orders.\n",
+});
+
 console.log("Wrote the samples for share-the-close.");
