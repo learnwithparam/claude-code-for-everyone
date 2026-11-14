@@ -33,6 +33,8 @@ flowchart TB
 
 Open the `wren-street` folder in Claude Code, as in the last part. Stay in Manual mode. Each step page has the prompt to paste. After each one, run its check.
 
+To check, ask Claude to check your work. Say: "Please check my work for the step name. Run it and tell me what it printed. Do not change anything to make it pass." The commands below are what Claude runs. The [ways of working](../../00-orientation/ways-of-working.md) page lists every mode and command used here.
+
 First, Claude writes the house rules. Read them before you say yes. Then start a new chat and type `/memory` to see that Claude read them.
 
 ```bash

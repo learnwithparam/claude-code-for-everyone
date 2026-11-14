@@ -4,7 +4,7 @@
 
 Jess wants the report waiting for her. A scheduled task can do that. It starts Claude on a clock, with nobody there.
 
-Nobody is there to say no. So each run keeps its own file and says when it was made. And you read the first runs before you trust it. Anthropic's sales team did the same: "After enough manual checks confirmed Claude was getting it right, he removed the validation and lets it run" ([Anthropic](https://claude.com/resources/guides/deploying-claude-across-your-organization/how-anthropic-teams-use-cowork)).
+Nobody is there to say no. So each run keeps its own file and says when it was made. And you read the first runs before you trust it.
 
 ```mermaid
 flowchart LR
@@ -48,7 +48,13 @@ For example, the cron line `0 7 * * 2` runs at 7 in the morning on the second da
 - Way 1: they were made 55 or more minutes apart. Or way 2: `out/schedule.md` has a cron line of numbers and says why you read the first run.
 - No original file has changed.
 
-The check says which way passed.
+Ask Claude to check:
+
+```text
+Please check my work for schedule-the-monday-report. Run bun run verify schedule-the-monday-report and tell me what it printed. Do not change anything to make it pass.
+```
+
+It runs this:
 
 ```bash
 bun run verify schedule-the-monday-report

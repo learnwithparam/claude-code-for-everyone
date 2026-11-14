@@ -20,14 +20,16 @@ flowchart LR
 
 ## How to run a command
 
-Each grey box in this course is a command. You can paste it into a terminal that is open in the course folder. Or you can ask Claude Code to run it for you:
+Each grey box in this course is a command. There are two ways to run one.
+
+First, you install Claude Code. For that one step you use a terminal. A terminal is a window where you type commands. On a Mac, press Command and Space, type Terminal, and press Enter. On Windows, click Start, type PowerShell, and press Enter. For example, on a Mac you see a white or black window with a blinking cursor. That is the terminal.
+
+After Claude Code is installed, you can ask it to run every other command:
 
 1. Start Claude Code in the course folder. In a terminal, go to the folder and type `claude`. In the desktop app, click the **Code** tab, pick **Local**, then **Open folder** and choose the course folder.
 2. Copy the command from the grey box. Paste it to Claude and add: "Please run this."
 3. Claude asks before it runs a command. Read what it will run. If it matches the box, say yes.
 4. Check that you see the text on the **Expect** line under the box.
-
-Until you install Claude Code below, use a terminal.
 
 ## Walkthrough
 
@@ -138,13 +140,21 @@ Ask Claude to open the file `finished/index.html` in your web browser. This is t
 
 ![The finished Friday close: clean orders, flagged invoices, a fixed label and the report](images/finished-close.png)
 
-Then do the first step: [meet-the-bakery](meet-the-bakery/problem/README.md). Its check is:
+Then do the first step: [meet-the-bakery](meet-the-bakery/problem/README.md). To check it, ask Claude:
+
+```text
+Please check my work for meet-the-bakery. Run bun run verify meet-the-bakery and tell me what it printed. Do not change anything to make it pass.
+```
+
+Claude runs this command. You can paste it too:
 
 ```bash
 bun run verify meet-the-bakery
 ```
 
 Expect: `Done. All 5 rules pass.`
+
+The [ways of working](ways-of-working.md) page lists every Claude Code technique this course teaches, with the step for each.
 
 ## Is my work safe?
 

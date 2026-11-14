@@ -18,6 +18,7 @@ This file is for the sessions that build one part each. A part session can start
 - The finished run leaves every label's `Checked by:` line empty, because a person signs. When you build `sign-off-the-labels`, sign the labels in `world/finished.ts` after the run, as a separate step that says it is the person, not Claude.
 - Retake pictures with `bun run pictures`. Add a step's own picture there if it needs more than the passing check.
 - Prose: grade 6 or lower (`bun test` measures it), no em dash, no week, day, hour, weekday or date. The Friday close and the Monday report are business names, not times.
+- A part that teaches a new Claude Code technique adds it to `00-orientation/ways-of-working.md`, with a link to the step.
 - Add every new FAIL line to `00-orientation/troubleshooting.md`. A test fails until you do.
 - Fill the part README's Walkthrough: one `bun run verify <step>` per step, each with its exact Expect line.
 

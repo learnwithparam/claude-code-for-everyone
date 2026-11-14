@@ -32,6 +32,14 @@ Do not use the example on this page. Use your own task. You will come back to th
 - The sentence is your own, not the example.
 - No file in the bakery has changed.
 
+To check, ask Claude:
+
+```text
+Please check my work for meet-the-bakery. Run bun run verify meet-the-bakery and tell me what it printed. Do not change anything to make it pass.
+```
+
+Claude runs this command. You can paste it too:
+
 ```bash
 bun run verify meet-the-bakery
 ```

@@ -45,6 +45,14 @@ Do not let Claude change a price that was already right. The menu on the wall is
 - `out/price-changes.md` names the 3 products that changed, and no others.
 - The original price list has not changed.
 
+To check, ask Claude:
+
+```text
+Please check my work for fix-the-price-list. Run bun run verify fix-the-price-list and tell me what it printed. Do not change anything to make it pass.
+```
+
+It runs:
+
 ```bash
 bun run verify fix-the-price-list
 ```

@@ -38,6 +38,14 @@ Make sure the save point is made in `wren-street`, not in the course folder arou
 - Every original file is in it.
 - Your work in `out/` is in it too.
 
+To check, ask Claude:
+
+```text
+Please check my work for make-a-save-point. Run bun run verify make-a-save-point and tell me what it printed. Do not change anything to make it pass.
+```
+
+It runs:
+
 ```bash
 bun run verify make-a-save-point
 ```

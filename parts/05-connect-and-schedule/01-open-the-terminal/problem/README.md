@@ -25,7 +25,7 @@ Start Claude Code in the bakery folder. Find Plan mode with the keys, then go ba
 cd wren-street
 ```
 
-Expect: no output. The next line starts in `wren-street`.
+Expect: no output.
 
 3. See which Claude Code you have:
 
@@ -44,7 +44,7 @@ claude
 Expect: Claude asks if you trust the files in this folder. Press the down arrow to pick **Yes, I trust this folder**, then press Enter. The first choice is **No, exit**.
 
 5. Press **Shift+Tab** a few times. Watch the line under the box where you type. That line is the status bar. Stop when it says `plan mode on`. Copy the words you see.
-6. Press **Shift+Tab** again until the status bar says `manual mode on`. Older versions of Claude Code show no mode at all; that is Manual mode too. In Manual mode, Claude asks you before each change.
+6. Press **Shift+Tab** again until the status bar says `manual mode on`. Old versions show no mode. That is Manual mode too. In Manual mode, Claude asks you before each change.
 7. Paste this, with your own words in the brackets:
 
 ```text
@@ -56,7 +56,7 @@ Make out/terminal.md with three headings.
 
 Claude shows the file and asks first. Read it, then say yes. Type `/exit` to leave Claude.
 
-For example, in Plan mode the status bar says `⏸ plan mode on (shift+tab to cycle)`. In Plan mode, Claude reads and plans, but it changes nothing.
+For example, in Plan mode the status bar says `⏸ plan mode on (shift+tab to cycle)`. Claude plans but changes nothing.
 
 ## Done when
 
@@ -64,6 +64,14 @@ For example, in Plan mode the status bar says `⏸ plan mode on (shift+tab to cy
 - It has the words the status bar showed in Plan mode.
 - It says you work in Manual mode.
 - No original file has changed.
+
+Ask Claude to check:
+
+```text
+Please check my work for open-the-terminal. Run bun run verify open-the-terminal and tell me what it printed. Do not change anything to make it pass.
+```
+
+It runs this:
 
 ```bash
 bun run verify open-the-terminal

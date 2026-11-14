@@ -36,6 +36,8 @@ The free plan and some work laptops cannot run scheduled tasks. The last step ha
 
 This part starts in the terminal. Open a terminal, go to the course folder, then into the bakery. Run each check from there.
 
+To check, ask Claude to check your work. Say: "Please check my work for the step name. Run it and tell me what it printed. Do not change anything to make it pass." The commands below are what Claude runs. The [ways of working](../../00-orientation/ways-of-working.md) page lists every mode and command used here.
+
 First, start Claude Code in the bakery folder. Write down its version and the Plan mode words, as the step page shows.
 
 ```bash

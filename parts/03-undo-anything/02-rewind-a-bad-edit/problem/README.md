@@ -42,6 +42,14 @@ I rewound with /rewind and Restore code. The menu is back to £4.00.
 - `menu/menu.md` is the same as at the save point.
 - `out/undo-log.md` has a line that says "rewound" and how.
 
+To check, ask Claude:
+
+```text
+Please check my work for rewind-a-bad-edit. Run bun run verify rewind-a-bad-edit and tell me what it printed. Do not change anything to make it pass.
+```
+
+It runs:
+
 ```bash
 bun run verify rewind-a-bad-edit
 ```

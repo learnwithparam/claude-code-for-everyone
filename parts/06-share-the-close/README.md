@@ -35,6 +35,8 @@ flowchart LR
 
 Open a terminal in the course folder. Start Claude Code in `wren-street` for each job, as each step page shows. Run each check from the course folder.
 
+To check, ask Claude to check your work. Say: "Please check my work for the step name. Run it and tell me what it printed. Do not change anything to make it pass." The commands below are what Claude runs. The [ways of working](../../00-orientation/ways-of-working.md) page lists every mode and command used here.
+
 First, ask Claude for the menu page, from the clean prices and the new labels.
 
 ```bash

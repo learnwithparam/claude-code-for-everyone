@@ -35,6 +35,8 @@ This course teaches a way of working, not food law. A person always signs the la
 
 Open the `wren-street` folder in Claude Code. Stay in Manual mode. You need the clean price list from the first part and the save points from the last part.
 
+To check, ask Claude to check your work. Say: "Please check my work for the step name. Run it and tell me what it printed. Do not change anything to make it pass." The commands below are what Claude runs. The [ways of working](../../00-orientation/ways-of-working.md) page lists every mode and command used here.
+
 First, ask Claude for the done list, and read it. Then ask for a save point called `done-list`, before any label exists.
 
 ```bash

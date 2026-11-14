@@ -34,6 +34,14 @@ Claude may ask to install DuckDB. Say yes, because it is a normal package. Then 
 
 Write each prompt you used in `prompts.md`. Then run the check:
 
+To check, ask Claude:
+
+```text
+Please check my work for find-the-unmatched-invoices. Run bun run verify find-the-unmatched-invoices and tell me what it printed. Do not change anything to make it pass.
+```
+
+It runs:
+
 ```bash
 bun run verify find-the-unmatched-invoices
 ```
