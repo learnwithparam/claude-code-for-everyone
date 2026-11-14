@@ -202,3 +202,17 @@ Find the words you see in the first column. Each message any course script can p
 | ------------------------------------------------- | ----------------------------------------------------------- | ---------------------------------------------------------------------- |
 | `FAIL  The saved query runs with DuckDB 2.0.0`    | There is no `unmatched.sql`, or DuckDB 2.0.0 cannot run it. | Ask Claude to save `unmatched.sql` in `assignment/starter` and run it. |
 | `FAIL  The mismatch count matches the answer key` | The query lists too many bills or too few.                  | Say what matched means. Only the second bill on an order is a copy.    |
+
+## The checks added to later steps
+
+| What you see                                                                          | What it means                             | Fix                                                                                                |
+| ------------------------------------------------------------------------------------- | ----------------------------------------- | -------------------------------------------------------------------------------------------------- |
+| `FAIL  HL-873 is still flagged, and the note says its bill tried to give an order`    | The check did not find this in your work. | Open HL-873.pdf, find the line that talks to the assistant, and ask Claude to name it in the note. |
+| `FAIL  Claude cannot read the private/ folder (a Read deny rule)`                     | The check did not find this in your work. | Ask Claude to add Read(./private/**) to the deny list inside permissions.                          |
+| `FAIL  it says to use /clear and start a new chat for each task`                      | The check did not find this in your work. | Ask Claude to add the one-task-per-chat line to CLAUDE.md.                                         |
+| `FAIL  the hook script stops an edit to till/sales.csv (exit code 2)`                 | The check did not find this in your work. | Ask Claude to make block-till.sh print a reason and exit 2 when the path has till/.                |
+| `FAIL  the hook script lets an edit to out/notes.md through (exit code 0)`            | The check did not find this in your work. | Ask Claude to make block-till.sh exit 0 for every path that is not in till/.                       |
+| `FAIL  a subagent numbers-checker is in .claude/agents/ and can only read files`      | The check did not find this in your work. | Ask Claude to make the subagent with the line tools: Read, Grep, Glob.                             |
+| `FAIL  my-close/input/ holds a copy of 2 or more of your own files, not the bakery's` | The check did not find this in your work. | Copy 2 or more made-up or cleaned files from your own work into my-close/input/.                   |
+| `FAIL  every file under Files I used is in my-close/input/`                           | The check did not find this in your work. | List only files that are really in my-close/input/, one per dash line.                             |
+| `FAIL  How I checked says what you looked at and what you found, in a few words`      | The check did not find this in your work. | Write a few lines: which result you opened, what you compared, what you found.                     |
