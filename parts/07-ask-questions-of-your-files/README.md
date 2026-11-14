@@ -12,7 +12,7 @@ For example, one query lists every bill that is not the first bill for its order
 
 ```mermaid
 flowchart TB
-  H[Part 2: you reconciled the bills] --> K[(Answer key: 5 faulty bills)]
+  H[Teach the bakery: you reconciled the bills] --> K[(Answer key: 5 faulty bills)]
   C[Claude Code] -->|writes| Q[unmatched.sql]
   Q --> D[DuckDB 2.0.0]
   F[(Two CSV files)] --> D
