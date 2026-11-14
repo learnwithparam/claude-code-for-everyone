@@ -6,9 +6,21 @@ This course is for people who run part of a business in sheets, PDFs and email: 
 
 After this course, you can give Claude a folder of business files and tell it the rules. You can check what it made with a script, and undo anything. You leave with a project that proves it.
 
+## Start here
+
+Claude Code is a helper you talk to in plain words. You type what you want. It reads your files and makes new ones. It asks before it changes anything.
+
+You do not write code in this course. You paste prompts and read what comes back.
+
+1. Install Claude Code and sign in. The [orientation](00-orientation/README.md) shows each click.
+2. Open Claude Code in this course folder. The orientation shows how, in the app or in a terminal.
+3. Paste each command below to Claude and add: "Please run this."
+
+For example, to run the first command, you tell Claude: "Please run `bun install`."
+
 ## See the finished work first
 
-You work in a made-up bakery, Wren Street Bakery. Here is the whole Friday close, done by the real Claude Code with the setup you will build. You need [Bun](https://bun.sh) and, for a live run, Claude Code signed in with your Claude account. With no Claude Code, you see a run we saved from the real one.
+You work in a made-up bakery, Wren Street Bakery. Here is the whole Friday close, done by the real Claude Code with the setup you will build. For a live run you need Claude Code signed in with your Claude account and a small tool called [Bun](https://bun.sh). The orientation shows how to get both. With no Claude Code, you see a run we saved from the real one.
 
 ```bash
 bun install
@@ -40,7 +52,7 @@ Open `finished/index.html` in your browser. You should see this:
 
 ![The finished Friday close: clean orders, flagged invoices, a fixed label, the report and the price fixes](images/finished-system.png)
 
-New to all of this? Start with [00-orientation](00-orientation/README.md). It shows you how to run each command by asking Claude.
+Stuck on the Start here part? The [orientation](00-orientation/README.md) shows how to get Claude Code and how to run each command by asking Claude.
 
 ## What you work on
 
@@ -56,7 +68,7 @@ flowchart LR
   You[You] -->|ask| C[Claude Code, in Manual mode]
   Bakery -->|read only| C
   C --> Out[New files in out/]
-  Out --> V[bun run verify step-name]
+  Out --> V[Check]
   V -->|PASS| Next[Next step]
   V -->|FAIL and Try next| You
 ```
@@ -80,7 +92,13 @@ Claude never changes Jess's original files. It makes new files in `out/`. A chec
 | [Share it](parts/06-share-the-close/README.md)                                            | A web page, a kit for the next hire, the whole close on new data | publish-the-menu-page, pack-the-bakery-kit, run-the-friday-close, map-your-own-close     | 85      |
 | [Ask questions of your files with DuckDB](parts/07-ask-questions-of-your-files/README.md) | Redo the invoice check as one query over two CSV files           | find-the-unmatched-invoices                                                              | 20      |
 
-Each step has one check. Run it with the step name:
+Each step has one check. To run it, ask Claude:
+
+```text
+Please check my work for clean-the-orders. Run bun run verify clean-the-orders and tell me what it printed. Do not change anything to make it pass.
+```
+
+Claude runs this command. You can paste it too:
 
 ```bash
 bun run verify clean-the-orders
@@ -96,6 +114,7 @@ You also map the close onto one task from your own job: its files, its first hou
 
 ## What you need
 
+- A list of the ways of working with Claude Code that this course teaches: [ways of working](00-orientation/ways-of-working.md).
 - Claude Code, signed in with your own Claude account: the `claude` command, Claude Code in your editor, or the Code tab of the Claude desktop app.
 - A paid Claude plan: Pro, Max, Ultra, Team or Enterprise, or a Console account. The free plan has no Claude Code.
 - No key. You sign in to Claude Code. The checks need no Claude at all: they read files.

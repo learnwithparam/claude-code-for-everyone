@@ -38,6 +38,8 @@ flowchart LR
 
 From here on, open the `wren-street` folder in the Claude app, not the course folder. In the Code tab, click the folder button, pick **Open folder**, and choose `wren-street` inside the course folder.
 
+To check, ask Claude to check your work. Say: "Please check my work for the step name. Run it and tell me what it printed. Do not change anything to make it pass." The commands below are what Claude runs. The [ways of working](../../00-orientation/ways-of-working.md) page lists every mode and command used here.
+
 Run each check from there:
 
 ```bash

@@ -32,6 +32,8 @@ flowchart LR
 
 Open the `wren-street` folder in Claude Code. Stay in Manual mode. The last two steps use rewind, so do them in Claude Code in the terminal: open a terminal in `wren-street` and type `claude`.
 
+To check, ask Claude to check your work. Say: "Please check my work for the step name. Run it and tell me what it printed. Do not change anything to make it pass." The commands below are what Claude runs. The [ways of working](../../00-orientation/ways-of-working.md) page lists every mode and command used here.
+
 First, ask Claude to make a save point called `before-labels`. Say yes to each git command after you read it.
 
 ```bash
