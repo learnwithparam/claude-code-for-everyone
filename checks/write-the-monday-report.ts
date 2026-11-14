@@ -13,7 +13,8 @@ const REPORTS = "out/reports";
 const CHECKER = ".claude/agents/numbers-checker.md";
 const CHECK_NOTE = "out/numbers-check.md";
 const WORKTREE_NOTE = "out/worktree.md";
-// claude -w second-try makes the folder .claude/worktrees/second-try and the branch worktree-second-try.
+// claude -w second-try makes the folder .claude/worktrees/second-try
+// and the branch worktree-second-try.
 const WORKTREE_FOLDER = /\.claude\/worktrees\/[\w.-]+/;
 const WORKTREE_BRANCH = /\bworktree-[\w.-]+/;
 // A subagent that checks must not be able to change anything.

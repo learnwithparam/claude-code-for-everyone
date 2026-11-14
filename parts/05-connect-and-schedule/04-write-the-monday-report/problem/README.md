@@ -14,7 +14,7 @@ flowchart LR
 
 ## Watch it done
 
-A subagent is a helper with its own chat and only the tools you give it. This one gets Read, Grep and Glob, so it cannot change a file. A worktree is a second copy of your folder on its own branch. This is the note the checker leaves:
+A subagent is a helper with its own chat and only the tools you give it. This one gets Read, Grep and Glob, so it cannot change a file. A worktree is a second copy of your folder on its own branch. For example, this is the note the checker leaves:
 
 ```text
 - Takings: matches till/sales.csv.

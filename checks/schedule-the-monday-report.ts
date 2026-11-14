@@ -82,8 +82,9 @@ const scriptSkipsSafety = (folder: string) =>
 // The /loop line, with any backticks taken off, whose repeated part names the report.
 function loopRepeatsReport(folder: string): boolean {
   const lines = text(folder, LOOP_NOTE).split("\n");
-  const found = lines.map((line) => line.replace(/`/g, "").trim().match(LOOP_LINE));
-  return found.some((match) => match !== null && /report/i.test(match[1]));
+  const cleaned = lines.map((line) => line.replace(/`/g, "").trim());
+  const repeated = cleaned.map((line) => LOOP_LINE.exec(line)?.[1] ?? "");
+  return repeated.some((what) => /report/i.test(what));
 }
 
 const ranOnSchedule = (folder: string) => longestGap(folder) >= SCHEDULED_GAP;
@@ -113,8 +114,8 @@ const scheduleRule: Rule = {
     'and a "## Why I read the first run" part',
 };
 
-export default [
-  bakeryRule,
+// The rules for reports that keep their own file. keep-every-report checks these alone.
+export const KEEP_RULES: Rule[] = [
   {
     says: '2 or more reports start with a "Made at:" line, like Made at: YYYY-MM-DD HH:MM',
     test: (folder) => madeAtTimes(folder).length >= 2,
@@ -126,6 +127,11 @@ export default [
     tryNext: "a copy of a report does not count; let the task make each report itself",
   },
   ...REPORT_RULES,
+];
+
+export default [
+  bakeryRule,
+  ...KEEP_RULES,
   scheduleRule,
   {
     says: "run-report.sh runs claude with -p and asks for the monday-report skill",

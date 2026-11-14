@@ -15,7 +15,7 @@ flowchart LR
 
 ## Watch it done
 
-A skill is a saved set of steps Claude follows the same way each time. The report it makes has Sales, Waste and Late payers. The cafes come from Jess's notes.
+A skill is a saved set of steps Claude follows the same way each time. The report it makes has Sales, Waste and Late payers. For example, the cafes come from Jess's notes.
 
 ```text
 ## Late payers

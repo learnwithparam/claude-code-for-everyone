@@ -27,7 +27,7 @@ You checked the second line said `kit/skills/`, not `kit/.claude-plugin/skills/`
 
 ## What you checked after
 
-`claude plugin validate kit` printed `√ Validation passed`. It warned that there is no icon. A kit you hand to one new person needs no icon, so you left it.
+`claude plugin validate kit` printed a tick and the words Validation passed. It warned that there is no icon. A kit you hand to one new person needs no icon, so you left it.
 
 Then `claude --plugin-dir kit` started Claude Code with the kit. Typing `/wren` showed both skills, named `wren-street-kit:allergen-label` and `wren-street-kit:monday-report`.
 
@@ -38,4 +38,8 @@ Then `claude --plugin-dir kit` started Claude Code with the kit. Typing `/wren` 
 - The hook script exits 0 for every path. Say no. Then it blocks nothing.
 - Claude leaves out the version. Say no. The version tells a new person which kit they have.
 
-Then run `bun run verify pack-the-bakery-kit`. All 11 rules pass.
+## The workflow file
+
+Then you ask for `kit/friday-close.workflow.yml`, not under `.github/`. It runs on a schedule and on `workflow_dispatch`, and one step runs `claude -p`. The key is `${{ secrets.ANTHROPIC_API_KEY }}`, a placeholder. You say no to any real key.
+
+Then run `bun run verify pack-the-bakery-kit`. All 14 rules pass.

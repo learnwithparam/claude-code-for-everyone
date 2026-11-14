@@ -1,37 +1,41 @@
 # How Claude made this answer
 
-Claude Code makes the skill. Then the skill makes the report. You read both before you say yes.
+Claude Code makes the checker. Then you run a second try in a worktree. You read each file before you say yes.
 
-## The prompt you type
+## The prompts you type
 
 ```text
-Make a skill at .claude/skills/monday-report/SKILL.md, named
-monday-report. Its description says: use it when asked for the
-Monday report. Steps: get the totals from the till connector. Read
-notes/owner-notes.md for the cafes that pay late. Write
-out/reports/monday-report.md: two short sentences, then "## Sales"
-(takings and items sold), "## Waste" (items wasted and the most
-wasted product), and "## Late payers" (one line per cafe).
-Add "## Never": never guess a number, never change the till.
+Make a subagent at .claude/agents/numbers-checker.md with only the
+tools Read, Grep and Glob. It checks a report against till/sales.csv.
+Run it on out/reports/monday-report.md. Save its answer in
+out/numbers-check.md as a dash list that ends with a verdict.
 ```
 
-## The plan Claude showed
+Then, in the terminal, you type this to start the second try:
 
-Claude showed the whole `SKILL.md`. It had `name: monday-report` and a description between two `---` lines. Then Steps, then Never. You said yes.
+```bash
+claude -w second-try
+```
 
-Then you typed `/exit`, `claude`, and `/monday-report`.
+Expect: Claude starts inside the folder `.claude/worktrees/second-try`.
+
+Back in the bakery folder, you ask for the note:
+
+```text
+Make out/worktree.md. Under "## Worktree", write the worktree folder
+and branch I just used. Add one line on what I ran there.
+```
 
 ## What you checked before you said yes
 
-- Claude asked to use `till_totals`. You said yes. The till said £13,609.80 taken, 4558 sold, 392 wasted, and Focaccia had the most waste (39).
-- The report Claude showed had those same numbers. Nothing was rounded.
-- Under Late payers it named Kettle and Crumb and Moss and Grain. Those are the cafes in Jess's notes.
+- The checker's tools line was Read, Grep, Glob. It had no Write.
+- The note ended with a verdict that the report matches the till.
+- The worktree note named the folder `.claude/worktrees/second-try`.
 
 ## What you would say no to
 
-- The report says "about £13,600". Say no. Ask for the exact number from the till.
-- Late payers lists all six cafes. Say no. Only two pay late.
 - The checker can write files. Say no. A checker should only read.
-- Claude writes the report but skips the skill. Say no. Next time you want one word, `/monday-report`, not a long prompt.
+- The note says the report matches, but the checker never ran. Say no.
+- The worktree note names nothing. Say no. Write the folder or the branch.
 
-Then run `bun run verify write-the-monday-report`. All 12 rules pass.
+Then run `bun run verify write-the-monday-report`. All 13 rules pass.

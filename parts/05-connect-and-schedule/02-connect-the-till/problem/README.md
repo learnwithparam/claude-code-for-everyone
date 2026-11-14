@@ -14,7 +14,7 @@ flowchart LR
 
 ## Watch it done
 
-A connector is a safe door to another system. The till answers questions and cannot change a sale. Claude Code calls this kind of door an MCP server. After you add it, Claude asks the till for the days, then for one day.
+A connector is a safe door to another system. The till answers questions and cannot change a sale. Claude Code calls this kind of door an MCP server. After you add it, Claude asks the till for the days, then for one day. For example, the last open day gives:
 
 ```text
 - Day: 2026-11-01

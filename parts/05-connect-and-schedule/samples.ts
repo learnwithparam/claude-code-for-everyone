@@ -165,7 +165,8 @@ const WORKTREE_PATH = "out/worktree.md";
 const worktreeNote = (named: string) =>
   `# My second try\n\n## Worktree\n\n${named}\n\n` +
   "I ran the skill again there. My own folder did not change.\n";
-const worktreeFiles = { [WORKTREE_PATH]: worktreeNote("```text\n.claude/worktrees/second-try\n```") };
+const worktreeFolder = "```text\n.claude/worktrees/second-try\n```";
+const worktreeFiles = { [WORKTREE_PATH]: worktreeNote(worktreeFolder) };
 const SKILL_PATH = ".claude/skills/monday-report/SKILL.md";
 const REPORT_PATH = "out/reports/monday-report.md";
 sample("03-make-the-monday-skill", "solution", { [SKILL_PATH]: skill, [REPORT_PATH]: report });
@@ -264,28 +265,28 @@ const twoRuns = {
   [reportAt("07:00")]: madeAt("07:00"),
   [reportAt("07:03")]: madeAt("07:03"),
 };
-sample("05-schedule-the-monday-report", "solution", {
+sample("06-schedule-the-monday-report", "solution", {
   ...twoRuns,
   ...unattended,
   "out/schedule.md": schedulePlan("0 7 * * 2"),
 });
-sample("05-schedule-the-monday-report", "wrong/one-report-written-over", {
+sample("06-schedule-the-monday-report", "wrong/one-report-written-over", {
   [SKILL_PATH]: skill,
   [REPORT_PATH]: madeAt("07:03"),
   ...unattended,
   "out/schedule.md": schedulePlan("0 7 * * 2"),
 });
-sample("05-schedule-the-monday-report", "wrong/day-names-in-cron", {
+sample("06-schedule-the-monday-report", "wrong/day-names-in-cron", {
   ...twoRuns,
   ...unattended,
   "out/schedule.md": schedulePlan("0 7 * * TUE"),
 });
-sample("05-schedule-the-monday-report", "wrong/runs-every-minute", {
+sample("06-schedule-the-monday-report", "wrong/runs-every-minute", {
   ...twoRuns,
   ...unattended,
   "out/schedule.md": schedulePlan("* * * * *"),
 });
-sample("05-schedule-the-monday-report", "wrong/copied-a-report", {
+sample("06-schedule-the-monday-report", "wrong/copied-a-report", {
   [SKILL_PATH]: scheduledSkill,
   [reportAt("07:00")]: madeAt("07:00"),
   ...unattended,
@@ -294,20 +295,34 @@ sample("05-schedule-the-monday-report", "wrong/copied-a-report", {
 });
 
 const solutionFiles = { ...twoRuns, "out/schedule.md": schedulePlan("0 7 * * 2") };
-sample("05-schedule-the-monday-report", "wrong/script-without-p", {
+sample("06-schedule-the-monday-report", "wrong/script-without-p", {
   ...solutionFiles,
   "out/loop.md": goodLoop,
   "run-report.sh": RUN_SCRIPT.replace('claude -p "', 'claude "'),
 });
-sample("05-schedule-the-monday-report", "wrong/script-skips-permissions", {
+sample("06-schedule-the-monday-report", "wrong/script-skips-permissions", {
   ...solutionFiles,
   "out/loop.md": goodLoop,
-  "run-report.sh": RUN_SCRIPT.replace("--permission-mode acceptEdits", "--dangerously-skip-permissions"),
+  "run-report.sh": RUN_SCRIPT.replace(
+    "--permission-mode acceptEdits",
+    "--dangerously-skip-permissions",
+  ),
 });
-sample("05-schedule-the-monday-report", "wrong/loop-repeats-nothing", {
+sample("06-schedule-the-monday-report", "wrong/loop-repeats-nothing", {
   ...solutionFiles,
   "run-report.sh": RUN_SCRIPT,
   "out/loop.md": loopNote("/loop 1h"),
+});
+
+sample("05-keep-every-report", "solution", twoRuns);
+sample("05-keep-every-report", "wrong/one-report-written-over", {
+  [SKILL_PATH]: skill,
+  [REPORT_PATH]: madeAt("07:03"),
+});
+sample("05-keep-every-report", "wrong/copied-a-report", {
+  [SKILL_PATH]: scheduledSkill,
+  [reportAt("07:00")]: madeAt("07:00"),
+  "out/reports/monday-report-copy.md": madeAt("07:00"),
 });
 
 console.log("Wrote the samples for connect-and-schedule.");

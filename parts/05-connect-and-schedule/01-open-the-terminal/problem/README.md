@@ -14,7 +14,7 @@ flowchart LR
 
 ## Watch it done
 
-The status bar is the line under the box where you type. Shift+Tab steps through the modes.
+The status bar is the line under the box where you type. Shift+Tab steps through the modes. For example, in Plan mode it reads:
 
 ```text
 ⏸ plan mode on (shift+tab to cycle)
