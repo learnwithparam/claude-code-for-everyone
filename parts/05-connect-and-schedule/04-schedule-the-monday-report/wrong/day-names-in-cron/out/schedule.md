@@ -2,7 +2,9 @@
 
 ## Schedule
 
-`0 7 * * TUE`
+```text
+0 7 * * TUE
+```
 
 At 07:00 on the first day the shop opens, from the Custom box.
 

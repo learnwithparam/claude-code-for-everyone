@@ -52,6 +52,31 @@ function hookExitCode(folder: string, filePath: string): number | null {
   return spawnSync("bash", [script], { input: toolCall, encoding: "utf8" }).status;
 }
 
+const WORKFLOW = "kit/friday-close.workflow.yml";
+
+// The lines of the workflow with no comments, so a hash line cannot fake a trigger.
+const workflowLines = (folder: string) =>
+  text(folder, WORKFLOW)
+    .split("\n")
+    .filter((line) => !line.trim().startsWith("#"));
+
+function runsOnATimerOrByHand(folder: string): boolean {
+  const lines = workflowLines(folder);
+  const hasOn = lines.some((line) => /^on:/.test(line));
+  return hasOn && lines.some((line) => /^\s+(schedule|workflow_dispatch):/.test(line));
+}
+
+function runsClaude(folder: string): boolean {
+  return workflowLines(folder).some(
+    (line) => /\bclaude\s+-p\b/.test(line) || /anthropics\/claude-code-action/.test(line),
+  );
+}
+
+function keyIsAPlaceholder(folder: string): boolean {
+  const body = workflowLines(folder).join("\n");
+  return /\$\{\{\s*secrets\.[A-Z_]+\s*\}\}/.test(body) && !/sk-ant-/.test(body);
+}
+
 export default [
   bakeryRule,
   {
@@ -105,6 +130,21 @@ export default [
     says: "the hook script lets an edit to out/notes.md through (exit code 0)",
     test: (folder) => hookExitCode(folder, "out/notes.md") === 0,
     tryNext: "ask Claude to make block-till.sh exit 0 for every path that is not in till/",
+  },
+  {
+    says: `${WORKFLOW} is there and runs on a schedule or by hand (on: schedule or workflow_dispatch)`,
+    test: (folder) => has(folder, WORKFLOW) && runsOnATimerOrByHand(folder),
+    tryNext: "ask Claude to save the workflow with an on: part that has schedule or workflow_dispatch",
+  },
+  {
+    says: "the workflow has a step that runs claude",
+    test: (folder) => has(folder, WORKFLOW) && runsClaude(folder),
+    tryNext: 'ask Claude to add a step that runs claude -p "run the Friday close"',
+  },
+  {
+    says: "the workflow takes its key from a secrets placeholder, never a real key",
+    test: (folder) => has(folder, WORKFLOW) && keyIsAPlaceholder(folder),
+    tryNext: "use ${{ secrets.ANTHROPIC_API_KEY }} and never paste a real key into the file",
   },
   {
     says: "every original bakery file is the same as the start",

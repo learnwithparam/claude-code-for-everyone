@@ -1,3 +1,4 @@
 minutes = 30
 screen = true
 solution = true
+example_files = ["invoices/FD-2202.pdf", "invoices/FD-2207.pdf"]

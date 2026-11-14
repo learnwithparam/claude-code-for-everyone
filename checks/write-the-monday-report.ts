@@ -12,6 +12,10 @@ const SKILL = ".claude/skills/monday-report/SKILL.md";
 const REPORTS = "out/reports";
 const CHECKER = ".claude/agents/numbers-checker.md";
 const CHECK_NOTE = "out/numbers-check.md";
+const WORKTREE_NOTE = "out/worktree.md";
+// claude -w second-try makes the folder .claude/worktrees/second-try and the branch worktree-second-try.
+const WORKTREE_FOLDER = /\.claude\/worktrees\/[\w.-]+/;
+const WORKTREE_BRANCH = /\bworktree-[\w.-]+/;
 // A subagent that checks must not be able to change anything.
 const TOOLS_THAT_CHANGE = ["write", "edit", "bash", "notebookedit"];
 
@@ -144,6 +148,11 @@ function checkNoteSaysMatch(folder: string): boolean {
   return bullets(note).length >= 3 && /match|agree/.test(note);
 }
 
+function worktreeNamed(folder: string): boolean {
+  const note = text(folder, WORKTREE_NOTE);
+  return WORKTREE_FOLDER.test(note) || WORKTREE_BRANCH.test(note);
+}
+
 export default [
   bakeryRule,
   {
@@ -181,6 +190,13 @@ export default [
     test: (folder) => has(folder, CHECK_NOTE) && checkNoteSaysMatch(folder),
     tryNext:
       "ask the numbers-checker to check the report, then save its answer as numbers-check.md",
+  },
+  {
+    says: "out/worktree.md names the worktree folder or branch of a second try",
+    test: (folder) => has(folder, WORKTREE_NOTE) && worktreeNamed(folder),
+    tryNext:
+      "run claude -w second-try, then write the folder .claude/worktrees/second-try " +
+      "or the branch worktree-second-try in out/worktree.md",
   },
   {
     says: "every original bakery file is the same as the start",

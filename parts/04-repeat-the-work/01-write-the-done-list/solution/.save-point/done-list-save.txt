@@ -1,5 +1,6 @@
 .claude/settings.json
 README.md
+SPEC.md
 allergens/allergen-list.csv
 customers/cafes.csv
 invoices/FD-2201.pdf
@@ -42,6 +43,7 @@ menu/menu.md
 notes/owner-notes.md
 orders/wholesale-orders.csv
 out/.keep
+out/goal.md
 out/labels-done.md
 out/orders-clean.csv
 out/price-changes.md

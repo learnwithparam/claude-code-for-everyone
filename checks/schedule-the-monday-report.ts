@@ -11,6 +11,10 @@ import { section, words } from "./lib/md";
 import { REPORT_RULES, reports } from "./write-the-monday-report";
 
 const PLAN = "out/schedule.md";
+const SCRIPT = "run-report.sh";
+const LOOP_NOTE = "out/loop.md";
+// A line like: /loop 1h Run the monday-report skill. An interval, then what to repeat.
+const LOOP_LINE = /^\/loop\s+\d+\s*[smhd]\s+(.+)$/;
 const MADE_AT = /^Made at:\s*(\d{4}-\d{2}-\d{2})[ T](\d{2}):(\d{2})/m;
 const ONE_MINUTE = 60 * 1000;
 const SCHEDULED_GAP = 55 * ONE_MINUTE;
@@ -63,6 +67,25 @@ function whyFirstRun(folder: string): boolean {
   return words(why).length >= 6;
 }
 
+// The script runs claude with -p (print the answer and stop, no chat) and asks for the skill.
+function scriptRunsHeadless(folder: string): boolean {
+  const script = text(folder, SCRIPT);
+  const runsPrint = /^\s*claude\b[^\n]*\s(-p|--print)\b/m.test(script);
+  return runsPrint && /monday-report/.test(script);
+}
+
+const scriptSkipsSafety = (folder: string) =>
+  /--dangerously-skip-permissions|--permission-mode\s+bypassPermissions/.test(
+    text(folder, SCRIPT),
+  );
+
+// The /loop line, with any backticks taken off, whose repeated part names the report.
+function loopRepeatsReport(folder: string): boolean {
+  const lines = text(folder, LOOP_NOTE).split("\n");
+  const found = lines.map((line) => line.replace(/`/g, "").trim().match(LOOP_LINE));
+  return found.some((match) => match !== null && /report/i.test(match[1]));
+}
+
 const ranOnSchedule = (folder: string) => longestGap(folder) >= SCHEDULED_GAP;
 const plannedWithRunNow = (folder: string) =>
   has(folder, PLAN) && plannedCron(folder) !== undefined && whyFirstRun(folder);
@@ -104,6 +127,23 @@ export default [
   },
   ...REPORT_RULES,
   scheduleRule,
+  {
+    says: "run-report.sh runs claude with -p and asks for the monday-report skill",
+    test: (folder) => has(folder, SCRIPT) && scriptRunsHeadless(folder),
+    tryNext:
+      "ask Claude to write run-report.sh with one line: claude -p and a prompt that names " +
+      "the monday-report skill",
+  },
+  {
+    says: "run-report.sh does not switch off the permission checks",
+    test: (folder) => has(folder, SCRIPT) && !scriptSkipsSafety(folder),
+    tryNext: "take --dangerously-skip-permissions out; use --allowedTools to name what it may do",
+  },
+  {
+    says: "out/loop.md has a /loop line with an interval and the report it repeats",
+    test: (folder) => has(folder, LOOP_NOTE) && loopRepeatsReport(folder),
+    tryNext: "write a line like /loop 1h Run the monday-report skill in out/loop.md",
+  },
   {
     says: "every original bakery file is the same as the start",
     test: originalsUnchanged,

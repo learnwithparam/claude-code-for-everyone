@@ -6,5 +6,8 @@
       "Read(../checks/**)",
       "Read(./private/**)"
     ]
+  },
+  "sandbox": {
+    "enabled": true
   }
 }

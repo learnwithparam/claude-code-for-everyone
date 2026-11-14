@@ -2,7 +2,9 @@
 
 ## Schedule
 
-`* * * * *`
+```text
+* * * * *
+```
 
 At 07:00 on the first day the shop opens, from the Custom box.
 

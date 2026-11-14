@@ -21,7 +21,8 @@ import { join } from "node:path";
 import { NEXT_CLOSE, nextCloseFiles } from "../parts/06-share-the-close/next-close";
 import type { Rule } from "../scripts/verify";
 import { writeSeed } from "../world/build";
-import { BAKERY, bakeryRule, ROOT, workFolder } from "./lib/bakery";
+import { BAKERY, bakeryRule, has, ROOT, text, workFolder } from "./lib/bakery";
+import { bullets, section, words } from "./lib/md";
 
 // The steps the Friday close does. A step whose check is not in the course yet gets no rule.
 const PLANNED_CLOSE_STEPS = [
@@ -86,13 +87,42 @@ function closeResults(folder: string): Record<string, string[]> {
   return results;
 }
 
+// Notes a learner wrote in wren-street to show they tried a feature. The close does not remake them.
+const PRACTICE_NOTES = /^out\/worktree\.md/;
+
 // One rule for each step of the close: its check passes again on the next close.
 function passesAgain(step: string): Rule {
   return {
     says: `${step} passes again on the next close`,
-    test: (folder) => closeResults(folder)[step]?.length === 0,
+    test: (folder) => {
+      const failed = closeResults(folder)[step];
+      return failed !== undefined && failed.every((rule) => PRACTICE_NOTES.test(rule));
+    },
     tryNext: `read the ${step} page for what its file needs, fix the skill, and run it again`,
   };
+}
+
+const BATCH = "out/batch.md";
+const CONTRACT = "out/run-contract.md";
+const METRICS = "out/metrics.md";
+
+// A /batch line: the slash command, then the one change and the files it fans out over.
+function hasBatchLine(folder: string): boolean {
+  const lines = text(folder, BATCH).split("\n");
+  return lines.some((line) => {
+    const clean = line.replace(/`/g, "").trim();
+    return /^\/batch\s/.test(clean) && clean.includes("out/") && words(clean).length >= 8;
+  });
+}
+
+// One part of the run contract has real words under its heading.
+function contractPart(folder: string, heading: string): boolean {
+  return words(section(text(folder, CONTRACT), heading) ?? "").length >= 4;
+}
+
+// A number line is a dash line with a figure in it, like "- Files made: 25".
+function numberLines(folder: string): number {
+  return bullets(text(folder, METRICS)).filter((line) => /\d/.test(line)).length;
 }
 
 export default [
@@ -111,4 +141,21 @@ export default [
     tryNext: "make the friday-close skill in wren-street, then run next-close.ts reset to copy it",
   },
   ...CLOSE_STEPS.map(passesAgain),
+  {
+    says: `${BATCH} has a /batch line that names a change and files in out/`,
+    test: (folder) => has(folder, BATCH) && hasBatchLine(folder),
+    tryNext: "ask Claude to save one line that starts with /batch and names a folder in out/",
+  },
+  {
+    says: `${CONTRACT} says the task, when to stop, and what it may touch`,
+    test: (folder) =>
+      has(folder, CONTRACT) &&
+      ["task", "stop", "may touch"].every((heading) => contractPart(folder, heading)),
+    tryNext: 'write the headings "## Task", "## Stop when" and "## May touch", each with a line',
+  },
+  {
+    says: `${METRICS} has at least 3 numbers from the run`,
+    test: (folder) => has(folder, METRICS) && numberLines(folder) >= 3,
+    tryNext: "list 3 dash lines with a number, like files made, checks passed, invoices flagged",
+  },
 ] satisfies Rule[];

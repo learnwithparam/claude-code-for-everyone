@@ -40,6 +40,11 @@ export default [
     tryNext: 'ask Claude to add "Read(./private/**)" to the "deny" list inside "permissions"',
   },
   {
+    says: "the sandbox is on (sandbox.enabled is true)",
+    test: (folder) => settings(folder).sandbox?.enabled === true,
+    tryNext: 'ask Claude to add "sandbox": { "enabled": true } to .claude/settings.json',
+  },
+  {
     says: "out/safety.md names Manual mode",
     test: (folder) => has(folder, SAFETY) && fold(text(folder, SAFETY)).includes("manual"),
     tryNext: "ask Claude to say in out/safety.md that you work in Manual mode",
