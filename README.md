@@ -130,8 +130,6 @@ You also map the close onto one task from your own job: its files, its first hou
 ## For people who run the course
 
 - `bun run check` proves the repo meets [STANDARD.md](STANDARD.md).
-- `bun test` checks reading level and the help table.
 - `bun run world reset` puts the bakery back. The old folder is kept.
 - `bun run doctor` says if Claude Code is installed, new enough and signed in.
 - `bun run finished --replay 2` shows a saved run. [world/recordings/RECORD.md](world/recordings/RECORD.md) says how each one was recorded.
-- [PARTS.md](PARTS.md) lists every part, step and check.
