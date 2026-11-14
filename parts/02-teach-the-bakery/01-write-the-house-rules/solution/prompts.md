@@ -11,7 +11,8 @@ rules for Wren Street Bakery. Use these five headings: About the bakery,
 Where things live, Never do, Money rules, How to write. Under Never do,
 say: never delete a file, and never change anything in till/ or
 purchase-orders/. Say that every new file goes in out/. Keep it short,
-under 50 lines, so you will read all of it.
+under 50 lines, so you will read all of it. Also add one line that says:
+one task per chat, and use /clear or a new chat between tasks.
 ```
 
 ## What Claude showed
@@ -31,4 +32,4 @@ Claude read the notes and the folder list. Then it asked before it made `CLAUDE.
 - Claude writes 200 lines, with a rule for each cafe and each loaf. Say no. Ask for the rules that matter.
 - Claude adds a rule Jess never said, like "Give Kettle and Crumb a discount." Say no.
 
-Then start a new chat, type `/memory`, and run `bun run verify write-the-house-rules`. All 8 rules pass.
+Then start a new chat, type `/memory`, and run `bun run verify write-the-house-rules`. All 9 rules pass.

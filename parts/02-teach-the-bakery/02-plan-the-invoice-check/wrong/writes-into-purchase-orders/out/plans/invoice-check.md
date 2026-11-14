@@ -34,7 +34,7 @@ All new files go in `out/`. No other file is made, changed or deleted.
 4. Compare the unit price with `agreed_price`. Any gap gets a flag.
 5. Compare the amount billed with the amount ordered.
 6. Look for two bills on the same order. There are 24 bills and only 23 orders, so expect one.
-7. Give each bill one status: `ok`, `duplicate`, `price above PO` or `short delivery`.
+7. Give each bill one status: `ok`, `duplicate`, price above PO or `short delivery`.
 8. Write the two files. Money as £6.20. Dates as YYYY-MM-DD.
 9. Read both files again and check a few flagged rows against the PDFs.
 

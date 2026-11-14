@@ -1,0 +1,157 @@
+order_id,order_date,cafe,product,quantity
+WS-1001,2026-08-04,Lumen Cafe,Almond Croissant,24
+WS-1002,2026-08-05,Lumen Cafe,White Tin Loaf,12
+WS-1003,2026-08-05,Kettle and Crumb,Almond Croissant,10
+WS-1004,2026-08-06,Kettle and Crumb,Cinnamon Bun,12
+WS-1005,2026-08-06,Moss and Grain,Seeded Rye Loaf,24
+WS-1006,2026-08-07,Hartley Corner Cafe,Cheese Scone,30
+WS-1007,2026-08-07,Bluebell Coffee,Sourdough Loaf,30
+WS-1008,2026-08-07,Pier Nine Espresso,Almond Croissant,24
+WS-1009,2026-08-10,Kettle and Crumb,Pain au Chocolat,24
+WS-1010,2026-08-10,Moss and Grain,Sourdough Loaf,24
+WS-1011,2026-08-11,Lumen Cafe,Almond Croissant,12
+WS-1012,2026-08-11,Kettle and Crumb,Seeded Rye Loaf,24
+WS-1013,2026-08-11,Hartley Corner Cafe,Croissant,12
+WS-1014,2026-08-12,Bluebell Coffee,Almond Croissant,6
+WS-1015,2026-08-12,Moss and Grain,Croissant,10
+WS-1016,2026-08-13,Hartley Corner Cafe,Almond Croissant,24
+WS-1017,2026-08-14,Hartley Corner Cafe,Cinnamon Bun,24
+WS-1018,2026-08-14,Moss and Grain,Seeded Rye Loaf,24
+WS-1019,2026-08-14,Pier Nine Espresso,Focaccia,12
+WS-1020,2026-08-17,Kettle and Crumb,Multigrain Loaf,24
+WS-1021,2026-08-17,Bluebell Coffee,Brownie,12
+WS-1022,2026-08-17,Pier Nine Espresso,White Tin Loaf,30
+WS-1023,2026-08-18,Kettle and Crumb,Pain au Chocolat,30
+WS-1024,2026-08-18,Moss and Grain,Pain au Chocolat,18
+WS-1025,2026-08-19,Lumen Cafe,Seeded Rye Loaf,36
+WS-1026,2026-08-19,Pier Nine Espresso,White Tin Loaf,24
+WS-1027,2026-08-20,Hartley Corner Cafe,Sourdough Loaf,18
+WS-1028,2026-08-21,Lumen Cafe,Cinnamon Bun,12
+WS-1029,2026-08-21,Kettle and Crumb,Pain au Chocolat,12
+WS-1030,2026-08-21,Hartley Corner Cafe,Almond Croissant,24
+WS-1031,2026-08-21,Bluebell Coffee,Seeded Rye Loaf,30
+WS-1032,2026-08-21,Pier Nine Espresso,Cinnamon Bun,30
+WS-1033,2026-08-24,Kettle and Crumb,Seeded Rye Loaf,24
+WS-1034,2026-08-24,Hartley Corner Cafe,Croissant,6
+WS-1035,2026-08-25,Hartley Corner Cafe,Fruit Scone,12
+WS-1036,2026-08-25,Bluebell Coffee,Cinnamon Bun,6
+WS-1037,2026-08-26,Hartley Corner Cafe,Almond Croissant,24
+WS-1038,2026-08-26,Moss and Grain,Cheese Scone,18
+WS-1039,2026-08-27,Lumen Cafe,Pain au Chocolat,12
+WS-1040,2026-08-27,Kettle and Crumb,Seeded Rye Loaf,6
+WS-1041,2026-08-27,Moss and Grain,Focaccia,6
+WS-1042,2026-08-27,Pier Nine Espresso,Sourdough Loaf,12
+WS-1043,2026-08-28,Lumen Cafe,Croissant,10
+WS-1044,2026-08-28,Moss and Grain,Almond Croissant,18
+WS-1045,2026-08-31,Kettle and Crumb,Pain au Chocolat,12
+WS-1046,2026-08-31,Hartley Corner Cafe,Cinnamon Bun,6
+WS-1047,2026-08-31,Moss and Grain,White Tin Loaf,12
+WS-1048,2026-09-01,Hartley Corner Cafe,Fruit Scone,36
+WS-1049,2026-09-01,Moss and Grain,Seeded Rye Loaf,18
+WS-1050,2026-09-01,Pier Nine Espresso,Focaccia,36
+WS-1051,2026-09-02,Kettle and Crumb,Brownie,24
+WS-1052,2026-09-02,Moss and Grain,Multigrain Loaf,24
+WS-1053,2026-09-02,Pier Nine Espresso,Brownie,10
+WS-1054,2026-09-03,Moss and Grain,Seeded Rye Loaf,10
+WS-1055,2026-09-04,Lumen Cafe,Cinnamon Bun,12
+WS-1056,2026-09-07,Hartley Corner Cafe,Multigrain Loaf,36
+WS-1057,2026-09-08,Kettle and Crumb,Brownie,12
+WS-1058,2026-09-08,Hartley Corner Cafe,Cheese Scone,12
+WS-1059,2026-09-08,Pier Nine Espresso,Sourdough Loaf,6
+WS-1060,2026-09-09,Bluebell Coffee,Croissant,24
+WS-1061,2026-09-09,Moss and Grain,Almond Croissant,30
+WS-1062,2026-09-10,Hartley Corner Cafe,Seeded Rye Loaf,10
+WS-1063,2026-09-10,Moss and Grain,Seeded Rye Loaf,6
+WS-1064,2026-09-11,Lumen Cafe,Croissant,6
+WS-1065,2026-09-11,Bluebell Coffee,Sourdough Loaf,6
+WS-1066,2026-09-11,Pier Nine Espresso,Cheese Scone,36
+WS-1067,2026-09-14,Lumen Cafe,Seeded Rye Loaf,10
+WS-1068,2026-09-14,Moss and Grain,Cheese Scone,18
+WS-1069,2026-09-15,Hartley Corner Cafe,Brownie,18
+WS-1070,2026-09-15,Pier Nine Espresso,Cinnamon Bun,6
+WS-1071,2026-09-16,Lumen Cafe,Cinnamon Bun,10
+WS-1072,2026-09-16,Hartley Corner Cafe,Focaccia,12
+WS-1073,2026-09-16,Bluebell Coffee,Sourdough Loaf,30
+WS-1074,2026-09-17,Kettle and Crumb,Cheese Scone,12
+WS-1075,2026-09-17,Hartley Corner Cafe,Croissant,6
+WS-1076,2026-09-17,Bluebell Coffee,Sourdough Loaf,12
+WS-1077,2026-09-17,Pier Nine Espresso,Almond Croissant,24
+WS-1078,2026-09-18,Kettle and Crumb,Pain au Chocolat,10
+WS-1079,2026-09-18,Hartley Corner Cafe,Seeded Rye Loaf,24
+WS-1080,2026-09-18,Bluebell Coffee,Cinnamon Bun,10
+WS-1081,2026-09-18,Moss and Grain,Sourdough Loaf,6
+WS-1082,2026-09-18,Pier Nine Espresso,Almond Croissant,12
+WS-1083,2026-09-21,Hartley Corner Cafe,Brownie,12
+WS-1084,2026-09-21,Bluebell Coffee,Fruit Scone,10
+WS-1085,2026-09-21,Pier Nine Espresso,Sourdough Loaf,30
+WS-1086,2026-09-22,Lumen Cafe,Sourdough Loaf,10
+WS-1087,2026-09-22,Kettle and Crumb,Brownie,24
+WS-1088,2026-09-22,Bluebell Coffee,Focaccia,36
+WS-1089,2026-09-22,Moss and Grain,Multigrain Loaf,12
+WS-1090,2026-09-23,Kettle and Crumb,Multigrain Loaf,12
+WS-1091,2026-09-23,Moss and Grain,Cinnamon Bun,24
+WS-1092,2026-09-24,Hartley Corner Cafe,White Tin Loaf,24
+WS-1093,2026-09-24,Bluebell Coffee,Multigrain Loaf,6
+WS-1094,2026-09-25,Lumen Cafe,Pain au Chocolat,12
+WS-1095,2026-09-25,Bluebell Coffee,Multigrain Loaf,12
+WS-1096,2026-09-25,Moss and Grain,Sourdough Loaf,24
+WS-1097,2026-09-25,Pier Nine Espresso,Fruit Scone,24
+WS-1098,2026-09-28,Kettle and Crumb,Sourdough Loaf,10
+WS-1099,2026-09-28,Hartley Corner Cafe,Focaccia,30
+WS-1100,2026-09-29,Lumen Cafe,Sourdough Loaf,12
+WS-1101,2026-09-29,Kettle and Crumb,Croissant,12
+WS-1102,2026-09-30,Lumen Cafe,Almond Croissant,24
+WS-1103,2026-09-30,Kettle and Crumb,Brownie,30
+WS-1104,2026-09-30,Moss and Grain,Almond Croissant,36
+WS-1105,2026-09-30,Pier Nine Espresso,Multigrain Loaf,18
+WS-1106,2026-10-01,Bluebell Coffee,Seeded Rye Loaf,24
+WS-1107,2026-10-01,Moss and Grain,Seeded Rye Loaf,6
+WS-1108,2026-10-01,Pier Nine Espresso,Cinnamon Bun,12
+WS-1109,2026-10-02,Kettle and Crumb,Croissant,12
+WS-1110,2026-10-02,Hartley Corner Cafe,Fruit Scone,10
+WS-1111,2026-10-02,Bluebell Coffee,Almond Croissant,24
+WS-1112,2026-10-05,Kettle and Crumb,Brownie,12
+WS-1113,2026-10-06,Lumen Cafe,Multigrain Loaf,12
+WS-1114,2026-10-06,Kettle and Crumb,Cinnamon Bun,24
+WS-1115,2026-10-06,Bluebell Coffee,Brownie,24
+WS-1116,2026-10-06,Pier Nine Espresso,Seeded Rye Loaf,18
+WS-1117,2026-10-07,Hartley Corner Cafe,Seeded Rye Loaf,12
+WS-1118,2026-10-07,Pier Nine Espresso,Seeded Rye Loaf,6
+WS-1119,2026-10-08,Hartley Corner Cafe,Multigrain Loaf,18
+WS-1120,2026-10-09,Kettle and Crumb,Cinnamon Bun,18
+WS-1121,2026-10-09,Hartley Corner Cafe,Seeded Rye Loaf,36
+WS-1122,2026-10-09,Bluebell Coffee,White Tin Loaf,12
+WS-1123,2026-10-12,Lumen Cafe,Cinnamon Bun,24
+WS-1124,2026-10-12,Moss and Grain,Sourdough Loaf,36
+WS-1125,2026-10-12,Pier Nine Espresso,Seeded Rye Loaf,10
+WS-1126,2026-10-13,Hartley Corner Cafe,Almond Croissant,24
+WS-1127,2026-10-13,Moss and Grain,Fruit Scone,10
+WS-1128,2026-10-14,Bluebell Coffee,Focaccia,24
+WS-1129,2026-10-14,Pier Nine Espresso,Multigrain Loaf,24
+WS-1130,2026-10-15,Moss and Grain,Sourdough Loaf,24
+WS-1131,2026-10-16,Kettle and Crumb,Seeded Rye Loaf,36
+WS-1132,2026-10-16,Hartley Corner Cafe,Multigrain Loaf,24
+WS-1133,2026-10-16,Moss and Grain,Multigrain Loaf,6
+WS-1134,2026-10-19,Lumen Cafe,Fruit Scone,24
+WS-1135,2026-10-19,Hartley Corner Cafe,Brownie,36
+WS-1136,2026-10-19,Bluebell Coffee,Multigrain Loaf,10
+WS-1137,2026-10-19,Pier Nine Espresso,Almond Croissant,10
+WS-1138,2026-10-20,Bluebell Coffee,Fruit Scone,18
+WS-1139,2026-10-20,Pier Nine Espresso,Brownie,24
+WS-1140,2026-10-21,Lumen Cafe,White Tin Loaf,6
+WS-1141,2026-10-21,Bluebell Coffee,Seeded Rye Loaf,18
+WS-1142,2026-10-22,Hartley Corner Cafe,Almond Croissant,10
+WS-1143,2026-10-23,Lumen Cafe,Sourdough Loaf,12
+WS-1144,2026-10-23,Moss and Grain,Cinnamon Bun,6
+WS-1145,2026-10-23,Pier Nine Espresso,Pain au Chocolat,10
+WS-1146,2026-10-26,Kettle and Crumb,Seeded Rye Loaf,36
+WS-1147,2026-10-26,Hartley Corner Cafe,Focaccia,10
+WS-1148,2026-10-27,Moss and Grain,Croissant,12
+WS-1149,2026-10-27,Pier Nine Espresso,Sourdough Loaf,24
+WS-1150,2026-10-28,Lumen Cafe,Sourdough Loaf,18
+WS-1151,2026-10-28,Kettle and Crumb,Cheese Scone,12
+WS-1152,2026-10-28,Hartley Corner Cafe,Seeded Rye Loaf,36
+WS-1153,2026-10-29,Kettle and Crumb,Focaccia,6
+WS-1154,2026-10-29,Bluebell Coffee,Sourdough Loaf,30
+WS-1155,2026-10-30,Kettle and Crumb,Almond Croissant,30
+WS-1156,2026-10-30,Pier Nine Espresso,White Tin Loaf,24

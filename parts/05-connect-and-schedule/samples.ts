@@ -25,8 +25,8 @@ const sample = (step: string, kind: string, files: Record<string, string>) =>
 function terminalNote(version: string, statusBar: string, mode: string): string {
   return (
     "# My terminal\n\n" +
-    `## Version\n\n${version}\n\n` +
-    `## Status bar in Plan mode\n\n${statusBar}\n\n` +
+    `## Version\n\n\`\`\`text\n${version}\n\`\`\`\n\n` +
+    `## Status bar in Plan mode\n\n\`\`\`text\n${statusBar}\n\`\`\`\n\n` +
     `## Mode I work in\n\n${mode}\n`
   );
 }
@@ -133,18 +133,94 @@ const everyCafe = report.replace(
   "## Late payers\n\n- Lumen Cafe\n- Kettle and Crumb\n- Hartley Corner Cafe\n" +
     "- Bluebell Coffee\n- Moss and Grain\n- Pier Nine Espresso\n",
 );
+const CHECKER_START = `---
+name: numbers-checker
+description: Checks a report against till/sales.csv. Use after the Monday report is written.
+`;
+const CHECKER_BODY = `---
+
+You check numbers. You never write or change a file.
+
+1. Read the report you are given.
+2. Read till/sales.csv and add up takings, items sold and items wasted.
+3. Say, one line each, whether the report matches. Name any number that differs.
+`;
+const checker = (tools: string) => `${CHECKER_START}tools: ${tools}\n${CHECKER_BODY}`;
+const CHECKER_PATH = ".claude/agents/numbers-checker.md";
+const CHECK_NOTE_PATH = "out/numbers-check.md";
+const checkNote = `# Numbers check
+
+Checked by the numbers-checker subagent. It could only read files.
+
+- Takings: matches till/sales.csv.
+- Items sold: matches till/sales.csv.
+- Items wasted: matches till/sales.csv.
+- Verdict: the report matches the till.
+`;
+const subagentFiles = {
+  [CHECKER_PATH]: checker("Read, Grep, Glob"),
+  [CHECK_NOTE_PATH]: checkNote,
+};
+const WORKTREE_PATH = "out/worktree.md";
+const worktreeNote = (named: string) =>
+  `# My second try\n\n## Worktree\n\n${named}\n\n` +
+  "I ran the skill again there. My own folder did not change.\n";
+const worktreeFolder = "```text\n.claude/worktrees/second-try\n```";
+const worktreeFiles = { [WORKTREE_PATH]: worktreeNote(worktreeFolder) };
 const SKILL_PATH = ".claude/skills/monday-report/SKILL.md";
 const REPORT_PATH = "out/reports/monday-report.md";
-sample("03-write-the-monday-report", "solution", { [SKILL_PATH]: skill, [REPORT_PATH]: report });
-sample("03-write-the-monday-report", "wrong/guessed-numbers", {
+sample("03-make-the-monday-skill", "solution", { [SKILL_PATH]: skill, [REPORT_PATH]: report });
+sample("03-make-the-monday-skill", "wrong/guessed-numbers", {
   [SKILL_PATH]: skill,
   [REPORT_PATH]: guessed,
 });
-sample("03-write-the-monday-report", "wrong/every-cafe-is-late", {
+sample("03-make-the-monday-skill", "wrong/every-cafe-is-late", {
   [SKILL_PATH]: skill,
   [REPORT_PATH]: everyCafe,
 });
-sample("03-write-the-monday-report", "wrong/no-skill", { [REPORT_PATH]: report });
+sample("03-make-the-monday-skill", "wrong/no-skill", { [REPORT_PATH]: report });
+sample("04-write-the-monday-report", "solution", {
+  [SKILL_PATH]: skill,
+  [REPORT_PATH]: report,
+  ...subagentFiles,
+  ...worktreeFiles,
+});
+sample("04-write-the-monday-report", "wrong/guessed-numbers", {
+  [SKILL_PATH]: skill,
+  [REPORT_PATH]: guessed,
+  ...subagentFiles,
+  ...worktreeFiles,
+});
+sample("04-write-the-monday-report", "wrong/every-cafe-is-late", {
+  [SKILL_PATH]: skill,
+  [REPORT_PATH]: everyCafe,
+  ...subagentFiles,
+  ...worktreeFiles,
+});
+sample("04-write-the-monday-report", "wrong/no-skill", {
+  [REPORT_PATH]: report,
+  ...subagentFiles,
+  ...worktreeFiles,
+});
+sample("04-write-the-monday-report", "wrong/checker-can-edit-files", {
+  [SKILL_PATH]: skill,
+  [REPORT_PATH]: report,
+  [CHECKER_PATH]: checker("Read, Grep, Glob, Write, Edit"),
+  [CHECK_NOTE_PATH]: checkNote,
+  ...worktreeFiles,
+});
+sample("04-write-the-monday-report", "wrong/never-ran-the-checker", {
+  [SKILL_PATH]: skill,
+  [REPORT_PATH]: report,
+  [CHECKER_PATH]: checker("Read, Grep, Glob"),
+  ...worktreeFiles,
+});
+sample("04-write-the-monday-report", "wrong/no-worktree-named", {
+  [SKILL_PATH]: skill,
+  [REPORT_PATH]: report,
+  ...subagentFiles,
+  [WORKTREE_PATH]: worktreeNote("I tried it in a second place and it was fine."),
+});
 
 // ---- schedule-the-monday-report ----
 
@@ -162,7 +238,7 @@ const reportAt = (time: string) =>
 function schedulePlan(cron: string): string {
   return (
     "# The Monday report schedule\n\n" +
-    `## Schedule\n\n\`${cron}\`\n\n` +
+    `## Schedule\n\n\`\`\`text\n${cron}\n\`\`\`\n\n` +
     "At 07:00 on the first day the shop opens, from the Custom box.\n\n" +
     "## Why I read the first run\n\n" +
     "A job that runs alone can be wrong with nobody watching. " +
@@ -171,33 +247,82 @@ function schedulePlan(cron: string): string {
   );
 }
 
+const RUN_SCRIPT = `#!/bin/bash
+# Run the Monday report with nobody at the keyboard.
+cd "$(dirname "$0")"
+claude -p "Run the monday-report skill." --permission-mode acceptEdits \\
+  --allowedTools "Skill" "mcp__till" "Bash(date)" "Read" "Write"
+`;
+const FENCE = "```";
+const loopNote = (line: string) =>
+  `# My loop\n\n## Line\n\n${FENCE}text\n${line}\n${FENCE}\n\n` +
+  "It repeats the report while I am in the session.\n";
+const goodLoop = loopNote("/loop 1h Run the monday-report skill and tell me if a number changed.");
+const unattended = { "run-report.sh": RUN_SCRIPT, "out/loop.md": goodLoop };
+
 const twoRuns = {
   [SKILL_PATH]: scheduledSkill,
   [reportAt("07:00")]: madeAt("07:00"),
   [reportAt("07:03")]: madeAt("07:03"),
 };
-sample("04-schedule-the-monday-report", "solution", {
+sample("06-schedule-the-monday-report", "solution", {
   ...twoRuns,
+  ...unattended,
   "out/schedule.md": schedulePlan("0 7 * * 2"),
 });
-sample("04-schedule-the-monday-report", "wrong/one-report-written-over", {
+sample("06-schedule-the-monday-report", "wrong/one-report-written-over", {
   [SKILL_PATH]: skill,
   [REPORT_PATH]: madeAt("07:03"),
+  ...unattended,
   "out/schedule.md": schedulePlan("0 7 * * 2"),
 });
-sample("04-schedule-the-monday-report", "wrong/day-names-in-cron", {
+sample("06-schedule-the-monday-report", "wrong/day-names-in-cron", {
   ...twoRuns,
+  ...unattended,
   "out/schedule.md": schedulePlan("0 7 * * TUE"),
 });
-sample("04-schedule-the-monday-report", "wrong/runs-every-minute", {
+sample("06-schedule-the-monday-report", "wrong/runs-every-minute", {
   ...twoRuns,
+  ...unattended,
   "out/schedule.md": schedulePlan("* * * * *"),
 });
-sample("04-schedule-the-monday-report", "wrong/copied-a-report", {
+sample("06-schedule-the-monday-report", "wrong/copied-a-report", {
+  [SKILL_PATH]: scheduledSkill,
+  [reportAt("07:00")]: madeAt("07:00"),
+  ...unattended,
+  "out/reports/monday-report-copy.md": madeAt("07:00"),
+  "out/schedule.md": schedulePlan("0 7 * * 2"),
+});
+
+const solutionFiles = { ...twoRuns, "out/schedule.md": schedulePlan("0 7 * * 2") };
+sample("06-schedule-the-monday-report", "wrong/script-without-p", {
+  ...solutionFiles,
+  "out/loop.md": goodLoop,
+  "run-report.sh": RUN_SCRIPT.replace('claude -p "', 'claude "'),
+});
+sample("06-schedule-the-monday-report", "wrong/script-skips-permissions", {
+  ...solutionFiles,
+  "out/loop.md": goodLoop,
+  "run-report.sh": RUN_SCRIPT.replace(
+    "--permission-mode acceptEdits",
+    "--dangerously-skip-permissions",
+  ),
+});
+sample("06-schedule-the-monday-report", "wrong/loop-repeats-nothing", {
+  ...solutionFiles,
+  "run-report.sh": RUN_SCRIPT,
+  "out/loop.md": loopNote("/loop 1h"),
+});
+
+sample("05-keep-every-report", "solution", twoRuns);
+sample("05-keep-every-report", "wrong/one-report-written-over", {
+  [SKILL_PATH]: skill,
+  [REPORT_PATH]: madeAt("07:03"),
+});
+sample("05-keep-every-report", "wrong/copied-a-report", {
   [SKILL_PATH]: scheduledSkill,
   [reportAt("07:00")]: madeAt("07:00"),
   "out/reports/monday-report-copy.md": madeAt("07:00"),
-  "out/schedule.md": schedulePlan("0 7 * * 2"),
 });
 
 console.log("Wrote the samples for connect-and-schedule.");

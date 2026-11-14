@@ -36,3 +36,4 @@
 - Spell each cafe name the way customers/cafes.csv does.
 - Phone orders put the day first: 03/09/2026 is the 3rd of September.
 - In any file we keep, write dates as YYYY-MM-DD.
+- One task per chat. Use /clear, or start a new chat, between tasks.

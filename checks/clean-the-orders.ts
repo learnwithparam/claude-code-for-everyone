@@ -3,8 +3,10 @@
 import type { Rule } from "../scripts/verify";
 import { bakeryRule, has, KEY, originalsUnchanged, text } from "./lib/bakery";
 import { csvObjects } from "./lib/csv";
+import { section, words } from "./lib/md";
 
 const FILE = "out/orders-clean.csv";
+const NOTE = "out/diff-note.md";
 
 // One order as the answer key has it. The names match the CSV column names.
 type CleanOrder = {
@@ -54,6 +56,30 @@ function rightQuantity(row: Record<string, string>): boolean {
   return isWholeNumber && Number(row.quantity) === rightOrders[row.order_id]?.quantity;
 }
 
+// An order the clean copy changed: its original row has a different date, cafe or quantity.
+function wasChanged(folder: string, id: string): string[] {
+  const right = rightOrders[id];
+  const before = csvObjects(text(folder, "orders/wholesale-orders.csv")).find(
+    (row) => row.order_id === id,
+  );
+  if (!right || !before) return [];
+  const afterValues = [right.order_date, right.cafe, String(right.quantity)];
+  const beforeValues = [before.order_date, before.cafe, before.quantity];
+  return afterValues.filter((value, index) => value !== beforeValues[index]);
+}
+
+// A note line that names a changed order and quotes what it became.
+function namesChangedLine(folder: string): boolean {
+  return text(folder, NOTE)
+    .split("\n")
+    .some((line) => {
+      const id = line.match(/WS-\d{4}/)?.[0];
+      return !!id && wasChanged(folder, id).some((value) => line.includes(value));
+    });
+}
+
+const saysWhy = (folder: string) => words(section(text(folder, NOTE), "why") ?? "").length >= 6;
+
 export default [
   bakeryRule,
   {
@@ -97,6 +123,16 @@ export default [
     says: "every quantity is a whole number, and the right one",
     test: (folder) => rows(folder).every(rightQuantity),
     tryNext: 'ask Claude to turn words like "two dozen" into numbers, like 24',
+  },
+  {
+    says: `${NOTE} names a changed order and what it became`,
+    test: (folder) => has(folder, NOTE) && namesChangedLine(folder),
+    tryNext: "write one line with an order id like WS-1001 and its new date, cafe or number",
+  },
+  {
+    says: `${NOTE} has a "Why it is right" part with a reason`,
+    test: (folder) => has(folder, NOTE) && saysWhy(folder),
+    tryNext: 'add a heading "## Why it is right" and say why the change is right, in a sentence',
   },
   {
     says: "the original orders file is the same as the start",

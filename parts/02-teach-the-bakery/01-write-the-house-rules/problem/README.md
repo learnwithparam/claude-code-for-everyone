@@ -2,45 +2,69 @@
 
 ## The problem
 
-Each new chat, Claude starts fresh. It does not know Jess, the six cafes, or the rule about the till. So you say the same things again and again. And on the one day you forget, Claude may change a file it should not touch.
-
-Claude Code fixes this with one file: `CLAUDE.md`. Claude reads it at the start of every chat. Anthropic's guide says to keep it under 200 lines, because "longer files consume more context and reduce adherence" ([Anthropic, memory](https://code.claude.com/docs/en/memory.md)). In plain words: Claude follows a short list better than a long one.
+Each new chat, Claude starts fresh. It does not know Jess, the six cafes, or the rule about the till, so you say it all again. One file fixes this: `CLAUDE.md`. Claude reads it at the start of every chat ([Anthropic, memory](https://code.claude.com/docs/en/memory.md)).
 
 ```mermaid
 flowchart LR
   N[notes/owner-notes.md] --> C[Claude writes CLAUDE.md]
-  C --> M[CLAUDE.md at the top of wren-street]
-  M -->|read at the start of every chat| S[Every new chat]
+  C --> M[CLAUDE.md in wren-street]
+  M -->|read every chat| S[Every new chat]
+  R[.claude/rules/money.md] -->|read for bills| S
   M --> V[bun run verify]
 ```
 
-## Your challenge
+## Watch it done
 
-Stay in Manual mode. Paste this to Claude:
+For example, before, a new chat guesses what it must never do. After, it answers from the file. The check prints:
+
+```text
+Done. All 12 rules pass.
+```
+
+![The check passes on the house rules](../images/expected.png)
+
+## Your turn
+
+Stay in Manual mode, where Claude asks before each change.
+
+1. Paste this to Claude:
 
 ```text
 Read notes/owner-notes.md and look at the folders here. Then write
-CLAUDE.md at the top of this folder, not in out/. It holds the house
-rules for Wren Street Bakery. Use these five headings: About the bakery,
-Where things live, Never do, Money rules, How to write. Under Never do,
-say: never delete a file, and never change anything in till/ or
-purchase-orders/. Say that every new file goes in out/. Keep it short,
-under 50 lines, so you will read all of it.
+CLAUDE.md at the top of this folder, not in out/, with the headings
+About the bakery, Where things live, Never do, Money rules, How to write.
+Under Never do: never delete a file, and never change anything in till/
+or purchase-orders/. Every new file goes in out/. Keep it short. Add one
+line: one task per chat, and use /clear or a new chat between tasks.
 ```
 
-Claude asks before it makes the file. Read it first. Is every rule true for the bakery? Is anything missing?
+Expect: Claude asks before it makes the file. Read it, and say yes when every rule is true.
 
-For example, Jess's notes say "Never email a cafe without asking me first." That rule belongs under **Never do**.
+2. Type `/init`. This command makes Claude read the folder and suggest a `CLAUDE.md` of its own. Do not say yes yet.
 
-Then start a new chat and type `/memory`. You see `CLAUDE.md` in the list. Ask "What must you never do here?" Claude answers from the file.
+Expect: Claude shows its own version or changes to yours.
+
+3. Ask Claude to save `out/init-compare.md` with a line `Same:` and a line `Different:`, and to mention `/init`.
+
+Expect: a note on what matched and what `/init` missed.
+
+4. Ask Claude for `.claude/rules/money.md`. A rules file holds rules Claude reads only for matching files. Start it with a `paths:` list naming `invoices/**` and `purchase-orders/**`.
+
+Expect: a small file with a `paths:` list.
+
+5. Type `/clear`, then `/memory`.
+
+Expect: `CLAUDE.md` is listed. The `/clear` command wipes the chat, and the file loads again. The `/memory` command lists the files Claude has read.
+
+## Do it on your work
+
+Do the same in your own folder, with a rules file for your most careful folder. Good looks like a short file with every rule true.
 
 ## Done when
 
-- `CLAUDE.md` is at the top of the bakery folder.
-- It has the five headings.
-- Never do says: never delete a file, and never change `till/` or `purchase-orders/`.
-- It says new files go in `out/`.
-- It is shorter than 200 lines.
+- `CLAUDE.md` has the five headings, the never-do list, `out/`, and the `/clear` line.
+- `out/init-compare.md` has both labels.
+- `.claude/rules/` holds a file with real rules and a `paths:` list or a topic heading.
 
 To check, ask Claude:
 
@@ -54,22 +78,23 @@ It runs:
 bun run verify write-the-house-rules
 ```
 
-Expect: `Done. All 8 rules pass.`
+Expect: `Done. All 12 rules pass.`
 
-![The check passes on the house rules](../images/expected.png)
+## Solution
+
+The finished files are in `solution/`.
 
 ## If you get stuck
 
-| What you see                                        | Try this                                                              |
-| --------------------------------------------------- | --------------------------------------------------------------------- |
-| `FAIL CLAUDE.md is at the top of the bakery folder` | Claude put it in `out/`. Ask it to save it next to `orders/` instead. |
-| `FAIL Never do names till/ and purchase-orders/`    | Ask Claude to add both folders to the Never do list.                  |
-| `FAIL it is shorter than 200 lines`                 | Ask Claude to keep only the rules that matter.                        |
+| What you see                                | Try this                                            |
+| ------------------------------------------- | --------------------------------------------------- |
+| `FAIL out/init-compare.md names /init ...`  | Write both labels, with a few words after each.     |
+| `FAIL .claude/rules/ holds a rule file ...` | The file is empty. Ask Claude for four short rules. |
 
-A rule in `CLAUDE.md` is a strong hint, not a lock. Anthropic says Claude treats it "as context, not enforced configuration". So you still check the work.
+A rule is a strong hint, not a lock. You still check the work.
 
 ## Words you will use
 
-- **CLAUDE.md**: a file of house rules. Claude Code reads it at the start of each chat.
-- **/memory**: a command you type in Claude Code. It lists the rule files Claude has read.
-- **Context**: what Claude has read so far in this chat.
+- **CLAUDE.md**: a file of house rules that Claude reads at the start of each chat.
+- **/init**: a command that makes Claude suggest a `CLAUDE.md` from the folder.
+- **Rules file**: a small file in `.claude/rules/`, read when its `paths:` match.

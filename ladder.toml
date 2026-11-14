@@ -1,0 +1,41 @@
+# Maps each Claude Code feature a learner must use to the step that teaches it.
+# Levels come from standard section 7.
+[features]
+# L0 Ask
+plan-mode = "plan-the-invoice-check"
+at-files = "read-the-folder"
+screenshots = "read-the-folder"
+specific-prompt = "reconcile-the-invoices"
+# L1 Supervise
+permission-modes = "set-the-safety-rules"
+diff-review = "clean-the-orders"
+esc = "rewind-a-bad-edit"
+rewind = "rewind-a-bad-edit"
+clear = "write-the-house-rules"
+# L2 Teach the repo
+init = "write-the-house-rules"
+claude-md = "write-the-house-rules"
+rules = "write-the-house-rules"
+check-to-run = "map-your-own-close"
+# L3 Fence it
+hooks = "pack-the-bakery-kit"
+deny-rules = "set-the-safety-rules"
+sandbox = "set-the-safety-rules"
+skills = "build-the-label-skill"
+mcp-or-cli-tools = "connect-the-till"
+# L4 Spec and verify
+spec-interview = "write-the-done-list"
+goal = "write-the-done-list"
+stop-hook-gate = "sign-off-the-labels"
+code-review-subagent = "sign-off-the-labels"
+# L5 Parallel
+subagents = "write-the-monday-report"
+worktrees = "write-the-monday-report"
+batch = "run-the-friday-close"
+reviewer-agent = "write-the-monday-report"
+# L6 Unattended
+headless = "schedule-the-monday-report"
+loop = "schedule-the-monday-report"
+schedule = "schedule-the-monday-report"
+github-action = "pack-the-bakery-kit"
+run-contract-and-metrics = "run-the-friday-close"

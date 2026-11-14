@@ -8,6 +8,13 @@ const SETTINGS = ".claude/settings.json";
 const SAFETY = "out/safety.md";
 const settings = (folder: string) => JSON.parse(text(folder, SETTINGS));
 
+// A deny rule is a Read rule that names the folder, like "Read(./private/**)".
+function denies(folder: string, folderName: string): boolean {
+  const rules: unknown = settings(folder).permissions?.deny;
+  if (!Array.isArray(rules)) return false;
+  return rules.some((rule) => /^Read\(/.test(rule) && rule.includes(`${folderName}/`));
+}
+
 export default [
   bakeryRule,
   {
@@ -26,6 +33,16 @@ export default [
     test: (folder) => settings(folder).permissions?.blockWritesOutsideWorkingDirectories === true,
     tryNext:
       'ask Claude to set "blockWritesOutsideWorkingDirectories" to true inside "permissions"',
+  },
+  {
+    says: "Claude cannot read the private/ folder (a Read deny rule)",
+    test: (folder) => denies(folder, "private"),
+    tryNext: 'ask Claude to add "Read(./private/**)" to the "deny" list inside "permissions"',
+  },
+  {
+    says: "the sandbox is on (sandbox.enabled is true)",
+    test: (folder) => settings(folder).sandbox?.enabled === true,
+    tryNext: 'ask Claude to add "sandbox": { "enabled": true } to .claude/settings.json',
   },
   {
     says: "out/safety.md names Manual mode",

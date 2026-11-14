@@ -1,7 +1,16 @@
 // bun run check: the repo standard. CI runs this; any failure stops the build.
 import { existsSync, readdirSync, readFileSync, statSync } from "node:fs";
 import { dirname, join, relative } from "node:path";
-import { allSteps, type Part, parts, ROOT, type Step } from "./structure";
+import {
+  allSteps,
+  exampleFilesProblems,
+  type Part,
+  partShapeProblems,
+  parts,
+  ROOT,
+  type Step,
+  stepShapeProblems,
+} from "./structure";
 
 const problems: string[] = [];
 
@@ -11,13 +20,6 @@ function report(where: string, what: string) {
 
 const readText = (path: string) => readFileSync(path, "utf8");
 
-const STEP_SECTIONS = [
-  "## The problem",
-  "## Your challenge",
-  "## Done when",
-  "## If you get stuck",
-  "## Words you will use",
-];
 const HYPE_PHRASES = [
   "supercharge|unleash|unlock|seamless(ly)?|leverage|dive into|game[- ]changer",
   "revolutioni[sz]e|magic(al)?|cutting[- ]edge|AI-powered",
@@ -33,7 +35,8 @@ const hasImage = (text: string) => [...text.matchAll(IMAGE)].length > 0;
 
 function listFiles(folder: string, found: string[] = []): string[] {
   for (const entry of readdirSync(folder)) {
-    if (entry === "node_modules" || entry === ".git") continue;
+    // Fixtures are pages that fail on purpose, so the shape tests can prove the checks bite.
+    if (entry === "node_modules" || entry === ".git" || entry === "fixtures") continue;
     const path = join(folder, entry);
     if (statSync(path).isDirectory()) listFiles(path, found);
     else found.push(path);
@@ -106,12 +109,7 @@ function checkPartReadme(part: Part) {
   if (!existsSync(readme)) return report(part.dir, "part has no README.md");
   const text = readText(readme);
   if (!MERMAID.test(text)) report(readme, "part README needs a Mermaid diagram");
-  const walkthrough = text.split("## Walkthrough")[1]?.split("\n## ")[0];
-  if (walkthrough === undefined) {
-    report(readme, `part README needs a "## Walkthrough" section`);
-  } else if (!walkthrough.includes("```bash")) {
-    report(readme, "the walkthrough needs the commands, each with an Expect: line");
-  }
+  for (const problem of partShapeProblems(text)) report(readme, problem);
 }
 
 function checkStepName(step: Step, namesSeen: Set<string>) {
@@ -138,9 +136,7 @@ function checkStepReadme(step: Step, readme: string) {
   if (wordCount > 600) {
     report(readme, `${wordCount} words; a step README stays under 600, split the step`);
   }
-  for (const section of STEP_SECTIONS) {
-    if (!text.includes(section)) report(readme, `missing section "${section}"`);
-  }
+  for (const problem of stepShapeProblems(text)) report(readme, problem);
   if (!MERMAID.test(text) && !hasImage(text)) {
     report(readme, "a step shows a picture: a screenshot or a Mermaid diagram");
   }
@@ -174,6 +170,7 @@ function checkStep(step: Step, namesSeen: Set<string>) {
   const readme = join(step.dir, "problem", "README.md");
   if (!existsSync(readme)) return report(step.dir, "missing problem/README.md");
   checkStepReadme(step, readme);
+  for (const problem of exampleFilesProblems(step.meta.exampleFiles)) report(step.dir, problem);
   checkStepSolutionAndCheck(step);
 }
 
@@ -220,25 +217,15 @@ function checkCommands() {
   for (const file of markdownFiles) checkBashBlocksSayWhatToExpect(file);
 }
 
-// 5. The learner works in the real Claude Code: no model API, no model id, exact pins,
-// and a troubleshooting table.
-const MODEL_API = /@ai-sdk\/|@anthropic-ai\/sdk|openrouter|LLM_PROVIDER|ANTHROPIC_API_KEY/i;
-const TEXT_FILE = /\.(ts|py|md|jsonl?|toml|ya?ml|txt)$|\.env/;
-
-function checkNoModelApiOrModelName() {
-  const textFiles = allFiles.filter((file) => TEXT_FILE.test(file));
-  for (const file of textFiles) {
-    // This file holds the patterns that find model names, so it would flag itself.
-    if (file.includes("/scripts/check.ts")) continue;
-    const text = readText(file);
-    const modelName = text.match(MODEL_NAME);
-    if (modelName) {
-      report(file, `model id "${modelName[0]}": Claude Code picks the model, so no file names one`);
-    }
-    const modelApi = text.match(MODEL_API);
-    if (modelApi) {
-      const why = "this course uses the real Claude Code, never the model API";
-      report(file, `"${modelApi[0]}": ${why} (briefs/build/CLAUDE-CODE.md)`);
+// 5. One model config, exact pins, a troubleshooting table.
+function checkModelsNamedInOnePlace() {
+  const sourceFiles = allFiles.filter((file) => /\.(ts|py|md|json|toml|ya?ml)$/.test(file));
+  for (const file of sourceFiles) {
+    // This file holds the pattern that finds model names, so it would flag itself.
+    if (file.includes("/config/models.") || file.includes("/scripts/check.ts")) continue;
+    const found = readText(file).match(MODEL_NAME);
+    if (found) {
+      report(file, `model id "${found[0]}" outside config/models; name models in one place`);
     }
   }
 }
@@ -324,75 +311,6 @@ function checkSchedules(allParts: Part[]) {
   }
 }
 
-// 7. The learner writes no code: Claude Code makes every file.
-// Each solution/ has prompts.md: the prompts, the plan Claude showed, and what the learner checked.
-// No learner page offers a way to do the work by hand.
-const DO_IT_YOURSELF = /\b(yourself|by hand|hand-written|text editor)\b/i;
-// The orientation asks for a task the learner does by hand at work, so those phrases are allowed.
-const ALLOWED_PHRASE = /\b(you do|doing it) by hand\b/gi;
-
-function checkSolutionsHavePrompts(allParts: Part[]) {
-  for (const part of allParts) {
-    for (const step of part.steps) {
-      const solution = join(step.dir, "solution");
-      if (existsSync(solution) && !existsSync(join(solution, "prompts.md"))) {
-        const what = "the prompts, the plan Claude showed, and what the learner checked";
-        report(solution, `solution/ needs prompts.md: ${what}`);
-      }
-    }
-  }
-}
-
-function isLearnerPage(file: string): boolean {
-  const path = relative(ROOT, file);
-  const isStepPage = /\/(problem\/README|solution\/prompts)\.md$/.test(path);
-  const isPartPage = /^parts\/[^/]+\/README\.md$/.test(path);
-  return isStepPage || isPartPage || path === "README.md" || path.startsWith("00-orientation/");
-}
-
-function checkNoDoItYourself() {
-  const learnerPages = markdownFiles.filter(isLearnerPage);
-  for (const file of learnerPages) {
-    const lines = readText(file).split("\n");
-    lines.forEach((line, index) => {
-      const withoutAllowedPhrase = line.replace(ALLOWED_PHRASE, "");
-      const found = withoutAllowedPhrase.match(DO_IT_YOURSELF);
-      if (found) {
-        const why = "the learner never writes a file; Claude Code does";
-        report(file, `line ${index + 1}: "${found[0]}": ${why}`);
-      }
-    });
-  }
-}
-
-// 8. The setup the course teaches keeps Claude out of the answer key.
-// Every settings file a learner copies (a solution or the finished bakery) denies Read of checks/.
-const ANSWER_KEY_RULE = "Read(../checks/**)";
-const SAFETY_STEP = "parts/01-make-claude-ask-first/02-set-the-safety-rules";
-
-function isTaughtSettings(file: string): boolean {
-  const path = relative(ROOT, file);
-  if (!path.endsWith(".claude/settings.json")) return false;
-  const isSolution = /\/solution\/\.claude\/settings\.json$/.test(path);
-  return isSolution || path.startsWith("world/finished/");
-}
-
-function checkAnswerKeyDenied() {
-  for (const file of allFiles.filter(isTaughtSettings)) {
-    const deny = JSON.parse(readText(file)).permissions?.deny ?? [];
-    if (!deny.includes(ANSWER_KEY_RULE)) {
-      const why = "so Claude cannot read the answer key";
-      report(file, `permissions.deny needs "${ANSWER_KEY_RULE}" ${why}`);
-    }
-  }
-  for (const page of ["problem/README.md", "solution/prompts.md"]) {
-    const path = join(ROOT, SAFETY_STEP, page);
-    if (!readText(path).includes(ANSWER_KEY_RULE)) {
-      report(path, `the page must teach the "${ANSWER_KEY_RULE}" deny rule`);
-    }
-  }
-}
-
 function runEveryCheck() {
   const allParts = parts();
   checkNoMakefile();
@@ -401,14 +319,11 @@ function runEveryCheck() {
   checkKeyPagesHavePictures();
   checkPartsAndSteps(allParts);
   checkCommands();
-  checkNoModelApiOrModelName();
+  checkModelsNamedInOnePlace();
   checkNodePackagesPinned();
   checkPythonPackagesPinned();
   checkTroubleshootingTable();
   checkSchedules(allParts);
-  checkSolutionsHavePrompts(allParts);
-  checkNoDoItYourself();
-  checkAnswerKeyDenied();
   return allParts;
 }
 

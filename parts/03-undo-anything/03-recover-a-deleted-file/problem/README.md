@@ -2,13 +2,7 @@
 
 ## The problem
 
-Rewind has a gap. Anthropic's guide says: "A file that only Bash commands changed isn't tracked and stays as it is."
-
-To get such a file back, the guide says to use "version control, such as Git" ([Anthropic, checkpointing](https://code.claude.com/docs/en/checkpointing.md)).
-
-In plain words: when Claude runs a **command** that deletes a file, rewind cannot bring it back. Only a save point can.
-
-People have lost real files this way. One person asked Claude to clean up files left by old apps. A wrong delete command removed about 275 GB from their drive ([GitHub issue 106205](https://github.com/anthropics/claude-code/issues/106205)).
+For example, Anthropic's guide says: "A file that only Bash commands changed isn't tracked and stays as it is" ([Anthropic, checkpointing](https://code.claude.com/docs/en/checkpointing)). So when a **command** deletes a file, rewind cannot bring it back. Only a save point can.
 
 ```mermaid
 flowchart LR
@@ -18,32 +12,49 @@ flowchart LR
   S[(before-labels)] --> U2
 ```
 
-## Your challenge
+## Watch it done
 
-You delete Jess's notes on purpose, with a command. You have a save point, so this is safe.
+Before, a command deleted `notes/owner-notes.md`. Rewind shows no **Restore code** for it.
 
-In Claude Code in the terminal, paste this:
-
-```text
-This is a practice. I have a save point. Run this command:
-rm notes/owner-notes.md
-```
-
-Claude asks before it runs the command. It may warn you. Say yes. The file is gone.
-
-Now type `/rewind` and look at the list. For example, you see the prompt "This is a practice. I have a save point." Pick it. You see no **Restore code** for the notes. Claude's file tools never touched the notes, so rewind has nothing to restore.
-
-Now paste this:
+After, Claude restores it from the save point, and the log says why:
 
 ```text
-Bring back notes/owner-notes.md from the save point before-labels.
-Do not write it again from memory. Then add this line to out/undo-log.md:
 - owner-notes.md: a command (rm) deleted it. Rewind could not bring it
 back, because Claude's file tools never touched it. I got it back from
 the save point before-labels.
 ```
 
-Claude asks to run a git command that restores the file. Say yes.
+## Your turn
+
+The two files are `notes/owner-notes.md` and `out/undo-log.md`. You have a save point, so this practice is safe.
+
+1. In Claude Code in the terminal, paste this prompt:
+
+   ```text
+   This is a practice. I have a save point. Run this command:
+   rm notes/owner-notes.md
+   ```
+
+   Expect: Claude asks before it runs the command. Say yes. The file is gone.
+2. Type `/rewind` and read the list.
+   Expect: no **Restore code** for the notes. Claude's file tools never touched them.
+3. Paste this prompt:
+
+   ```text
+   Bring back notes/owner-notes.md from the save point before-labels.
+   Do not write it again from memory. Then add this line to out/undo-log.md:
+   - owner-notes.md: a command (rm) deleted it. Rewind could not bring it
+   back, because Claude's file tools never touched it. I got it back from
+   the save point before-labels.
+   ```
+
+   Expect: Claude asks to run a git command that restores the file. Say yes.
+4. Ask Claude to show the notes.
+   Expect: the same words as before.
+
+## Do it on your work
+
+Pick a spare file you saved earlier. Ask Claude to delete it with a command, then restore it from your save point. Good looks like this: the file is back with every letter the same.
 
 ## Done when
 
@@ -51,19 +62,21 @@ Claude asks to run a git command that restores the file. Say yes.
 - A line in `out/undo-log.md` names `owner-notes.md` and says a command deleted it.
 - Every other original file is the same as the start.
 
-To check, ask Claude:
-
-```text
-Please check my work for recover-a-deleted-file. Run bun run verify recover-a-deleted-file and tell me what it printed. Do not change anything to make it pass.
-```
-
-It runs:
+To check, ask Claude: "Please check my work for recover-a-deleted-file. Run the command and tell me what it printed. Do not change anything to make it pass."
 
 ```bash
 bun run verify recover-a-deleted-file
 ```
 
 Expect: `Done. All 5 rules pass.`
+
+## Solution
+
+The after state is the notes back and a log. Both are in `solution/`.
+
+## Go further
+
+- Ask Claude to write a hook that blocks any delete outside `out/`. A hook is a small script Claude Code runs before each tool.
 
 ## If you get stuck
 

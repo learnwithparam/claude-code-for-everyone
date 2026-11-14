@@ -1,0 +1,13 @@
+{
+  "permissions": {
+    "defaultMode": "default",
+    "blockWritesOutsideWorkingDirectories": true,
+    "deny": [
+      "Read(../checks/**)",
+      "Read(./private/**)"
+    ]
+  },
+  "sandbox": {
+    "enabled": false
+  }
+}

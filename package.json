@@ -4,7 +4,8 @@
   "type": "module",
   "packageManager": "bun@1.4.4",
   "scripts": {
-    "check": "bun scripts/readable.ts && bun scripts/plain-english.ts && bun scripts/check.ts && bun scripts/verify.ts --all && bun scripts/audit.ts && bun scripts/text-audit.ts",
+    "check": "bun scripts/readable.ts && bun scripts/plain-english.ts && bun scripts/check.ts && bun scripts/verify.ts --all && bun scripts/audit.ts && bun scripts/text-audit.ts && bun test scripts/prose.test.ts && bun test scripts/dates.test.ts && bun scripts/capstone.ts && bun test scripts/shape.test.ts && bun scripts/picks.ts && bun scripts/ladder.ts && bun test scripts/workfiles.test.ts scripts/picks.test.ts scripts/ladder.test.ts scripts/changed.test.ts",
+    "ladder": "bun scripts/ladder.ts",
     "audit": "bun scripts/audit.ts",
     "text-audit": "bun scripts/text-audit.ts",
     "assignment": "bun assignment/check.ts",
@@ -15,7 +16,10 @@
     "world": "bun world/world.ts",
     "doctor": "bun scripts/doctor.ts",
     "finished": "bun world/finished.ts",
-    "pictures": "bun images/shoot.ts"
+    "pictures": "bun images/shoot.ts",
+    "picks": "bun scripts/picks.ts",
+    "capstone": "bun scripts/capstone.ts",
+    "check:changed": "bun scripts/changed.ts"
   },
   "dependencies": {
     "fflate": "0.8.3"
@@ -27,5 +31,7 @@
   },
   "plainEnglish": {
     "grade": 6
-  }
+  },
+  "ladder": true,
+  "capstone": true
 }

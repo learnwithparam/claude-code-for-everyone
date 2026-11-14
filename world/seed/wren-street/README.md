@@ -15,4 +15,5 @@ This is the bakery's shared folder. It is made-up data for practice.
 | menu/ | The menu on the shop wall |
 | till/ | What sold, from the till |
 | notes/ | Notes from Jess, the owner |
+| private/ | Staff pay. Not for Claude to read |
 | out/ | Put new files here |

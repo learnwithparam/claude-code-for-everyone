@@ -2,11 +2,7 @@
 
 ## The problem
 
-Next, Claude checks 24 supplier bills. That is money. A wrong answer said with confidence can cost Jess real pounds. So before Claude does any work, you want to see its plan.
-
-A plan shows you the mistake before it happens. For example, a weak plan says "fix the purchase order to match the bill". That would change the bakery's record. You catch it in the plan, and nothing has changed yet.
-
-In Plan mode, Claude reads and thinks, but it does not change files. It shows you a plan. You say yes, or you ask for changes.
+Next, Claude checks 24 supplier bills. That is money, and a wrong answer said with confidence costs real pounds. For example, a weak plan might say "fix the purchase order to match the bill". In Plan mode you see that before anything changes.
 
 ```mermaid
 flowchart LR
@@ -17,9 +13,25 @@ flowchart LR
   R[(purchase-orders.csv)] -.->|read only| P
 ```
 
-## Your challenge
+## Watch it done
 
-Switch Claude to **Plan** mode. In the terminal, press Shift+Tab until it says plan mode. In the app, use the mode button. Then paste this:
+Before, Claude would start reading bills at once. After, it shows a plan with five headings and waits. The plan says which file is the truth, and the check prints:
+
+```text
+Done. All 6 rules pass.
+```
+
+![The check passes on the saved plan](../images/expected.png)
+
+## Your turn
+
+The example file is `purchase-orders/purchase-orders.csv`. A purchase order is what Jess ordered, and the price she agreed.
+
+1. Press Shift+Tab until the terminal says plan mode. In Plan mode Claude reads and thinks, but changes no file. In the app, use the mode button.
+
+Expect: the mode line says plan.
+
+2. Paste this:
 
 ```text
 We will check the 24 supplier invoices in invoices/ against
@@ -28,22 +40,28 @@ Make a plan with these headings: Goal, Files I will read,
 Files I will write, Steps, Risks. Say which file is the source of truth.
 ```
 
-Read the plan. Check three things:
+Expect: a plan with the five headings. The source of truth is the file that wins when two files disagree.
 
-- Does it say `purchase-orders.csv` is the source of truth?
-- Does every file it will write sit in `out/`?
-- Does it name a risk you did not think of?
+3. Read it. Does it name `purchase-orders.csv` as the truth? Does every file it will write sit in `out/`? Ask for changes until yes, then say yes.
 
-If the answer is no, tell Claude what to change. When the plan is right, say yes. Claude leaves Plan mode. Then paste this:
+Expect: Claude leaves Plan mode.
+
+4. Paste this:
 
 ```text
 Save the plan you showed me as out/plans/invoice-check.md.
 Do not start the check.
 ```
 
+Expect: the file `out/plans/invoice-check.md` appears.
+
+## Do it on your work
+
+Pick a job in your own folder that touches money or many files. Ask for a plan first, with the same five headings. Good looks like a plan that names one file as the truth and writes only to a safe folder. It should also name a risk you had not thought of.
+
 ## Done when
 
-- `out/plans/invoice-check.md` is there, with the five headings.
+- The plan is saved, with the five headings.
 - It names `purchase-orders.csv` as the source of truth.
 - Every file under Files I will write is in `out/`.
 - No original bakery file has changed.
@@ -62,18 +80,14 @@ bun run verify plan-the-invoice-check
 
 Expect: `Done. All 6 rules pass.`
 
-![The check passes on the saved plan](../images/expected.png)
+## Solution
+
+The saved plan is in `solution/out/plans/invoice-check.md`.
 
 ## If you get stuck
 
-| What you see                                                                | Try this                                                           |
-| --------------------------------------------------------------------------- | ------------------------------------------------------------------ |
-| `FAIL it names purchase-orders.csv as the source of truth`                  | Ask Claude to say which file wins when a bill and an order differ. |
-| `FAIL Files I will write names at least one file, and every one is in out/` | Claude wants to change an original. Say no, and ask for `out/`.    |
-| `FAIL out/plans/invoice-check.md is there`                                  | Claude made the plan but did not save it. Ask it to save it.       |
-
-## Words you will use
-
-- **Plan mode**: Claude reads and plans, but changes no file until you say yes.
-- **Source of truth**: the file that wins when two files disagree.
-- **Purchase order**: what Jess ordered from a supplier, and the price she agreed.
+| What you see                                               | Try this                                                        |
+| ---------------------------------------------------------- | --------------------------------------------------------------- |
+| `FAIL it names purchase-orders.csv as the source of truth` | Ask which file wins when a bill and an order differ.            |
+| `FAIL Files I will write names at least one file ...`      | Claude wants to change an original. Say no, and ask for `out/`. |
+| `FAIL out/plans/invoice-check.md is there`                 | Ask Claude to save the plan.                                    |

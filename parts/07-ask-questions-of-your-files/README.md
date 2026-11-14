@@ -1,30 +1,32 @@
 # Ask questions of your files with DuckDB
 
-This part moves you toward the course goal: you redo one job with a tool teams use at work.
+## After this part you can
+
+Ask a question of two CSV files with one saved query, and get the same answer you found by hand.
+
+## You leave with
+
+A file `unmatched.sql` that lists the faulty bills, and a `prompts.md` that shows how you got it.
 
 ## The problem
 
-Before, you read and checked 24 bills against 23 orders. It worked. But next month there are 200 bills, and a person cannot read them all.
-
-Many teams ask questions of their files with DuckDB. It reads CSV files with a query and needs no server. This part is short. It is optional in the live session and expected as homework.
-
-For example, one query lists every bill that is not the first bill for its order, or has the wrong price or quantity. It gives the same 5 bills you found before.
+You read and checked 24 bills against 23 orders. It worked, but next month there are 200 bills and a person cannot read them all. DuckDB is a free tool that reads CSV files with a query and needs no server. One query lists the same 5 faulty bills you found before. For example, it lists `FD-2204`, which charges £6.45 a kg where the order says £6.20. This part is optional in the live session and expected as homework.
 
 ```mermaid
 flowchart TB
   H[Teach the bakery: you reconciled the bills] --> K[(Answer key: 5 faulty bills)]
   C[Claude Code] -->|writes| Q[unmatched.sql]
-  Q --> D[DuckDB 2.0.0]
+  Q --> D[DuckDB]
   F[(Two CSV files)] --> D
   D --> K2[5 bills]
   K2 -->|same count| K
 ```
 
-## The steps
+## Steps
 
-| Step                                                                            | Minutes | What you make   | What the check reads                                          |
-| ------------------------------------------------------------------------------- | ------- | --------------- | ------------------------------------------------------------- |
-| [find-the-unmatched-invoices](01-find-the-unmatched-invoices/problem/README.md) | 20      | `unmatched.sql` | The query runs with DuckDB 2.0.0 and lists the 5 faulty bills |
+| Step                                                                            | What you make   | What the check reads                                  |
+| ------------------------------------------------------------------------------- | --------------- | ----------------------------------------------------- |
+| [find-the-unmatched-invoices](01-find-the-unmatched-invoices/problem/README.md) | `unmatched.sql` | The query runs and lists the 5 faulty bills it should |
 
 ## Walkthrough
 
@@ -45,6 +47,15 @@ bun run assignment
 ```
 
 Expect: `2 of 2 lines pass. Wrote assignment/result.json`
+
+## Watch and read
+
+| Kind | Title | Author | Why | Link |
+| ---- | ----- | ------ | --- | ---- |
+
+## Project
+
+Pick two CSV files from your own work that share one column. Use made-up or cleaned data. Ask Claude to save a query that lists the rows in the first file with no good match in the second. Ask what matched means, check one row by hand, and keep the prompts in a note.
 
 ## Hand it in
 

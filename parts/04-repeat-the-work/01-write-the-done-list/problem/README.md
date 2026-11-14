@@ -2,67 +2,106 @@
 
 ## The problem
 
-Next, Claude makes 12 shelf labels. Before it starts, you decide what a good label looks like. If you look at the labels first, you judge them by what Claude made, not by what Jess needs.
-
-People lean toward what a tool shows them. In one Anthropic study, 50 trained analysts worked with an agent. A coin flip set which way the agent leaned. The analysts went with its lean 86% of the time ([Anthropic, agents and judgment calls](https://www.anthropic.com/research/agents-judgment-calls)). A list you write first keeps your own judgment.
+Claude is about to make 12 shelf labels. Judge them after, and you judge by what Claude made. In an Anthropic study, 50 analysts followed an agent's lean 86% of the time ([Anthropic](https://www.anthropic.com/research/agents-judgment-calls)). Write "done" first.
 
 ```mermaid
 flowchart LR
-  Y[You say what done means] --> D[out/labels-done.md]
-  D --> S[(Save point: done-list)]
-  S --> L[Only then: the labels]
+  I[Claude interviews you] --> S[SPEC.md]
+  S --> D[out/labels-done.md]
+  S --> G[out/goal.md]
+  D --> P[(Save point: done-list)]
+  P --> L[Only then: the labels]
 ```
 
-## Your challenge
+## Watch it done
 
-Stay in Manual mode. Make no labels yet. Paste this:
+For example, the Multigrain Loaf recipe has sesame seeds. Its old label says:
 
 ```text
-Before you make any shelf label, write out/labels-done.md:
-a list of checks a person can tick, each line starting with "- [ ]".
-At least four checks. One must say the label names sesame when the
-recipe has sesame. One must say a person signs the "Checked by:" line.
-Do not make any label yet.
+Contains: gluten, soya
 ```
 
-Read the list. Would it catch a wrong label? For example, the Multigrain Loaf recipe now has sesame seeds. But its old label in `labels/` says only "gluten, soya". One check must catch that.
-
-Then make a save point, so the list is on record before any label:
+Your done list gets a line that catches it:
 
 ```text
-Make a save point called done-list.
+- [ ] The Multigrain Loaf label names sesame, because the recipe now has sesame seeds.
 ```
+
+A **spec** is a short file that says what you want and when to stop. Claude writes it after it asks you questions.
+
+## Your turn
+
+Stay in Manual mode. Make no labels yet.
+
+1. Ask Claude to interview you.
+
+   ```text
+   Interview me about the 12 shelf labels, one question at a time. Use
+   recipes/multigrain-loaf.md and labels/multigrain-loaf.md. Then write
+   SPEC.md with ## Goal, ## Stop condition and ## Questions and answers,
+   each question as "Q:" and each answer as "A:".
+   ```
+
+   Expect: Claude asks you questions, then offers to write `SPEC.md`. Say yes.
+
+2. Ask for the done list, made from the spec.
+
+   ```text
+   From SPEC.md, write out/labels-done.md: four or more lines that start
+   with "- [ ]". One names sesame. One says a person signs.
+   ```
+
+   Expect: a file with checkbox lines. No label exists yet.
+
+3. Ask for the goal line. A `/goal` line tells Claude when it may stop.
+
+   ```text
+   Write out/goal.md: one line that starts with /goal, says to make the
+   12 labels, then "until" and the stop condition from SPEC.md.
+   ```
+
+   Expect: one line that starts with `/goal`.
+
+4. Make the save point, so the list is on record before any label.
+
+   ```text
+   Make a save point called done-list.
+   ```
+
+   Expect: Claude shows the git commands. Read them, then say yes.
+
+## Do it on your work
+
+Pick a job of your own with a clear end, such as a monthly report. Let Claude interview you, then keep a spec, a done list and a goal line beside it. Good is a stop condition a stranger could test: a count, a file, a name.
 
 ## Done when
 
-- `out/labels-done.md` has 4 or more checkbox lines.
-- One names sesame. One names the sign-off by a person.
-- The done list is in a save point, and no label is in that save point.
+- `SPEC.md` has a goal, a stop condition and two questions with answers.
+- `out/labels-done.md` has four checkboxes, one on sesame and one on signing.
+- `out/goal.md` has a `/goal` line with "until" in it.
+- The done list is in a save point, and no label is.
 
-To check, ask Claude:
-
-```text
-Please check my work for write-the-done-list. Run bun run verify write-the-done-list and tell me what it printed. Do not change anything to make it pass.
-```
-
-It runs:
+Ask Claude: "Please check my work for write-the-done-list. Run it and tell me what it printed. Do not change anything to make it pass."
 
 ```bash
 bun run verify write-the-done-list
 ```
 
-Expect: `Done. All 7 rules pass.`
+Expect: `Done. All 11 rules pass.`
+
+## Solution
+
+The finished files are in `solution/`.
 
 ## If you get stuck
 
-| What you see                                                       | Try this                                                              |
-| ------------------------------------------------------------------ | --------------------------------------------------------------------- |
-| `FAIL the done list was in a save point before any label was made` | Ask Claude for a save point called done-list. Do it before any label. |
-| `FAIL one check names sesame`                                      | Ask Claude to add a check about sesame on the Multigrain Loaf.        |
-| `FAIL it has 4 or more checkbox lines`                             | Ask Claude to start each check with `- [ ]`.                          |
+| What you see                             | Try this                                        |
+| ---------------------------------------- | ----------------------------------------------- |
+| `FAIL the done list was in a save point` | Ask for a save point called done-list first.    |
+| `FAIL out/goal.md has a /goal line`      | The line must start with /goal and say "until". |
 
 ## Words you will use
 
-- **Done list**: what a finished piece of work must have. You write it before the work.
-- **Checkbox**: a line that starts with `- [ ]`. It becomes `- [x]` when it is ticked.
-- **Allergen**: a food that makes some people ill, like sesame or milk.
+- **Done list**: what a finished piece of work must have.
+- **Stop condition**: what must be true before Claude may stop.
+- **Checkbox**: a line that starts with `- [ ]`. Ticked, it is `- [x]`.

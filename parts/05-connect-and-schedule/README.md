@@ -1,44 +1,46 @@
 # Connect it and let it run
 
-This part moves you toward the goal of the course: a Friday close that runs on its own, from the real record, and that you can trust.
+## After this part you can
+
+Connect Claude to a real system, check its work with a helper, and run a job with nobody there.
+
+## You leave with
+
+A till connector and a Monday report skill. The skill has a read-only checker. You also get a script that runs it with `-p`, and a note with a cron line and a loop line.
 
 ## The problem
 
-Jess wants the Monday report without asking for it. The numbers live in the till, not in a file Claude can guess at. And a job that runs by itself must be right before you stop watching it.
+Jess wants the Monday report without asking for it. The numbers live in the till, not in a file Claude can guess at. For example, the whole till holds £13,609.80, but one day took far less. A job that runs by itself must be right before you stop watching it.
 
 A solar firm uses Claude to sort permit emails. "About 71% of emails are fully processed without human intervention" ([Freedom Forever](https://claude.com/customers/freedom-forever)).
-
-In this part, you meet the terminal and connect the till to Claude. Then Claude turns the report into a skill, and you set it to run on its own.
-
-For example, the report has a "## Late payers" part. It names Kettle and Crumb and Moss and Grain, from Jess's notes.
 
 ```mermaid
 flowchart LR
   T[(The till)] -->|connector| C[Claude]
   F[The bakery folder] --> C
-  K[A clock] -->|starts| C
-  C --> R[out/reports/monday-report.md]
+  K[A clock, a script, a loop] -->|starts| C
+  C --> R[out/reports/]
   R --> P[Jess reads it]
 ```
 
-## The steps
+## Steps
 
-| Step                                                                          | Minutes | What you make                              | What the check reads                                           |
-| ----------------------------------------------------------------------------- | ------- | ------------------------------------------ | -------------------------------------------------------------- |
-| [open-the-terminal](01-open-the-terminal/problem/README.md)                   | 15      | `out/terminal.md`                          | The version is new enough; the mode is named                   |
-| [connect-the-till](02-connect-the-till/problem/README.md)                     | 20      | The till connector and `out/till-today.md` | The connector is there; the total matches the till             |
-| [write-the-monday-report](03-write-the-monday-report/problem/README.md)       | 25      | A `monday-report` skill and the report     | Sales, Waste, Late payers; every number matches the till       |
-| [schedule-the-monday-report](04-schedule-the-monday-report/problem/README.md) | 15      | Two reports from the skill                 | Made by a scheduled task, or by Run now plus `out/schedule.md` |
+| Step                                                                          | What you make                               | What the check reads                                     |
+| ----------------------------------------------------------------------------- | ------------------------------------------- | -------------------------------------------------------- |
+| [open-the-terminal](01-open-the-terminal/problem/README.md)                   | `out/terminal.md`                           | The version is new enough; the mode is named             |
+| [connect-the-till](02-connect-the-till/problem/README.md)                     | The till connector and `out/till-today.md`  | The connector is there; the total matches the till       |
+| [make-the-monday-skill](03-make-the-monday-skill/problem/README.md)           | A `monday-report` skill and a report        | Sales, Waste, Late payers; every number matches the till |
+| [write-the-monday-report](04-write-the-monday-report/problem/README.md)       | A read-only checker and a worktree note     | The checker cannot write; the note names the worktree    |
+| [keep-every-report](05-keep-every-report/problem/README.md)                   | Two reports, each with its own file         | A Made at line; reports at least a minute apart          |
+| [schedule-the-monday-report](06-schedule-the-monday-report/problem/README.md) | A cron note, `run-report.sh`, `out/loop.md` | A cron line of numbers; a script with `-p`; a loop line  |
 
 The free plan and some work laptops cannot run scheduled tasks. The last step has a second way to pass for them.
 
 ## Walkthrough
 
-This part starts in the terminal. Open a terminal, go to the course folder, then into the bakery. Run each check from there.
+Open a terminal, go to the course folder, then into the bakery. To check, ask Claude: "Please check my work for the step name. Run it and tell me what it printed. Do not change anything to make it pass." The commands below are what Claude runs. The [ways of working](../../00-orientation/ways-of-working.md) page lists every mode and command used here.
 
-To check, ask Claude to check your work. Say: "Please check my work for the step name. Run it and tell me what it printed. Do not change anything to make it pass." The commands below are what Claude runs. The [ways of working](../../00-orientation/ways-of-working.md) page lists every mode and command used here.
-
-First, start Claude Code in the bakery folder. Write down its version and the Plan mode words, as the step page shows.
+First, start Claude Code in the bakery folder and find Plan mode.
 
 ```bash
 bun run verify open-the-terminal
@@ -46,7 +48,7 @@ bun run verify open-the-terminal
 
 Expect: `Done. All 7 rules pass.`
 
-Next, add the till as a connector, approve it in Claude Code, and ask for the last day's takings.
+Next, add the till and ask for the last day's takings.
 
 ```bash
 bun run verify connect-the-till
@@ -54,21 +56,23 @@ bun run verify connect-the-till
 
 Expect: `Done. All 7 rules pass.`
 
-Then ask Claude to make the `monday-report` skill, and run it with `/monday-report`.
+Then make the skill, add a checker, and try a second run in a worktree.
 
 ```bash
+bun run verify make-the-monday-skill
 bun run verify write-the-monday-report
 ```
 
-Expect: `Done. All 10 rules pass.`
+Expect: `Done. All 10 rules pass.` and then `Done. All 13 rules pass.`
 
-Last, make each run keep its own report. Run it two times, with a scheduled task or with Run now.
+Last, keep each run, then run alone with a script and a loop.
 
 ```bash
+bun run verify keep-every-report
 bun run verify schedule-the-monday-report
 ```
 
-Expect: `Done. All 9 rules pass.`
+Expect: `Done. All 8 rules pass.` and then `Done. All 12 rules pass.`
 
 To check the whole part at once:
 
@@ -76,31 +80,19 @@ To check the whole part at once:
 bun run verify part connect-and-schedule
 ```
 
-Expect: `Part connect-and-schedule is done: 4/4 steps pass.`
+Expect: `Part connect-and-schedule is done: 6/6 steps pass.`
 
-## Assignment
+## Watch and read
 
-The problem: Jess wants the Monday report without asking for it.
+| Kind  | Title                                                      | Author           | Why                                                       | Link                                                                  |
+| ----- | ---------------------------------------------------------- | ---------------- | --------------------------------------------------------- | --------------------------------------------------------------------- |
+| video | Claude Code advanced patterns: Subagents, MCP, and scaling | Anthropic        | The makers show subagents and connectors at work.         | <https://claude.com/resources/webinars/claude-code-advanced-patterns> |
+| video | Claude Code: Advanced                                      | Anthropic        | A hands-on session on worktrees, loops and parallel work. | <https://claude.com/resources/webinars/claude-code-workshop-advanced> |
+| read  | Run Claude Code programmatically                           | Claude Code docs | How `claude -p` runs with no chat, and what to allow.     | <https://code.claude.com/docs/en/headless>                            |
+| read  | Run prompts on a schedule                                  | Claude Code docs | Loops and scheduled tasks, and when each one stops.       | <https://code.claude.com/docs/en/scheduled-tasks>                     |
+| read  | Common workflows                                           | Claude Code docs | Parallel sessions with worktrees, step by step.           | <https://code.claude.com/docs/en/common-workflows>                    |
+| read  | Connect Claude Code to tools through MCP                   | Claude Code docs | How a connector is added and checked.                     | <https://code.claude.com/docs/en/mcp>                                 |
 
-Hand in these files from your `wren-street` folder: `.mcp.json`, `.claude/skills/monday-report/SKILL.md`, and two reports in `out/reports/`. If you took the Run now way, add `out/schedule.md`.
+## Project
 
-Each question is yes or no:
-
-1. Does `bun run verify connect-the-till` pass?
-2. Does `bun run verify write-the-monday-report` pass?
-3. Does `bun run verify schedule-the-monday-report` pass?
-4. Does the skill say to never guess a number?
-5. Did you read the first report before you let the task run alone?
-
-To go further, move the task to a cloud scheduled task. Then write one sentence on what changed. For example, a cloud task gets a fresh copy of your files, not your own folder.
-
-## Finished
-
-You now have Claude Code in the terminal, a till connector that can only read, and a `monday-report` skill. The skill writes a new report each run, with numbers from the till. You read the first runs before you let it run alone.
-
-In the next part, you share it. You put the skill in a kit that a new person can install. Then you run the whole Friday close on new orders and bills.
-
-## Read more
-
-- [Desktop scheduled tasks](https://code.claude.com/docs/en/desktop-scheduled-tasks.md): how the app runs a task, and why a run is skipped when the computer sleeps.
-- [Connect Claude Code to tools through MCP](https://code.claude.com/docs/en/mcp.md): `claude mcp add`, and how to see if a connector is connected.
+Pick one report you make by hand each week. Give it a skill with a Never part, a read-only checker, and a script that runs it with `-p`. Read the first run before you trust it. Hand in the skill, the script and two reports.

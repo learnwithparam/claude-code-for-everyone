@@ -42,4 +42,8 @@ Claude worked through the seven steps. It asked before it ran each script and be
 - Claude asks to change a file in `orders/` or `till/`. Say no. Those are the record.
 - Claude fills in "Checked by:" on a label. Say no. A person signs.
 
-Then run `bun run verify run-the-friday-close` in the course folder. All 10 rules pass.
+## The three files for running alone
+
+Back in `wren-street`, you ask for `out/batch.md` with one `/batch` line, `out/run-contract.md` with its four headings, and `out/metrics.md` with counted numbers. You say no to a number Claude did not count.
+
+Then run `bun run verify run-the-friday-close` in the course folder. All 13 rules pass.

@@ -2,11 +2,15 @@
 
 ## Version
 
+```text
 2.1.323 (Claude Code)
+```
 
 ## Status bar in Plan mode
 
+```text
 ? for shortcuts
+```
 
 ## Mode I work in
 

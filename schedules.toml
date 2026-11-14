@@ -1,13 +1,14 @@
 # Parts mapped onto formats. Content never names a time; only this file does.
-# Minutes per part: orientation 20, make-claude-ask-first 65, teach-the-bakery 60, undo-anything 35,
-# repeat-the-work 45, connect-and-schedule 75, share-the-close 85, ask-questions-of-your-files 20. Total 405.
+# Minutes per part: orientation 20, make-claude-ask-first 70, teach-the-bakery 60, undo-anything 35,
+# repeat-the-work 50, connect-and-schedule 115, share-the-close 110, ask-questions-of-your-files 20. Total 480.
 
 [one-day]
 sessions = [
   { parts = ["orientation", "make-claude-ask-first"], minutes = 90 },
   { parts = ["teach-the-bakery", "undo-anything"], minutes = 100 },
-  { parts = ["repeat-the-work", "connect-and-schedule"], minutes = 125 },
-  { parts = ["share-the-close"], minutes = 90 },
+  { parts = ["repeat-the-work"], minutes = 50 },
+  { parts = ["connect-and-schedule"], minutes = 115 },
+  { parts = ["share-the-close"], minutes = 110 },
   { parts = ["ask-questions-of-your-files"], minutes = 20 },
 ]
 
@@ -15,8 +16,9 @@ sessions = [
 sessions = [
   { parts = ["orientation", "make-claude-ask-first"], minutes = 90 },
   { parts = ["teach-the-bakery", "undo-anything"], minutes = 100 },
-  { parts = ["repeat-the-work", "connect-and-schedule"], minutes = 125 },
-  { parts = ["share-the-close"], minutes = 90 },
+  { parts = ["repeat-the-work"], minutes = 50 },
+  { parts = ["connect-and-schedule"], minutes = 115 },
+  { parts = ["share-the-close"], minutes = 110 },
   { parts = ["ask-questions-of-your-files"], minutes = 20 },
 ]
 
@@ -24,8 +26,8 @@ sessions = [
 sessions = [
   { parts = ["orientation", "make-claude-ask-first"], minutes = 90 },
   { parts = ["teach-the-bakery"], minutes = 60 },
-  { parts = ["undo-anything", "repeat-the-work"], minutes = 85 },
-  { parts = ["connect-and-schedule"], minutes = 75 },
-  { parts = ["share-the-close"], minutes = 90 },
+  { parts = ["undo-anything", "repeat-the-work"], minutes = 90 },
+  { parts = ["connect-and-schedule"], minutes = 115 },
+  { parts = ["share-the-close"], minutes = 110 },
   { parts = ["ask-questions-of-your-files"], minutes = 20 },
 ]

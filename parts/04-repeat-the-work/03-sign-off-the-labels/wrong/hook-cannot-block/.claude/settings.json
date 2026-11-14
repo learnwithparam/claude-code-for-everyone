@@ -1,0 +1,19 @@
+{
+  "permissions": {
+    "defaultMode": "default",
+    "blockWritesOutsideWorkingDirectories": true,
+    "deny": ["Read(./private/**)"]
+  },
+  "hooks": {
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash .claude/hooks/check-labels.sh"
+          }
+        ]
+      }
+    ]
+  }
+}
