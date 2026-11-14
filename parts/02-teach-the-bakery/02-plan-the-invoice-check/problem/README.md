@@ -2,7 +2,7 @@
 
 ## The problem
 
-Next, Claude checks 24 supplier bills. That is money, and a wrong answer said with confidence costs real pounds. A weak plan might say "fix the purchase order to match the bill". In Plan mode you see that before anything changes.
+Next, Claude checks 24 supplier bills. That is money, and a wrong answer said with confidence costs real pounds. For example, a weak plan might say "fix the purchase order to match the bill". In Plan mode you see that before anything changes.
 
 ```mermaid
 flowchart LR
@@ -57,7 +57,7 @@ Expect: the file `out/plans/invoice-check.md` appears.
 
 ## Do it on your work
 
-Pick a job in your own folder that touches money or many files. Ask for a plan first, with the same five headings. Good looks like a plan that names one file as the truth, writes only to a safe folder, and has a risk you had not thought of.
+Pick a job in your own folder that touches money or many files. Ask for a plan first, with the same five headings. Good looks like a plan that names one file as the truth and writes only to a safe folder. It should also name a risk you had not thought of.
 
 ## Done when
 

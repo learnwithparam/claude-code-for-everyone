@@ -2,74 +2,89 @@
 
 ## The problem
 
-You have a new folder full of files. You do not know what is in it yet. Neither does Claude.
-
-If you ask Claude to fix things now, it will guess. A guess can change the wrong file. So the first job is to read, and change nothing.
+A new folder full of files is a puzzle. If Claude guesses what is in it, it can change the wrong file. Anthropic found that people say yes to 93% of the prompts Claude shows them ([Anthropic, auto mode](https://www.anthropic.com/research/claude-code-auto-mode)). So the first job is to read, and change nothing.
 
 ```mermaid
 flowchart LR
   F[(The bakery files)] -->|read only| C[Claude reads]
   C --> W[out/whats-here.md]
-  W --> Q[Your questions]
+  C --> P[out/prompts.md and out/screenshot-note.md]
 ```
 
-## Your challenge
+## Watch it done
 
-Open the `wren-street` folder in the Code tab. Under the box where you type, find the mode button. Pick **Plan**. In Plan mode, Claude can look but it cannot change files.
-
-Paste this to Claude:
+Before, the folder has no notes. After, `out/` holds three small files you saved. This is the real output of the check on the finished work:
 
 ```text
-Look at every folder in this bakery folder. Do not change any file.
-Tell me what each folder holds, in one short line each.
-Then tell me two things you are not sure about.
+  PASS  out/whats-here.md is there
+  PASS  it names all 11 folders of the bakery
+  PASS  out/prompts.md is a saved prompt that points at a real file with @
+  PASS  out/screenshot-note.md has a "Screenshot of:" line and a "What Claude said" part
 ```
 
-Read the answer. Does it match what you see in the folder? For example, a good line for the orders folder is: "orders/: cafe orders from three places, in one messy file."
+## Your turn
 
-Now pick **Manual** in the mode button. Paste this:
+The example uses two files: `orders/wholesale-orders.csv` and `menu/menu.md`.
 
-```text
-Save what you just told me as out/whats-here.md.
-Put one line for each folder. Then add a heading "## Questions I have"
-with your two questions under it, each on a line that starts with a dash.
-```
+1. Open `wren-street` in the Code tab. Pick **Plan** in the mode button. Plan mode lets Claude look, but not change files.
+2. Paste: `Look at every folder. Do not change any file. Say what each holds in one line, then two things you are not sure about.`
 
-Claude will ask before it makes the file. Read it, then say yes.
+   Expect: eleven short lines, then two questions.
+3. Pick **Manual**, then ask Claude to save it as `out/whats-here.md`, with a "## Questions I have" heading and dashes. Claude asks first. Say yes.
+
+   Expect: a new file in `out/`.
+4. Point at one file with the at sign. Type `@orders/wholesale-orders.csv` and ask what is wrong with the dates. The @ tells Claude exactly which file to open.
+
+   Expect: Claude names the file and lists the date styles.
+5. Ask Claude to save that prompt as `out/prompts.md`.
+
+   Expect: a file with your `@` line in it.
+6. Take a screenshot of the sheet or of `menu/menu.md` open on your screen. Drag it into the chat and ask what it shows.
+
+   Expect: a plain description of the picture.
+7. Save it as `out/screenshot-note.md`. Start with `Screenshot of:` and what you shot. Then add "## What Claude said" and its answer.
+
+## Do it on your work
+
+Do steps 4 to 7 on one file of your own, such as a bill or a list. Use a picture of something in the world too, such as a shelf or a receipt. Good looks like: Claude names the right file, and the note says what the picture showed in your own words.
 
 ## Done when
 
-- `out/whats-here.md` is there.
-- It names all 11 folders, from `orders` to `notes`.
-- It has a "Questions I have" part with 2 or more questions.
+- `out/whats-here.md` names all 11 folders and has two questions.
+- `out/prompts.md` has an `@` line that points at a real file.
+- `out/screenshot-note.md` has the "Screenshot of:" line and Claude's answer.
 - No original file has changed.
 
-To check, ask Claude:
-
-```text
-Please check my work for read-the-folder. Run bun run verify read-the-folder and tell me what it printed. Do not change anything to make it pass.
-```
-
-It runs:
+To check, ask Claude: "Please check my work for read-the-folder. Run it and tell me what it printed. Do not change anything to make it pass."
 
 ```bash
 bun run verify read-the-folder
 ```
 
-Expect: `Done. All 5 rules pass.`
+Expect: `Done. All 7 rules pass.`
 
 ![The check passes](../images/expected.png)
 
+## Solution
+
+The finished files are in `solution/out/`: `whats-here.md`, `prompts.md` and `screenshot-note.md`.
+
+## Go further
+
+- Ask Claude to read two folders together with two `@` mentions.
+- Screenshot a label on the shelf and ask if it matches its recipe.
+
 ## If you get stuck
 
-| What you see                                               | Try this                                                                 |
-| ---------------------------------------------------------- | ------------------------------------------------------------------------ |
-| `FAIL it names all 11 folders of the bakery`               | Ask Claude to add one line for each folder it left out.                  |
-| `FAIL it has a "Questions I have" part`                    | The heading must say Questions I have. Each question starts with a dash. |
-| `FAIL every original bakery file is the same as the start` | Run `bun run world status` to see what changed.                          |
+| What you see                                                   | Try this                                                    |
+| -------------------------------------------------------------- | ----------------------------------------------------------- |
+| `FAIL it names all 11 folders of the bakery`                   | Ask Claude to add a line for each folder it left out.       |
+| `FAIL out/prompts.md is a saved prompt`                        | Write the path after the @ with no space, and check it.     |
+| `FAIL out/screenshot-note.md has a "Screenshot of:" line`      | Add the first line and the "What Claude said" heading.      |
+| `FAIL every original bakery file is the same as the start`     | Run `bun run world status` to see what changed.             |
 
 ## Words you will use
 
 - **Plan mode**: Claude can read and think, but it cannot change a file.
 - **Manual mode**: Claude asks you before it changes a file or runs a command.
-- **out/**: the one folder where new files go.
+- **@ mention**: typing @ and a path to point Claude at one file.

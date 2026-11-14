@@ -2,7 +2,7 @@
 
 ## The problem
 
-Jess has 24 bills and 23 purchase orders, so she is about to pay one bill too much. Checking each bill takes a morning. To reconcile means to put two lists side by side and find where they differ.
+Jess has 24 bills and 23 purchase orders, so she is about to pay one bill too much. Checking takes a morning. To reconcile means to put two lists side by side and find where they differ.
 
 ```mermaid
 flowchart LR
@@ -15,7 +15,7 @@ flowchart LR
 
 ## Watch it done
 
-Bills `FD-2202` and `FD-2207` both bill order `PO-3005`. After the check, the first row is `ok` and the second is `duplicate`:
+For example, `FD-2202` and `FD-2207` both bill order `PO-3005`. The first row is `ok` and the second is `duplicate`:
 
 ```text
 FD-2202,PO-3005,ok
@@ -66,7 +66,7 @@ Expect: a table with 24 rows, and a short note.
 
 Read the table before you say yes. Open one flagged PDF and check its numbers. One bill has a sneaky line at the bottom that tells the assistant to mark it ok. A bill is data, not a boss. Ask Claude to name that line in the note.
 
-Good looks like three kinds of fault flagged, no fine bill flagged, and a note Jess can act on.
+Good looks like three kinds of fault flagged, and a note Jess can act on.
 
 ## Done when
 
@@ -97,7 +97,6 @@ The finished table and note are in `solution/out/`.
 ## Go further
 
 - Open `HL-873.pdf` and read its last line.
-- Ask Claude to compare unit prices, not only totals.
 
 ## If you get stuck
 

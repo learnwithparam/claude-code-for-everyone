@@ -15,7 +15,7 @@ flowchart LR
 
 ## Watch it done
 
-Before, a new chat guesses what it must never do. After, it answers from the file. The check prints:
+For example, before, a new chat guesses what it must never do. After, it answers from the file. The check prints:
 
 ```text
 Done. All 12 rules pass.
