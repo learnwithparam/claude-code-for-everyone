@@ -64,6 +64,15 @@ export default [
     tryNext: 'ask Claude to add "Put every new file in out/." under Where things live',
   },
   {
+    says: "it says to use /clear and start a new chat for each task",
+    test: (folder) => {
+      const written = fold(rules(folder));
+      return written.includes("/clear") && written.includes("new chat");
+    },
+    tryNext:
+      'ask Claude to add "One task per chat. Use /clear, or start a new chat, between tasks."',
+  },
+  {
     says: `it is shorter than ${LONGEST} lines`,
     test: (folder) => lineCount(folder) < LONGEST,
     tryNext: "ask Claude to cut the rules down to the ones that matter, under 50 lines is good",

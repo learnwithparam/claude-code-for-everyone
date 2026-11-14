@@ -2,9 +2,9 @@
 
 ## The problem
 
-Each new chat, Claude starts fresh. It does not know Jess, the six cafes, or the rule about the till. So you say the same things again and again. And on the one day you forget, Claude may change a file it should not touch.
+Each new chat, Claude starts fresh. It does not know Jess, the six cafes, or the rule about the till. So you say it all again. On the day you forget, Claude may change a file it should not.
 
-Claude Code fixes this with one file: `CLAUDE.md`. Claude reads it at the start of every chat. Anthropic's guide says to keep it under 200 lines, because "longer files consume more context and reduce adherence" ([Anthropic, memory](https://code.claude.com/docs/en/memory.md)). In plain words: Claude follows a short list better than a long one.
+Claude Code fixes this with one file: `CLAUDE.md`. Claude reads it at the start of every chat. Keep it under 200 lines, because Claude follows a short list better than a long one ([Anthropic, memory](https://code.claude.com/docs/en/memory.md)).
 
 ```mermaid
 flowchart LR
@@ -25,14 +25,15 @@ rules for Wren Street Bakery. Use these five headings: About the bakery,
 Where things live, Never do, Money rules, How to write. Under Never do,
 say: never delete a file, and never change anything in till/ or
 purchase-orders/. Say that every new file goes in out/. Keep it short,
-under 50 lines, so you will read all of it.
+under 50 lines, so you will read all of it. Also add one line that says:
+one task per chat, and use /clear or a new chat between tasks.
 ```
 
-Claude asks before it makes the file. Read it first. Is every rule true for the bakery? Is anything missing?
+Claude asks before it makes the file. Read it first. Is every rule true? For example, "Never email a cafe without asking me first" belongs under **Never do**.
 
-For example, Jess's notes say "Never email a cafe without asking me first." That rule belongs under **Never do**.
+Why one task per chat? Old reading crowds out the new job. The `/clear` command wipes the chat so the next task starts clean. `CLAUDE.md` loads again after a clear.
 
-Then start a new chat and type `/memory`. You see `CLAUDE.md` in the list. Ask "What must you never do here?" Claude answers from the file.
+Then start a new chat and type `/memory`. You see `CLAUDE.md` listed. Ask "What must you never do here?"
 
 ## Done when
 
@@ -40,6 +41,7 @@ Then start a new chat and type `/memory`. You see `CLAUDE.md` in the list. Ask "
 - It has the five headings.
 - Never do says: never delete a file, and never change `till/` or `purchase-orders/`.
 - It says new files go in `out/`.
+- It says to use `/clear` or a new chat for each task.
 - It is shorter than 200 lines.
 
 To check, ask Claude:
@@ -54,19 +56,20 @@ It runs:
 bun run verify write-the-house-rules
 ```
 
-Expect: `Done. All 8 rules pass.`
+Expect: `Done. All 9 rules pass.`
 
 ![The check passes on the house rules](../images/expected.png)
 
 ## If you get stuck
 
-| What you see                                        | Try this                                                              |
-| --------------------------------------------------- | --------------------------------------------------------------------- |
-| `FAIL CLAUDE.md is at the top of the bakery folder` | Claude put it in `out/`. Ask it to save it next to `orders/` instead. |
-| `FAIL Never do names till/ and purchase-orders/`    | Ask Claude to add both folders to the Never do list.                  |
-| `FAIL it is shorter than 200 lines`                 | Ask Claude to keep only the rules that matter.                        |
+| What you see                                                    | Try this                                                              |
+| --------------------------------------------------------------- | --------------------------------------------------------------------- |
+| `FAIL CLAUDE.md is at the top of the bakery folder`             | Claude put it in `out/`. Ask it to save it next to `orders/` instead. |
+| `FAIL Never do names till/ and purchase-orders/`                | Ask Claude to add both folders to the Never do list.                  |
+| `FAIL it says to use /clear and start a new chat for each task` | Ask Claude to add the one-task-per-chat line.                         |
+| `FAIL it is shorter than 200 lines`                             | Ask Claude to keep only the rules that matter.                        |
 
-A rule in `CLAUDE.md` is a strong hint, not a lock. Anthropic says Claude treats it "as context, not enforced configuration". So you still check the work.
+A rule in `CLAUDE.md` is a strong hint, not a lock. You still check the work.
 
 ## Words you will use
 

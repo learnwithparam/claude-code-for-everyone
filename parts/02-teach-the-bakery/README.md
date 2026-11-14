@@ -41,7 +41,7 @@ First, Claude writes the house rules. Read them before you say yes. Then start a
 bun run verify write-the-house-rules
 ```
 
-Expect: `Done. All 8 rules pass.`
+Expect: `Done. All 9 rules pass.`
 
 Next, switch to Plan mode and ask for a plan for the invoice check. Read it, fix it, say yes, and ask Claude to save it.
 
