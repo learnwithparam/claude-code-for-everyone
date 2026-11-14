@@ -4,7 +4,7 @@ For the page pass. Each part lists watch-or-read candidates. Cut each list to 4 
 least 2 videos, then delete this file. Bar: STANDARD-v2 section 5 (made by the person or team that
 makes or runs the method, evergreen, never a listicle or paywall).
 
-I wrote this without live web access. Every link must be confirmed live (YouTube through oEmbed)
+I wrote this without live web access. Every link must be confirmed live (YouTube, by oEmbed)
 and every year confirmed before a pick ships. "V" marks a video, "R" marks a read.
 
 Sources that pass the bar for every part: Anthropic docs (the product team), Anthropic Engineering
@@ -69,7 +69,7 @@ blog, Anthropic talks at conferences, the Model Context Protocol docs, Pro Git, 
 ## 05 Connect it and let it run
 
 1. R. Model Context Protocol docs, "Introduction". The protocol makers' own page.
-2. R. Anthropic docs, "Connect Claude Code to tools via MCP". The step's exact feature.
+2. R. Anthropic docs, "Connect Claude Code to tools with MCP". The step's exact feature.
 3. R. Anthropic, "Writing effective tools for agents" (Engineering blog, 2025). The team on tool design.
 4. V. Anthropic, an MCP talk (AI Engineer or Code with Claude, 2025). Confirm title; made by the protocol team.
 5. R. Anthropic docs, "Subagents". The step's new subagent.
