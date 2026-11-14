@@ -10,6 +10,12 @@ kit/.claude-plugin/plugin.json with "name": "wren-street-kit",
 "version": "1.0.0", a one line "description", and "license": "CC0-1.0".
 Copy .claude/skills/allergen-label and .claude/skills/monday-report
 into kit/skills/. The skills sit next to .claude-plugin/, not inside it.
+Also add a hook. A hook is a small script that Claude Code runs on its
+own, every time, before a tool runs. Make kit/hooks/hooks.json with a
+PreToolUse hook, matcher "Write|Edit", that runs
+${CLAUDE_PLUGIN_ROOT}/hooks/block-till.sh. Make that script read the tool
+call from its input. If the file path has till/ in it, print a short reason
+and exit with code 2. Otherwise exit 0.
 ```
 
 ## The plan Claude showed
@@ -29,6 +35,7 @@ Then `claude --plugin-dir kit` started Claude Code with the kit. Typing `/wren` 
 
 - Claude puts the skills inside `kit/.claude-plugin/`. Say no. Claude Code does not look for skills there.
 - Claude names the kit "Wren Street Kit". Say no. Use dashes, not spaces.
+- The hook script exits 0 for every path. Say no. Then it blocks nothing.
 - Claude leaves out the version. Say no. The version tells a new person which kit they have.
 
-Then run `bun run verify pack-the-bakery-kit`. All 8 rules pass.
+Then run `bun run verify pack-the-bakery-kit`. All 11 rules pass.

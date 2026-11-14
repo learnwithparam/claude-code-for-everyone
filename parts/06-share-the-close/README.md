@@ -57,7 +57,7 @@ Expect: `√ Validation passed`
 bun run verify pack-the-bakery-kit
 ```
 
-Expect: `Done. All 8 rules pass.`
+Expect: `Done. All 11 rules pass.`
 
 Then make the `friday-close` skill, make the new folder, and run `/friday-close` in it once.
 
