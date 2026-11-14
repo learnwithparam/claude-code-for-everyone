@@ -95,10 +95,10 @@ The finished files are in `solution/`.
 
 ## If you get stuck
 
-| What you see                                       | Try this                                       |
-| -------------------------------------------------- | ---------------------------------------------- |
-| `FAIL the done list was in a save point`           | Ask for a save point called done-list first.   |
-| `FAIL out/goal.md has a /goal line`                | The line must start with /goal and say "until". |
+| What you see                             | Try this                                        |
+| ---------------------------------------- | ----------------------------------------------- |
+| `FAIL the done list was in a save point` | Ask for a save point called done-list first.    |
+| `FAIL out/goal.md has a /goal line`      | The line must start with /goal and say "until". |
 
 ## Words you will use
 

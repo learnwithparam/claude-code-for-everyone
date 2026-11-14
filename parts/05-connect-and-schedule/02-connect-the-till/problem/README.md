@@ -21,8 +21,6 @@ A connector is a safe door to another system. The till answers questions and can
 - Takings: £474.35
 ```
 
-The finished files are in `solution/`: `.mcp.json`, `out/till-today.md` and `out/till-log.jsonl`.
-
 ## Your turn
 
 1. In the terminal, in `wren-street`, type one line:
@@ -57,7 +55,7 @@ Expect: Claude asks before each till tool. Read the tool name, which starts with
 
 ## Do it on your work
 
-Pick one system you look up by hand, such as a booking page or a sales sheet. Ask Claude to list which connector would reach it. Good looks like this: Claude uses a tool from the connector, not a file copy, and the number it gives matches the source.
+Pick one system you look up by hand. Add its connector. Good looks like this: Claude uses a tool from the connector, and the number matches the source.
 
 ## Done when
 
@@ -84,14 +82,13 @@ Expect: `Done. All 7 rules pass.`
 
 ## Solution
 
-The after state is in `solution/`: the connector file, the note, and the log.
+The after state is in `solution/`: `.mcp.json`, the note, and the log.
 
 ## If you get stuck
 
 | What you see                                | Try this                                                              |
 | ------------------------------------------- | --------------------------------------------------------------------- |
 | `/mcp` shows no till                        | Type `/exit`, then `claude` again. Pick the Use choice.               |
-| till shows failed                           | Run `bun --version`. The connector needs Bun.                         |
 | `FAIL  the takings it gives match the till` | Ask for one day, not the whole till.                                  |
 | `FAIL  Claude asked the till connector`     | The connector was off, so Claude read the file. Turn it on in `/mcp`. |
 

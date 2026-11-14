@@ -34,10 +34,12 @@ const countLines = (part: string, pattern: RegExp) =>
 // A /goal line is the word /goal, then the job, then a stop condition that starts with "until".
 function goalLine(folder: string): string {
   if (!has(folder, GOAL_FILE)) return "";
-  return text(folder, GOAL_FILE)
-    .split("\n")
-    .map((line) => line.trim())
-    .find((line) => /^\/goal\s/.test(line)) ?? "";
+  return (
+    text(folder, GOAL_FILE)
+      .split("\n")
+      .map((line) => line.trim())
+      .find((line) => /^\/goal\s/.test(line)) ?? ""
+  );
 }
 
 const goalHasStop = (line: string) =>

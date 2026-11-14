@@ -81,9 +81,9 @@ The finished files are in `solution/`.
 
 ## If you get stuck
 
-| What you see                                    | Try this                                       |
-| ----------------------------------------------- | ---------------------------------------------- |
-| `FAIL no label is signed by Claude`             | Tell Claude to put your name, not its own.     |
+| What you see                        | Try this                                   |
+| ----------------------------------- | ------------------------------------------ |
+| `FAIL no label is signed by Claude` | Tell Claude to put your name, not its own. |
 
 ## Words you will use
 

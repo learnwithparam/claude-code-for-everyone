@@ -25,11 +25,11 @@ flowchart LR
 
 ## Steps
 
-| Step                                                                | What you make                                                              | What the check reads                                                        |
-| ------------------------------------------------------------------- | -------------------------------------------------------------------------- | --------------------------------------------------------------------------- |
-| [write-the-done-list](01-write-the-done-list/problem/README.md)     | `SPEC.md`, `out/labels-done.md`, `out/goal.md` and a save point            | A goal, a stop condition and questions; a `/goal` line; saved before labels |
-| [build-the-label-skill](02-build-the-label-skill/problem/README.md) | `.claude/skills/allergen-label/SKILL.md` and 12 labels                     | The skill parses; each label lists every allergen and the right price       |
-| [sign-off-the-labels](03-sign-off-the-labels/problem/README.md)     | A Stop hook, `out/review.md` and a name on every label                     | A Stop hook that can block; a review note; every label signed and ticked    |
+| Step                                                                | What you make                                                   | What the check reads                                                        |
+| ------------------------------------------------------------------- | --------------------------------------------------------------- | --------------------------------------------------------------------------- |
+| [write-the-done-list](01-write-the-done-list/problem/README.md)     | `SPEC.md`, `out/labels-done.md`, `out/goal.md` and a save point | A goal, a stop condition and questions; a `/goal` line; saved before labels |
+| [build-the-label-skill](02-build-the-label-skill/problem/README.md) | `.claude/skills/allergen-label/SKILL.md` and 12 labels          | The skill parses; each label lists every allergen and the right price       |
+| [sign-off-the-labels](03-sign-off-the-labels/problem/README.md)     | A Stop hook, `out/review.md` and a name on every label          | A Stop hook that can block; a review note; every label signed and ticked    |
 
 This course teaches a way of working, not food law. A person always signs the label.
 
@@ -73,14 +73,14 @@ Expect: `Part repeat-the-work is done: 3/3 steps pass.`
 
 ## Watch and read
 
-| Kind  | Title                                                                  | Author                      | Why                                                                      | Link                                                                          |
-| ----- | ---------------------------------------------------------------------- | --------------------------- | ------------------------------------------------------------------------ | ----------------------------------------------------------------------------- |
-| video | Claude Code Advanced Patterns: Subagents, MCP, and Scaling             | Anthropic Applied AI team   | Shows subagents and hooks guarding multi-step work. A free form is needed to watch. | https://claude.com/resources/webinars/claude-code-advanced-patterns           |
-| video | Claude Code Best Practices: Power User Insights                        | Anthropic, with two founders | Live demos of hooks and subagents from teams that use them daily. A free form is needed to watch. | https://claude.com/resources/webinars/claude-code-best-practices-lightspeed   |
-| read  | Best practices for Claude Code                                         | Anthropic docs              | Says to give Claude a way to check its work, and to let it interview you. | https://code.claude.com/docs/en/best-practices                                |
-| read  | Automate workflows with hooks                                          | Anthropic docs              | The Stop hook and exit code 2, step by step.                             | https://code.claude.com/docs/en/hooks-guide                                   |
-| read  | Extend Claude with skills                                              | Anthropic docs              | How a skill is written and when Claude picks it.                         | https://code.claude.com/docs/en/skills                                        |
-| read  | Building effective agents                                              | Anthropic engineering blog  | Why a person checks the work, and when a loop with a check beats a guess. | https://www.anthropic.com/engineering/building-effective-agents               |
+| Kind  | Title                                                      | Author                       | Why                                                                                               | Link                                                                        |
+| ----- | ---------------------------------------------------------- | ---------------------------- | ------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------- |
+| video | Claude Code Advanced Patterns: Subagents, MCP, and Scaling | Anthropic Applied AI team    | Shows subagents and hooks guarding multi-step work. A free form is needed to watch.               | https://claude.com/resources/webinars/claude-code-advanced-patterns         |
+| video | Claude Code Best Practices: Power User Insights            | Anthropic, with two founders | Live demos of hooks and subagents from teams that use them daily. A free form is needed to watch. | https://claude.com/resources/webinars/claude-code-best-practices-lightspeed |
+| read  | Best practices for Claude Code                             | Anthropic docs               | Says to give Claude a way to check its work, and to let it interview you.                         | https://code.claude.com/docs/en/best-practices                              |
+| read  | Automate workflows with hooks                              | Anthropic docs               | The Stop hook and exit code 2, step by step.                                                      | https://code.claude.com/docs/en/hooks-guide                                 |
+| read  | Extend Claude with skills                                  | Anthropic docs               | How a skill is written and when Claude picks it.                                                  | https://code.claude.com/docs/en/skills                                      |
+| read  | Building effective agents                                  | Anthropic engineering blog   | Why a person checks the work, and when a loop with a check beats a guess.                         | https://www.anthropic.com/engineering/building-effective-agents             |
 
 ## Project
 

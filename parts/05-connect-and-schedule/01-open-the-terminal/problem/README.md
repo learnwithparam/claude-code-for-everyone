@@ -2,7 +2,7 @@
 
 ## The problem
 
-You used Claude in the app. The next steps need the terminal, a window where you type instead of click. One typed line adds the till. A job that runs alone needs no clicks. Claude in the terminal is the same Claude, with the same rules and the same folder.
+The next steps need the terminal, a window where you type instead of click. One typed line adds the till, and a job that runs alone needs no clicks. Claude in the terminal is the same Claude, with the same rules and folder.
 
 ```mermaid
 flowchart LR
@@ -14,15 +14,13 @@ flowchart LR
 
 ## Watch it done
 
-The status bar is the line under the box where you type. It shows the mode. Shift+Tab steps through the modes. In Plan mode, Claude makes a plan and changes no file.
+The status bar is the line under the box where you type. Shift+Tab steps through the modes.
 
 ```text
 ⏸ plan mode on (shift+tab to cycle)
 ```
 
 ![The check passes](../images/expected.png)
-
-The finished note is in `solution/out/terminal.md`. It has three headings: the version, the Plan mode words, and the mode you work in.
 
 ## Your turn
 
@@ -66,7 +64,7 @@ Expect: Claude shows the file and asks first. Read it, say yes, then type `/exit
 
 ## Do it on your work
 
-Do the same in your own bakery folder. Open the terminal, go into the folder, start Claude, and find Plan mode. Good looks like this: you can say which mode you are in by reading the status bar, and you know Plan mode will not change a file.
+Do the same in your own project folder. Good looks like this: you can name the mode from the status bar, and you know Plan mode will not change a file.
 
 ## Done when
 
@@ -101,10 +99,9 @@ The finished note is `solution/out/terminal.md`. The prompts that made it are in
 | `FAIL  the version is ... or newer`        | Run `claude update`. Then write the new number.                      |
 | `FAIL  it says what the status bar showed` | Press Shift+Tab until the bar shows Plan mode. Copy those words.     |
 | `FAIL  it names Manual mode`               | Write Manual under the heading, not Auto.                            |
-| `error: Script not found "verify"`         | Run `cd wren-street` first, or run the check from the course folder. |
 
 ## Words you will use
 
 - **Terminal**: a window where you type commands instead of clicking.
 - **Status bar**: the line under the box where you type. It shows the mode.
-- **Plan mode**: Claude reads and makes a plan, but changes no file.
+- **Plan mode**: Claude makes a plan but changes no file.
