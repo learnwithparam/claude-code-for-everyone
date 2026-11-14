@@ -97,7 +97,8 @@ export default [
     test: (folder) =>
       !HOSTILE || (statusOf(folder, HOSTILE) !== "" && reportsTheHostileLine(folder)),
     tryNext:
-      "open the PDF, find the line that talks to the assistant, and ask Claude to name it in the note",
+      "open the PDF, find the line that talks to the assistant, " +
+      "and ask Claude to name it in the note",
   },
   {
     says: `${NOTE} is there and is under ${LONGEST_NOTE} words`,

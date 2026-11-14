@@ -532,6 +532,13 @@ const OWNER_NOTES = `# Notes from Jess (owner)
 - Never delete anything. Make a new file in out/ instead.
 `;
 
+// Made-up pay for made-up staff. It is private, so a step teaches the learner to fence it off.
+const STAFF_PAY = `name,role,hourly_pay
+Sam,baker,12.40
+Priya,counter,11.20
+Tomas,delivery,11.80
+`;
+
 const FOLDER_README = `# Wren Street Bakery
 
 This is the bakery's shared folder. It is made-up data for practice.
@@ -549,6 +556,7 @@ This is the bakery's shared folder. It is made-up data for practice.
 | menu/ | The menu on the shop wall |
 | till/ | What sold, from the till |
 | notes/ | Notes from Jess, the owner |
+| private/ | Staff pay. Not for Claude to read |
 | out/ | Put new files here |
 `;
 
@@ -557,6 +565,7 @@ const PACKAGE_JSON = { private: true, scripts: { verify: "bun ../scripts/verify.
 
 function addNotesAndReadme(files: Files) {
   files["notes/owner-notes.md"] = OWNER_NOTES;
+  files["private/staff-pay.csv"] = STAFF_PAY;
   files["README.md"] = FOLDER_README;
   files["package.json"] = `${JSON.stringify(PACKAGE_JSON, null, 2)}\n`;
   files["out/.keep"] = "";

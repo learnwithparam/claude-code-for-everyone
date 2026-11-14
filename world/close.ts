@@ -128,7 +128,7 @@ export function safetyRules(folder: string) {
     permissions: {
       defaultMode: "default",
       blockWritesOutsideWorkingDirectories: true,
-      deny: ["Read(../checks/**)"],
+      deny: ["Read(../checks/**)", "Read(./private/**)"],
     },
   };
   save(folder, ".claude/settings.json", `${JSON.stringify(settings, null, 2)}\n`);

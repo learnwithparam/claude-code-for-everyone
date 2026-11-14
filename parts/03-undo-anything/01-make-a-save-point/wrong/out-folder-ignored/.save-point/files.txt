@@ -43,6 +43,7 @@ notes/owner-notes.md
 orders/wholesale-orders.csv
 package.json
 prices/price-list.xlsx
+private/staff-pay.csv
 purchase-orders/purchase-orders.csv
 recipes/almond-croissant.md
 recipes/brownie.md

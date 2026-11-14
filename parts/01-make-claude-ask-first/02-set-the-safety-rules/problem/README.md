@@ -24,7 +24,7 @@ Make the file .claude/settings.json in this folder with this in it:
   "permissions": {
     "defaultMode": "default",
     "blockWritesOutsideWorkingDirectories": true,
-    "deny": ["Read(../checks/**)"]
+    "deny": ["Read(../checks/**)", "Read(./private/**)"]
   }
 }
 ```
@@ -34,6 +34,8 @@ The word `default` is the name the file uses for Manual mode.
 For example, say Claude tries to save a file in your Documents folder. The second rule stops it. Claude can only write inside `wren-street`.
 
 The `deny` line keeps Claude from reading the `checks` folder next to your work. That folder holds the answer key, and a step should pass because you did the work.
+
+The second `deny` entry fences off `private/`. That folder holds what each person on the team earns. A **deny rule** is a lock Claude cannot talk its way past, so this is stronger than asking nicely in `CLAUDE.md`.
 
 Then ask Claude for a short note that says how you work. Paste this:
 
@@ -50,6 +52,7 @@ Now start a new chat in the same folder. Look at the mode button. It should say 
 - `.claude/settings.json` is there and is valid.
 - It starts Claude in Manual mode.
 - It stops Claude from writing outside the bakery folder.
+- It stops Claude from reading the `private/` folder.
 - `out/safety.md` names Manual mode and lists 2 things Claude will ask about.
 - No original file has changed.
 
@@ -65,7 +68,7 @@ It runs:
 bun run verify set-the-safety-rules
 ```
 
-Expect: `Done. All 7 rules pass.`
+Expect: `Done. All 8 rules pass.`
 
 ![The check passes](../images/expected.png)
 
@@ -76,6 +79,7 @@ Expect: `Done. All 7 rules pass.`
 | `FAIL .claude/settings.json is there and is valid`   | Look for a comma after the last line in a block. Take it out. |
 | `FAIL Claude starts in Manual mode`                  | The value must be `default`, not `auto` or `manual`.          |
 | `FAIL Claude cannot write outside the bakery folder` | Add the second line, with the value `true`.                   |
+| `FAIL Claude cannot read the private folder`         | Add `"Read(./private/**)"` to the `deny` list.                |
 | `FAIL out/safety.md lists 2 things`                  | Check the heading words and the dashes.                       |
 
 ## Words you will use
