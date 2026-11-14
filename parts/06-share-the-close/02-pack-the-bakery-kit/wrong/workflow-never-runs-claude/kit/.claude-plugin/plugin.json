@@ -1,0 +1,9 @@
+{
+  "name": "wren-street-kit",
+  "version": "1.0.0",
+  "description": "The Wren Street Bakery skills: allergen labels and the Monday report.",
+  "author": {
+    "name": "Jess at Wren Street"
+  },
+  "license": "CC0-1.0"
+}

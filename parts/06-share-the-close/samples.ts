@@ -14,6 +14,8 @@ import { writeSample } from "./write-sample";
 type Files = Record<string, string | Uint8Array>;
 
 const PART = import.meta.dir;
+const CHECKER = ".claude/agents/numbers-checker.md";
+const CHECK_NOTE = "out/numbers-check.md";
 const FINISHED_SKILLS = join(ROOT, "world", "finished", "bakery", ".claude", "skills");
 const RECIPE_NAMES = (KEY.prices.clean as { product: string }[]).map((row) => row.product);
 const WHY = "I want Claude to match our delivery notes to the orders so I stop doing it by hand.\n";
@@ -93,21 +95,56 @@ const kitSkills = (folder: string): Files => ({
   [`${folder}/monday-report/SKILL.md`]: skillFile("monday-report"),
 });
 const MANIFEST_PATH = "kit/.claude-plugin/plugin.json";
+const HOOKS_PATH = "kit/hooks/hooks.json";
+const HOOK_SCRIPT_PATH = "kit/hooks/block-till.sh";
+// Claude Code swaps in the plugin folder where the command says CLAUDE_PLUGIN_ROOT.
+const HOOK_COMMAND = "bash $" + "{CLAUDE_PLUGIN_ROOT}/hooks/block-till.sh";
+const HOOKS = manifest({
+  hooks: {
+    // biome-ignore lint/style/useNamingConvention: this is the event name Claude Code uses.
+    PreToolUse: [{ matcher: "Write|Edit", hooks: [{ type: "command", command: HOOK_COMMAND }] }],
+  },
+});
+const BLOCK_TILL = `#!/bin/bash
+# Stop any edit to a file inside till/, because the till is the record.
+input=$(cat)
+if echo "$input" | grep -q '"file_path"[^,}]*till/'; then
+  echo "Blocked: till/ is the record. Write a copy in out/ instead." >&2
+  exit 2
+fi
+exit 0
+`;
+const kitHook: Files = { [HOOKS_PATH]: HOOKS, [HOOK_SCRIPT_PATH]: BLOCK_TILL };
 sample("02-pack-the-bakery-kit", "solution", {
   [MANIFEST_PATH]: manifest(KIT_MANIFEST),
   ...kitSkills("kit/skills"),
+  ...kitHook,
+});
+sample("02-pack-the-bakery-kit", "wrong/hook-lets-till-through", {
+  [MANIFEST_PATH]: manifest(KIT_MANIFEST),
+  ...kitSkills("kit/skills"),
+  [HOOKS_PATH]: HOOKS,
+  [HOOK_SCRIPT_PATH]: "#!/bin/bash\n# Lets every edit through.\nexit 0\n",
+});
+sample("02-pack-the-bakery-kit", "wrong/hook-never-wired", {
+  [MANIFEST_PATH]: manifest(KIT_MANIFEST),
+  ...kitSkills("kit/skills"),
+  [HOOK_SCRIPT_PATH]: BLOCK_TILL,
 });
 sample("02-pack-the-bakery-kit", "wrong/skills-inside-claude-plugin", {
   [MANIFEST_PATH]: manifest(KIT_MANIFEST),
   ...kitSkills("kit/.claude-plugin/skills"),
+  ...kitHook,
 });
 sample("02-pack-the-bakery-kit", "wrong/name-with-spaces", {
   [MANIFEST_PATH]: manifest({ ...KIT_MANIFEST, name: "Wren Street Kit" }),
   ...kitSkills("kit/skills"),
+  ...kitHook,
 });
 sample("02-pack-the-bakery-kit", "wrong/no-version", {
   [MANIFEST_PATH]: manifest({ ...KIT_MANIFEST, version: undefined }),
   ...kitSkills("kit/skills"),
+  ...kitHook,
 });
 
 // ---- run-the-friday-close ----
@@ -123,6 +160,12 @@ const setup: Files = {
   ".claude/skills/friday-close/SKILL.md": skillFile("friday-close"),
   ".claude/skills/allergen-label/SKILL.md": skillFile("allergen-label"),
   ".claude/skills/monday-report/SKILL.md": skillFile("monday-report"),
+  ".claude/agents/numbers-checker.md": readFileSync(
+    join(PART, "..", "05-connect-and-schedule/03-write-the-monday-report/solution", CHECKER),
+  ),
+  "out/numbers-check.md": readFileSync(
+    join(PART, "..", "05-connect-and-schedule/03-write-the-monday-report/solution", CHECK_NOTE),
+  ),
 };
 rmSync(setupWork, { recursive: true, force: true });
 const nextCloseOut = nextClose;
@@ -181,6 +224,59 @@ sample("04-map-your-own-close", "wrong/the-bakery-not-my-job", {
 sample("04-map-your-own-close", "wrong/no-check", {
   ...whyFile,
   [MAP]: closeMap(MY_TASK, MY_FILES, MY_RULE, "Claude checks it."),
+});
+
+// ---- run-your-own-close ----
+
+const MINE = "my-close";
+const ORDERS_COPY = "order,cafe,loaves\nO-1,Pine Cafe,12\nO-2,Harbour Cafe,8\n";
+const NOTE_COPY = "Delivery note N-7\nOrder: O-1\nLoaves delivered: 12\n";
+const MATCHES = "note,order,matches\nN-7,O-1,yes\n";
+const MY_RULES =
+  "# My close\n\n## Never\n\n- Never change a file in input/. Write results to out/.\n";
+const RUN_LOG = `# Run log
+
+## What I asked
+
+Match each delivery note to its order, and say if the loaves agree.
+
+## Files I used
+
+- orders.csv
+- note-7.txt
+
+## What Claude made
+
+- matches.csv
+
+## How I checked
+
+I opened matches.csv and compared N-7 with order O-1.
+Both say 12 loaves, and the file says yes.
+`;
+const myFiles = (extra: Files): Files => ({
+  [`${MINE}/input/orders.csv`]: ORDERS_COPY,
+  [`${MINE}/input/note-7.txt`]: NOTE_COPY,
+  [`${MINE}/CLAUDE.md`]: MY_RULES,
+  [`${MINE}/out/matches.csv`]: MATCHES,
+  [`${MINE}/out/run-log.md`]: RUN_LOG,
+  ...extra,
+});
+sample("05-run-your-own-close", "solution", myFiles({}));
+sample("05-run-your-own-close", "wrong/the-bakery-files-copied", {
+  ...myFiles({}),
+  [`${MINE}/input/orders.csv`]: readFileSync(join(SEED, "till", "sales.csv")),
+  [`${MINE}/input/note-7.txt`]: readFileSync(join(SEED, "notes", "owner-notes.md")),
+});
+const { [`${MINE}/out/matches.csv`]: _matches, ...withoutMatches } = myFiles({});
+sample("05-run-your-own-close", "wrong/nothing-made", withoutMatches);
+sample("05-run-your-own-close", "wrong/log-names-a-file-that-is-not-there", {
+  ...myFiles({}),
+  [`${MINE}/out/run-log.md`]: RUN_LOG.replace("- matches.csv", "- matches-final.csv"),
+});
+sample("05-run-your-own-close", "wrong/no-never-rule", {
+  ...myFiles({}),
+  [`${MINE}/CLAUDE.md`]: "# My close\n\nBe careful with orders.\n",
 });
 
 console.log("Wrote the samples for share-the-close.");

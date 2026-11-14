@@ -1,6 +1,10 @@
 {
   "permissions": {
     "defaultMode": "default",
-    "blockWritesOutsideWorkingDirectories": true
+    "blockWritesOutsideWorkingDirectories": true,
+    "deny": [
+      "Read(../checks/**)",
+      "Read(./private/**)"
+    ]
   }
 }

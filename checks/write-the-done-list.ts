@@ -11,12 +11,39 @@ import { existsSync } from "node:fs";
 import { join } from "node:path";
 import type { Rule } from "../scripts/verify";
 import { BAKERY, bakeryRule, has, originalsUnchanged, text, workFolder } from "./lib/bakery";
-import { fold } from "./lib/md";
+import { fold, section } from "./lib/md";
 
 const FILE = "out/labels-done.md";
 const RECORD = ".save-point/done-list-save.txt";
 const SMALLEST = 4;
 const CHECKBOX = /^\s*[-*]\s+\[[ xX]\]\s+\S/;
+
+const SPEC = "SPEC.md";
+const GOAL_FILE = "out/goal.md";
+const QUESTION = /^\s*(?:[-*]\s+)?(?:\*\*)?Q\d*[:.]/i;
+const ANSWER = /^\s*(?:[-*]\s+)?(?:\*\*)?A\d*[:.]/i;
+const GOAL_WORDS = 6;
+
+// The words under a heading of SPEC.md, or "" when the heading or the file is missing.
+const specPart = (folder: string, heading: string) =>
+  has(folder, SPEC) ? (section(text(folder, SPEC), heading) ?? "").trim() : "";
+
+const countLines = (part: string, pattern: RegExp) =>
+  part.split("\n").filter((line) => pattern.test(line)).length;
+
+// A /goal line is the word /goal, then the job, then a stop condition that starts with "until".
+function goalLine(folder: string): string {
+  if (!has(folder, GOAL_FILE)) return "";
+  return (
+    text(folder, GOAL_FILE)
+      .split("\n")
+      .map((line) => line.trim())
+      .find((line) => /^\/goal\s/.test(line)) ?? ""
+  );
+}
+
+const goalHasStop = (line: string) =>
+  line.split(/\s+/).length >= GOAL_WORDS && /\buntil\b/i.test(line);
 
 const isYourBakery = (folder: string) => workFolder(folder) === BAKERY;
 const asLines = (printed: string) =>
@@ -81,6 +108,29 @@ export default [
     tryNext:
       "ask Claude to make a save point called done-list; if labels exist, first ask it to " +
       "move out/labels/ to out/labels-early/",
+  },
+  {
+    says: `${SPEC} has a goal part with words under it`,
+    test: (folder) => specPart(folder, "goal").length > 0,
+    tryNext: 'ask Claude to interview you, then write SPEC.md with a "## Goal" part',
+  },
+  {
+    says: `${SPEC} has a stop condition part with words under it`,
+    test: (folder) => specPart(folder, "stop condition").length > 0,
+    tryNext: 'ask Claude to add a "## Stop condition" part to SPEC.md: what must be true to stop',
+  },
+  {
+    says: `${SPEC} has a questions and answers part with 2 or more pairs`,
+    test: (folder) => {
+      const part = specPart(folder, "questions");
+      return countLines(part, QUESTION) >= 2 && countLines(part, ANSWER) >= 2;
+    },
+    tryNext: 'ask Claude to keep the interview in SPEC.md under "## Questions and answers"',
+  },
+  {
+    says: `${GOAL_FILE} has a /goal line that says what to do until a stop condition`,
+    test: (folder) => goalHasStop(goalLine(folder)),
+    tryNext: `ask Claude for one line in ${GOAL_FILE}: /goal, the job, then "until" and the stop`,
   },
   {
     says: "every original bakery file is the same as the start",

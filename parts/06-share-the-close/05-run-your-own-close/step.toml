@@ -1,0 +1,4 @@
+minutes = 20
+screen = false
+solution = true
+example_files = ["orders/wholesale-orders.csv", "out/friday-close.md"]

@@ -10,11 +10,17 @@ claude --version
 claude
 ```
 
-`claude --version` printed `2.1.323 (Claude Code)`. Then Claude asked if you trust the folder. You picked Yes.
+`claude --version` printed a version number. Then Claude asked if you trust the folder. You picked Yes.
 
 ## What you pressed
 
-Shift+Tab, two times. The status bar went from no mode, to `⏵⏵ accept edits on`, to `⏸ plan mode on (shift+tab to cycle)`. You copied those words. Then you pressed Shift+Tab until no mode showed again. That is Manual mode.
+Shift+Tab, two times. The status bar went from no mode, to the accept edits mode, to this:
+
+```text
+⏸ plan mode on (shift+tab to cycle)
+```
+
+You copied those words. Then you pressed Shift+Tab until no mode showed again. That is Manual mode.
 
 ## The prompt you type
 

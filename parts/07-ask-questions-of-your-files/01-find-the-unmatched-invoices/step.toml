@@ -1,3 +1,4 @@
 minutes = 20
 screen = false
 solution = true
+example_files = ["assignment/starter/invoices.csv", "assignment/starter/purchase-orders.csv"]

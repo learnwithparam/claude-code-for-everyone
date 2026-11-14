@@ -145,7 +145,6 @@ export function problemsIn(file: string, text: string): Problem[] {
 }
 
 // What a run makes in the course folder: the learner's bakery, its backups and the finished close.
-// Git ignores them, and the code and pages in them are Claude's work, not the course's.
 function isWorkFolder(entry: string): boolean {
   return entry === "finished" || entry === "wren-street" || entry.startsWith("wren-street-backup-");
 }

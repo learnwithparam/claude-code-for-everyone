@@ -1,0 +1,3 @@
+Delivery note N-7
+Order: O-1
+Loaves delivered: 12

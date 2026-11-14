@@ -2,11 +2,15 @@
 
 ## Version
 
+```text
 2.0.76 (Claude Code)
+```
 
 ## Status bar in Plan mode
 
+```text
 ⏸ plan mode on (shift+tab to cycle)
+```
 
 ## Mode I work in
 

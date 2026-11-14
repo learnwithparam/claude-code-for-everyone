@@ -1,3 +1,4 @@
 minutes = 10
 screen = true
 solution = true
+example_files = ["menu/menu.md", "notes/owner-notes.md"]

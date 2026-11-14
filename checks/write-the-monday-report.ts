@@ -10,6 +10,15 @@ import { bullets, fold, section } from "./lib/md";
 
 const SKILL = ".claude/skills/monday-report/SKILL.md";
 const REPORTS = "out/reports";
+const CHECKER = ".claude/agents/numbers-checker.md";
+const CHECK_NOTE = "out/numbers-check.md";
+const WORKTREE_NOTE = "out/worktree.md";
+// claude -w second-try makes the folder .claude/worktrees/second-try
+// and the branch worktree-second-try.
+const WORKTREE_FOLDER = /\.claude\/worktrees\/[\w.-]+/;
+const WORKTREE_BRANCH = /\bworktree-[\w.-]+/;
+// A subagent that checks must not be able to change anything.
+const TOOLS_THAT_CHANGE = ["write", "edit", "bash", "notebookedit"];
 
 // Every report file in out/reports/, as a path inside the bakery folder.
 export function reports(folder: string): string[] {
@@ -118,8 +127,35 @@ export function skillDescription(front: string): string {
   return found ? found[1].replace(/\s+/g, " ").trim() : "";
 }
 
-export default [
-  bakeryRule,
+function checkerFront(folder: string): string {
+  return text(folder, CHECKER).match(/^---\r?\n([\s\S]*?)\r?\n---/)?.[1] ?? "";
+}
+
+function checkerToolList(folder: string): string[] {
+  const line = checkerFront(folder).match(/^tools:\s*(.+)$/m)?.[1] ?? "";
+  return line
+    .split(",")
+    .map((tool) => tool.trim().toLowerCase())
+    .filter(Boolean);
+}
+
+function checkerIsReadOnly(folder: string): boolean {
+  const tools = checkerToolList(folder);
+  return tools.length > 0 && !tools.some((tool) => TOOLS_THAT_CHANGE.includes(tool));
+}
+
+function checkNoteSaysMatch(folder: string): boolean {
+  const note = fold(text(folder, CHECK_NOTE));
+  return bullets(note).length >= 3 && /match|agree/.test(note);
+}
+
+function worktreeNamed(folder: string): boolean {
+  const note = text(folder, WORKTREE_NOTE);
+  return WORKTREE_FOLDER.test(note) || WORKTREE_BRANCH.test(note);
+}
+
+// The rules for the skill and the report it makes. make-the-monday-skill checks these alone.
+export const SKILL_RULES: Rule[] = [
   {
     says: `${SKILL} is there with name: monday-report`,
     test: (folder) => /^name:\s*monday-report\s*$/m.test(frontmatter(folder)),
@@ -144,6 +180,30 @@ export default [
     tryNext: "type /monday-report in Claude Code, so the skill writes out/reports/monday-report.md",
   },
   ...REPORT_RULES,
+];
+
+export default [
+  bakeryRule,
+  ...SKILL_RULES,
+  {
+    says: "a subagent numbers-checker is in .claude/agents/ and can only read files",
+    test: (folder) => has(folder, CHECKER) && checkerIsReadOnly(folder),
+    tryNext:
+      "ask Claude to make .claude/agents/numbers-checker.md with the line tools: Read, Grep, Glob",
+  },
+  {
+    says: "out/numbers-check.md lists what the subagent checked and says the report matches",
+    test: (folder) => has(folder, CHECK_NOTE) && checkNoteSaysMatch(folder),
+    tryNext:
+      "ask the numbers-checker to check the report, then save its answer as numbers-check.md",
+  },
+  {
+    says: "out/worktree.md names the worktree folder or branch of a second try",
+    test: (folder) => has(folder, WORKTREE_NOTE) && worktreeNamed(folder),
+    tryNext:
+      "run claude -w second-try, then write the folder .claude/worktrees/second-try " +
+      "or the branch worktree-second-try in out/worktree.md",
+  },
   {
     says: "every original bakery file is the same as the start",
     test: originalsUnchanged,

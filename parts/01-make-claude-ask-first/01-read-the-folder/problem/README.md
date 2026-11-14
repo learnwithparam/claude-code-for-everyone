@@ -2,74 +2,83 @@
 
 ## The problem
 
-You have a new folder full of files. You do not know what is in it yet. Neither does Claude.
-
-If you ask Claude to fix things now, it will guess. A guess can change the wrong file. So the first job is to read, and change nothing.
+A new folder full of files is a puzzle. If Claude guesses what is in it, it can change the wrong file. Anthropic found that people say yes to 93% of the prompts Claude shows them ([Anthropic, auto mode](https://www.anthropic.com/research/claude-code-auto-mode)). So the first job is to read, and change nothing.
 
 ```mermaid
 flowchart LR
   F[(The bakery files)] -->|read only| C[Claude reads]
   C --> W[out/whats-here.md]
-  W --> Q[Your questions]
+  C --> P[out/prompts.md and out/screenshot-note.md]
 ```
 
-## Your challenge
+## Watch it done
 
-Open the `wren-street` folder in the Code tab. Under the box where you type, find the mode button. Pick **Plan**. In Plan mode, Claude can look but it cannot change files.
-
-Paste this to Claude:
+Before, `out/` is empty. After, it holds three notes. This is the check on the finished work:
 
 ```text
-Look at every folder in this bakery folder. Do not change any file.
-Tell me what each folder holds, in one short line each.
-Then tell me two things you are not sure about.
+  PASS  it names all 11 folders of the bakery
+  PASS  out/prompts.md is a saved prompt that points at a real file with @
+  PASS  out/screenshot-note.md has a "Screenshot of:" line and a "What Claude said" part
 ```
 
-Read the answer. Does it match what you see in the folder? For example, a good line for the orders folder is: "orders/: cafe orders from three places, in one messy file."
+## Your turn
 
-Now pick **Manual** in the mode button. Paste this:
+Files: `orders/wholesale-orders.csv` and `menu/menu.md`.
 
-```text
-Save what you just told me as out/whats-here.md.
-Put one line for each folder. Then add a heading "## Questions I have"
-with your two questions under it, each on a line that starts with a dash.
-```
+1. Open `wren-street` in the Code tab. Pick **Plan**. Claude can look but not change files.
+2. Paste: `Look at every folder. Change nothing. Say what each holds in one line, then two things you are unsure about.`
 
-Claude will ask before it makes the file. Read it, then say yes.
+   Expect: eleven short lines, then two questions.
+3. Pick **Manual**. Ask Claude to save it as `out/whats-here.md`, with a "## Questions I have" heading and dashes. Say yes.
+
+   Expect: a new file in `out/`.
+4. Type `@orders/wholesale-orders.csv` and ask what is wrong with the dates. The @ points Claude at one file. For example, it names the file and lists the date styles.
+
+   Expect: an answer about that file only.
+5. Ask Claude to save that prompt as `out/prompts.md`.
+
+   Expect: a file with your `@` line in it.
+6. Screenshot the sheet or `menu/menu.md` on your screen. Drag it into the chat and ask what it shows.
+
+   Expect: a plain description of the picture.
+7. Save it as `out/screenshot-note.md`: a line `Screenshot of:` and what you shot, then "## What Claude said" and its answer.
+
+## Do it on your work
+
+Do steps 4 to 7 on one file of your own, and on a picture of a shelf or a receipt. Good looks like: Claude names the right file, and the note says what the picture showed.
 
 ## Done when
 
-- `out/whats-here.md` is there.
-- It names all 11 folders, from `orders` to `notes`.
-- It has a "Questions I have" part with 2 or more questions.
+- `out/whats-here.md` names all 11 folders and has two questions.
+- `out/prompts.md` has an `@` line that points at a real file.
+- `out/screenshot-note.md` has the "Screenshot of:" line and Claude's answer.
 - No original file has changed.
 
-To check, ask Claude:
-
-```text
-Please check my work for read-the-folder. Run bun run verify read-the-folder and tell me what it printed. Do not change anything to make it pass.
-```
-
-It runs:
+To check, ask Claude: "Run the check for read-the-folder and tell me what it printed. Change nothing."
 
 ```bash
 bun run verify read-the-folder
 ```
 
-Expect: `Done. All 5 rules pass.`
+Expect: `Done. All 7 rules pass.`
 
 ![The check passes](../images/expected.png)
 
+## Solution
+
+The finished files are in `solution/out/`: `whats-here.md`, `prompts.md` and `screenshot-note.md`.
+
 ## If you get stuck
 
-| What you see                                               | Try this                                                                 |
-| ---------------------------------------------------------- | ------------------------------------------------------------------------ |
-| `FAIL it names all 11 folders of the bakery`               | Ask Claude to add one line for each folder it left out.                  |
-| `FAIL it has a "Questions I have" part`                    | The heading must say Questions I have. Each question starts with a dash. |
-| `FAIL every original bakery file is the same as the start` | Run `bun run world status` to see what changed.                          |
+| What you see                                               | Try this                                               |
+| ---------------------------------------------------------- | ------------------------------------------------------ |
+| `FAIL it names all 11 folders of the bakery`               | Ask Claude to add a line for each folder it left out.  |
+| `FAIL out/prompts.md is a saved prompt`                    | Write the path right after the @, with no space.       |
+| `FAIL out/screenshot-note.md has a "Screenshot of:" line`  | Add the first line and the "What Claude said" heading. |
+| `FAIL every original bakery file is the same as the start` | Run `bun run world status` to see what changed.        |
 
 ## Words you will use
 
-- **Plan mode**: Claude can read and think, but it cannot change a file.
-- **Manual mode**: Claude asks you before it changes a file or runs a command.
-- **out/**: the one folder where new files go.
+- **Plan mode**: Claude can read, not change.
+- **Manual mode**: Claude asks before it changes a file.
+- **@ mention**: an @ and a path, to point at one file.
