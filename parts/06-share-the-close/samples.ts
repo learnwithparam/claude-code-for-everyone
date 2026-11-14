@@ -97,14 +97,12 @@ const kitSkills = (folder: string): Files => ({
 const MANIFEST_PATH = "kit/.claude-plugin/plugin.json";
 const HOOKS_PATH = "kit/hooks/hooks.json";
 const HOOK_SCRIPT_PATH = "kit/hooks/block-till.sh";
+// Claude Code swaps in the plugin folder where the command says CLAUDE_PLUGIN_ROOT.
+const HOOK_COMMAND = "bash $" + "{CLAUDE_PLUGIN_ROOT}/hooks/block-till.sh";
 const HOOKS = manifest({
   hooks: {
-    PreToolUse: [
-      {
-        matcher: "Write|Edit",
-        hooks: [{ type: "command", command: "bash ${CLAUDE_PLUGIN_ROOT}/hooks/block-till.sh" }],
-      },
-    ],
+    // biome-ignore lint/style/useNamingConvention: this is the event name Claude Code uses.
+    PreToolUse: [{ matcher: "Write|Edit", hooks: [{ type: "command", command: HOOK_COMMAND }] }],
   },
 });
 const BLOCK_TILL = `#!/bin/bash
@@ -253,7 +251,8 @@ Match each delivery note to its order, and say if the loaves agree.
 
 ## How I checked
 
-I opened matches.csv and compared N-7 with order O-1 in orders.csv. Both say 12 loaves, and the file says yes.
+I opened matches.csv and compared N-7 with order O-1.
+Both say 12 loaves, and the file says yes.
 `;
 const myFiles = (extra: Files): Files => ({
   [`${MINE}/input/orders.csv`]: ORDERS_COPY,

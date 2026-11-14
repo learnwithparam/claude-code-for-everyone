@@ -1,0 +1,182 @@
+# The Claude Code ladder, L0 to L6, mapped onto this course's steps.
+# Each feature names the step that uses it, and a "proof": words from one rule of that step's
+# check, so a feature counts only when a check really tests it.
+# A feature with planned = true has no step yet. `bun checks/ladder.ts` lists them and still
+# passes. `bun checks/ladder.ts --strict` fails on them, and is the bar for a finished ladder.
+
+[[feature]]
+level = "L0"
+name = "plan mode"
+step = "plan-the-invoice-check"
+proof = "headings Goal"
+
+[[feature]]
+level = "L0"
+name = "@ files"
+planned = true
+
+[[feature]]
+level = "L0"
+name = "screenshots"
+planned = true
+
+[[feature]]
+level = "L0"
+name = "a specific prompt"
+step = "reconcile-the-invoices"
+proof = "one row for each"
+
+[[feature]]
+level = "L1"
+name = "permission modes"
+step = "set-the-safety-rules"
+proof = "Manual mode"
+
+[[feature]]
+level = "L1"
+name = "diff review"
+planned = true
+
+[[feature]]
+level = "L1"
+name = "Esc"
+step = "rewind-a-bad-edit"
+proof = "/rewind, Esc"
+
+[[feature]]
+level = "L1"
+name = "/rewind"
+step = "rewind-a-bad-edit"
+proof = "/rewind, Esc"
+
+[[feature]]
+level = "L1"
+name = "/clear"
+step = "write-the-house-rules"
+proof = "/clear"
+
+[[feature]]
+level = "L2"
+name = "/init"
+planned = true
+
+[[feature]]
+level = "L2"
+name = "CLAUDE.md under 200 lines"
+step = "write-the-house-rules"
+proof = "shorter than"
+
+[[feature]]
+level = "L2"
+name = ".claude/rules"
+planned = true
+
+[[feature]]
+level = "L2"
+name = "a check to run"
+step = "map-your-own-close"
+proof = "One check a script could run"
+
+[[feature]]
+level = "L3"
+name = "hooks"
+step = "pack-the-bakery-kit"
+proof = "PreToolUse"
+
+[[feature]]
+level = "L3"
+name = "deny rules"
+step = "set-the-safety-rules"
+proof = "private/"
+
+[[feature]]
+level = "L3"
+name = "sandbox"
+planned = true
+
+[[feature]]
+level = "L3"
+name = "skills"
+step = "build-the-label-skill"
+proof = "Steps part and a Never part"
+
+[[feature]]
+level = "L3"
+name = "MCP or CLI tools"
+step = "connect-the-till"
+proof = "connector called till"
+
+[[feature]]
+level = "L4"
+name = "interview to SPEC.md"
+planned = true
+
+[[feature]]
+level = "L4"
+name = "/goal"
+planned = true
+
+[[feature]]
+level = "L4"
+name = "Stop hook gate"
+planned = true
+
+[[feature]]
+level = "L4"
+name = "/code-review in a subagent"
+planned = true
+
+[[feature]]
+level = "L5"
+name = "subagents"
+step = "write-the-monday-report"
+proof = "subagent numbers-checker"
+
+[[feature]]
+level = "L5"
+name = "worktrees"
+planned = true
+
+[[feature]]
+level = "L5"
+name = "/batch"
+planned = true
+
+[[feature]]
+level = "L5"
+name = "a reviewer agent"
+step = "write-the-monday-report"
+proof = "can only read files"
+
+[[feature]]
+level = "L6"
+name = "claude -p"
+planned = true
+
+[[feature]]
+level = "L6"
+name = "/loop"
+planned = true
+
+[[feature]]
+level = "L6"
+name = "/schedule"
+step = "schedule-the-monday-report"
+proof = "cron line"
+
+[[feature]]
+level = "L6"
+name = "a GitHub Action"
+planned = true
+
+[[feature]]
+level = "L6"
+name = "a run contract and metrics"
+planned = true
+
+# Learners do their own work at the top of the ladder in this step.
+[[feature]]
+level = "L6"
+name = "your own folder, run on a copy"
+step = "run-your-own-close"
+proof = "my-close/input"

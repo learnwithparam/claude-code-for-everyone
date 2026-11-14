@@ -135,7 +135,7 @@ const everyCafe = report.replace(
 );
 const CHECKER_START = `---
 name: numbers-checker
-description: Checks the numbers in a report against till/sales.csv. Use after the Monday report is written.
+description: Checks a report against till/sales.csv. Use after the Monday report is written.
 `;
 const CHECKER_BODY = `---
 

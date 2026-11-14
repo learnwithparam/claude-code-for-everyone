@@ -1,6 +1,6 @@
 ---
 name: numbers-checker
-description: Checks the numbers in a report against till/sales.csv. Use after the Monday report is written.
+description: Checks a report against till/sales.csv. Use after the Monday report is written.
 tools: Read, Grep, Glob
 ---
 

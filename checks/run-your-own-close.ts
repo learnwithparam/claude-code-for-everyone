@@ -65,7 +65,7 @@ function copyIsNotTheBakery(folder: string): boolean {
 }
 
 const madeFiles = (folder: string) =>
-  filesUnder(mine(folder, "out")).filter((f) => f !== "run-log.md");
+  filesUnder(mine(folder, "out")).filter((file) => file !== "run-log.md");
 
 export default [
   bakeryRule,
