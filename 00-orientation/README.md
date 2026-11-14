@@ -68,7 +68,7 @@ If Claude Code opens and you are not signed in yet, type `/login`. When it says 
 
 ### Or use the desktop app
 
-The Claude desktop app has Claude Code built in. Get it from the [desktop app page](https://code.claude.com/docs/en/desktop-quickstart.md), sign in, and click the **Code** tab. You can do every step there. Part 5 still uses the `claude` command, so install it as well.
+The Claude desktop app has Claude Code built in. Get it from the [desktop app page](https://code.claude.com/docs/en/desktop-quickstart.md), sign in, and click the **Code** tab. You can do every step there. The Connect and schedule part still uses the `claude` command, so install it as well.
 
 ### Get the checks
 

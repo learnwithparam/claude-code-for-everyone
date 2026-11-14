@@ -27,6 +27,7 @@ This file is for the sessions that build one part each. A part session can start
 | ------------------------------------------- | --------------------------------------------------------------------------------------- | ------- |
 | `00-orientation/` (part name `orientation`) | meet-the-bakery 20                                                                      | 20      |
 | `parts/01-make-claude-ask-first/`           | read-the-folder 15, set-the-safety-rules 10, clean-the-orders 25, fix-the-price-list 15 | 65      |
+| `parts/07-ask-questions-of-your-files/`     | find-the-unmatched-invoices 20                                                          | 20      |
 
 ## The parts still to build
 
