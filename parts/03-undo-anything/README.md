@@ -68,11 +68,11 @@ Expect: `Part undo-anything is done: 3/3 steps pass.`
 
 ## Watch and read
 
-| Kind | Title                                                    | Author                 | Why                                                              | Link                                                                                         |
-| ---- | -------------------------------------------------------- | ---------------------- | ---------------------------------------------------------------- | -------------------------------------------------------------------------------------------- |
-| read | Checkpointing                                            | Anthropic, Claude Code | Says what rewind saves and the gap that commands leave           | [code.claude.com](https://code.claude.com/docs/en/checkpointing)                            |
-| read | Best practices for Claude Code                           | Anthropic, Claude Code | Shows how to undo changes and why to keep a way back             | [code.claude.com](https://code.claude.com/docs/en/best-practices)                           |
-| read | Common workflows                                         | Anthropic, Claude Code | Shows everyday steps with git that Claude can run for you        | [code.claude.com](https://code.claude.com/docs/en/common-workflows)                         |
+| Kind | Title                          | Author                 | Why                                                       | Link                                                                |
+| ---- | ------------------------------ | ---------------------- | --------------------------------------------------------- | ------------------------------------------------------------------- |
+| read | Checkpointing                  | Anthropic, Claude Code | Says what rewind saves and the gap that commands leave    | [code.claude.com](https://code.claude.com/docs/en/checkpointing)    |
+| read | Best practices for Claude Code | Anthropic, Claude Code | Shows how to undo changes and why to keep a way back      | [code.claude.com](https://code.claude.com/docs/en/best-practices)   |
+| read | Common workflows               | Anthropic, Claude Code | Shows everyday steps with git that Claude can run for you | [code.claude.com](https://code.claude.com/docs/en/common-workflows) |
 
 ## Project
 

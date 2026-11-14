@@ -85,10 +85,10 @@ The finished query and prompts are in `solution/`.
 
 ## If you get stuck
 
-| What you see                                      | Try this                                                               |
-| ------------------------------------------------- | ---------------------------------------------------------------------- |
-| `FAIL  The saved query runs with DuckDB 2.0.0`    | Ask Claude to save and run `unmatched.sql`. |
-| `FAIL  The mismatch count matches the answer key` | Say what matched means. Only the second bill on an order is a copy.    |
+| What you see                                      | Try this                                                            |
+| ------------------------------------------------- | ------------------------------------------------------------------- |
+| `FAIL  The saved query runs with DuckDB 2.0.0`    | Ask Claude to save and run `unmatched.sql`.                         |
+| `FAIL  The mismatch count matches the answer key` | Say what matched means. Only the second bill on an order is a copy. |
 
 ## Words you will use
 

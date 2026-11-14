@@ -83,11 +83,11 @@ The finished skill is `solution/.claude/skills/friday-close/SKILL.md`. The three
 
 ## If you get stuck
 
-| What you see                               | Try this                                                       |
-| ------------------------------------------ | -------------------------------------------------------------- |
-| `FAIL  clean-the-orders passes again`      | Ask Claude to fix that step in the skill, and run it again.    |
-| `FAIL  out/batch.md has a /batch line`     | Start the line with `/batch` and name a folder in `out/`.      |
-| You want to start the next close again     | Run `bun parts/06-share-the-close/next-close.ts reset`.        |
+| What you see                           | Try this                                                    |
+| -------------------------------------- | ----------------------------------------------------------- |
+| `FAIL  clean-the-orders passes again`  | Ask Claude to fix that step in the skill, and run it again. |
+| `FAIL  out/batch.md has a /batch line` | Start the line with `/batch` and name a folder in `out/`.   |
+| You want to start the next close again | Run `bun parts/06-share-the-close/next-close.ts reset`.     |
 
 ## Words you will use
 

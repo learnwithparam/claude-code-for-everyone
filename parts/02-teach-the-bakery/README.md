@@ -23,11 +23,11 @@ flowchart TB
 
 ## Steps
 
-| Step                                                                  | What you make                                           | What the check reads                                                      |
-| --------------------------------------------------------------------- | ------------------------------------------------------- | ------------------------------------------------------------------------- |
-| [write-the-house-rules](01-write-the-house-rules/problem/README.md)   | `CLAUDE.md`, an `/init` note and a rules file           | The headings, the never-do list, `out/`, the note and the rules file      |
-| [plan-the-invoice-check](02-plan-the-invoice-check/problem/README.md) | `out/plans/invoice-check.md`                            | Goal, files to read and write, steps, risks; nothing else changed         |
-| [reconcile-the-invoices](03-reconcile-the-invoices/problem/README.md) | `out/reconciliation.csv` and a short note               | Every planted fault flagged, no false flags                               |
+| Step                                                                  | What you make                                 | What the check reads                                                 |
+| --------------------------------------------------------------------- | --------------------------------------------- | -------------------------------------------------------------------- |
+| [write-the-house-rules](01-write-the-house-rules/problem/README.md)   | `CLAUDE.md`, an `/init` note and a rules file | The headings, the never-do list, `out/`, the note and the rules file |
+| [plan-the-invoice-check](02-plan-the-invoice-check/problem/README.md) | `out/plans/invoice-check.md`                  | Goal, files to read and write, steps, risks; nothing else changed    |
+| [reconcile-the-invoices](03-reconcile-the-invoices/problem/README.md) | `out/reconciliation.csv` and a short note     | Every planted fault flagged, no false flags                          |
 
 ## Walkthrough
 
@@ -69,12 +69,12 @@ Expect: `Part teach-the-bakery is done: 3/3 steps pass.`
 
 ## Watch and read
 
-| Kind | Title                                    | Author                 | Why                                                       | Link                                                                                              |
-| ---- | ---------------------------------------- | ---------------------- | --------------------------------------------------------- | ------------------------------------------------------------------------------------------------- |
-| read | How Claude remembers your project        | Anthropic, Claude Code | Says what goes in `CLAUDE.md` and how rules files work    | [code.claude.com](https://code.claude.com/docs/en/memory)                                         |
-| read | Best practices for Claude Code           | Anthropic, Claude Code | Says to give Claude a check to run and to plan first      | [code.claude.com](https://code.claude.com/docs/en/best-practices)                                 |
+| Kind | Title                                    | Author                 | Why                                                          | Link                                                                                               |
+| ---- | ---------------------------------------- | ---------------------- | ------------------------------------------------------------ | -------------------------------------------------------------------------------------------------- |
+| read | How Claude remembers your project        | Anthropic, Claude Code | Says what goes in `CLAUDE.md` and how rules files work       | [code.claude.com](https://code.claude.com/docs/en/memory)                                          |
+| read | Best practices for Claude Code           | Anthropic, Claude Code | Says to give Claude a check to run and to plan first         | [code.claude.com](https://code.claude.com/docs/en/best-practices)                                  |
 | read | Effective context engineering for agents | Anthropic Engineering  | Why a short, clear set of rules works better than a long one | [anthropic.com](https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents) |
-| read | Trustworthy agents in practice           | Anthropic Research     | Why a bill that gives orders is data, not a boss          | [anthropic.com](https://www.anthropic.com/research/trustworthy-agents)                            |
+| read | Trustworthy agents in practice           | Anthropic Research     | Why a bill that gives orders is data, not a boss             | [anthropic.com](https://www.anthropic.com/research/trustworthy-agents)                             |
 
 ## Project
 

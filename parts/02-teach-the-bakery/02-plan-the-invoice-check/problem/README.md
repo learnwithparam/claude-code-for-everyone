@@ -86,8 +86,8 @@ The saved plan is in `solution/out/plans/invoice-check.md`.
 
 ## If you get stuck
 
-| What you see                                               | Try this                                                      |
-| ---------------------------------------------------------- | ------------------------------------------------------------- |
-| `FAIL it names purchase-orders.csv as the source of truth` | Ask which file wins when a bill and an order differ.          |
+| What you see                                               | Try this                                                        |
+| ---------------------------------------------------------- | --------------------------------------------------------------- |
+| `FAIL it names purchase-orders.csv as the source of truth` | Ask which file wins when a bill and an order differ.            |
 | `FAIL Files I will write names at least one file ...`      | Claude wants to change an original. Say no, and ask for `out/`. |
-| `FAIL out/plans/invoice-check.md is there`                 | Ask Claude to save the plan.                                  |
+| `FAIL out/plans/invoice-check.md is there`                 | Ask Claude to save the plan.                                    |

@@ -31,7 +31,10 @@ const RULE_WORDS = 8;
 
 // The words after a label like "Same:" on the same line, or "" when the label is missing.
 function afterLabel(note: string, label: string): string {
-  const starts = (each: string) => fold(each).replace(/^[-*\s]+/, "").startsWith(label);
+  const starts = (each: string) =>
+    fold(each)
+      .replace(/^[-*\s]+/, "")
+      .startsWith(label);
   const line = note.split("\n").find(starts);
   return line ? line.slice(line.indexOf(":") + 1) : "";
 }

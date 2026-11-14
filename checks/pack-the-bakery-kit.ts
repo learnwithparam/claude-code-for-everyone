@@ -60,7 +60,7 @@ const workflowLines = (folder: string) =>
     .split("\n")
     .filter((line) => !line.trim().startsWith("#"));
 
-function runsOnATimerOrByHand(folder: string): boolean {
+function runsOnTimerOrByHand(folder: string): boolean {
   const lines = workflowLines(folder);
   const hasOn = lines.some((line) => /^on:/.test(line));
   return hasOn && lines.some((line) => /^\s+(schedule|workflow_dispatch):/.test(line));
@@ -72,7 +72,7 @@ function runsClaude(folder: string): boolean {
   );
 }
 
-function keyIsAPlaceholder(folder: string): boolean {
+function keyIsPlaceholder(folder: string): boolean {
   const body = workflowLines(folder).join("\n");
   return /\$\{\{\s*secrets\.[A-Z_]+\s*\}\}/.test(body) && !/sk-ant-/.test(body);
 }
@@ -90,7 +90,7 @@ export default [
     tryNext: "ask Claude for a name of small words joined by dashes, with no spaces",
   },
   {
-    says: "it has a version like 1.0.0 and a description",
+    says: "it has a version number and a description",
     test: (folder) => {
       const { version, description } = manifest(folder);
       return VERSION.test(String(version)) && String(description ?? "").trim().length > 0;
@@ -133,7 +133,7 @@ export default [
   },
   {
     says: `${WORKFLOW} runs on a schedule or by hand (on: schedule or workflow_dispatch)`,
-    test: (folder) => has(folder, WORKFLOW) && runsOnATimerOrByHand(folder),
+    test: (folder) => has(folder, WORKFLOW) && runsOnTimerOrByHand(folder),
     tryNext: "save the workflow with an on: part that has schedule or workflow_dispatch",
   },
   {
@@ -143,7 +143,7 @@ export default [
   },
   {
     says: "the workflow takes its key from a secrets placeholder, never a real key",
-    test: (folder) => has(folder, WORKFLOW) && keyIsAPlaceholder(folder),
+    test: (folder) => has(folder, WORKFLOW) && keyIsPlaceholder(folder),
     tryNext: "read the key from secrets.ANTHROPIC_API_KEY and never paste a real key into the file",
   },
   {

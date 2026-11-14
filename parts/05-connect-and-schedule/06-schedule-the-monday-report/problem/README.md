@@ -89,11 +89,11 @@ The after state is in `solution/`: the note, the script and the loop note.
 
 ## If you get stuck
 
-| What you see                              | Try this                                              |
-| ----------------------------------------- | ----------------------------------------------------- |
-| `FAIL  it ran on a schedule, or`          | Use numbers in the cron line. |
-| `FAIL  run-report.sh runs claude with -p` | The line must start with claude and have `-p` in it.  |
-| `FAIL  out/loop.md has a /loop line`      | Write the interval, like 1h, then what to repeat.     |
+| What you see                              | Try this                                             |
+| ----------------------------------------- | ---------------------------------------------------- |
+| `FAIL  it ran on a schedule, or`          | Use numbers in the cron line.                        |
+| `FAIL  run-report.sh runs claude with -p` | The line must start with claude and have `-p` in it. |
+| `FAIL  out/loop.md has a /loop line`      | Write the interval, like 1h, then what to repeat.    |
 
 ## Words you will use
 

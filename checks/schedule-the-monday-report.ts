@@ -75,9 +75,7 @@ function scriptRunsHeadless(folder: string): boolean {
 }
 
 const scriptSkipsSafety = (folder: string) =>
-  /--dangerously-skip-permissions|--permission-mode\s+bypassPermissions/.test(
-    text(folder, SCRIPT),
-  );
+  /--dangerously-skip-permissions|--permission-mode\s+bypassPermissions/.test(text(folder, SCRIPT));
 
 // The /loop line, with any backticks taken off, whose repeated part names the report.
 function loopRepeatsReport(folder: string): boolean {

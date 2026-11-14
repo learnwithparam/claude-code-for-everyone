@@ -98,10 +98,10 @@ The finished kit is in `solution/kit/`. The prompt is in `solution/prompts.md`.
 
 ## If you get stuck
 
-| What you see                                | Try this                                                       |
-| ------------------------------------------- | -------------------------------------------------------------- |
-| `FAIL  the workflow has a step that runs claude` | Ask Claude to add a `run:` line with `claude -p`.       |
-| The `/wren` menu is empty                   | Start with `claude --plugin-dir kit` from `wren-street`.       |
+| What you see                                     | Try this                                                 |
+| ------------------------------------------------ | -------------------------------------------------------- |
+| `FAIL  the workflow has a step that runs claude` | Ask Claude to add a `run:` line with `claude -p`.        |
+| The `/wren` menu is empty                        | Start with `claude --plugin-dir kit` from `wren-street`. |
 
 ## Words you will use
 

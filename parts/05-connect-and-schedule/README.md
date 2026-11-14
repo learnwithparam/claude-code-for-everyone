@@ -25,14 +25,14 @@ flowchart LR
 
 ## Steps
 
-| Step                                                                 | What you make                               | What the check reads                                       |
-| -------------------------------------------------------------------- | ------------------------------------------- | ---------------------------------------------------------- |
-| [open-the-terminal](01-open-the-terminal/problem/README.md)          | `out/terminal.md`                           | The version is new enough; the mode is named               |
-| [connect-the-till](02-connect-the-till/problem/README.md)            | The till connector and `out/till-today.md`  | The connector is there; the total matches the till         |
-| [make-the-monday-skill](03-make-the-monday-skill/problem/README.md)  | A `monday-report` skill and a report        | Sales, Waste, Late payers; every number matches the till   |
-| [write-the-monday-report](04-write-the-monday-report/problem/README.md) | A read-only checker and a worktree note  | The checker cannot write; the note names the worktree      |
-| [keep-every-report](05-keep-every-report/problem/README.md)          | Two reports, each with its own file         | A Made at line; reports at least a minute apart            |
-| [schedule-the-monday-report](06-schedule-the-monday-report/problem/README.md) | A cron note, `run-report.sh`, `out/loop.md` | A cron line of numbers; a script with `-p`; a loop line |
+| Step                                                                          | What you make                               | What the check reads                                     |
+| ----------------------------------------------------------------------------- | ------------------------------------------- | -------------------------------------------------------- |
+| [open-the-terminal](01-open-the-terminal/problem/README.md)                   | `out/terminal.md`                           | The version is new enough; the mode is named             |
+| [connect-the-till](02-connect-the-till/problem/README.md)                     | The till connector and `out/till-today.md`  | The connector is there; the total matches the till       |
+| [make-the-monday-skill](03-make-the-monday-skill/problem/README.md)           | A `monday-report` skill and a report        | Sales, Waste, Late payers; every number matches the till |
+| [write-the-monday-report](04-write-the-monday-report/problem/README.md)       | A read-only checker and a worktree note     | The checker cannot write; the note names the worktree    |
+| [keep-every-report](05-keep-every-report/problem/README.md)                   | Two reports, each with its own file         | A Made at line; reports at least a minute apart          |
+| [schedule-the-monday-report](06-schedule-the-monday-report/problem/README.md) | A cron note, `run-report.sh`, `out/loop.md` | A cron line of numbers; a script with `-p`; a loop line  |
 
 The free plan and some work laptops cannot run scheduled tasks. The last step has a second way to pass for them.
 
@@ -84,14 +84,14 @@ Expect: `Part connect-and-schedule is done: 6/6 steps pass.`
 
 ## Watch and read
 
-| Kind  | Title                                                                    | Author                | Why                                                          | Link |
-| ----- | ------------------------------------------------------------------------ | --------------------- | ------------------------------------------------------------ | ---- |
-| video | Claude Code advanced patterns: Subagents, MCP, and scaling               | Anthropic             | The makers show subagents and connectors at work.            | <https://claude.com/resources/webinars/claude-code-advanced-patterns> |
-| video | Claude Code: Advanced                                                    | Anthropic             | A hands-on session on worktrees, loops and parallel work.    | <https://claude.com/resources/webinars/claude-code-workshop-advanced> |
-| read  | Run Claude Code programmatically                                         | Claude Code docs      | How `claude -p` runs with no chat, and what to allow.        | <https://code.claude.com/docs/en/headless> |
-| read  | Run prompts on a schedule                                                | Claude Code docs      | Loops and scheduled tasks, and when each one stops.          | <https://code.claude.com/docs/en/scheduled-tasks> |
-| read  | Common workflows                                                         | Claude Code docs      | Parallel sessions with worktrees, step by step.              | <https://code.claude.com/docs/en/common-workflows> |
-| read  | Connect Claude Code to tools through MCP                                 | Claude Code docs      | How a connector is added and checked.                        | <https://code.claude.com/docs/en/mcp> |
+| Kind  | Title                                                      | Author           | Why                                                       | Link                                                                  |
+| ----- | ---------------------------------------------------------- | ---------------- | --------------------------------------------------------- | --------------------------------------------------------------------- |
+| video | Claude Code advanced patterns: Subagents, MCP, and scaling | Anthropic        | The makers show subagents and connectors at work.         | <https://claude.com/resources/webinars/claude-code-advanced-patterns> |
+| video | Claude Code: Advanced                                      | Anthropic        | A hands-on session on worktrees, loops and parallel work. | <https://claude.com/resources/webinars/claude-code-workshop-advanced> |
+| read  | Run Claude Code programmatically                           | Claude Code docs | How `claude -p` runs with no chat, and what to allow.     | <https://code.claude.com/docs/en/headless>                            |
+| read  | Run prompts on a schedule                                  | Claude Code docs | Loops and scheduled tasks, and when each one stops.       | <https://code.claude.com/docs/en/scheduled-tasks>                     |
+| read  | Common workflows                                           | Claude Code docs | Parallel sessions with worktrees, step by step.           | <https://code.claude.com/docs/en/common-workflows>                    |
+| read  | Connect Claude Code to tools through MCP                   | Claude Code docs | How a connector is added and checked.                     | <https://code.claude.com/docs/en/mcp>                                 |
 
 ## Project
 

@@ -24,23 +24,23 @@ flowchart LR
 
 ## Steps
 
-| Step | What you make | What the check reads |
-| ---- | ------------- | -------------------- |
-| [publish-the-menu-page](01-publish-the-menu-page/problem/README.md) | `out/site/index.html` | Every product, the right price and allergens, works offline |
-| [pack-the-bakery-kit](02-pack-the-bakery-kit/problem/README.md) | `kit/` with skills, a hook and a workflow file | The kit parses, the hook blocks the till, the workflow runs claude |
-| [run-the-friday-close](03-run-the-friday-close/problem/README.md) | One skill, a `/batch` line, a run contract and metrics | Every earlier check passes on new files, and the three files are real |
-| [map-your-own-close](04-map-your-own-close/problem/README.md) | `out/friday-close.md` | Your task, its files, a first rule, one check a script could run |
-| [run-your-own-close](05-run-your-own-close/problem/README.md) | `my-close/` with your files, rules, results and a log | A copy, a Never rule, a result, a log with a `/schedule` line |
+| Step                                                                | What you make                                          | What the check reads                                                  |
+| ------------------------------------------------------------------- | ------------------------------------------------------ | --------------------------------------------------------------------- |
+| [publish-the-menu-page](01-publish-the-menu-page/problem/README.md) | `out/site/index.html`                                  | Every product, the right price and allergens, works offline           |
+| [pack-the-bakery-kit](02-pack-the-bakery-kit/problem/README.md)     | `kit/` with skills, a hook and a workflow file         | The kit parses, the hook blocks the till, the workflow runs claude    |
+| [run-the-friday-close](03-run-the-friday-close/problem/README.md)   | One skill, a `/batch` line, a run contract and metrics | Every earlier check passes on new files, and the three files are real |
+| [map-your-own-close](04-map-your-own-close/problem/README.md)       | `out/friday-close.md`                                  | Your task, its files, a first rule, one check a script could run      |
+| [run-your-own-close](05-run-your-own-close/problem/README.md)       | `my-close/` with your files, rules, results and a log  | A copy, a Never rule, a result, a log with a `/schedule` line         |
 
 ## Watch and read
 
-| Kind | Title | Author | Why | Link |
-| ---- | ----- | ------ | --- | ---- |
-| read | Plugins overview | Anthropic docs | Shows how a kit of skills and hooks is built and shared. | <https://code.claude.com/docs/en/plugins> |
-| read | Claude Code GitHub Actions | Anthropic docs | Shows how a workflow file runs Claude on a timer or by hand. | <https://code.claude.com/docs/en/github-actions> |
-| read | Run Claude Code programmatically | Anthropic docs | Explains the print mode that runs a job with no one at the keyboard. | <https://code.claude.com/docs/en/headless> |
-| read | Run prompts on a schedule | Anthropic docs | Explains how a task starts by itself, and what to watch. | <https://code.claude.com/docs/en/scheduled-tasks> |
-| read | Building effective AI agents | Anthropic engineering | Says why simple, checked steps beat clever ones. | <https://www.anthropic.com/engineering/building-effective-agents> |
+| Kind | Title                            | Author                | Why                                                                  | Link                                                              |
+| ---- | -------------------------------- | --------------------- | -------------------------------------------------------------------- | ----------------------------------------------------------------- |
+| read | Plugins overview                 | Anthropic docs        | Shows how a kit of skills and hooks is built and shared.             | <https://code.claude.com/docs/en/plugins>                         |
+| read | Claude Code GitHub Actions       | Anthropic docs        | Shows how a workflow file runs Claude on a timer or by hand.         | <https://code.claude.com/docs/en/github-actions>                  |
+| read | Run Claude Code programmatically | Anthropic docs        | Explains the print mode that runs a job with no one at the keyboard. | <https://code.claude.com/docs/en/headless>                        |
+| read | Run prompts on a schedule        | Anthropic docs        | Explains how a task starts by itself, and what to watch.             | <https://code.claude.com/docs/en/scheduled-tasks>                 |
+| read | Building effective AI agents     | Anthropic engineering | Says why simple, checked steps beat clever ones.                     | <https://www.anthropic.com/engineering/building-effective-agents> |
 
 ## Project
 

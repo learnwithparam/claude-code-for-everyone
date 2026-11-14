@@ -93,12 +93,12 @@ The finished note is `solution/out/terminal.md`. The prompts that made it are in
 
 ## If you get stuck
 
-| What you see                               | Try this                                                             |
-| ------------------------------------------ | -------------------------------------------------------------------- |
-| `claude: command not found`                | Install Claude Code from the start page. Then open a new terminal.   |
-| `FAIL  the version is ... or newer`        | Run `claude update`. Then write the new number.                      |
-| `FAIL  it says what the status bar showed` | Press Shift+Tab until the bar shows Plan mode. Copy those words.     |
-| `FAIL  it names Manual mode`               | Write Manual under the heading, not Auto.                            |
+| What you see                               | Try this                                                           |
+| ------------------------------------------ | ------------------------------------------------------------------ |
+| `claude: command not found`                | Install Claude Code from the start page. Then open a new terminal. |
+| `FAIL  the version is ... or newer`        | Run `claude update`. Then write the new number.                    |
+| `FAIL  it says what the status bar showed` | Press Shift+Tab until the bar shows Plan mode. Copy those words.   |
+| `FAIL  it names Manual mode`               | Write Manual under the heading, not Auto.                          |
 
 ## Words you will use
 

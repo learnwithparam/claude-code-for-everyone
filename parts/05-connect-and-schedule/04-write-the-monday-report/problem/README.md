@@ -82,12 +82,12 @@ The after state is in `solution/`: the checker, its note, and `out/worktree.md`.
 
 ## If you get stuck
 
-| What you see                                | Try this                                                        |
-| ------------------------------------------- | --------------------------------------------------------------- |
-| `FAIL  a subagent numbers-checker`          | Its tools line must be only Read, Grep, Glob.                   |
-| `FAIL  out/numbers-check.md lists`          | Ask the checker to run, then save its answer.                   |
-| `FAIL  out/worktree.md names`               | Run `claude -w second-try`, then write the folder or branch.    |
-| `claude -w` says this is not a git folder   | Do the save-point step first. A worktree needs git.             |
+| What you see                              | Try this                                                     |
+| ----------------------------------------- | ------------------------------------------------------------ |
+| `FAIL  a subagent numbers-checker`        | Its tools line must be only Read, Grep, Glob.                |
+| `FAIL  out/numbers-check.md lists`        | Ask the checker to run, then save its answer.                |
+| `FAIL  out/worktree.md names`             | Run `claude -w second-try`, then write the folder or branch. |
+| `claude -w` says this is not a git folder | Do the save-point step first. A worktree needs git.          |
 
 ## Words you will use
 

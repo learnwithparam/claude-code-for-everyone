@@ -86,10 +86,10 @@ The finished files are in `solution/`.
 
 ## If you get stuck
 
-| What you see                                        | Try this                                              |
-| --------------------------------------------------- | ----------------------------------------------------- |
-| `FAIL out/init-compare.md names /init ...`          | Write both labels, with a few words after each.       |
-| `FAIL .claude/rules/ holds a rule file ...`         | The file is empty. Ask Claude for four short rules.   |
+| What you see                                | Try this                                            |
+| ------------------------------------------- | --------------------------------------------------- |
+| `FAIL out/init-compare.md names /init ...`  | Write both labels, with a few words after each.     |
+| `FAIL .claude/rules/ holds a rule file ...` | The file is empty. Ask Claude for four short rules. |
 
 A rule is a strong hint, not a lock. You still check the work.
 

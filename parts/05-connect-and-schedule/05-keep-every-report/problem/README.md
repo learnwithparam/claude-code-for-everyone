@@ -69,10 +69,10 @@ The after state is in `solution/`: the changed skill and two reports.
 
 ## If you get stuck
 
-| What you see                           | Try this                                         |
-| -------------------------------------- | ------------------------------------------------ |
+| What you see                           | Try this                                                             |
+| -------------------------------------- | -------------------------------------------------------------------- |
 | `FAIL  2 or more reports start with`   | The skill wrote over the old file. Ask for a new file name each run. |
-| `FAIL  made at least one minute apart` | Run it again a few minutes later. Do not copy a file. |
+| `FAIL  made at least one minute apart` | Run it again a few minutes later. Do not copy a file.                |
 
 ## Words you will use
 

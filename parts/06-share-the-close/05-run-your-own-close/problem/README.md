@@ -97,10 +97,10 @@ A finished folder, made of practice files, is `solution/my-close/`. The prompts 
 
 ## If you get stuck
 
-| What you see                                 | Try this                                           |
-| -------------------------------------------- | -------------------------------------------------- |
-| `FAIL every file under Files I used is in`   | List only names that are in `my-close/input/`.     |
-| `FAIL When it runs by itself names a`        | Add a line with `/schedule` and when it runs.      |
+| What you see                               | Try this                                       |
+| ------------------------------------------ | ---------------------------------------------- |
+| `FAIL every file under Files I used is in` | List only names that are in `my-close/input/`. |
+| `FAIL When it runs by itself names a`      | Add a line with `/schedule` and when it runs.  |
 
 ## Words you will use
 
