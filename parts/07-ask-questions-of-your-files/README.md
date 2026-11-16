@@ -10,7 +10,9 @@ A file `unmatched.sql` that lists the faulty bills, and a `prompts.md` that show
 
 ## The problem
 
-You read and checked 24 bills against 23 orders. It worked, but next month there are 200 bills and a person cannot read them all. DuckDB is a free tool that reads CSV files with a query and needs no server. One query lists the same 5 faulty bills you found before. For example, it lists `FD-2204`, which charges £6.45 a kg where the order says £6.20. This part is optional in the live session and expected as homework.
+You read and checked 24 bills against 23 orders. It worked, but next month there are 200 bills and a person cannot read them all. DuckDB is a free tool that reads CSV files with a query and needs no server. One query lists the same 5 faulty bills you found before. For example, it lists `FD-2204`, which charges £6.45 a kg where the order says £6.20.
+
+This part is optional in the live session and expected as homework.
 
 ```mermaid
 flowchart TB

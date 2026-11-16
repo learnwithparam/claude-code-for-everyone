@@ -13,7 +13,7 @@ flowchart LR
 
 ## What you need
 
-- Claude Code, signed in with your own Claude account. You use it in one of three places: the `claude` command in a terminal, Claude Code in your code editor, or the **Code** tab of the Claude desktop app. They are the same Claude Code.
+- Claude Code, signed in with your own Claude account. You use it in one of three places. These are the `claude` command in a terminal, Claude Code in your code editor, or the **Code** tab of the Claude desktop app. They are the same Claude Code.
 - A paid Claude plan: Pro, Max, Ultra, Team or Enterprise. A Console account works too. The free plan has no Claude Code.
 - No key. The course never asks you for one. You sign in with your Claude account.
 - The course folder. On the course page, click the green **Code** button, then **Download ZIP**. Unzip it into your Documents folder.
@@ -22,7 +22,9 @@ flowchart LR
 
 Each grey box in this course is a command. There are two ways to run one.
 
-First, you install Claude Code. For that one step you use a terminal. A terminal is a window where you type commands. On a Mac, press Command and Space, type Terminal, and press Enter. On Windows, click Start, type PowerShell, and press Enter. For example, on a Mac you see a white or black window with a blinking cursor. That is the terminal.
+First, you install Claude Code. For that one step you use a terminal. A terminal is a window where you type commands.
+
+On a Mac, press Command and Space, type Terminal, and press Enter. On Windows, click Start, type PowerShell, and press Enter. For example, on a Mac you see a white or black window with a blinking cursor. That is the terminal.
 
 After Claude Code is installed, you can ask it to run every other command:
 

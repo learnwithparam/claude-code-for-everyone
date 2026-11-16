@@ -115,7 +115,7 @@ You also map the close onto one task from your own job: its files, its first hou
 ## What you need
 
 - A list of the ways of working with Claude Code that this course teaches: [ways of working](00-orientation/ways-of-working.md).
-- Claude Code, signed in with your own Claude account: the `claude` command, Claude Code in your editor, or the Code tab of the Claude desktop app.
+- Claude Code, signed in with your own Claude account. You use the `claude` command, Claude Code in your editor, or the Code tab of the Claude desktop app.
 - A paid Claude plan: Pro, Max, Ultra, Team or Enterprise, or a Console account. The free plan has no Claude Code.
 - No key. You sign in to Claude Code. The checks need no Claude at all: they read files.
 

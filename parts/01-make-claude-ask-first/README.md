@@ -10,7 +10,9 @@ A settings file named `.claude/settings.json`. It has Manual mode, a deny rule a
 
 ## The problem
 
-Claude can change files on your computer. In some modes it does this without asking you. Asking is not enough on its own: Anthropic found that people say yes to 93% of the prompts Claude shows them ([Anthropic, auto mode](https://www.anthropic.com/research/claude-code-auto-mode)). They click yes without reading. For example, a yes to a changed price list is easy to give and hard to undo. So you do two things. You make Claude ask first, and you read the change before you say yes. Then a script checks what it made, so you do not have to trust it.
+Claude can change files on your computer. In some modes it does this without asking you. Asking is not enough on its own: Anthropic found that people say yes to 93% of the prompts Claude shows them ([Anthropic, auto mode](https://www.anthropic.com/research/claude-code-auto-mode)). They click yes without reading.
+
+For example, a yes to a changed price list is easy to give and hard to undo. So you do two things. You make Claude ask first, and you read the change before you say yes. Then a script checks what it made, so you do not have to trust it.
 
 ```mermaid
 flowchart LR
@@ -82,4 +84,6 @@ Expect: `Part make-claude-ask-first is done: 4/4 steps pass.`
 
 ## Project
 
-Pick one sheet from your own work, such as a list, a log or a price file. Work on a copy. In a new folder, save a settings file with Manual mode, a deny rule for one private folder, and the sandbox on. Then ask Claude to clean the copy with an @ mention. Read its diff before you say yes. Save a short note that names one changed line and why it is right.
+Pick one sheet from your own work, such as a list, a log or a price file. Work on a copy. In a new folder, save a settings file with Manual mode, a deny rule for one private folder, and the sandbox on.
+
+Then ask Claude to clean the copy with an @ mention. Read its diff before you say yes. Save a short note that names one changed line and why it is right.

@@ -10,7 +10,11 @@ A spec file, a done list and a goal line. An `allergen-label` skill with 12 labe
 
 ## The problem
 
-For example, ask Claude for a label three times and you get three shapes. A label can also be wrong. The Multigrain Loaf now has sesame on top, but its label does not say so. Even good tools miss some. An insurance firm, DXC, built a Claude app for one claims job. It "was 80% right on the first pass". Claims experts checked the rest ([DXC](https://claude.com/customers/dxc)). So you write down what done means first. Then you teach the method as a skill. At the end, a person signs.
+For example, ask Claude for a label three times and you get three shapes. A label can also be wrong. The Multigrain Loaf now has sesame on top, but its label does not say so.
+
+Even good tools miss some. An insurance firm, DXC, built a Claude app for one claims job. It "was 80% right on the first pass". Claims experts checked the rest ([DXC](https://claude.com/customers/dxc)).
+
+So you write down what done means first. Then you teach the method as a skill. At the end, a person signs.
 
 ```mermaid
 flowchart LR
@@ -84,7 +88,9 @@ Expect: `Part repeat-the-work is done: 3/3 steps pass.`
 
 ## Project
 
-Pick one job on your own work that you ask Claude for again and again. Do four things. Let Claude interview you and write a `SPEC.md` with a stop condition. Write the done list before the work. Put the method in a skill. Add a Stop hook that exits 2 when the output is wrong. Then read the result and sign it yourself.
+Pick one job on your own work that you ask Claude for again and again. Do four things.
+
+Let Claude interview you and write a `SPEC.md` with a stop condition. Write the done list before the work. Put the method in a skill. Add a Stop hook that exits 2 when the output is wrong. Then read the result and sign it yourself.
 
 Hand in `SPEC.md`, the skill, the settings file and your signed output. A grader answers yes or no:
 

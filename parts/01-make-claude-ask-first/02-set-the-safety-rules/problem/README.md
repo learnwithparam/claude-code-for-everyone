@@ -44,7 +44,7 @@ File: `private/staff-pay.csv`.
 3. Ask Claude: `Read private/staff-pay.csv.`
 
    Expect: Claude says it is not allowed.
-4. Ask Claude to make `out/safety.md`. It says you work in Manual mode, and it has a "## Claude will ask me before" heading with two lines that start with a dash.
+4. Ask Claude to make `out/safety.md`. The note says you work in Manual mode. It has a "## Claude will ask me before" heading with two lines that start with a dash.
 
    Expect: a short note in `out/`.
 5. Start a new chat in the same folder.

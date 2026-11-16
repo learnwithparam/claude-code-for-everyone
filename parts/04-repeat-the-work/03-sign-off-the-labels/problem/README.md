@@ -2,7 +2,9 @@
 
 ## The problem
 
-A label with a missing allergen can make a customer ill. Even good tools miss some: an insurance firm, DXC, built a Claude app for one claims job. It "was 80% right on the first pass". Claims experts checked the rest ([DXC](https://claude.com/customers/dxc)). Claude makes the labels. A gate checks them, and you sign.
+A label with a missing allergen can make a customer ill. Even good tools miss some: an insurance firm, DXC, built a Claude app for one claims job. It "was 80% right on the first pass". Claims experts checked the rest ([DXC](https://claude.com/customers/dxc)).
+
+Claude makes the labels. A gate checks them, and you sign.
 
 ```mermaid
 flowchart LR

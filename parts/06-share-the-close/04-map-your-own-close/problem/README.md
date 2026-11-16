@@ -2,7 +2,7 @@
 
 ## The problem
 
-The bakery was practice. At the start you wrote one task from your own job in `out/why-i-am-here.md`. Now you need a plan for your own desk. A close that carries to any job has four parts: the task, its files, one rule Claude must never break, and a check a script can run.
+The bakery was practice. At the start you wrote one task from your own job in `out/why-i-am-here.md`. Now you need a plan for your own desk. A close that carries to any job has four parts. They are the task, its files, one rule Claude must never break, and a check a script can run.
 
 ```mermaid
 flowchart LR
