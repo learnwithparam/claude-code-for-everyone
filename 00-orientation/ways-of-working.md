@@ -31,13 +31,13 @@ For example, you forget how to switch to Plan mode. Find **Plan mode** below, th
 
 - **Open Claude Code in a folder.** Type `claude` in a terminal, and say yes to the trust question. Taught in [open-the-terminal](../parts/05-connect-and-schedule/01-open-the-terminal/problem/README.md).
 - **Sign in and exit.** Type `/login` to sign in and `/exit` to leave. Taught in the [orientation](README.md).
-- **Start a new chat.** Do this so Claude loads a new skill. Taught in [build-the-label-skill](../parts/04-repeat-the-work/02-build-the-label-skill/problem/README.md) and [write-the-monday-report](../parts/05-connect-and-schedule/03-write-the-monday-report/problem/README.md).
+- **Start a new chat.** Do this so Claude loads a new skill. Taught in [build-the-label-skill](../parts/04-repeat-the-work/02-build-the-label-skill/problem/README.md) and [write-the-monday-report](../parts/05-connect-and-schedule/04-write-the-monday-report/problem/README.md).
 
 ## Skills, connectors and plugins
 
-- **Skills.** A skill is a file named `SKILL.md` that holds steps Claude follows. You run it with `/name`. Taught in [build-the-label-skill](../parts/04-repeat-the-work/02-build-the-label-skill/problem/README.md), [write-the-monday-report](../parts/05-connect-and-schedule/03-write-the-monday-report/problem/README.md) and [run-the-friday-close](../parts/06-share-the-close/03-run-the-friday-close/problem/README.md).
+- **Skills.** A skill is a file named `SKILL.md` that holds steps Claude follows. You run it with `/name`. Taught in [build-the-label-skill](../parts/04-repeat-the-work/02-build-the-label-skill/problem/README.md), [write-the-monday-report](../parts/05-connect-and-schedule/04-write-the-monday-report/problem/README.md) and [run-the-friday-close](../parts/06-share-the-close/03-run-the-friday-close/problem/README.md).
 - **Connectors.** A connector lets Claude ask another system, such as the till. Type `/mcp` to see which are on. Taught in [connect-the-till](../parts/05-connect-and-schedule/02-connect-the-till/problem/README.md).
-- **Scheduled tasks.** A task runs by itself in the desktop app, and you can use Run now. Taught in [schedule-the-monday-report](../parts/05-connect-and-schedule/04-schedule-the-monday-report/problem/README.md).
+- **Scheduled tasks.** A task runs by itself in the desktop app, and you can use Run now. Taught in [schedule-the-monday-report](../parts/05-connect-and-schedule/06-schedule-the-monday-report/problem/README.md).
 - **Plugins.** A plugin packs your setup for the next person. Taught in [pack-the-bakery-kit](../parts/06-share-the-close/02-pack-the-bakery-kit/problem/README.md).
 
 ## Check the work
